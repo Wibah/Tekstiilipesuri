@@ -7,7 +7,8 @@ Suomenkielinen affiliate-sivusto, joka vertailee Suomessa myytäviä tekstiilipe
 - **Astro 7**, `@astrojs/sitemap`, Tailwind 4 (Vite-plugin). Pääosa tyyleistä on käsin kirjoitettua CSS:ää tiedostossa `src/styles/site.css` (sama kuin painepesurit.fi:ssä).
 - Node 22 (nvm: `~/.nvm/versions/node/v22.23.2`). Dev-palvelin: `.claude/launch.json` → `tekstiilipesuri-dev`, portti 4331 (painepesurit.fi käyttää porttia 4321).
 - **Kanoninen domain on `https://tekstiilipesuri.com`.** `site` tiedostossa `astro.config.mjs` on oltava sama kuin domain, jolta sisältö tarjoillaan.
-- **GitHub ja Vercel puuttuvat vielä.** Kun ne tehdään, julkaisu toimii kuten painepesurit.fi:ssä: push `main`-haaraan julkaisee tuotantoon, joten aja `npm run build` ennen pushia.
+- **GitHub:** `Wibah/Tekstiilipesuri` (yksityinen), päähaara `main` (luotu 2026-10-05).
+- **Vercel puuttuu vielä.** Kun Ville kytkee projektin Vercelin GitHub-integraatioon, julkaisu toimii kuten painepesurit.fi:ssä: push `main`-haaraan julkaisee tuotantoon, joten aja `npm run build` ennen pushia.
 - Google Search Consolen vahvistustagi lisätään tiedostoon `src/layouts/Layout.astro`, kun domain vahvistetaan.
 
 ## Rakenne
