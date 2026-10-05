@@ -1,0 +1,31 @@
+---
+// Kärcherin tekstiilipesureiden pesu- ja hoitoaineet (kokoelma pesuaineet, npm run hae:pesuaineet).
+import { getCollection } from 'astro:content';
+import { euroa } from '../../lib/tuotteet';
+
+interface Props {
+	ammatti?: boolean; // true = vain ammattiaineet, false = vain kotiaineet, undefined = kaikki
+}
+
+const { ammatti } = Astro.props;
+const aineet = (await getCollection('pesuaineet'))
+	.map((a) => a.data)
+	.filter((a) => ammatti === undefined || a.ammattiaine === ammatti);
+---
+<div class="tp-taulu">
+	<table class="tp-versiot">
+		<thead>
+			<tr><th scope="col">Pesuaine</th><th scope="col">Koko</th><th scope="col">Hinta Kärcher.comissa</th><th scope="col">Valmistajan kuvaus</th></tr>
+		</thead>
+		<tbody>
+			{aineet.map((a) => (
+				<tr>
+					<th scope="row"><a href={a.ostopaikka.url} target="_blank" rel="nofollow noopener">{a.merkki} {a.nimi.replace(/,\s*[\d.,]+\s*(l|ml|kg|Tablets)$/i, '')}</a></th>
+					<td>{a.pakkauskoko?.replace('Tablets', 'tablettia') ?? '–'}</td>
+					<td>{a.myynnissa && a.hinta != null ? euroa(a.hinta) : 'Ei myynnissä verkossa'}</td>
+					<td>{a.kuvaus}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>

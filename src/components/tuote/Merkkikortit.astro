@@ -1,0 +1,43 @@
+---
+// Merkkisivujen tuotekortit (mallina ikkunanpesurobotti.fi:n ja painepesurit.fi:n merkkisivut). Kortin tiedot
+// tulevat datasta: teho, säiliöt, paino, letku, johto ja akku.
+// Kortteina näytetään merkin mallit, joilla on hinta (kumppanikauppa ensin, sitten valmistajan kauppa), halvimmasta
+// kalleimpaan. `kaikki` lisää loppuun hinnattomat mallit, joiden nappi vie valmistajan tuotetietoihin.
+// `sivut` liittää kortin otsikkoon mallin oman sivun (esim. Kärcherin SE- ja Puzzi-mallisivut).
+// Kuvattomasta kortista kuva-alue jätetään pois (Villen ohje 2026-09-25): kuvat tulevat feedeistä tai Villeltä.
+import Korttirivi from './Korttirivi.astro';
+import type { Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuotteet: Tuote[];
+	otsikko: string;
+	ohita?: string; // esim. sivun yläosan suositus, jota ei toisteta korteissa
+	kaikki?: boolean;
+	sivut?: Record<string, string>;
+	nimet?: Record<string, string>; // korvaava kortin otsikko tuotteen id:n mukaan
+	kuvaukset?: Record<string, string>;
+}
+
+const { tuotteet, otsikko, ohita, kaikki = false, sivut = {}, nimet = {}, kuvaukset = {} } = Astro.props;
+const hinnallinen = (t: Tuote) => t.myynnissa && t.hinta != null;
+const kortit = tuotteet
+	.filter((t) => t.id !== ohita && (hinnallinen(t) || (kaikki && t.vainTuotetiedot)))
+	.sort(
+		(a, b) =>
+			Number(!!b.affiliate) - Number(!!a.affiliate) ||
+			Number(hinnallinen(b)) - Number(hinnallinen(a)) ||
+			(a.hinta ?? 0) - (b.hinta ?? 0) ||
+			a.nimi.localeCompare(b.nimi, 'fi', { numeric: true }),
+	);
+---
+{kortit.length > 0 && (
+	<section class="mk">
+		<h2>{otsikko}</h2>
+		<slot />
+		<div class="mk-lista">
+			{kortit.map((t) => (
+				<Korttirivi tuote={t} sivu={sivut[t.id]} otsikko={nimet[t.id]} versio={!!nimet[t.id]} kuvaus={kuvaukset[t.id]} />
+			))}
+		</div>
+	</section>
+)}

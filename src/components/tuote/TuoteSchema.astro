@@ -1,0 +1,42 @@
+---
+// Product-JSON-LD mallisivun tai merkkisivun päätuotteelle. Schema tulostetaan vain, kun tuotteella on
+// voimassa oleva hinta ostopaikassa (sama hinta näkyy sivulla ostolaatikossa): Google vaatii Productille
+// offers-, review- tai aggregateRating-kentän, eikä meillä ole arvosteluja tai kokonaispistettä (ks. CLAUDE.md).
+// Siksi hinnattomat tuotteet (vainTuotetiedot) jäävät ilman Product-schemaa (Search Console 2026-09-29).
+// Kauppiastiedot vaativat myös kuvan (Search Console 2026-09-29, ”Kenttä image puuttuu”), joten kuvana on sama
+// feedistä ladattu kuva kuin sivulla (src/assets/tuotteet/). Tuote ilman kuvaa jää ilman Product-schemaa.
+import { getImage } from 'astro:assets';
+import type { Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuote: Tuote;
+}
+
+const { tuote } = Astro.props;
+const kuvat = import.meta.glob<{ default: ImageMetadata }>('/src/assets/tuotteet/*', { eager: true });
+const lahde = tuote.kuva ? kuvat[`/src/assets/tuotteet/${tuote.kuva}`]?.default : undefined;
+const kuva = lahde ? new URL((await getImage({ src: lahde, width: 800, format: 'jpg' })).src, Astro.site).href : null;
+const tarjous = tuote.myynnissa && tuote.hinta != null && kuva != null;
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Product',
+	name: `${tuote.merkki} ${tuote.nimi}`,
+	image: kuva,
+	brand: { '@type': 'Brand', name: tuote.merkki },
+	...(tuote.tuotenumero && { sku: tuote.tuotenumero, mpn: tuote.tuotenumero }),
+	...(tuote.kuvaus && { description: tuote.kuvaus }),
+	...(tarjous && {
+		offers: {
+			'@type': 'Offer',
+			price: tuote.hinta.toFixed(2),
+			priceCurrency: 'EUR',
+			availability: 'https://schema.org/InStock',
+			itemCondition: 'https://schema.org/NewCondition',
+			url: tuote.ostopaikka.url,
+			seller: { '@type': 'Organization', name: tuote.ostopaikka.nimi },
+		},
+	}),
+};
+---
+{tarjous && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

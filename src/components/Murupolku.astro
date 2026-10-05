@@ -1,0 +1,29 @@
+---
+// Näkyvä murupolku ja BreadcrumbList-JSON-LD samasta listasta.
+// Viimeinen kohta on nykyinen sivu, eikä sitä linkitetä.
+interface Props {
+	polku: { nimi: string; sivu: string }[];
+}
+
+const { polku } = Astro.props;
+const site = Astro.site ?? new URL('https://tekstiilipesuri.com');
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: polku.map((kohta, i) => ({
+		'@type': 'ListItem',
+		position: i + 1,
+		name: kohta.nimi,
+		item: new URL(kohta.sivu, site).href,
+	})),
+};
+---
+<nav class="tp-murupolku" aria-label="Murupolku">
+	{polku.map((kohta, i) => (
+		i < polku.length - 1
+			? <><a href={kohta.sivu}>{kohta.nimi}</a><span aria-hidden="true"> › </span></>
+			: <span aria-current="page">{kohta.nimi}</span>
+	))}
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

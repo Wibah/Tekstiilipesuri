@@ -1,0 +1,38 @@
+---
+import Ostolaatikko from './Ostolaatikko.astro';
+import TuoteKuva from './TuoteKuva.astro';
+import { luku, akkukayttoinen, type Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuote: Tuote;
+	otsikko: string;
+	yla: string;
+	merkinta?: string;
+}
+
+const { tuote, otsikko, yla, merkinta } = Astro.props;
+const t = tuote.tekniset;
+const avainluvut = [
+	{ nimi: 'Teho', arvo: t.tehoW, yksikko: 'W' },
+	{ nimi: 'Puhdasvesi', arvo: t.puhdasvesiL, yksikko: 'l' },
+	{ nimi: 'Paino', arvo: t.painoKg, yksikko: 'kg' },
+	akkukayttoinen(tuote) ? { nimi: 'Akku', arvo: t.akkujanniteV, yksikko: 'V' } : { nimi: 'Johto', arvo: t.virtajohtoM, yksikko: 'm' },
+].filter((a) => a.arvo != null);
+---
+<section class="tp-hero" id={tuote.id}>
+	<TuoteKuva merkinta={merkinta} kuva={tuote.kuva} alt={`${tuote.merkki} ${tuote.nimi} tekstiilipesuri`} />
+	<div>
+		<span class="tp-label">{yla}</span>
+		<h1>{otsikko}</h1>
+		<div class="tp-lede"><slot /></div>
+		<dl class="tp-avainluvut" style={`--sarakkeet: ${avainluvut.length}`}>
+			{avainluvut.map((a) => (
+				<div>
+					<dt class="tp-label">{a.nimi}</dt>
+					<dd>{luku(a.arvo!)}<small>{a.yksikko}</small></dd>
+				</div>
+			))}
+		</dl>
+		<Ostolaatikko tuote={tuote} />
+	</div>
+</section>

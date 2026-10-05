@@ -1,0 +1,37 @@
+---
+// Mallisivujen kokemusosio: kerää käyttäjien kokemuksia Formspreen kautta. Kokemukset tulevat
+// sähköpostiin (sama Formspree-lomake kuin ikkunanpesurobotti.fi:ssä ja painepesurit.fi:ssä, aihe kertoo sivuston),
+// ja ne julkaistaan käsin vasta tarkistuksen jälkeen. Älä kirjoita tänne keksittyjä kokemuksia.
+// Oppaissa ja merkkisivuilla johdantoteksti annetaan slotissa. Merkkisivuilla (mallikentta) käyttäjä kertoo
+// myös oman mallinsa, koska sivu kattaa koko merkin (Villen pyyntö 2026-09-30).
+interface Props {
+	malli: string; // esim. "Kärcher SE 3 Compact"
+	polku: string; // esim. "/karcher-se-3-compact/"
+	mallikentta?: boolean;
+	otsikko?: string; // oletus "<malli> kokemuksia"
+}
+const { malli, polku, mallikentta = false, otsikko } = Astro.props;
+const FORMSPREE = 'https://formspree.io/f/xkoazber';
+---
+<h2 id="kokemuksia">{otsikko ?? `${malli} kokemuksia`}</h2>
+{Astro.slots.has('default') ? <slot /> : (
+	<>
+		<p>Keräämme {malli} -tekstiilipesurin käyttäjien kokemuksia. Luemme jokaisen kokemuksen ja julkaisemme sen tällä sivulla, kun se kertoo tekstiilipesurin käytöstä.</p>
+		<p>Kerro alla olevalla lomakkeella, mitä peset, kuinka kauan olet käyttänyt {malli} -tekstiilipesuria ja mikä toimii tai ei toimi.</p>
+	</>
+)}
+<form class="kokemuslomake" action={FORMSPREE} method="POST">
+	<input type="hidden" name="_subject" value={`tekstiilipesuri.com – kokemus: ${malli}`} />
+	<input type="hidden" name="sivusto" value="tekstiilipesuri.com" />
+	<input type="hidden" name="malli" value={malli} />
+	<input type="hidden" name="sivu" value={`https://tekstiilipesuri.com${polku}`} />
+	<input type="text" name="_gotcha" class="kl-piilo" tabindex="-1" autocomplete="off" aria-hidden="true" />
+	<label>Nimimerkki<input type="text" name="nimimerkki" required maxlength="60" /></label>
+	<label>Ikä (vapaaehtoinen)<input type="number" name="ika" min="15" max="110" /></label>
+	{mallikentta && <label>Tekstiilipesurin malli (vapaaehtoinen)<input type="text" name="kayttajan_malli" maxlength="80" /></label>}
+	<label>Kokemuksesi<textarea name="kokemus" required rows="6" maxlength="3000"></textarea></label>
+	<label>Sähköposti (vapaaehtoinen, ei julkaista)<input type="email" name="email" /></label>
+	<label class="kl-valinta"><input type="checkbox" name="julkaisulupa" value="kyllä" required /> Kokemukseni saa julkaista tällä sivulla nimimerkilläni.</label>
+	<button type="submit" class="kl-nappi">Lähetä kokemus</button>
+	<p class="tp-lahde">Käsittelemme tietoja <a href="/tietosuojaseloste/">tietosuojaselosteen</a> mukaisesti.</p>
+</form>

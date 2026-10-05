@@ -1,0 +1,43 @@
+---
+import { euroa, paiva, type Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuote: Tuote;
+}
+
+const { tuote } = Astro.props;
+const { ostopaikka } = tuote;
+const alennus = tuote.hinta != null && tuote.hintaEnnenAlennusta != null && tuote.hintaEnnenAlennusta > tuote.hinta;
+---
+<div class="tp-osto">
+	<div class="tp-osto-rivi">
+		<div>
+			{tuote.affiliate ? (
+				// Kumppanikaupan nimeä ei näytetä (Villen ohje 2026-09-25): hinta ja linkki riittävät.
+				<>
+					<span class="tp-label">Saatavuus</span>
+					<span class="tp-osto-kauppa">Varastossa<small>Verkkokauppa</small></span>
+				</>
+			) : (
+				<>
+					<span class="tp-label">{tuote.vainTuotetiedot ? 'Tuotetiedot' : 'Myyjä'}</span>
+					<span class="tp-osto-kauppa">{ostopaikka.nimi}<small>{tuote.vainTuotetiedot ? 'Tuotetietojen lähde' : 'Valmistajan virallinen verkkokauppa'}</small></span>
+				</>
+			)}
+		</div>
+		{tuote.vainTuotetiedot ? (
+			<span class="tp-ei-myynnissa">Tarkista hinta jälleenmyyjältä</span>
+		) : tuote.myynnissa && tuote.hinta != null ? (
+			<span class="tp-hinta">
+				{alennus && <s>{euroa(tuote.hintaEnnenAlennusta!)}</s>}
+				{euroa(tuote.hinta)}
+			</span>
+		) : (
+			<span class="tp-ei-myynnissa">Ei tällä hetkellä myynnissä verkossa</span>
+		)}
+		<a class="tp-nappi" href={ostopaikka.url} target="_blank" rel={tuote.affiliate ? 'sponsored nofollow noopener' : 'nofollow noopener'}>
+			{tuote.myynnissa || tuote.vainTuotetiedot ? `${ostopaikka.napinTeksti} →` : 'Katso tuote valmistajan sivulla →'}
+		</a>
+	</div>
+	<p class="tp-osto-huom">{tuote.nimi} · {tuote.vainTuotetiedot ? 'tiedot haettu' : 'hinta tarkistettu'} {paiva(tuote.haettu)}</p>
+</div>

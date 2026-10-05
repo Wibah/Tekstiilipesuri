@@ -1,0 +1,117 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-tekstiilipesurit/. Hakusanat: SE 4 Plus (Ahrefs 2026-10:
+// noin 130 hakua). Vanhan SE 4001:n testejä ei käytetä, koska mallia ei enää myydä (Villen päätös 2026-10-05).
+// Kirjoitettu tekstiilipesuri-writer-skillillä (2026-10-05). Luvut ja hinnat tulevat Kärcherin datasta.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+
+const suositus = await paatuote('SE 4');
+const special = await tuote('se-4-plus-special');
+const goFurther = await tuote('se-4-go-further-eu');
+const se4versiot = await versiot('SE 4');
+const se6 = await tuote('se-6-signature-line');
+const se5car = await tuote('se-5-car');
+const se3 = await paatuote('SE 3');
+
+const t = suositus.tekniset;
+const t3 = se3.tekniset;
+
+const ukk = [
+	{
+		kysymys: 'Mikä ero on Kärcher SE 4 Plussalla ja SE 4 Plus Specialilla?',
+		vastaus: `Laite on sama: ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran säiliöt ja ${luku(t.painoKg!)} kg. Special-versiossa on vaihdettava lattiasuulake kuivaimurointiin ja erittäin pitkä rakosuulake. Kärcher.comissa Special maksaa ${euroa(special.hinta! - suositus.hinta!)} enemmän.`,
+	},
+	{
+		kysymys: 'Toimiiko Kärcher SE 4 Plus märkä-kuivaimurina?',
+		vastaus: 'Toimii. Mukana on lattiasuulake märkä-kuivaimurointiin, vaahtosuodatin ja fleece-pölypussi, joten samalla laitteella voi imuroida myös tavallisesti.',
+	},
+	{
+		kysymys: 'Mikä ero on Kärcher SE 4 Plussalla ja SE 6 Signature Linella?',
+		vastaus: `Teho, säiliöt ja virtajohto ovat samat. SE 6 Signature Line painaa ${luku(se6.tekniset.painoKg!)} kg, ja sen toimitukseen kuuluvat vaihdettava kuivaimurointisuulake ja laakasuodatin. Kärcher.comissa SE 6 maksaa ${euroa(se6.hinta!)} ja SE 4 Plus ${euroa(suositus.hinta!)}.`,
+	},
+	{
+		kysymys: 'Kumman valitsen, Kärcher SE 3 Compactin vai SE 4 Plussan?',
+		vastaus: `SE 3 Compact on parempi, jos peset lähinnä sohvaa, tuoleja ja autoa ja säilytystilaa on vähän. SE 4 Plus kannattaa, jos peset mattoja tai haluat laitteen, joka toimii myös märkä-kuivaimurina. Vertailu on <a href="${mallisivut['SE 3']}">SE 3 Compactin sivulla</a>.`,
+	},
+];
+---
+<Layout
+	title="Kärcher SE 4 Plus tekstiilipesuri kokemuksia – versiot, hinta ja kenelle sopii (2026)"
+	description={`Kärcher SE 4 Plus -tekstiilipesurin versiot, hinnat ja tekniset tiedot. ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran säiliöt ja lattiasuulake matoille. Toimii myös märkä-kuivaimurina.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Kärcher SE 4 Plus', sivu: mallisivut['SE 4'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SE 4 Plus -tekstiilipesuri" yla="Kärcher · Matoille ja kuivaimurointiin" merkinta="Suosituksemme">
+			<p>Kärcher SE 4 Plus on tekstiilipesuri ja märkä-kuivaimuri samassa laitteessa. Sen teho on {luku(t.tehoW!)} W, kummankin säiliön tilavuus on {luku(t.puhdasvesiL!)} litraa, ja mukana tulee {luku(t.tyoleveysMm!)} mm:n lattiasuulake. Laite pesee mattoja, sohvia ja auton penkkejä ja imuroi muulloin lattioita.</p>
+			<p>SE 4 Plus painaa {luku(t.painoKg!)} kg eli {luku(t.painoKg! - t3.painoKg!)} kg enemmän kuin SE 3 Compact. Isommalla säiliöllä vettä tarvitsee lisätä harvemmin.</p>
+		</TuoteHero>
+
+		<h2>Kenelle SE 4 Plus sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Mattoihin: {luku(t.tyoleveysMm!)} mm:n lattiasuulake ja kaksi 0,5 metrin jatkoputkea kuuluvat toimitukseen</li>
+					<li>Lapsi- ja lemmikkiperheisiin, joissa tahroja tulee usein: Kärcher markkinoi mallia juuri heille</li>
+					<li>Laitteeksi, jonka pitää myös imuroida: mukana ovat märkä-kuivaimurointisuulake, vaahtosuodatin ja pölypussi</li>
+					<li>Pidempään pesuun: puhdasvesisäiliö on {luku(t.puhdasvesiL!)} litraa, kun SE 3 Compactissa se on {luku(t3.puhdasvesiL!)} litraa</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Pieneen säilytystilaan: mitat ovat {t.mitatMm!.replaceAll(' x ', ' × ')} mm</li>
+					<li>Autoon ilman pistorasiaa: SE 4 toimii vain verkkovirralla (katso akkukäyttöinen <a href={mallisivut['SE 3']}>SE 3-18</a>)</li>
+					<li>Kerran vuodessa tehtävään pesuun: silloin <a href={mallisivut['Puzzi 8/1']}>vuokrattava Puzzi</a> voi tulla halvemmaksi</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>SE 4:n versiot vertailussa</h2>
+		<p>Kärcher.com myy SE 4:ää kolmena versiona. Moottori, säiliöt, letku ja paino ovat kaikissa samat, joten versiot eroavat toisistaan vain suulakkeiden osalta. Go!Further maksaa saman verran kuin Plus ({euroa(goFurther.hinta!)}), ja sen mukana tulee lisäksi verhoilusuulake lemmikkien karvoille. Kärcherin mukaan Go!Furtherin rungossa on käytetty 25 prosenttia kierrätysmuovia.</p>
+		<p>Jos kotona on koira tai kissa, Go!Further on siis samalla hinnalla parempi valinta. Muuten Plus riittää. Special-version vaihdettava kuivaimurointisuulake ja pitkä rakosuulake ovat hyödyllisiä lähinnä silloin, kun laitetta käytetään paljon myös imurina.</p>
+		<VersioVertailu versiot={se4versiot} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat tarkistettu {paiva(suositus.haettu)} Kärcher.comista.</p>
+
+		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>SE 4, SE 5 ja SE 6: mitä eroa?</h2>
+		<p>Kärcherin SE 4-, SE 5- ja SE 6 -mallit ovat samaa kokoluokkaa. Kaikissa on {luku(t.tehoW!)} watin teho, {luku(t.puhdasvesiL!)} litran säiliöt ja {luku(t.virtajohtoM!)} metrin virtajohto. Erot ovat rungossa ja varusteissa:</p>
+		<ul>
+			<li><strong>SE 5 Car</strong> on pakattu auton pesuun, eikä siinä ole lattiasuulaketta. Kärcher.com ei myy sitä tällä hetkellä.</li>
+			<li><strong>SE 5 Upholstery</strong> on varustettu verhoilun ja mattojen pesuun. Kärcher.com ei myy sitäkään tällä hetkellä.</li>
+			<li><strong>SE 6 Signature Line</strong> maksaa {euroa(se6.hinta!)}, ja sen mukana tulee litra RM 519 -pesuainetta, vaihdettava kuivaimurointisuulake ja laakasuodatin.</li>
+		</ul>
+		<p>Koska teho ja säiliöt ovat samat, suosittelemme SE 4 Plussaa tai Go!Furtheria. Ne ovat Kärcher.comissa SE-sarjan isoista malleista edullisimmat, ja niissä on lattiasuulake. Kaikki versiot ovat <a href="/karcher-tekstiilipesurit/">Kärcherin mallistotaulukossa</a>.</p>
+		<p class="tp-lahde">SE 5 Carin tiedot: <a href={se5car.lahde} target="_blank" rel="nofollow noopener">Kärcher.com</a>.</p>
+
+		<h2>Näin peset maton SE 4 Plussalla</h2>
+		<ol>
+			<li>Imuroi matto huolellisesti, esimerkiksi SE 4:n omalla kuivaimurointisuulakkeella.</li>
+			<li>Tarkista maton pesuohje ja kokeile pesuainetta reunaan. Villamatoille ohjeet vaihtelevat, joten valmistajan ohje ratkaisee.</li>
+			<li>Laita puhdasvesisäiliöön vettä ja RM 519 -pesuainetta. Mukana tulee litran pullo.</li>
+			<li>Ruiskuta ja vedä lattiasuulaketta hitaasti. Tee lopuksi vetoja pelkällä imulla, jotta matto jää mahdollisimman kuivaksi.</li>
+			<li>Anna maton kuivua kokonaan ennen kuin sen päällä kävellään. Lämmin ja tuuletettu huone nopeuttaa kuivumista.</li>
+		</ol>
+		<p>Pesuaineiden erot on koottu <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaaseen</a>.</p>
+
+		<h2>Vaihtoehdot</h2>
+		<div class="mk-lista">
+			<Tuotekortti tuote={se3} otsikko="Kärcher SE 3 Compact" sivu={mallisivut['SE 3']} kenelle={sarjakuvaukset['SE 3']} tagi="Pienempi ja kevyempi" />
+			<Tuotekortti tuote={se6} otsikko="Kärcher SE 6 Signature Line" sivu="/karcher-tekstiilipesurit/" kenelle={sarjakuvaukset['SE 6']} tagi="Sama teho, eri varusteet" ankkuri={`malli-${se6.id}`} />
+		</div>
+
+		<Kokemuslomake malli="Kärcher SE 4 Plus" polku={mallisivut['SE 4']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

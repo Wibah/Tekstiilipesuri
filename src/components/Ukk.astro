@@ -1,0 +1,31 @@
+---
+// Usein kysytyt kysymykset sekä sivulle että FAQPage-rakenteiseksi dataksi
+// samasta lähteestä, jotta näkyvä teksti ja JSON-LD eivät pääse eroamaan.
+// Vastaus saa sisältää HTML-linkkejä; JSON-LD:hen menee pelkkä teksti.
+interface Props {
+	kysymykset: { kysymys: string; vastaus: string }[];
+}
+
+const { kysymykset } = Astro.props;
+const pelkkaTeksti = (html: string) => html.replace(/<[^>]+>/g, '');
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: kysymykset.map(({ kysymys, vastaus }) => ({
+		'@type': 'Question',
+		name: kysymys,
+		acceptedAnswer: { '@type': 'Answer', text: pelkkaTeksti(vastaus) },
+	})),
+};
+---
+<h2>Usein kysytyt kysymykset</h2>
+<div class="faq-container">
+	{kysymykset.map(({ kysymys, vastaus }) => (
+		<div class="faq-block">
+			<span class="faq-q">{kysymys}</span>
+			<p class="faq-a" set:html={vastaus} />
+		</div>
+	))}
+</div>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

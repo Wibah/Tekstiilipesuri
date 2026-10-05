@@ -1,0 +1,46 @@
+---
+import { luku, type Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuote: Tuote;
+}
+
+const { tuote } = Astro.props;
+const t = tuote.tekniset;
+const rivit = [
+	['Teho', t.tehoW, 'W'],
+	['Imuturbiinin teho', t.imuturbiiniW, 'W'],
+	['Puhdasvesisäiliö', t.puhdasvesiL, 'l'],
+	['Likavesisäiliö', t.likavesiL, 'l'],
+	['Letku', t.letkuM, 'm'],
+	['Virtajohto', t.virtajohtoM, 'm'],
+	['Käyttösäde', t.kayttosadeM, 'm'],
+	['Työleveys', t.tyoleveysMm, 'mm'],
+	['Akun jännite', t.akkujanniteV, 'V'],
+	['Äänenvoimakkuus', t.meluDb, 'dB(A)'],
+	['Paino ilman varusteita', t.painoKg, 'kg'],
+] as const;
+---
+<div class="tp-tekniset">
+	<div class="tp-taulu">
+		<table class="tp-spec">
+			<tbody>
+				{rivit.filter(([, arvo]) => arvo != null).map(([nimi, arvo, yksikko]) => (
+					<tr><th scope="row">{nimi}</th><td>{luku(arvo!)} {yksikko}</td></tr>
+				))}
+				{t.akkuKayttoaika && <tr><th scope="row">Käyttöaika yhdellä latauksella (min)</th><td>{t.akkuKayttoaika.replace(/Normaali tila: \/ /g, '')}</td></tr>}
+				{t.tyosuoritusM2h && <tr><th scope="row">Työsuoritus</th><td>{t.tyosuoritusM2h} m²/h</td></tr>}
+				{t.mitatMm && <tr><th scope="row">Mitat (p × l × k)</th><td>{t.mitatMm.replaceAll(' x ', ' × ')} mm</td></tr>}
+			</tbody>
+		</table>
+	</div>
+	<div>
+		{tuote.toimitusSisaltaa.length > 0 && (
+			<>
+				<h3>Toimitus sisältää</h3>
+				<ul class="tp-lista">{tuote.toimitusSisaltaa.map((rivi) => <li>{rivi.replace('::', ':')}</li>)}</ul>
+			</>
+		)}
+		<p class="tp-lahde">Lähde: <a href={tuote.lahde} target="_blank" rel="nofollow noopener">{tuote.merkki} {tuote.nimi} valmistajan sivuilla</a></p>
+	</div>
+</div>

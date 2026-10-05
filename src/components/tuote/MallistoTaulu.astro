@@ -1,0 +1,53 @@
+---
+// Merkin koko mallisto yhdessä taulukossa (merkkisivut). Suositeltu tuote korostetaan.
+import { Image } from 'astro:assets';
+import { euroa, luku, sailiot, akkukayttoinen, type Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuotteet: Tuote[];
+	suositusId?: string;
+	sivut?: Record<string, string>; // sarja → mallisivu
+}
+
+const { tuotteet, suositusId, sivut = {} } = Astro.props;
+// Hintasarake vain, jos jollakin tuotteella seurataan hintaa.
+const naytaHinta = tuotteet.some((t) => !t.vainTuotetiedot);
+// Pieni tuotekuva, jos kuva on ladattu Adtraction-feedistä (src/assets/tuotteet/).
+const kuvat = import.meta.glob<{ default: ImageMetadata }>('/src/assets/tuotteet/*', { eager: true });
+const kuva = (t: Tuote) => (t.kuva ? kuvat[`/src/assets/tuotteet/${t.kuva}`]?.default : undefined);
+const n = (v: number | null, yksikko = '') => (v == null ? '–' : `${luku(v)}${yksikko}`);
+---
+<div class="tp-taulu">
+	<table class="tp-versiot">
+		<thead>
+			<tr>
+				<th scope="col">Malli</th>
+				{naytaHinta && <th scope="col">Hinta</th>}
+				<th scope="col">Teho</th>
+				<th scope="col">Säiliöt (puhdas / lika)</th>
+				<th scope="col">Paino</th>
+				<th scope="col">Virtalähde</th>
+			</tr>
+		</thead>
+		<tbody>
+			{tuotteet.map((t) => (
+				<tr id={`malli-${t.id}`} class:list={{ 'tp-suositus': t.id === suositusId, 'tp-ei-myynnissa-rivi': !t.myynnissa && !t.vainTuotetiedot }}>
+					<th scope="row">
+						{kuva(t) && <Image class="tp-mini-kuva" src={kuva(t)!} alt="" width={96} loading="lazy" />}
+						{t.sarja && sivut[t.sarja] ? (
+							<a href={sivut[t.sarja]}>{t.merkki} {t.nimi}</a>
+						) : (
+							<a href={t.ostopaikka.url} target="_blank" rel={t.affiliate ? 'sponsored nofollow noopener' : 'nofollow noopener'}>{t.merkki} {t.nimi}</a>
+						)}
+						{t.id === suositusId && <span class="tp-tagi">Suosituksemme</span>}
+					</th>
+					{naytaHinta && <td>{t.vainTuotetiedot ? '–' : t.myynnissa && t.hinta != null ? euroa(t.hinta) : 'Ei myynnissä Kärcher.comissa'}</td>}
+					<td>{n(t.tekniset.tehoW, ' W')}</td>
+					<td>{sailiot(t) ?? '–'}</td>
+					<td>{n(t.tekniset.painoKg, ' kg')}</td>
+					<td>{akkukayttoinen(t) ? `Akku${t.tekniset.akkujanniteV ? ` ${luku(t.tekniset.akkujanniteV)} V` : ''}` : 'Verkkovirta'}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>

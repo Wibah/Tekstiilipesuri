@@ -1,0 +1,42 @@
+---
+import { euroa, luku, sailiot, akkukayttoinen, erotVersioissa, type Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	versiot: Tuote[];
+	paatuoteId: string;
+}
+
+const { versiot, paatuoteId } = Astro.props;
+const erot = erotVersioissa(versiot);
+// Virtalähdesarake vain, jos versiot eroavat siinä.
+const naytaVirta = new Set(versiot.map(akkukayttoinen)).size > 1;
+---
+<div class="tp-taulu">
+	<table class="tp-versiot">
+		<thead>
+			<tr>
+				<th scope="col">Versio</th>
+				<th scope="col">Hinta</th>
+				{naytaVirta && <th scope="col">Virtalähde</th>}
+				<th scope="col">Säiliöt</th>
+				<th scope="col">Paino</th>
+				<th scope="col">Mukana muihin versioihin verrattuna</th>
+			</tr>
+		</thead>
+		<tbody>
+			{versiot.map((v) => (
+				<tr class:list={{ 'tp-suositus': v.id === paatuoteId, 'tp-ei-myynnissa-rivi': !v.myynnissa && !v.vainTuotetiedot }}>
+					<th scope="row">
+						<a href={v.ostopaikka.url} target="_blank" rel={v.affiliate ? 'sponsored nofollow noopener' : 'nofollow noopener'}>{v.merkki} {v.nimi}</a>
+						{v.id === paatuoteId && <span class="tp-tagi">Suosituksemme</span>}
+					</th>
+					<td>{v.vainTuotetiedot ? '–' : v.myynnissa && v.hinta != null ? euroa(v.hinta) : 'Ei myynnissä Kärcher.comissa'}</td>
+					{naytaVirta && <td>{akkukayttoinen(v) ? 'Akku' : 'Verkkovirta'}</td>}
+					<td>{sailiot(v) ?? '–'}</td>
+					<td>{v.tekniset.painoKg != null ? `${luku(v.tekniset.painoKg)} kg` : '–'}</td>
+					<td>{erot.get(v.id)?.length ? erot.get(v.id)!.map((r) => r.replace('::', ':')).join('; ') : '–'}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>

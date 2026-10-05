@@ -1,0 +1,134 @@
+---
+// SCN: tuki, intentti Decision, emopilari /. Hakusanat: tekstiilipesuri vuokraus 2 600, vuokraa tekstiilipesuri 200,
+// kaupunkihaut (Oulu, Turku, Tampere, Helsinki, Jyväskylä, Espoo, Kuopio, Lahti, Joensuu ym.), kärcher tekstiilipesuri
+// vuokraus 90 (Ahrefs 2026-10, yhteensä noin 5 950 hakua). Vuokraamoiden hinnat tiedostosta src/data/vuokrahinnat.json
+// (tarkistettu käsin 2026-10-05). Kaupunkikohtaiset tiedot ovat vain niistä vuokraamoista, joiden sivut on tarkistettu.
+// Kirjoitettu tekstiilipesuri-writer-skillillä (2026-10-05).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import VuokraTaulu from '../components/tuote/VuokraTaulu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import { paatuote, tuote, euroa, luku, paiva, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+
+const se3 = await paatuote('SE 3');
+const se3perus = await tuote('se-3-compact');
+const se2 = await tuote('se-2-spot-care');
+const se4 = await paatuote('SE 4');
+const puzzi = await paatuote('Puzzi 8/1');
+
+// Halvin tarkistettu vuorokausivuokra (Pesurivuokraus.fi) ja kallein (Kärcher Center Vantaa).
+const halvin = 39;
+const kallein = 45;
+const paivaa = (hinta: number) => luku(Math.round((hinta / halvin) * 10) / 10);
+const laskelma = [
+	{ t: se2, nimi: 'Kärcher SE 2 Spot Care', sivu: '/karcher-tekstiilipesurit/' },
+	{ t: se3perus, nimi: 'Kärcher SE 3 Compact', sivu: mallisivut['SE 3'] },
+	{ t: se3, nimi: 'Kärcher SE 3 Compact Floor', sivu: mallisivut['SE 3'] },
+	{ t: se4, nimi: 'Kärcher SE 4 Plus', sivu: mallisivut['SE 4'] },
+	{ t: puzzi, nimi: `Kärcher ${puzzi.nimi}`, sivu: mallisivut['Puzzi 8/1'] },
+];
+
+const kaupungit = [
+	['Helsinki, Espoo ja Vantaa', 'Pesurivuokraus.fi (noutopisteet), Kärcher Center Vantaa'],
+	['Tampere', 'Pesurivuokraus.fi (noutopiste)'],
+	['Turku ja Raisio', 'Vuokraamo 24/7 Raisiossa (itsepalvelunouto ympäri vuorokauden)'],
+	['Oulu ja Kempele', 'Pesurivuokraus.fi (noutopisteet), Kärcher Center Oulu'],
+	['Jyväskylä', 'Pesurivuokraus.fi (noutopiste), Kärcher Center Jyväskylä'],
+	['Lahti, Hämeenlinna ja Lappeenranta', 'Pesurivuokraus.fi (noutopisteet)'],
+	['Vaasa, Seinäjoki, Mikkeli, Salo ja Nurmijärvi', 'Pesurivuokraus.fi (noutopisteet), Nurmijärvellä myös Kärcher Oy'],
+];
+
+const ukk = [
+	{
+		kysymys: 'Paljonko tekstiilipesurin vuokraus maksaa?',
+		vastaus: `Tarkistamissamme vuokraamoissa Kärcher Puzzi 8/1 maksoi lokakuussa 2026 ${halvin}–${kallein} € vuorokaudelta. Kärcher Center Vantaa vuokraa sitä myös viikonlopuksi 60 eurolla ja viikoksi 150 eurolla. Vuokraamo 24/7 Raisiossa vuokraa alkaen 25 € neljäksi tunniksi.`,
+	},
+	{
+		kysymys: 'Kannattaako tekstiilipesuri ostaa vai vuokrata?',
+		vastaus: `Vuokraa, jos peset kerran tai kaksi vuodessa. Osta, jos tahroja tulee usein, esimerkiksi lemmikki- tai lapsiperheessä, tai jos peset useammin kuin muutaman kerran vuodessa. Kompaktin <a href="${mallisivut['SE 3']}">Kärcher SE 3 Compactin</a> hinnalla (${euroa(se3perus.hinta!)}) saa noin ${paivaa(se3perus.hinta!)} vuorokauden vuokran.`,
+	},
+	{
+		kysymys: 'Mitä tekstiilipesurin vuokraan sisältyy?',
+		vastaus: 'Se vaihtelee vuokraamoittain. Kärcher Center Vantaalla hintaan kuuluvat kalustesuulake ja kaksi RM 760 -pesuainetablettia, ja mattosuulake maksaa 10 € lisää. Pesurivuokraus.fi myy pesuaineen varauksen yhteydessä. Tarkista ennen varausta, kuuluuko hintaan pesuaine ja mattosuulake.',
+	},
+	{
+		kysymys: 'Mitä tekstiilipesuria vuokraamot vuokraavat?',
+		vastaus: `Kaikki kolme tarkistamaamme vuokraamoa vuokraavat Kärcherin Puzzi 8/1 -ammattilaitetta. Sen puhdasvesisäiliö on ${luku(puzzi.tekniset.puhdasvesiL!)} litraa, kun kotimalleissa se on 1,5–4 litraa. Lue lisää <a href="${mallisivut['Puzzi 8/1']}">Puzzi 8/1 -sivulta</a>.`,
+	},
+	{
+		kysymys: 'Pitääkö vuokratekstiilipesuri puhdistaa ennen palautusta?',
+		vastaus: 'Yleensä pitää. Esimerkiksi Vuokraamo 24/7 ohjeistaa palauttamaan laitteen puhdistettuna. Tyhjennä likavesisäiliö, huuhtele säiliöt ja suulake ja tarkista vuokraamon omat ehdot.',
+	},
+];
+---
+<Layout
+	title="Tekstiilipesuri vuokraus – hinnat, vuokraamot ja kannattaako ostaa (2026)"
+	description={`Tekstiilipesurin vuokraus maksaa noin ${halvin}–${kallein} € vuorokaudelta. Vertailimme vuokraamoiden hinnat ja laskimme, milloin oma tekstiilipesuri tulee vuokrausta halvemmaksi.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Tekstiilipesurin vuokraus vai osto', sivu: '/tekstiilipesuri-vuokraus-vai-osto/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Tekstiilipesurin vuokraus vai oma tekstiilipesuri?</h1>
+		<p>Tekstiilipesurin vuokraus maksaa tarkistamissamme vuokraamoissa {halvin}–{kallein} € vuorokaudelta, ja vuokralle saa tehokkaan Kärcher Puzzi 8/1 -ammattilaitteen. Vuokraus kannattaa, jos peset sohvat, matot tai auton kerran tai kaksi vuodessa. Oma laite kannattaa, jos tahroja tulee usein tai haluat pestä ne heti. Kompaktin kotimallin hinnalla saa noin {paivaa(se3perus.hinta!)} vuokravuorokautta.</p>
+
+		<h2>Tekstiilipesurin vuokrahinnat</h2>
+		<p>Tarkistimme kolmen vuokraamon hinnat. Kaikki kolme vuokraavat Kärcher Puzzi 8/1 -tekstiilipesuria, joten hinnat ovat suoraan vertailukelpoisia.</p>
+		<VuokraTaulu />
+
+		<h2>Laskelma: milloin oma tekstiilipesuri tulee halvemmaksi?</h2>
+		<p>Taulukko kertoo, montako vuorokautta laitteen hinnalla saa vuokrata halvimmasta tarkistamastamme vuokraamosta ({halvin} € / vrk). Pesuaine on jätetty laskelmasta pois, koska sitä tarvitaan kummassakin vaihtoehdossa.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Oma laite</th><th scope="col">Hinta Kärcher.comissa</th><th scope="col">Vastaa vuokravuorokausia</th></tr></thead>
+				<tbody>
+					{laskelma.map(({ t, nimi, sivu }) => (
+						<tr><th scope="row"><a href={sivu}>{nimi}</a></th><td>{euroa(t.hinta!)}</td><td>noin {paivaa(t.hinta!)}</td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p class="tp-lahde">Laitteiden hinnat tarkistettu {paiva(se3.haettu)} Kärcher.comista.</p>
+		<p>Kun pesukertoja on vuodessa enemmän kuin kaksi tai kolme, oma kompakti laite maksaa itsensä takaisin muutamassa vuodessa. Oma laite on silloin myös käsillä heti, kun kahvi kaatuu sohvalle. Tuore tahra lähtee helpommin kuin kuivunut, ja tästä testit ovat yksimielisiä.</p>
+		<p>Ison pesun teho on kuitenkin vuokralaitteen puolella. Puzzi 8/1:n {luku(puzzi.tekniset.puhdasvesiL!)} litran säiliö on kaksinkertainen SE 4 Plussan {luku(se4.tekniset.puhdasvesiL!)} litraan ja lähes viisinkertainen SE 3 Compactin {luku(se3.tekniset.puhdasvesiL!)} litraan verrattuna. Siksi koko sohvakalusto ja isot matot käyvät vuokralaitteella nopeammin.</p>
+
+		<h2>Vuokraa, jos…</h2>
+		<ul>
+			<li>peset sohvat, matot ja auton kerran tai kaksi vuodessa</li>
+			<li>pesettävää on paljon kerralla: koko sohvakalusto, isot matot tai muuton jälkeinen loppusiivous</li>
+			<li>säilytystilaa on vähän</li>
+		</ul>
+		<h2>Osta, jos…</h2>
+		<ul>
+			<li>kotona on lapsia tai lemmikkejä, ja tahroja tulee viikoittain</li>
+			<li>peset auton penkkejä usein (katso akkukäyttöinen <a href={mallisivut['SE 3']}>Kärcher SE 3-18</a>)</li>
+			<li>haluat pestä tahrat heti, ennen kuin ne kuivuvat</li>
+		</ul>
+
+		<h2>Tekstiilipesurin vuokraus paikkakunnittain</h2>
+		<p>Lista kattaa vain ne kolme vuokraamoa, joiden sivut tarkistimme. Paikkakunnalla voi olla muitakin vuokraajia, kuten rautakauppoja ja paikallisia vuokraamoja.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Paikkakunta</th><th scope="col">Vuokraamot</th></tr></thead>
+				<tbody>{kaupungit.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody>
+			</table>
+		</div>
+
+		<h2>Näin vuokraus onnistuu</h2>
+		<ol>
+			<li><strong>Varaa netissä.</strong> Kaikki kolme vuokraamoa ottavat varauksen verkossa ja näyttävät vapaat ajat.</li>
+			<li><strong>Varaa pesuaine ja mattosuulake samalla.</strong> Perus-Puzzissa on mukana vain kalustesuulake. Pesuaineista kerrotaan <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.</li>
+			<li><strong>Valmistele kohteet.</strong> Imuroi sohvat ja matot ennen kuin haet laitteen, niin vuokra-aika menee pesuun.</li>
+			<li><strong>Pese kaikki kerralla.</strong> Mitä useamman kohteen peset samalla vuokrauksella, sitä halvemmaksi yksi kohde tulee.</li>
+			<li><strong>Puhdista ja palauta.</strong> Tyhjennä likavesisäiliö ja huuhtele laite vuokraamon ohjeen mukaan.</li>
+		</ol>
+
+		<h2>Jos päätät ostaa</h2>
+		<div class="mk-lista">
+			<Tuotekortti tuote={se3} otsikko="Kärcher SE 3 Compact" sivu={mallisivut['SE 3']} kenelle={sarjakuvaukset['SE 3']} tagi="Suosituksemme kotiin" />
+			<Tuotekortti tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kenelle={sarjakuvaukset['SE 4']} tagi="Matoille" />
+		</div>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

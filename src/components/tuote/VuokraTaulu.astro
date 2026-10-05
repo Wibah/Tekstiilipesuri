@@ -1,0 +1,24 @@
+---
+// Tekstiilipesurin vuokrahinnat tiedostosta src/data/vuokrahinnat.json. Hinnat tarkistetaan käsin vuokraamoiden
+// sivuilta (ks. kenttä tarkistettu), koska vuokraamot eivät tarjoa rajapintaa. Päivitä tiedosto, kun hinnat muuttuvat.
+import vuokrat from '../../data/vuokrahinnat.json';
+import { euroa, paiva } from '../../lib/tuotteet';
+---
+<div class="tp-taulu">
+	<table class="tp-versiot">
+		<thead>
+			<tr><th scope="col">Vuokraamo</th><th scope="col">Laite</th><th scope="col">Hinta</th><th scope="col">Huomioitavaa</th></tr>
+		</thead>
+		<tbody>
+			{vuokrat.map((v) => (
+				<tr>
+					<th scope="row"><a href={v.lahde} target="_blank" rel="nofollow noopener">{v.vuokraamo}</a><br /><small>{v.paikkakunnat}</small></th>
+					<td>{v.laite}</td>
+					<td>{v.hinnat.map((h) => <div>{h.kesto}: {'alkaen' in h && h.alkaen ? 'alk. ' : ''}{euroa(h.hinta)}</div>)}</td>
+					<td>{v.lisat}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</div>
+<p class="tp-lahde">Hinnat tarkistettu {paiva(vuokrat[0].tarkistettu)} vuokraamoiden sivuilta. Tarkista ajantasainen hinta vuokraamolta ennen varausta.</p>

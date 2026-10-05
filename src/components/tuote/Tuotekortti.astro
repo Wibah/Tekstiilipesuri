@@ -1,0 +1,16 @@
+---
+// Mallisivujen vaihtoehtokortti (toinen K-malli): sama kortti kuin merkkisivuilla (Korttirivi).
+import Korttirivi from './Korttirivi.astro';
+import type { Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuote: Tuote;
+	otsikko: string;
+	sivu: string;
+	kenelle: string;
+	tagi?: string;
+}
+
+const { tuote, otsikko, sivu, kenelle, tagi } = Astro.props;
+---
+<Korttirivi tuote={tuote} otsikko={otsikko} sivu={sivu} kuvaus={kenelle} tagi={tagi} versio />

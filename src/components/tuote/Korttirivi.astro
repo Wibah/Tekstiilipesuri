@@ -1,0 +1,72 @@
+---
+// Yksi tuotekortti, ulkoasu ikkunanpesurobotti.fi:n ja painepesurit.fi:n tuotekorttien mukaan:
+// kuva vasemmalla, otsikko, lyhyt kuvaus, ✓-lista teknisistä tiedoista ja alarivillä hinta sekä kaksi nappia
+// (osto ja mallin oma sivu). Käytössä merkkisivuilla (Merkkikortit), etusivun toplistassa (ToplistaRivi) ja
+// mallisivujen vaihtoehdoissa (Tuotekortti). Kuvaton kortti näytetään ilman kuva-aluetta.
+import { Image } from 'astro:assets';
+import { euroa, luku, sailiot, akkukayttoinen, type Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	tuote: Tuote;
+	otsikko?: string; // oletus "<merkki> <nimi>"
+	sivu?: string; // mallin oma sivu sivustolla
+	kuvaus?: string;
+	tagi?: string;
+	sija?: number;
+	versio?: boolean; // näytä "Suositeltu versio: <nimi>"
+	otsikkoH3?: string; // kortin otsikkoteksti, jos se poikkeaa napin mallinimestä (esim. "Paras tekstiilipesuri kotiin: Kärcher SE 3 Compact")
+	ankkuri?: string; // kohta sivulla, jos malli ei ole siellä korttina (esim. MallistoTaulun rivi "malli-<id>")
+}
+
+const { tuote: t, otsikko: otsikkoAnnettu, otsikkoH3, sivu, kuvaus, tagi, sija, versio = false, ankkuri } = Astro.props;
+const otsikko = otsikkoH3 ?? otsikkoAnnettu ?? `${t.merkki} ${t.nimi}`;
+const kuvat = import.meta.glob<{ default: ImageMetadata }>('/src/assets/tuotteet/*', { eager: true });
+const kuva = t.kuva ? kuvat[`/src/assets/tuotteet/${t.kuva}`]?.default : undefined;
+const rel = t.affiliate ? 'sponsored nofollow noopener' : 'nofollow noopener';
+const hinnallinen = t.myynnissa && t.hinta != null;
+const alennus = hinnallinen && t.hintaEnnenAlennusta != null && t.hintaEnnenAlennusta > t.hinta!;
+const k = t.tekniset;
+const iso = (s: string) => s.replace(/^./, (c) => c.toUpperCase());
+const rivit = [
+	[k.tehoW != null && `${luku(k.tehoW)} W`, sailiot(t) && `säiliöt ${sailiot(t)}`],
+	[k.painoKg != null && `paino ${luku(k.painoKg)} kg`, k.letkuM != null && `letku ${luku(k.letkuM)} m`, k.virtajohtoM != null && `johto ${luku(k.virtajohtoM)} m`],
+]
+	.map((r) => r.filter(Boolean).join(', '))
+	.filter(Boolean)
+	.map(iso);
+if (akkukayttoinen(t)) rivit.unshift(k.akkujanniteV != null ? `Akkukäyttöinen, ${luku(k.akkujanniteV)} V` : 'Akkukäyttöinen');
+const napinTeksti = t.myynnissa || t.vainTuotetiedot ? t.ostopaikka.napinTeksti : 'Katso tuote valmistajan sivulla';
+// Toisen napin teksti: annettu otsikko sellaisenaan, muuten merkki ja mallinimi.
+const sivunNimi = otsikkoAnnettu ?? `${t.merkki} ${t.nimi}`;
+// Mallisivulla oleva malli linkitetään sivulle, muuten kohtaan sivulla (kortin id on tuotteen id).
+const linkki = sivu && ankkuri ? `${sivu}#${ankkuri}` : sivu;
+---
+<article class="mk-kortti" id={t.id}>
+	{(kuva || sija != null) && (
+		<a href={linkki ?? t.ostopaikka.url} {...(sivu ? {} : { target: '_blank', rel })} class:list={['mk-kuva', { 'mk-kuva-sija': !kuva }]}>
+			{sija != null && <span class="mk-sija">{sija}</span>}
+			{kuva && <Image src={kuva} alt={`${t.merkki} ${t.nimi} tekstiilipesuri`} width={240} loading="lazy" />}
+		</a>
+	)}
+	<div class="mk-sisalto">
+		{tagi && <span class="tp-tagi">{tagi}</span>}
+		<h3>{sivu ? <a href={linkki}>{otsikko}</a> : otsikko}</h3>
+		{versio && <p class="mk-versio">Suositeltu versio: {t.nimi}</p>}
+		{kuvaus && <p class="mk-kuvaus">{kuvaus}</p>}
+		{rivit.length > 0 && <ul>{rivit.map((r) => <li>{r}</li>)}</ul>}
+		<div class="mk-ala">
+			{hinnallinen ? (
+				<span class="mk-hinta">
+					{euroa(t.hinta!)}
+					{alennus && <s>{euroa(t.hintaEnnenAlennusta!)}</s>}
+				</span>
+			) : (
+				<span class="mk-hinta mk-ei-hintaa">Hinta jälleenmyyjältä</span>
+			)}
+			<div class="mk-napit">
+				<a href={t.ostopaikka.url} target="_blank" rel={rel} class="mk-osta">{napinTeksti}</a>
+				{sivu && <a href={linkki} class="mk-tiedot">Katso {sivunNimi}</a>}
+			</div>
+		</div>
+	</div>
+</article>

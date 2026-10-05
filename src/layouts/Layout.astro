@@ -1,0 +1,41 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+// Fontit ladataan sivuston omalta palvelimelta (ei Google Fontsista), jotta kävijän
+// IP-osoite ei välity Googlelle. Vain latin-merkistö, johon ä ja ö kuuluvat.
+import '@fontsource/barlow/latin-400.css';
+import '@fontsource/barlow/latin-500.css';
+import '@fontsource/barlow/latin-600.css';
+import '@fontsource/barlow-semi-condensed/latin-700.css';
+import '@fontsource/barlow-semi-condensed/latin-800.css';
+import '../styles/site.css';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+<html lang="fi">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<!-- Favicon (2026-10-01): SVG selaimille, 48 px:n monikerrat Googlen hakutuloksia varten, ICO vanhoille selaimille. -->
+		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+		<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+		<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+		<!-- Google Search Consolen vahvistustagi lisätään tähän, kun Ville vahvistaa domainin. -->
+	</head>
+	<body>
+		<Header />
+		<slot />
+		<Footer />
+	</body>
+</html>

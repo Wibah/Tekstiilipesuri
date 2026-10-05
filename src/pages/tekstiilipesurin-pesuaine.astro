@@ -1,0 +1,106 @@
+---
+// SCN: tuki, intentti Use Case, emopilari /. Hakusanat: tekstiilipesuri pesuaine 800, kärcher tekstiilipesuri pesuaine
+// 700, tekstiilipesuri aine 60, kärcher tekstiilipesuri pesuaine tabletti 20 (Ahrefs 2026-10, yhteensä noin 1 840 hakua).
+// Kauppahaut (Tokmanni, Prisma, Puuilo) jätetään tietoisesti pois. Kirjoitettu tekstiilipesuri-writer-skillillä
+// (2026-10-05). Kärcherin aineet: kokoelma pesuaineet (npm run hae:pesuaineet). Bissellin aineiden nimet ovat
+// kumppanifeedeistä (2026-10-05).
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import PesuaineTaulu from '../components/tuote/PesuaineTaulu.astro';
+import Ukk from '../components/Ukk.astro';
+import { euroa, luku, paiva, paatuote, mallisivut } from '../lib/tuotteet';
+
+const aine = async (id: string) => (await getEntry('pesuaineet', id))!.data;
+const rm519 = await aine('rm-519-tekstiilien-puhdistusaine-62960310');
+const rm519n = await aine('tekstiilien-puhdistusaine-beyond-rm-519n-62962370');
+const rm762 = await aine('tekstiilinhoitoaine-62957690');
+const rm760t = await aine('tekstiilipesutabletti-carpetcleaner-rm-760-62958500');
+const rm760j = await aine('tekstiilipesujauhe-carpetpro-cleaner-rm-760-oa-62958490');
+const se3 = await paatuote('SE 3');
+const se4 = await paatuote('SE 4');
+
+// SE 3-18:n käyttöohjeen annos Parkersin ja CAR Magazinen mukaan (2026): 100–200 ml pesuainetta 4 litraan vettä.
+// Kärcherin omilta sivuilta annosteluohjetta ei löytynyt (tarkistettu 2026-10-05).
+const annos = (litraa: number) => `${Math.round((100 * litraa) / 4)}–${Math.round((200 * litraa) / 4)} ml`;
+const s3 = se3.tekniset.puhdasvesiL!;
+const s4 = se4.tekniset.puhdasvesiL!;
+
+const ukk = [
+	{
+		kysymys: 'Voiko tekstiilipesuriin laittaa tavallista pesuainetta?',
+		vastaus: 'Käytä tekstiilipesurille tarkoitettua pesuainetta. Liika vaahto haittaa tekstiilipesurin työtä, ja tavalliset pesuaineet voivat vaahdota liikaa. Kärcher myy ammattilaitteisiin jopa erillistä vaahdonestoainetta (RM 761) likavesisäiliöön.',
+	},
+	{
+		kysymys: 'Paljonko pesuainetta tekstiilipesuriin laitetaan?',
+		vastaus: `Noudata pesuaineen pakkauksen ohjetta. Parkersin ja CAR Magazinen mukaan Kärcher SE 3-18:n ohje on 100–200 ml pesuainetta neljään litraan vettä likaisuuden mukaan. Kärcher SE 3 Compactin ${luku(s3)} litran säiliöön tämä tarkoittaa noin ${annos(s3)} pesuainetta ja SE 4 Plussan ${luku(s4)} litran säiliöön ${annos(s4)}.`,
+	},
+	{
+		kysymys: 'Mikä ero on Kärcherin RM 519:llä ja RM 519N:llä?',
+		vastaus: `Kumpikin on Kärcherin nestemäinen pesuaine kotimalleihin. RM 519N Beyond koostuu Kärcherin mukaan yli 99-prosenttisesti luonnollisista ainesosista, ja Kärcher markkinoi sitä perheille, allergikoille ja lemmikkikoteihin. Kärcher.comissa RM 519N maksaa ${euroa(rm519n.hinta!)} ja RM 519 ${euroa(rm519.hinta!)}.`,
+	},
+	{
+		kysymys: 'Sopiiko Kärcherin pesuaine Bissellin tekstiilipesuriin?',
+		vastaus: 'Käytä Bissellin laitteessa Bissellin omia aineita, ellei Bissellin käyttöohje salli muuta. Valmistajat antavat annosteluohjeet omille aineilleen ja omien laitteidensa säiliöille.',
+	},
+	{
+		kysymys: 'Mitä pesuainetta vuokratekstiilipesuriin laitetaan?',
+		vastaus: 'Vuokraamot neuvovat sopivan aineen, ja moni myy sitä vuokrauksen yhteydessä. Kärcher Center Vantaa suosittelee vuokraamaansa Puzzi 8/1:een RM 760 -tabletteja ja antaa kaksi tablettia vuokrauksen mukana. Lue lisää <a href="/karcher-puzzi-8-1/">Puzzi 8/1:n vuokrauksesta</a>.',
+	},
+];
+---
+<Layout
+	title="Tekstiilipesuri pesuaine – Kärcherin RM 519, RM 519N ja RM 760 -tabletit vertailussa (2026)"
+	description="Mikä pesuaine tekstiilipesuriin? Kärcherin RM 519, RM 519N, RM 762 ja RM 760 -tabletit vertailussa, hinnat Kärcher.comista ja annostelu SE 3- ja SE 4 -malleihin."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Tekstiilipesurin pesuaine', sivu: '/tekstiilipesurin-pesuaine/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Tekstiilipesurin pesuaine</h1>
+		<p>Tekstiilipesuriin laitetaan vähän vaahtoavaa tekstiilipesuainetta, joka on tehty juuri ruiskutus- ja imupesuun. Kärcherin kotimalleihin sopii RM 519 ({euroa(rm519.hinta!)} / litra) tai sen luonnollisista ainesosista valmistettu versio RM 519N ({euroa(rm519n.hinta!)} / litra). Puzzi-ammattilaitteisiin Kärcher myy RM 760 -pesuainetta tabletteina ja jauheena.</p>
+		<p>Tällä sivulla ovat kaikki Kärcher.comin tekstiilipesuaineet ja -hoitoaineet, niiden erot ja annostelu. Lopussa on vinkkejä siihen, miten pesuainetta käytetään niin, ettei kankaaseen jää jäämiä.</p>
+
+		<h2>Kärcherin pesuaineet kotimalleihin</h2>
+		<p>Kärcherin SE-mallien mukana tulee RM 519 -pesuainetta: SE 3 Compactin mukana 100 ml ja SE 4 Plussan mukana litra. Kärcher.com myy kotimalleihin kolmea ainetta:</p>
+		<ul>
+			<li><strong>RM 519</strong> on nestemäinen pesuaine mattojen, huonekalujen verhoilujen ja auton penkkien ylläpitopesuun. Kärcherin mukaan se kuivuu nopeasti.</li>
+			<li><strong>RM 519N Beyond</strong> on Kärcherin mukaan yli 99-prosenttisesti luonnollisista ainesosista valmistettu pesuaine. Se on Kärcher.comissa RM 519:ää edullisempi ({euroa(rm519n.hinta!)} ja {euroa(rm519.hinta!)}).</li>
+			<li><strong>Tekstiilinhoitoaine RM 762</strong> ({rm762.pakkauskoko}, {euroa(rm762.hinta!)}) puhdistaa ja jättää kankaaseen suojan, joka Kärcherin mukaan hidastaa uudelleenlikaantumista.</li>
+		</ul>
+		<PesuaineTaulu ammatti={false} />
+
+		<h2>Kärcherin ammattiaineet Puzzi-laitteisiin</h2>
+		<p>Ammattisarjan aineet on tehty Puzzi-painehuuhtelukoneisiin, mutta osa niistä sopii Kärcherin mukaan tekstiilipesureihin yleisesti. Kärcher.com myy kuluttajille kahta niistä: RM 760 -tabletteja ({rm760t.pakkauskoko?.replace('Tablets', 'tablettia')}, {euroa(rm760t.hinta!)}) ja RM 760 -jauhetta ({rm760j.pakkauskoko}, {euroa(rm760j.hinta!)}). Kärcherin mukaan jauhe sopii myös villakuiduille. Kärcher Center Vantaa kuvaa tabletteja helpoiksi annostella.</p>
+		<PesuaineTaulu ammatti={true} />
+		<p class="tp-lahde">Kuvaukset ja hinnat: Kärcher.com, tarkistettu {paiva(rm519.haettu)}.</p>
+
+		<h2>Annostelu: kuinka paljon pesuainetta?</h2>
+		<p>Brittiläisten Parkersin ja CAR Magazinen mukaan Kärcher SE 3-18:n käyttöohje neuvoo laittamaan 100–200 ml pesuainetta neljään litraan vettä likaisuuden mukaan. Lehdet moittivat testeissään (2026) ohjetta hankalaksi, koska säiliö on 1,7 litraa eikä siinä ole asteikkoa. Laskimme annokset valmiiksi samalla suhteella. Tarkista silti oman laitteesi ja pesuaineesi ohje.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Laite</th><th scope="col">Puhdasvesisäiliö</th><th scope="col">RM 519 -annos</th></tr></thead>
+				<tbody>
+					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3 Compact ja SE 3-18</a></th><td>{luku(s3)} l</td><td>{annos(s3)}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 4']}>Kärcher SE 4, SE 5 ja SE 6</a></th><td>{luku(s4)} l</td><td>{annos(s4)}</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p>Mittaa annos mitta-astialla.</p>
+
+		<h2>Näin käytät pesuainetta oikein</h2>
+		<ol>
+			<li><strong>Kokeile ensin piilossa olevaan kohtaan.</strong> Pesuaine voi muuttaa kankaan väriä. Telegraphin haastattelema siivousasiantuntija Emily Barron neuvoo testaamaan jokaisen aineen ensin pieneen alueeseen.</li>
+			<li><strong>Tarkista pesumerkintä.</strong> Villan kohdalla ohjeet vaihtelevat: Consumer Reports neuvoo välttämään herkkiä kankaita, kuten villaa ja silkkiä, mutta Kärcherin RM 760 on valmistajan mukaan tehty myös villakuiduille. Valmistajan ohje ja koekohta ratkaisevat.</li>
+			<li><strong>Esikäsittele ja anna vaikuttaa.</strong> Ruiskuta likaisimpiin kohtiin ja odota hetki ennen imua.</li>
+			<li><strong>Huuhtele pelkällä vedellä.</strong> io-tech-foorumin harrastajat suosittelivat (2022) levittämään pesuaineen suihkepullolla ja ajamaan tekstiilipesurilla pelkkää vettä. Silloin kankaaseen jää vähemmän pesuainetta.</li>
+		</ol>
+
+		<h2>Muiden merkkien pesuaineet</h2>
+		<p>Bissell myy SpotClean-, PowerWash- ja ProHeat-laitteisiinsa omia aineitaan, esimerkiksi Spot &amp; Stain-, Wash &amp; Protect- ja Oxygen Boost -nimisiä aineita. Suomalaisissa verkkokaupoissa ne maksoivat lokakuussa 2026 noin 14–22 € pullolta (1–1,5 litraa). Käytä laitteessa sen valmistajan suosittelemaa ainetta ja annostele laitteen omien ohjeiden mukaan.</p>
+
+		<p>Tekstiilipesurin valinnasta kerrotaan <a href="/">etusivun ostajan oppaassa</a> ja Kärcherin malleista <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurit-sivulla</a>.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://www.parkers.co.uk/car-advice/car-care/car-carpet-cleaners/" target="_blank" rel="nofollow noopener">Parkers</a>, <a href="https://www.carmagazine.co.uk/car-advice/maintenance/the-best-car-carpet-cleaners/" target="_blank" rel="nofollow noopener">CAR Magazine</a>, <a href="https://www.telegraph.co.uk/recommended/home/best-carpet-cleaners/" target="_blank" rel="nofollow noopener">Telegraph</a>, <a href="https://www.consumerreports.org/appliances/carpet-cleaners/buying-guide/" target="_blank" rel="nofollow noopener">Consumer Reports</a>, <a href="https://bbs.io-tech.fi/threads/tekstiilipesurit.434893/" target="_blank" rel="nofollow noopener">io-tech</a>.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

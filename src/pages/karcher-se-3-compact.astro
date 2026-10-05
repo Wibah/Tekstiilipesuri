@@ -1,0 +1,132 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-tekstiilipesurit/. Hakusanat: SE 3 Compact, Home, Floor ja
+// Home Shoe (Ahrefs 2026-10: noin 730 hakua yhteensä). Kirjoitettu tekstiilipesuri-writer-skillillä (2026-10-05).
+// Luvut ja hinnat tulevat Kärcherin datasta. Testiviittaukset (K-Rauta, M3, Parkers, CAR, io-tech) on tarkistettu
+// lähteistä 2026-10-05.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { getEntry } from 'astro:content';
+import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+
+const suositus = await paatuote('SE 3');
+const perus = await tuote('se-3-compact');
+const akku = await tuote('se-3-18-compact-akulla');
+const akkuHome = await tuote('se-3-18-compact-home-akulla');
+const kaikki = await versiot('SE 3', 'SE 3-18');
+const se4 = await paatuote('SE 4');
+const puzzi = await paatuote('Puzzi 8/1');
+
+const t = suositus.tekniset;
+const ta = akku.tekniset;
+const tah = akkuHome.tekniset;
+const t4 = se4.tekniset;
+const floorLisa = suositus.hinta! - perus.hinta!;
+const rm519 = (await getEntry('pesuaineet', 'rm-519-tekstiilien-puhdistusaine-62960310'))!.data;
+// "n. 12 (2,5 Ah)" → "12"
+const minuutit = (s: string | null) => s?.match(/\d+/)?.[0] ?? '–';
+
+const ukk = [
+	{
+		kysymys: 'Mikä ero on Kärcher SE 3 Compactilla ja SE 3 Compact Floorilla?',
+		vastaus: `Laite on sama: ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran puhdasvesisäiliö ja ${luku(t.painoKg!)} kg. Floor-versiossa on lisäksi 2-in-1-tekstiilisuutin XXL ja kaksi 0,5 metrin jatkoputkea, joten mattoa voi pestä seisaaltaan. Kärcher.comissa Floor maksaa ${euroa(floorLisa)} enemmän kuin perusversio.`,
+	},
+	{
+		kysymys: 'Mikä on Kärcher SE 3 Compact Home Floor?',
+		vastaus: `Kaupat käyttävät nimeä SE 3 Compact Home Floor samasta laitteesta, jonka Kärcher myy nimellä SE 3 Compact Floor (tuotenumero ${suositus.tuotenumero}). Tunnistat version tuotenumerosta: perusversio on ${perus.tuotenumero}.`,
+	},
+	{
+		kysymys: 'Kuinka kauan Kärcher SE 3-18:n akku kestää?',
+		vastaus: `Kärcherin mukaan 2,5 Ah:n akulla noin ${minuutit(ta.akkuKayttoaika)} minuuttia ja 5,0 Ah:n akulla noin ${minuutit(tah.akkuKayttoaika)} minuuttia. Parkersin testissä (2026) Mazda MX-5:n kaksi mattoa vei akusta 39 prosenttia, eli yksi pikkuauto onnistuu yhdellä latauksella.`,
+	},
+	{
+		kysymys: 'Paljonko pesuainetta Kärcher SE 3:een laitetaan?',
+		vastaus: 'Annostele pesuaine pakkauksen ohjeen mukaan. Parkers ja CAR Magazine moittivat SE 3-18:n testeissään (2026), että ohje kertoo annoksen neljälle litralle vettä, vaikka puhdasvesisäiliö on 1,7 litraa eikä säiliössä ole asteikkoa. Laske annos siis valmiiksi ja mittaa se mitta-astialla. Lue lisää <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineista</a>.',
+	},
+	{
+		kysymys: 'Pystyykö Kärcher SE 3 Compactilla pesemään koko maton?',
+		vastaus: `Pienen maton pystyy, kun käytössä on Floor-version lattiasuulake. Säiliö on kuitenkin ${luku(t.puhdasvesiL!)} litraa, joten isossa matossa vettä joutuu lisäämään useita kertoja. Isoille matoille sopii paremmin <a href="${mallisivut['SE 4']}">SE 4 Plus</a> (${luku(t4.puhdasvesiL!)} l) tai vuokrattava <a href="${mallisivut['Puzzi 8/1']}">Puzzi 8/1</a>.`,
+	},
+];
+---
+<Layout
+	title="Kärcher SE 3 Compact tekstiilipesuri kokemuksia – Floor, Home ja akkuversio (2026)"
+	description={`Kärcher SE 3 Compact -tekstiilipesurin versiot, hinnat ja testit. ${luku(t.tehoW!)} W, ${luku(t.painoKg!)} kg ja ${luku(t.puhdasvesiL!)} litran säiliö sopivat sohvalle, nojatuolille ja autolle. Floor-versiossa on mukana lattiasuulake.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Kärcher SE 3 Compact', sivu: mallisivut['SE 3'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SE 3 Compact -tekstiilipesuri" yla="Kärcher · Kompakti kotimalli" merkinta="Suosituksemme">
+			<p>Kärcher SE 3 Compact on Kärcherin kompakti tekstiilipesuri sohvan, nojatuolin, patjan ja auton penkkien pesuun. Laite ruiskuttaa veden ja pesuaineen kankaaseen ja imee sen heti takaisin. Puhdasvesisäiliö on {luku(t.puhdasvesiL!)} litraa, likavesisäiliö {luku(t.likavesiL!)} litraa, ja laite painaa {luku(t.painoKg!)} kg.</p>
+			<p>Suosittelemme Floor-versiota. Sen lattiasuulakkeella pesee myös pienen maton, ja hintaero perusversioon on {euroa(floorLisa)}.</p>
+		</TuoteHero>
+
+		<h2>Kenelle SE 3 Compact sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Sohvan, nojatuolin ja patjan tahroihin: verhoilusuulake on 88 mm leveä</li>
+					<li>Auton penkkeihin ja lastenistuimiin: rakosuulake ylettyy saumoihin, ja akkuversio toimii ilman pistorasiaa</li>
+					<li>Pieneen säilytystilaan: mitat ovat {t.mitatMm!.replaceAll(' x ', ' × ')} mm, ja letku ja suulakkeet mahtuvat runkoon</li>
+					<li>Pienille matoille, kun valitset Floor-version</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Isoille matoille ja kokolattiamatoille: {luku(t.puhdasvesiL!)} litran säiliö pitää täyttää monta kertaa</li>
+					<li>Kauas pistorasiasta: virtajohto on {luku(t.virtajohtoM!)} m ja letku {luku(t.letkuM!)} m, joten portaissa laitetta joutuu siirtämään</li>
+					<li>Märkä-kuivaimuriksi: Kärcher mainitsee märkä-kuivaimuroinnin vain akkuversion ja <a href={mallisivut['SE 4']}>SE 4 Plussan</a> tiedoissa</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>SE 3 Compactin versiot vertailussa</h2>
+		<p>Kärcher myy SE 3 Compactia kolmena verkkovirtaversiona ja kahtena akkuversiona (SE 3-18). Verkkovirtaversioissa on sama {luku(t.tehoW!)} watin moottori ja samat säiliöt, ja ne eroavat toisistaan vain mukana tulevien suulakkeiden ja pesuaineen osalta. Home Shoe -versiossa on mukana Shoe!Cleaner kenkien pesuun ja litra luonnollista RM 519N -pesuainetta. Kärcher.com ei kuitenkaan myy sitä tällä hetkellä.</p>
+		<p>Akkuversio SE 3-18 painaa {luku(ta.painoKg!)} kg ja sen teho on {luku(ta.tehoW!)} W. Kärcher.comissa kumpaankin akkuversioon kuuluvat akku ja laturi. SE 3-18 Compact Home akulla maksaa {euroa(akkuHome.hinta!)}, mikä on vähemmän kuin SE 3-18 Compact akulla ({euroa(akku.hinta!)}), vaikka siinä on suurempi 5,0 Ah:n akku ja pikalaturi. Jos haluat akkuversion, valitse siis Home.</p>
+		<VersioVertailu versiot={kaikki} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat tarkistettu {paiva(suositus.haettu)} Kärcher.comista.</p>
+
+		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Kärcher SE 3 Compact testeissä</h2>
+		<p>SE 3 Compactista ja sen akkuversiosta on testejä Suomesta, Ruotsista ja Britanniasta. Testit kehuvat kokoa ja helppokäyttöisyyttä ja moittivat melua, pientä säiliötä ja hankalaa pesuaineen annostelua. Raskaimpiin pinttymiin laite ei testaajien mukaan riitä.</p>
+		<ul>
+			<li><strong>K-Rauta (päivitetty 15.5.2025):</strong> kaupan julkaisemassa kuluttajatestissä lapsi- ja koiraperhe pesi SE 3 Compactilla sohvan, räsymaton, lastenrattaat ja nojatuolin. Sohvasta lähtivät pinttyneetkin tahrat. Kehuja saivat koko, letku ja itsepuhdistus. Moitteita saivat melu, pesuaineen annostelu ja se, että mattoon tarvitaan lattiasuulake.</li>
+			<li><strong>M3 (huhtikuu 2025):</strong> ruotsalainen M3 antoi SE 3 Compact Home Floorille neljä tähteä viidestä. Testaajan mukaan laite on helppokäyttöinen ja pesee tehokkaasti, mutta raskaimmat tahrat jäävät. Johto rajoittaa auton pesua.</li>
+			<li><strong>Parkers (16.3.2026) ja CAR Magazine (13.4.2026):</strong> brittiläiset autolehdet testasivat SE 3-18:aa auton matoilla. Parkers antoi neljä tähteä viidestä. Laite pesi tehokkaasti, mutta kulutti puhdasta vettä niin paljon, että säiliö piti täyttää yhden maton jälkeen. Kummankin lehden mielestä pesuaineen annosteluohje oli turhan monimutkainen.</li>
+			<li><strong>io-tech-foorumi (2022):</strong> suomalaiset harrastajat pitivät SE 3 Compact Flooria käytännöllisenä juuri lattiasuulakkeen takia.</li>
+		</ul>
+		<p>Nämä havainnot vastaavat myös teknisiä tietoja: {luku(t.puhdasvesiL!)} litran säiliö ja kevyt runko tekevät SE 3:sta näppärän tahroihin ja autoon, mutta isossa pesussa samat ominaisuudet hidastavat työtä.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://www.k-rauta.fi/inspiraatio-ja-ohjeet/tuotetestit/tuotetesti-karcher-tekstiilipesuri-se-3-compact" target="_blank" rel="nofollow noopener">K-Rauta</a>, <a href="https://www.m3.se/article/2682993/karcher-se-3-compact.html" target="_blank" rel="nofollow noopener">M3</a>, <a href="https://www.parkers.co.uk/car-advice/car-care/car-carpet-cleaners/" target="_blank" rel="nofollow noopener">Parkers</a>, <a href="https://www.carmagazine.co.uk/car-advice/maintenance/the-best-car-carpet-cleaners/" target="_blank" rel="nofollow noopener">CAR Magazine</a>, <a href="https://bbs.io-tech.fi/threads/tekstiilipesurit.434893/" target="_blank" rel="nofollow noopener">io-tech</a>.</p>
+
+		<h2>Näin peset SE 3 Compactilla</h2>
+		<ol>
+			<li>Imuroi kangas ensin, jotta irtolika ja karvat eivät tuki suulaketta.</li>
+			<li>Kokeile pesuainetta piilossa olevaan kohtaan ja tarkista verhoilun pesumerkintä.</li>
+			<li>Ruiskuta likaisimpiin kohtiin ja anna pesuaineen vaikuttaa ennen imua.</li>
+			<li>Vedä suulaketta hitaasti ja tee lopuksi muutama veto pelkällä imulla, jotta kangas jää mahdollisimman kuivaksi.</li>
+			<li>Käytä lopuksi järjestelmän huuhtelutoimintoa, jolla laite puhdistaa itsensä.</li>
+		</ol>
+		<p>Mukana tulee 100 ml RM 519 -pesuainetta, joka riittää vain muutamaan pesuun. Litran pullo maksaa Kärcher.comissa {euroa(rm519.hinta!)}. Pesuaineet ja niiden erot on koottu <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaaseen</a>.</p>
+
+		<h2>SE 3 Compact vs. SE 4 Plus ja Puzzi 8/1</h2>
+		<p><a href={mallisivut['SE 4']}>SE 4 Plus</a> on SE 3:a suurempi laite. Sen teho on {luku(t4.tehoW!)} W, kummankin säiliön tilavuus on {luku(t4.puhdasvesiL!)} litraa, ja se toimii myös märkä-kuivaimurina. SE 4 Plus painaa {luku(t4.painoKg!)} kg ja maksaa {euroa(se4.hinta!)}. Ero SE 3 Compact Flooriin on {euroa(se4.hinta! - suositus.hinta!)}.</p>
+		<p>Jos peset kerran vuodessa ison maton tai koko sohvakaluston, ammattilaitteen vuokraaminen voi tulla edullisemmaksi kuin oman laitteen ostaminen. Kaikki kolme tarkistamaamme vuokraamoa vuokraavat <a href={mallisivut['Puzzi 8/1']}>Kärcher Puzzi 8/1</a> -laitetta, jonka puhdasvesisäiliö on {luku(puzzi.tekniset.puhdasvesiL!)} litraa. Laskelma on <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kenelle={sarjakuvaukset['SE 4']} tagi="Isommat säiliöt" />
+			<Tuotekortti tuote={puzzi} otsikko="Kärcher Puzzi 8/1" sivu={mallisivut['Puzzi 8/1']} kenelle={sarjakuvaukset['Puzzi 8/1']} tagi="Ammattilaite" />
+		</div>
+
+		<Kokemuslomake malli="Kärcher SE 3 Compact" polku={mallisivut['SE 3']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

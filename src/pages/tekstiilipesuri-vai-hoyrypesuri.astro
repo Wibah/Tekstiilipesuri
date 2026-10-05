@@ -1,0 +1,87 @@
+---
+// SCN: silta → hoyrypesuri.fi, intentti Comparison, emopilari /. Hakusanat: höyrypesuri vai tekstiilipesuri 50,
+// höyry tekstiilipesuri 50, tekstiilipesuri vai höyrypesuri 30, tekstiilipesuri höyrypesuri 20 (Ahrefs 2026-10).
+// Höyryä käyttävät tekstiilipesurit kuuluvat tälle sivustolle, pelkät höyrypesurit hoyrypesuri.fi:lle (sovittu
+// 2026-10-05 höyrypesuri.fi:n feedilaskennan kanssa). Kirjoitettu tekstiilipesuri-writer-skillillä (2026-10-05).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Ukk from '../components/Ukk.astro';
+import { paatuote, mallisivut } from '../lib/tuotteet';
+
+// Vaihda true, kun hoyrypesuri.fi on julkaistu. Siihen asti sivu mainitsee sisarsivuston ilman linkkiä.
+const HOYRYPESURI_JULKAISTU = false;
+const hoyry = HOYRYPESURI_JULKAISTU ? '<a href="https://hoyrypesuri.fi/">Höyrypesuri.fi</a>' : 'Höyrypesuri.fi';
+
+const se3 = await paatuote('SE 3');
+
+const hydro = [
+	['Bissell SpotClean HydroSteam Pro 3700N', 'kannettava'],
+	['Bissell SpotClean HydroSteam Select 3697N', 'kannettava'],
+	['Bissell Revolution HydroSteam 3670N', 'pystymalli'],
+	['Bissell PowerWash HydroSteam 4199N', 'pystymalli'],
+	['Dreame N20 Steam', 'kannettava'],
+	['UWANT Y200S', 'pesevä imuri'],
+];
+
+const ukk = [
+	{
+		kysymys: 'Voiko höyrypesurilla pestä sohvan?',
+		vastaus: 'Höyrypesuri on tehty koville pinnoille, kuten laatoille, saumoille ja kylpyhuoneeseen. Sohvan ja maton pesuun tarvitaan tekstiilipesuri, joka imee pesuveden ja lian pois kankaasta.',
+	},
+	{
+		kysymys: 'Voiko höyrypesurilla pestä maton?',
+		vastaus: 'Maton pesuun sopii paremmin tekstiilipesuri, koska se imee veden ja irronneen lian pois. Jos haluat höyryä mattoon, valitse tekstiilipesuri, jossa on höyrytoiminto, esimerkiksi Bissell Revolution HydroSteam.',
+	},
+	{
+		kysymys: 'Mikä ero on tekstiilipesurilla ja höyrypesurilla?',
+		vastaus: 'Tekstiilipesuri ruiskuttaa veden ja pesuaineen kankaaseen ja imee sen heti takaisin. Höyrypesuri puhdistaa kuumalla höyryllä kovia pintoja, mutta ei ime likaa. Tekstiilipesuri on siis kankaille ja höyrypesuri koville pinnoille.',
+	},
+];
+---
+<Layout
+	title="Tekstiilipesuri vai höyrypesuri – ero ja kumpi sopii sohvalle (2026)"
+	description="Tekstiilipesuri vai höyrypesuri? Tekstiilipesuri pesee sohvat, matot ja auton penkit, höyrypesuri kovat pinnat. Kerromme erot ja laitteet, joissa on molemmat."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Tekstiilipesuri vai höyrypesuri', sivu: '/tekstiilipesuri-vai-hoyrypesuri/' }]} />
+		<span class="tp-label">Vertailu</span>
+		<h1>Tekstiilipesuri vai höyrypesuri?</h1>
+		<p>Tekstiilipesuri pesee kankaat: sohvat, nojatuolit, matot, patjat ja auton penkit. Höyrypesuri puhdistaa kovat pinnat, kuten laatat, saumat, lieden ja kylpyhuoneen. Jos haluat pestä sohvan tai maton, tarvitset tekstiilipesurin.</p>
+
+		<h2>Ero lyhyesti</h2>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col"></th><th scope="col">Tekstiilipesuri</th><th scope="col">Höyrypesuri</th></tr></thead>
+				<tbody>
+					<tr><th scope="row">Miten toimii</th><td>Ruiskuttaa veden ja pesuaineen kankaaseen ja imee ne heti takaisin likaveden säiliöön</td><td>Kuumentaa veden höyryksi ja irrottaa lian höyryllä ja liinalla</td></tr>
+					<tr><th scope="row">Pinnat</th><td>Pehmeät ja huokoiset: kankaat, matot, verhoilu</td><td>Kovat: laatat, saumat, lasi, liesi</td></tr>
+					<tr><th scope="row">Imee lian pois</th><td>Kyllä, likavesisäiliöön</td><td>Ei (paitsi imevät höyrypesurit)</td></tr>
+					<tr><th scope="row">Pesuaine</th><td>Tekstiilipesuaine</td><td>Yleensä pelkkä vesi</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p>Kärkkäisen opas tiivistää eron samoin: tekstiilipesuri on pehmeille ja huokoisille materiaaleille, ja höyrypesuri koville pinnoille. Kärkkäisen mukaan tekstiilipesurissa pesuvesi imeytyy takaisin laitteeseen, ja pesuri kohtelee kangasta hellävaraisesti.</p>
+
+		<h2>Tekstiilipesurit, joissa on höyry</h2>
+		<p>Osa tekstiilipesureista käyttää lisäksi höyryä. Ne ovat edelleen tekstiilipesureita, koska ne imevät pesuveden pois kankaasta. Suomen verkkokaupoissa on lokakuussa 2026 näitä malleja:</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Tyyppi</th></tr></thead>
+				<tbody>{hydro.map(([n, tyyppi]) => <tr><th scope="row">{n}</th><td>{tyyppi}</td></tr>)}</tbody>
+			</table>
+		</div>
+		<p>Testit kehuvat höyryä pinttyneisiin tahroihin, mutta löytävät myös rajoituksia. Testatut laitteet olivat Britannian ja Yhdysvaltojen myyntiversioita, joten Suomessa myytävän version varusteet voivat poiketa niistä.</p>
+		<ul>
+			<li><strong>Telegraph (päivitetty 29.9.2026)</strong> valitsi Bissell Revolution HydroSteamin testinsä parhaaksi ostokseksi. Höyrykäsittely irrotti kuivuneetkin viinitahrat. Laite kuitenkin kulutti pesuainetta muita enemmän, eikä höyry toiminut lisäsuulakkeissa. Tehokkaimmalla pesutilalla matto kuivui kahdeksassa tunnissa.</li>
+			<li><strong>The Spruce (päivitetty 2.10.2026)</strong> piti Revolution HydroSteamia parhaana höyrymallina, mutta testimatto kuivui noin 15 tunnissa, ja laite oli kova-ääninen.</li>
+			<li><strong>CAR Magazine (13.4.2026)</strong> testasi Bissell SpotClean HydroSteamia autossa. Laite pesi matot hyvin, mutta kangaspenkit eivät puhdistuneet eivätkä kuivuneet kunnolla. Höyryn lämpeneminen kesti noin 30 sekuntia.</li>
+		</ul>
+		<p>Höyry auttaa vanhoihin tahroihin, mutta kuivumiseen kannattaa varata aikaa. Tavalliseen ylläpitopesuun riittää höyrytön tekstiilipesuri, kuten <a href={mallisivut['SE 3']}>Kärcher SE 3 Compact</a> tai <a href={mallisivut['SE 4']}>SE 4 Plus</a>.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://www.telegraph.co.uk/recommended/home/best-carpet-cleaners/" target="_blank" rel="nofollow noopener">Telegraph</a>, <a href="https://www.thespruce.com/best-carpet-cleaners-to-buy-4107087" target="_blank" rel="nofollow noopener">The Spruce</a>, <a href="https://www.carmagazine.co.uk/car-advice/maintenance/the-best-car-carpet-cleaners/" target="_blank" rel="nofollow noopener">CAR Magazine</a>, <a href="https://www.karkkainen.com/verkkokauppa/inspiroidu/pesureita-joka-pesueelle" target="_blank" rel="nofollow noopener">Kärkkäinen</a>.</p>
+
+		<h2>Höyrypesurit kylpyhuoneeseen ja lattioille</h2>
+		<p set:html={`Jos aiot puhdistaa laattoja, saumoja tai kovia lattioita, tarvitset höyrypesurin. Höyrypesureita vertaillaan sisarsivustollamme ${hoyry}.`} />
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

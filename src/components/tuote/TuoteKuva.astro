@@ -1,0 +1,32 @@
+---
+// Tuotekuva. Kuvat ladataan Adtractionin tuotefeedeistä kansioon src/assets/tuotteet/
+// (scripts/hae_affiliate.py, Villen lupa feedien kuviin). Valmistajan kuvia ei hotlinkata
+// (ks. CLAUDE.md), joten ilman feedikuvaa näytetään yleinen tekstiilipesurin piirros.
+import { Image } from 'astro:assets';
+
+interface Props {
+	merkinta?: string;
+	pieni?: boolean;
+	kuva?: string | null;
+	alt?: string;
+}
+
+const { merkinta, pieni = false, kuva = null, alt = '' } = Astro.props;
+const kuvat = import.meta.glob<{ default: ImageMetadata }>('/src/assets/tuotteet/*', { eager: true });
+const kuvaData = kuva ? kuvat[`/src/assets/tuotteet/${kuva}`]?.default : undefined;
+---
+<div class:list={['tp-kuva', { 'tp-kuva-pieni': pieni, 'tp-kuva-foto': kuvaData }]}>
+	{merkinta && <span class="tp-merkinta">{merkinta}</span>}
+	{kuvaData ? (
+		<Image src={kuvaData} alt={alt} width={pieni ? 320 : 520} loading={pieni ? 'lazy' : 'eager'} />
+	) : (
+		<svg viewBox="0 0 200 200" aria-hidden="true">
+			<rect x="52" y="52" width="96" height="104" rx="18" fill="#dbe7f3" />
+			<rect x="52" y="52" width="96" height="44" rx="18" fill="#18447e" />
+			<rect x="62" y="104" width="76" height="40" rx="8" fill="#b9cde3" />
+			<rect x="88" y="34" width="24" height="22" rx="6" fill="#2b2f36" />
+			<path d="M100 36 C 150 20, 178 60, 160 110 L 150 150" stroke="#2b2f36" stroke-width="8" fill="none" stroke-linecap="round" />
+			<rect x="134" y="148" width="34" height="14" rx="4" fill="#2b2f36" />
+		</svg>
+	)}
+</div>

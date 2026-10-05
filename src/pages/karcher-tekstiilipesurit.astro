@@ -1,0 +1,100 @@
+---
+// SCN: pilari (merkki), intentti Comparison, emopilari /. Hakusanat: kärcher tekstiilipesuri 4 700, tekstiilipesuri
+// kärcher 1 200, kärcher tekstiilipesuri tarjous 200 (Ahrefs 2026-10). Linkittää alas mallisivuille SE 3, SE 4 ja
+// Puzzi 8/1 sekä pesuaine- ja vuokraussivuille. Kirjoitettu tekstiilipesuri-writer-skillillä (2026-10-05).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
+import Merkkikortit from '../components/tuote/Merkkikortit.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { merkinTuotteet, paatuote, luku, euroa, paiva, mallisivut, paatuotteet, sarjakuvaukset, hintavali } from '../lib/tuotteet';
+
+const kaikki = await merkinTuotteet('Kärcher');
+const koti = kaikki.filter((t) => !t.ammattilaite);
+const ammatti = kaikki.filter((t) => t.ammattilaite);
+const suositus = await paatuote('SE 3');
+const se4 = await paatuote('SE 4');
+const puzzi = await paatuote('Puzzi 8/1');
+const se2 = kaikki.find((t) => t.sarja === 'SE 2')!;
+const myynnissaKoti = koti.filter((t) => t.myynnissa);
+
+// Mallisivut sarjan mukaan: SE 3-18 kuuluu SE 3 Compactin sivulle.
+const sarjanSivu: Record<string, string> = { ...mallisivut, 'SE 3-18': mallisivut['SE 3'] };
+const sivut = Object.fromEntries(kaikki.filter((t) => t.sarja && sarjanSivu[t.sarja]).map((t) => [t.id, sarjanSivu[t.sarja!]]));
+const nimet = Object.fromEntries(Object.entries(paatuotteet).map(([sarja, id]) => [id, `Kärcher ${sarja === 'SE 3' ? 'SE 3 Compact' : sarja === 'SE 4' ? 'SE 4 Plus' : sarja}`]));
+
+const t = suositus.tekniset;
+
+const ukk = [
+	{
+		kysymys: 'Mikä Kärcherin tekstiilipesuri kannattaa ostaa?',
+		vastaus: `Useimpiin koteihin suosittelemme <a href="${mallisivut['SE 3']}">SE 3 Compact Flooria</a> (${euroa(suositus.hinta!)}). Se on kompakti, pesee sohvat ja auton penkit, ja lattiasuulakkeella pesee myös pienen maton. Jos peset paljon mattoja tai tarvitset myös märkä-kuivaimurin, valitse <a href="${mallisivut['SE 4']}">SE 4 Plus</a> (${euroa(se4.hinta!)}).`,
+	},
+	{
+		kysymys: 'Mikä ero on Kärcherin SE-malleilla ja Puzzi-malleilla?',
+		vastaus: `SE-mallit ovat kotikäyttöön tehtyjä tekstiilipesureita, ja niiden puhdasvesisäiliö on 1,5–4 litraa. Puzzit ovat ammattikäyttöön tarkoitettuja painehuuhtelukoneita, joiden säiliöt ovat suurempia: <a href="${mallisivut['Puzzi 8/1']}">Puzzi 8/1</a>:ssä ${luku(puzzi.tekniset.puhdasvesiL!)} litraa. Kaikki tarkistamamme vuokraamot vuokraavat Puzzi 8/1:tä.`,
+	},
+	{
+		kysymys: 'Mistä löydän Kärcherin tekstiilipesurin tarjouksen?',
+		vastaus: `Tällä sivulla olevat hinnat ovat Kärcher.comin hintoja, ja ne on tarkistettu ${paiva(suositus.haettu)}. Kärcher.com merkitsee alennetun hinnan näkyviin, ja näytämme silloin myös hinnan ennen alennusta.`,
+	},
+	{
+		kysymys: 'Mikä on Kärcherin halvin tekstiilipesuri?',
+		vastaus: `Kärcher.comin edullisin tekstiilipesuri on SE 2 Spot Care (${euroa(se2.hinta!)}). Se on pieni kannettava malli tahrojen pesuun. Sen puhdasvesisäiliö on ${luku(se2.tekniset.puhdasvesiL!)} litraa ja likavesisäiliö ${luku(se2.tekniset.likavesiL!)} litraa.`,
+	},
+];
+---
+<Layout
+	title="Kärcher tekstiilipesurit kokemuksia – SE- ja Puzzi-mallit, hinnat ja tarjoukset (2026)"
+	description={`Kaikki Kärcherin tekstiilipesurit vertailussa: SE 2, SE 3 Compact, SE 4, SE 5, SE 6 ja Puzzi. Hinnat Kärcher.comista, tekniset tiedot ja suositus siitä, mikä malli sopii sohvalle, matolle ja autolle.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher-tekstiilipesurit', sivu: '/karcher-tekstiilipesurit/' }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher-tekstiilipesurit" yla="Kärcher · Koko mallisto" merkinta="Suosituksemme">
+			<p>Kärcher myy Suomessa kahta tekstiilipesurisarjaa. SE-sarja on kotikäyttöön, ja Kärcher.comissa on nyt myynnissä {myynnissaKoti.length} SE-mallia hintaan {hintavali(myynnissaKoti)}. Puzzi-sarja on ammattikäyttöön, ja Puzzeja vuokraavat myös vuokraamot.</p>
+			<p>Suosittelemme useimpiin koteihin Kärcher {suositus.nimi} -mallia. Se painaa {luku(t.painoKg!)} kg, pesee sohvan ja auton penkit, ja lattiasuulakkeella pesee myös pienen maton.</p>
+		</TuoteHero>
+
+		<h2>Mikä Kärcher sopii mihinkin?</h2>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead>
+					<tr><th scope="col">Malli</th><th scope="col">Sopii parhaiten</th><th scope="col">Hinta Kärcher.comissa</th></tr>
+				</thead>
+				<tbody>
+					<tr><th scope="row">Kärcher SE 2 Spot Care</th><td>{sarjakuvaukset['SE 2']}</td><td>{euroa(se2.hinta!)}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3 Compact</a></th><td>{sarjakuvaukset['SE 3']}</td><td>{hintavali(koti.filter((x) => x.sarja === 'SE 3'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3-18 Compact</a></th><td>{sarjakuvaukset['SE 3-18']}</td><td>{hintavali(koti.filter((x) => x.sarja === 'SE 3-18'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 4']}>Kärcher SE 4 Plus</a></th><td>{sarjakuvaukset['SE 4']}</td><td>{hintavali(koti.filter((x) => x.sarja === 'SE 4'))}</td></tr>
+					<tr><th scope="row">Kärcher SE 6 Signature Line</th><td>Sama teho ja säiliöt kuin SE 4:ssä, enemmän suulakkeita</td><td>{hintavali(koti.filter((x) => x.sarja === 'SE 6'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['Puzzi 8/1']}>Kärcher Puzzi 8/1</a></th><td>Isot pesut, saatavana myös vuokralle</td><td>{hintavali(ammatti.filter((x) => x.sarja === 'Puzzi 8/1'))}</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<p>SE-sarjan numero kertoo koon. SE 2 on pieni kannettava tahrapesuri. SE 3 on kompakti verkkovirta- tai akkumalli. SE 4, SE 5 ja SE 6 ovat isompia laitteita, joissa on 1000 watin teho, 4 litran säiliöt ja märkä-kuivaimurin toiminto. Erot isompien mallien välillä ovat varusteissa ja rungossa. Lue lisää <a href={mallisivut['SE 4']}>SE 4 Plussan sivulta</a>.</p>
+
+		<Merkkikortit tuotteet={koti} otsikko="Kärcherin kotimallit hintajärjestyksessä" ohita={suositus.id} sivut={sivut} nimet={nimet} />
+
+		<h2>Kärcherin SE-mallisto taulukkona</h2>
+		<p>Taulukossa ovat kaikki Kärcher.comin SE-mallit, myös ne, joita Kärcher.com ei tällä hetkellä myy. Niitä voi silti löytyä muista kaupoista.</p>
+		<MallistoTaulu tuotteet={koti} suositusId={suositus.id} sivut={sarjanSivu} />
+
+		<h2>Kärcher Puzzi: ammattilaitteet ja vuokraus</h2>
+		<p>Puzzit ovat Kärcherin ammattisarjan tekstiilipesureita. Puzzi 8/1:n puhdasvesisäiliö on {luku(puzzi.tekniset.puhdasvesiL!)} litraa, ja sen hinnalla ({euroa(puzzi.hinta!)}) saisi noin {Math.round(puzzi.hinta! / 39)} vuorokauden vuokran halvimmasta tarkistamastamme vuokraamosta. Siksi kotiin Puzzi kannattaa yleensä vuokrata. Vuokraamot ja hinnat ovat <a href={mallisivut['Puzzi 8/1']}>Puzzi 8/1 -sivulla</a> ja vertailu <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.</p>
+		<MallistoTaulu tuotteet={ammatti} sivut={sarjanSivu} />
+
+		<h2>Pesuaineet Kärcherin tekstiilipesureihin</h2>
+		<p>Kärcherin kotimallien mukana tulee RM 519 -pesuainetta, ja Puzzeihin Kärcher Center suosittelee RM 760 -tabletteja. Aineiden erot, hinnat ja annostelu ovat <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineoppaassa</a>.</p>
+
+		<p class="tp-lahde">Hinnat ja tekniset tiedot: Kärcher.com, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<Kokemuslomake malli="Kärcher" polku="/karcher-tekstiilipesurit/" mallikentta otsikko="Onko sinulla Kärcher tekstiilipesuri kokemuksia? Kerro ne meille!">
+			<p>Keräämme Kärcherin tekstiilipesureiden käyttäjien kokemuksia. Kerro, mikä malli sinulla on, mitä peset ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

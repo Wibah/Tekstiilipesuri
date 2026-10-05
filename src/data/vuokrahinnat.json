@@ -1,0 +1,33 @@
+[
+	{
+		"vuokraamo": "Pesurivuokraus.fi",
+		"laite": "Kärcher Puzzi 8/1 C",
+		"paikkakunnat": "noutopisteitä mm. Helsingissä, Espoossa, Vantaalla, Tampereella, Oulussa, Jyväskylässä, Lahdessa ja Lappeenrannassa",
+		"hinnat": [{ "kesto": "1 vuorokausi", "hinta": 39 }],
+		"lisat": "Pesuaineen voi ostaa varauksen yhteydessä.",
+		"lahde": "https://pesurivuokraus.fi/",
+		"tarkistettu": "2026-10-05"
+	},
+	{
+		"vuokraamo": "Kärcher Center Vantaa",
+		"laite": "Kärcher Puzzi 8/1",
+		"paikkakunnat": "Vantaa (Kärcher Centerit myös Jyväskylässä, Oulussa ja Nurmijärvellä)",
+		"hinnat": [
+			{ "kesto": "1 päivä (24 h)", "hinta": 45 },
+			{ "kesto": "viikonloppu pe–ma", "hinta": 60 },
+			{ "kesto": "1 viikko", "hinta": 150 }
+		],
+		"lisat": "Mukana kalustesuulake ja kaksi RM 760 -pesuainetablettia. Mattosuulake 10 € / vuokraus. RM 760 -tabletit (16 kpl) puoleen hintaan vuokrauksen yhteydessä.",
+		"lahde": "https://rentle.store/karchersuomi/l/centervantaa/shop",
+		"tarkistettu": "2026-10-05"
+	},
+	{
+		"vuokraamo": "Vuokraamo 24/7",
+		"laite": "Kärcher Puzzi 8/1",
+		"paikkakunnat": "Raisio (itsepalvelunouto ympäri vuorokauden)",
+		"hinnat": [{ "kesto": "4 tuntia", "hinta": 25, "alkaen": true }],
+		"lisat": "Lopullinen hinta näkyy varauskalenterissa.",
+		"lahde": "https://vuokraamo247.fi/",
+		"tarkistettu": "2026-10-05"
+	}
+]

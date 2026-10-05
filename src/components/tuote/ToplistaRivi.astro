@@ -1,0 +1,16 @@
+---
+// Etusivun toplistan rivi: sama kortti kuin merkkisivuilla (Korttirivi), sijanumero kuvan kulmassa.
+import Korttirivi from './Korttirivi.astro';
+import type { Tuote } from '../../lib/tuotteet';
+
+interface Props {
+	sija: number;
+	tuote: Tuote;
+	tagi: string;
+	kuvaus: string;
+	sivu: string;
+}
+
+const { sija, tuote, tagi, kuvaus, sivu } = Astro.props;
+---
+<Korttirivi tuote={tuote} sija={sija} tagi={tagi} kuvaus={kuvaus} sivu={sivu} otsikko={`Kärcher ${tuote.nimi}`} />

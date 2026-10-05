@@ -1,0 +1,72 @@
+---
+---
+<header>
+	<a href="/" class="logo">🛋️ Tekstiilipesuri.com</a>
+	<button class="hamburger" id="navToggle" aria-label="Avaa valikko" aria-expanded="false" aria-controls="mainNav">
+		<span></span><span></span><span></span>
+	</button>
+	<nav id="mainNav">
+		<a href="/" class="nav-link">Etusivu</a>
+		<div class="dropdown">
+			<button class="dropbtn" aria-expanded="false">Kärcher ▾</button>
+			<div class="dropdown-content">
+				<a href="/karcher-tekstiilipesurit/">Kaikki Kärcher-tekstiilipesurit</a>
+				<a href="/karcher-se-3-compact/">Kärcher SE 3 Compact</a>
+				<a href="/karcher-se-4-plus/">Kärcher SE 4 Plus</a>
+				<a href="/karcher-puzzi-8-1/">Kärcher Puzzi 8/1</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="dropbtn" aria-expanded="false">Oppaat ▾</button>
+			<div class="dropdown-content">
+				<a href="/tekstiilipesurin-pesuaine/">Tekstiilipesurin pesuaine</a>
+				<a href="/tekstiilipesuri-vuokraus-vai-osto/">Vuokraa vai osta</a>
+				<a href="/tekstiilipesuri-vai-hoyrypesuri/">Tekstiilipesuri vai höyrypesuri</a>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<script>
+	const navToggle = document.getElementById('navToggle');
+	const mainNav = document.getElementById('mainNav');
+
+	navToggle?.addEventListener('click', () => {
+		const isOpen = mainNav?.classList.toggle('open');
+		navToggle.setAttribute('aria-expanded', String(!!isOpen));
+		if (!isOpen) {
+			document.querySelectorAll('.dropdown.open').forEach((d) => {
+				d.classList.remove('open');
+				d.querySelector('.dropbtn')?.setAttribute('aria-expanded', 'false');
+			});
+		}
+	});
+
+	document.querySelectorAll('.dropdown > .dropbtn').forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const dropdown = btn.parentElement;
+			const isOpen = dropdown?.classList.toggle('open');
+			btn.setAttribute('aria-expanded', String(!!isOpen));
+			document.querySelectorAll('.dropdown.open').forEach((d) => {
+				if (d !== dropdown) {
+					d.classList.remove('open');
+					d.querySelector('.dropbtn')?.setAttribute('aria-expanded', 'false');
+				}
+			});
+		});
+	});
+
+	document.addEventListener('click', (e) => {
+		if (!(e.target instanceof Node) || !mainNav || !navToggle) return;
+		const clickedInsideNav = mainNav.contains(e.target);
+		const clickedToggle = navToggle.contains(e.target);
+		if (!clickedInsideNav && !clickedToggle) {
+			mainNav.classList.remove('open');
+			navToggle.setAttribute('aria-expanded', 'false');
+			document.querySelectorAll('.dropdown.open').forEach((d) => {
+				d.classList.remove('open');
+				d.querySelector('.dropbtn')?.setAttribute('aria-expanded', 'false');
+			});
+		}
+	});
+</script>

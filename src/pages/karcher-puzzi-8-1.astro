@@ -1,0 +1,109 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-tekstiilipesurit/, sivulinkki /tekstiilipesuri-vuokraus-vai-osto/.
+// Hakusanat: Puzzi 8/1, Puzzi 8/1 C, Puzzi 10/1 (Ahrefs 2026-10: noin 210 hakua). Kirjoitettu tekstiilipesuri-writer-
+// skillillä (2026-10-05). Luvut ja hinnat tulevat Kärcherin datasta, vuokrahinnat tiedostosta src/data/vuokrahinnat.json.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import VuokraTaulu from '../components/tuote/VuokraTaulu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+
+const suositus = await paatuote('Puzzi 8/1');
+const perus = await tuote('puzzi-8-1');
+const adv = await tuote('puzzi-8-1-adv');
+const p8versiot = await versiot('Puzzi 8/1');
+const p10 = await tuote('puzzi-10-1');
+const p21 = await tuote('puzzi-2-1-bp');
+const se4 = await paatuote('SE 4');
+
+const t = suositus.tekniset;
+const t4 = se4.tekniset;
+// Halvimman vuorokausivuokran (Pesurivuokraus.fi 39 €) ja ostohinnan suhde.
+const vuorokausi = 39;
+const kertaa = Math.round(suositus.hinta! / vuorokausi);
+
+const ukk = [
+	{
+		kysymys: 'Paljonko Kärcher Puzzi 8/1:n vuokraus maksaa?',
+		vastaus: `Tarkistamissamme vuokraamoissa Puzzi 8/1 maksoi lokakuussa 2026 noin 39–45 € vuorokaudelta. Kärcher Center Vantaa vuokraa sitä 60 eurolla perjantaista maanantaihin ja 150 eurolla viikoksi. Vuokraamo 24/7 Raisiossa vuokraa sitä alkaen 25 € neljäksi tunniksi. Vuokraamot ovat taulukossa tällä sivulla.`,
+	},
+	{
+		kysymys: 'Mikä ero on Puzzi 8/1:llä ja Puzzi 8/1 Adv:lla?',
+		vastaus: `Laite on sama. Adv-versiossa on lisäksi 240 mm:n lattiasuulake, pesukahva ja painehuuhteluputki, joten sillä pesee myös mattoja. Kärcher.comissa Adv maksaa ${euroa(adv.hinta!)} ja perusversio ${euroa(perus.hinta!)}.`,
+	},
+	{
+		kysymys: 'Mikä on Puzzi 8/1 C?',
+		vastaus: `Kaupat ja vuokraamot käyttävät nimeä Puzzi 8/1 C laitteesta, jonka Kärcher myy nimellä Puzzi 8/1 (tuotenumero ${perus.tuotenumero}). Tarkistamamme vuokraamot vuokraavat tätä perusversiota, jossa on mukana kalustesuulake.`,
+	},
+	{
+		kysymys: 'Mitä pesuainetta Puzziin laitetaan?',
+		vastaus: 'Kärcher Center Vantaa suosittelee Puzziin CarpetPro RM 760 -tabletteja ja antaa vuokrauksen mukana kaksi tablettia. Samaa ainetta myydään myös jauheena. Muut Kärcherin aineet ovat <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.',
+	},
+	{
+		kysymys: 'Kannattaako Puzzi 8/1 ostaa kotiin?',
+		vastaus: `Harvoin. Puzzi 8/1 maksaa Kärcher.comissa vähintään ${euroa(suositus.hinta!)}, mikä vastaa noin ${kertaa} vuorokauden vuokraa halvimmassa tarkistamassamme vuokraamossa. Kotiin, jossa tekstiilejä pestään usein, sopii paremmin <a href="${mallisivut['SE 4']}">SE 4 Plus</a> (${euroa(se4.hinta!)}).`,
+	},
+];
+---
+<Layout
+	title="Kärcher Puzzi 8/1 tekstiilipesuri kokemuksia – vuokraus, hinta ja versiot (2026)"
+	description={`Kärcher Puzzi 8/1 on ammattikäyttöön tehty tekstiilipesuri, jota vuokraamot vuokraavat noin 39–45 eurolla vuorokaudeksi. Versiot, hinnat, vuokraamot ja tekniset tiedot.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Kärcher Puzzi 8/1', sivu: mallisivut['Puzzi 8/1'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher Puzzi 8/1 -tekstiilipesuri" yla="Kärcher Professional · Ammattilaite" merkinta="Edullisin versio">
+			<p>Kärcher Puzzi 8/1 on Kärcherin ammattikäyttöön tarkoitettu tekstiilipesuri. Kärcher kutsuu sitä painehuuhtelukoneeksi. Puhdasvesisäiliö on {luku(t.puhdasvesiL!)} litraa, likavesisäiliö {luku(t.likavesiL!)} litraa ja imuturbiinin teho {luku(t.imuturbiiniW!)} W. Kärcherin mukaan työsuoritus on {t.tyosuoritusM2h} m² tunnissa.</p>
+			<p>Useimmille kodeille Puzzi kannattaa vuokrata. Vuorokauden vuokra on noin 39–45 €, ja laitteen hinnalla saisi noin {kertaa} vuokrapäivää.</p>
+		</TuoteHero>
+
+		<h2>Puzzi 8/1:n vuokraus</h2>
+		<p>Kaikki kolme tarkistamaamme vuokraamoa vuokraavat Puzzi 8/1:tä. Kärcher Center Vantaan hintaan kuuluvat kalustesuulake ja kaksi pesuainetablettia. Mattosuulakkeen saa 10 eurolla lisähintaan. Jos aiot pestä mattoja, varaa lattiasuulake samalla, koska perusversiossa on mukana vain kalustesuulake.</p>
+		<VuokraTaulu />
+		<p>Pese samalla vuokrauksella mahdollisimman monta kohdetta: sohvat, nojatuolit, matot ja auton penkit. Mitä useamman kohteen peset, sitä edullisemmaksi yksi kohde tulee. Laskelma omasta laitteesta ja vuokrauksesta on <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.</p>
+
+		<h2>Kenelle Puzzi 8/1 sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Kerran tai kaksi vuodessa tehtävään isoon pesuun: koko sohvakalusto, matot ja auto samalla vuokrauksella</li>
+					<li>Isoille pinnoille: {luku(t.puhdasvesiL!)} litran puhdasvesisäiliö on kaksinkertainen SE 4 Plussan {luku(t4.puhdasvesiL!)} litraan verrattuna</li>
+					<li>Ammattikäyttöön, esimerkiksi siivousyrityksille ja autonhoitajille</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Tuoreisiin tahroihin heti, kun ne syntyvät: vuokralaite ei ole käsillä (katso <a href={mallisivut['SE 3']}>SE 3 Compact</a>)</li>
+					<li>Pieneen säilytystilaan: Puzzi painaa {luku(t.painoKg!)} kg, ja mitat ovat {t.mitatMm!.replaceAll(' x ', ' × ')} mm</li>
+					<li>Hiljaiseen käyttöön: Kärcher ilmoittaa äänenvoimakkuudeksi {luku(t.meluDb!)} dB(A)</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Puzzi 8/1:n versiot vertailussa</h2>
+		<p>Kärcher myy Puzzi 8/1:tä neljänä versiona. Laite on kaikissa sama, ja versiot eroavat varusteiden ja pesuaineen osalta. Juhlavuoden Anniversary Edition ja musta Go!Further maksavat vähemmän kuin perusversio, ja niiden mukana tulee pesuainetta: Anniversary Editionissa 16 RM 760 -tablettia ja Go!Furtherissa litra RM 764N -pesuainetta. Mattojen pesuun tarvittava lattiasuulake kuuluu vain Adv-versioon.</p>
+		<VersioVertailu versiot={p8versiot} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat tarkistettu {paiva(suositus.haettu)} Kärcher.comista.</p>
+
+		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Muut Puzzi-mallit</h2>
+		<p>Puzzi 8/1:n lisäksi Kärcher myy Suomessa muita Puzzi-malleja. Puzzi 2/1 Bp on akkukäyttöinen, ja sen säiliöt ovat {luku(p21.tekniset.puhdasvesiL!)} ja {luku(p21.tekniset.likavesiL!)} litraa. Puzzi 10/1 on Puzzi 8/1:tä suurempi, ja sen hinta on {euroa(p10.hinta!)}. Kaikki mallit ovat <a href="/karcher-tekstiilipesurit/">Kärcherin mallistotaulukossa</a>.</p>
+		<div class="mk-lista">
+			<Tuotekortti tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kenelle={sarjakuvaukset['SE 4']} tagi="Kotiin" />
+			<Tuotekortti tuote={p10} otsikko="Kärcher Puzzi 10/1" sivu="/karcher-tekstiilipesurit/" ankkuri={`malli-${p10.id}`} kenelle={sarjakuvaukset['Puzzi 10/1']} tagi="Suurempi Puzzi" />
+		</div>
+
+		<Kokemuslomake malli="Kärcher Puzzi 8/1" polku={mallisivut['Puzzi 8/1']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
