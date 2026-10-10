@@ -9,7 +9,7 @@ Suomenkielinen affiliate-sivusto, joka vertailee Suomessa myytäviä tekstiilipe
 - **Kanoninen domain on `https://tekstiilipesuri.com`.** `site` tiedostossa `astro.config.mjs` on oltava sama kuin domain, jolta sisältö tarjoillaan.
 - **GitHub:** `Wibah/Tekstiilipesuri` (yksityinen), päähaara `main` (luotu 2026-10-05).
 - **Vercel:** projekti `tekstiilipesuri` (Ville Hinkkanen's projects, luotu 2026-10-10). Jokainen push `main`-haaraan julkaisee osoitteeseen https://tekstiilipesuri.vercel.app, joten aja `npm run build` ennen pushia.
-- **Ei vielä julkinen (Villen päätös 2026-10-10):** domainia tekstiilipesuri.com ei ole lisätty Verceliin, koska ennen julkaisua tarvitaan lisää sivuja (ks. SUUNNITELMA.md). Kun sivusto julkaistaan: lisää domain ja www-uudelleenohjaus Vercelissä, päivitä DNS, lisää Search Consolen vahvistustagi ja hae Adtraction-kanava.
+- **Ei vielä julkinen (Villen päätös 2026-10-10):** domainia tekstiilipesuri.com ei ole lisätty Verceliin, koska ennen julkaisua tarvitaan lisää sivuja (ks. SUUNNITELMA.md). Kun sivusto julkaistaan: vaihda `JULKAISTU = true` tiedostossa `src/layouts/Layout.astro` (poistaa esikatselun noindexin), lisää domain ja www-uudelleenohjaus Vercelissä, päivitä DNS, lisää Search Consolen vahvistustagi ja hae Adtraction-kanava.
 - Google Search Consolen vahvistustagi lisätään tiedostoon `src/layouts/Layout.astro`, kun domain vahvistetaan.
 
 ## Rakenne

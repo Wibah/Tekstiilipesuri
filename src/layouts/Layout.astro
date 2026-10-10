@@ -16,6 +16,9 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+// Sivusto ei ole vielä julkinen (Villen päätös 2026-10-10): esikatselu tekstiilipesuri.vercel.app ei saa päätyä
+// Googleen. Vaihda true, kun domain tekstiilipesuri.com julkaistaan, jolloin noindex poistuu.
+const JULKAISTU = false;
 ---
 <html lang="fi">
 	<head>
@@ -30,6 +33,7 @@ const { title, description } = Astro.props;
 		<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
 		<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		{!JULKAISTU && <meta name="robots" content="noindex, nofollow" />}
 		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 		<!-- Google Search Consolen vahvistustagi lisätään tähän, kun Ville vahvistaa domainin. -->
 	</head>
