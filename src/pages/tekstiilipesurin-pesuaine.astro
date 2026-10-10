@@ -36,6 +36,10 @@ const ukk = [
 		vastaus: 'Kärcher ei mainitse mäntysuopaa, vaan suosittelee SE- ja Puzzi-tekstiilipesureihin omia pesuaineitaan, kuten RM 519:ää ja RM 760:tä. Mäntysuopa vaahtoaa, ja vaahto on ongelma imevissä laitteissa: Kärcher varoittaa <a href="https://www.karcher.com/fi/palvelut/asiakaspalvelu/usein-kysyttyae.html" target="_blank" rel="nofollow noopener">usein kysytyissä kysymyksissään</a> vaahtoavista aineista imevien ikkunapesurien kohdalla ja myy ammattilaitteisiin erillistä vaahdonestoainetta (RM 761). Käytä siis tekstiilipesurille tarkoitettua pesuainetta ja tarkista laitteen käyttöohje.',
 	},
 	{
+		kysymys: 'Mikä Kärcher tekstiilipesuri aine sopii mihinkin malliin?',
+		vastaus: 'Kärcherin SE-malleihin käytetään RM 519- tai RM 519N -pesuainetta. RM 519 tulee SE 3-, SE 4- ja SE 6 -mallien mukana. Puzzi-ammattilaitteisiin sopivat RM 760 -tabletit ja -jauhe sekä RM 764N, jota on Puzzi 8/1 Go!Furtherin ja Puzzi 2/1 Bp:n toimituksessa. Erikoistahroille Kärcher valmistaa lisäksi tahranpoistoainetta RM 769.',
+	},
+	{
 		kysymys: 'Paljonko pesuainetta tekstiilipesuriin laitetaan?',
 		vastaus: `Noudata pesuaineen pakkauksen ohjetta. Parkersin ja CAR Magazinen mukaan Kärcher SE 3-18:n ohje on 100–200 ml pesuainetta neljään litraan vettä likaisuuden mukaan. Kärcher SE 3 Compactin ${luku(s3)} litran säiliöön tämä tarkoittaa noin ${annos(s3)} pesuainetta ja SE 4 Plussan ${luku(s4)} litran säiliöön ${annos(s4)}.`,
 	},
@@ -54,7 +58,7 @@ const ukk = [
 ];
 ---
 <Layout
-	title="Tekstiilipesuri pesuaine – Kärcherin RM 519, RM 519N ja RM 760 -tabletit vertailussa (2026)"
+	title="Tekstiilipesuri pesuaine 2026 – Kärcherin ja Bissellin aineet, tabletit ja annostelu"
 	description="Tekstiilipesurien pesuaineet vertailussa: Kärcher tekstiilipesuri pesuaine ja tabletit sekä Bissellin ja muiden merkkien aineet. Hinnat ja annostelu."
 >
 	<main class="article-layout">
@@ -76,9 +80,11 @@ const ukk = [
 		<h2>Kärcher tekstiilipesuri tabletti ja jauhe Puzzi-laitteisiin</h2>
 		<p>Ammattisarjan aineet on tehty Puzzi-painehuuhtelukoneisiin, mutta osa niistä sopii Kärcherin mukaan tekstiilipesureihin yleisesti. Kärcher.com myy kuluttajille kahta niistä: RM 760 -tabletteja ({rm760t.pakkauskoko?.replace('Tablets', 'tablettia')}, {euroa(rm760t.hinta!)}) ja RM 760 -jauhetta ({rm760j.pakkauskoko}, {euroa(rm760j.hinta!)}). Kärcherin mukaan jauhe sopii myös villakuiduille. Kärcher Center Vantaa kuvaa tabletteja helpoiksi annostella.</p>
 		<PesuaineTaulu ammatti={true} />
+		<h3>Kärcher tekstiilipesuri pesuaine tabletti vai jauhe?</h3>
+		<p>RM 760 on sama pesuaine kahdessa muodossa. Tabletit ({rm760t.pakkauskoko?.replace('Tablets', 'tablettia')}, {euroa(rm760t.hinta!)}) liukenevat Kärcherin mukaan nopeasti, ja Kärcher Center Vantaa kuvaa niitä helpoiksi annostella. Jauheen ({rm760j.pakkauskoko}, {euroa(rm760j.hinta!)}) annos mitataan itse, ja Kärcherin mukaan jauhe sopii myös villakuiduille. Satunnaiseen pesuun tabletit ovat näistä helpompi valinta.</p>
 		<p class="tp-lahde">Kuvaukset ja hinnat: Kärcher.com, tarkistettu {paiva(rm519.haettu)}.</p>
 
-		<h2>Annostelu: kuinka paljon pesuainetta?</h2>
+		<h2>Tekstiilipesuri aine ja annostelu: kuinka paljon pesuainetta?</h2>
 		<p>Brittiläisten Parkersin ja CAR Magazinen mukaan Kärcher SE 3-18:n käyttöohje neuvoo laittamaan 100–200 ml pesuainetta neljään litraan vettä likaisuuden mukaan. Lehdet moittivat testeissään (2026) ohjetta hankalaksi, koska säiliö on 1,7 litraa eikä siinä ole asteikkoa. Laskimme annokset valmiiksi samalla suhteella. Tarkista silti oman laitteesi ja pesuaineesi ohje.</p>
 		<div class="tp-taulu">
 			<table class="tp-versiot">
@@ -102,6 +108,14 @@ const ukk = [
 		<h2>Muiden merkkien pesuaineet</h2>
 		<h3>Bissell pesuaine</h3>
 		<p>Bissell myy SpotClean-, PowerWash- ja ProHeat-laitteisiinsa omia aineitaan, esimerkiksi Spot &amp; Stain-, Wash &amp; Protect- ja Oxygen Boost -nimisiä aineita. Suomalaisissa verkkokaupoissa ne maksoivat lokakuussa 2026 noin 14–22 € pullolta (1–1,5 litraa). Käytä laitteessa sen valmistajan suosittelemaa ainetta ja annostele laitteen omien ohjeiden mukaan.</p>
+		<h3>Bissell tekstiilipesuri pesuaine: Oxygen Boost vai Spot &amp; Stain?</h3>
+		<p>Jälleenmyyjien tuotekuvausten mukaan Bissellin Oxygen Boost (1134N) on happea sisältävä pesuaine SpotClean-laitteisiin, ja se on tarkoitettu vaikeammille tahroille, kuten punaviinille ja kahville. Tavallinen Spot &amp; Stain (1084N) on tehty arkisiin tahroihin matoissa ja verhoilussa, eikä siinä ole happea. Spot &amp; Stain Pro Oxy on happea sisältävä versio. Valitse siis Oxygen Boost tai Pro Oxy vanhoille ja tummille tahroille ja tavallinen Spot &amp; Stain ylläpitopesuun.</p>
+		<h3>Tefal tekstiilipesuri pesuaine</h3>
+		<p>Tefalin oma tekstiilipesuaine on Clean It XD5320F0 (1 l) verhoilulle ja matoille. Tuotekuvauksen mukaan se on tarkoitettu Tefalin Clean It -tekstiilipesureihin, ja sitä annostellaan noin 50 ml litraan vettä. Mukana tulee mittakorkki.</p>
+		<h3>Ryobi tekstiilipesuri pesuaine</h3>
+		<p>Ryobilla on oma Swift Clean -puhdistusaine RBACLS-01 (1 l), joka on jälleenmyyjien tuotetietojen mukaan tarkoitettu Ryobin ONE+ Swift Clean -tekstiilipesuriin (RDC18) mattojen ja verhoilun pesuun. Laitteen mukana tulee 250 ml pesuainetiivistettä. Käytä Ryobin ainetta tai muuta vähän vaahtoavaa tekstiilipesuainetta ja tarkista annostelu laitteen käyttöohjeesta.</p>
+		<h3>Ströme tekstiilipesuri pesuaine</h3>
+		<p>Ströme ei kerro PowerClean- eikä T203-tekstiilipesurien tuotetiedoissa, mitä pesuainetta laitteeseen suositellaan. Käytä vähän vaahtoavaa tekstiilipesuainetta ja tarkista suositus ja annostelu laitteen käyttöohjeesta.</p>
 
 		<p>Tekstiilipesurin valinnasta kerrotaan <a href="/">etusivun ostajan oppaassa</a> ja Kärcherin malleista <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurit-sivulla</a>.</p>
 		<p class="tp-lahde">Lähteet: <a href="https://www.parkers.co.uk/car-advice/car-care/car-carpet-cleaners/" target="_blank" rel="nofollow noopener">Parkers</a>, <a href="https://www.carmagazine.co.uk/car-advice/maintenance/the-best-car-carpet-cleaners/" target="_blank" rel="nofollow noopener">CAR Magazine</a>, <a href="https://www.telegraph.co.uk/recommended/home/best-carpet-cleaners/" target="_blank" rel="nofollow noopener">Telegraph</a>, <a href="https://www.consumerreports.org/appliances/carpet-cleaners/buying-guide/" target="_blank" rel="nofollow noopener">Consumer Reports</a>, <a href="https://bbs.io-tech.fi/threads/tekstiilipesurit.434893/" target="_blank" rel="nofollow noopener">io-tech</a>.</p>
