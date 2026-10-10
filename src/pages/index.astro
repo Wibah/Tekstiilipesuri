@@ -69,7 +69,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Paljonko tekstiilipesuri maksaa?',
-		vastaus: `Kärcherin kotimallit maksavat Kärcher.comissa ${hintavali(kotimallit)} ja Puzzi-ammattilaitteet ${hintavali(karcher.filter((t) => t.ammattilaite))}. Jos tarvitset laitetta vain kerran tai kaksi vuodessa, vuokraus maksaa noin 39–45 € vuorokaudelta. Laskelma on <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.`,
+		vastaus: `Kärcherin kotikäyttöön tarkoitetut mallit maksavat Kärcher.comissa ${hintavali(kotimallit)} ja Puzzi-ammattilaitteet ${hintavali(karcher.filter((t) => t.ammattilaite))}. Jos tarvitset laitetta vain kerran tai kaksi vuodessa, vuokraus maksaa noin 39–45 € vuorokaudelta. Laskelma on <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.`,
 	},
 	{
 		kysymys: 'Mikä on halpa tekstiilipesuri?',
@@ -100,7 +100,7 @@ const ukk = [
 		</section>
 
 		<div class="es-luottamus">
-			<div><b>{karcher.length} Kärcherin mallia</b>SE-kotimallit ja Puzzi-ammattilaitteet</div>
+			<div><b>{karcher.length} Kärcherin mallia</b>SE-mallit kotikäyttöön ja Puzzi-ammattilaitteet</div>
 			<div><b>Tekniset tiedot</b>suoraan valmistajan sivuilta</div>
 			<div><b>Hinnat tarkistettu</b>{paiva(se3.haettu)}</div>
 		</div>
@@ -156,7 +156,7 @@ const ukk = [
 					</div>
 					<div class="model-box">
 						<h3>2. Säiliö ja paino</h3>
-						<p>Tehokas tekstiilipesuri isoille matoille tarvitsee ison säiliön, koska pientä säiliötä joutuu täyttämään kesken työn. Kärcherin kotimalleissa puhdasvesisäiliö on 1,5–4 litraa ja paino 3,6–7,6 kg. Pieni säiliö pitää täyttää useammin, ja juuri tästä testit moittivat pieniä laitteita. Iso laite on taas raskaampi kantaa portaissa.</p>
+						<p>Tehokas tekstiilipesuri isoille matoille tarvitsee ison säiliön, koska pientä säiliötä joutuu täyttämään kesken työn. Kärcherin kotikäyttöön tarkoitetuissa malleissa puhdasvesisäiliö on 1,5–4 litraa ja paino 3,6–7,6 kg. Pieni säiliö pitää täyttää useammin, ja juuri tästä testit moittivat pieniä laitteita. Iso laite on taas raskaampi kantaa portaissa.</p>
 					</div>
 					<div class="model-box">
 						<h3>3. Verkkovirta vai akku</h3>
@@ -175,8 +175,8 @@ const ukk = [
 
 			<section class="es-osio">
 				<div class="es-otsikko"><div><span class="tp-label">Hinnat</span><h2>Tekstiilipesuri tarjous: mitä tekstiilipesuri maksaa?</h2></div><a class="es-lisaa" href="/karcher-tekstiilipesurit/">Kärcher-opas →</a></div>
-				<p>Tekstiilipesurin hinta Kärcher.comissa on {hintavali(kotimallit)} kotimalleille ja {hintavali(karcher.filter((t) => t.ammattilaite))} Puzzi-ammattilaitteille. Edullinen tekstiilipesuri löytyy Kärcherin pienimmästä mallista: SE 2 Spot Care maksaa {euroa(se2.hinta!)}. {alennetut.length ? `Kärcher.comissa on nyt alennettu ${alennetut.length} tekstiilipesuria, ja näytämme alennetuille malleille myös hinnan ennen alennusta.` : `Kärcher.comissa ei ole tällä hetkellä alennettuja tekstiilipesureita (tarkistettu ${paiva(se3.haettu)}).`} Kun jokin tekstiilipesuri tarjous tulee voimaan, se näkyy tämän sivun korteissa alennettuna hintana ja hintana ennen alennusta.</p>
-				<p>Tarkistamiemme suomalaisten verkkokauppojen valikoimissa Kärcherillä on eniten tekstiilipesurimalleja. Kärcher.com myy nyt {kotimallit.filter((t) => t.myynnissa).length} SE-kotimallia. Sarjan numero kertoo koon: SE 2 on pienin ja SE 4–SE 6 suurimmat kotimallit.</p>
+				<p>Tekstiilipesurin hinta Kärcher.comissa on {hintavali(kotimallit)} kotikäyttöön tarkoitetuille malleille ja {hintavali(karcher.filter((t) => t.ammattilaite))} Puzzi-ammattilaitteille. Edullinen tekstiilipesuri löytyy Kärcherin pienimmästä mallista: SE 2 Spot Care maksaa {euroa(se2.hinta!)}. {alennetut.length ? `Kärcher.comissa on nyt alennettu ${alennetut.length} tekstiilipesuria, ja näytämme alennetuille malleille myös hinnan ennen alennusta.` : `Kärcher.comissa ei ole tällä hetkellä alennettuja tekstiilipesureita (tarkistettu ${paiva(se3.haettu)}).`} Kun jokin tekstiilipesuri tarjous tulee voimaan, se näkyy tämän sivun korteissa alennettuna hintana ja hintana ennen alennusta.</p>
+				<p>Tarkistamiemme suomalaisten verkkokauppojen valikoimissa Kärcherillä on eniten tekstiilipesurimalleja. Kärcher.com myy nyt {kotimallit.filter((t) => t.myynnissa).length} kotikäyttöön tarkoitettua SE-mallia. Sarjan numero kertoo koon: SE 2 on pienin ja SE 4–SE 6 suurimmat kotimallit.</p>
 				<div class="tp-taulu">
 					<table class="es-ksarja">
 						<thead><tr><th scope="col">Malli</th><th scope="col">Säiliöt</th><th scope="col">Paino</th><th scope="col">Hinta</th><th scope="col">Sopii parhaiten</th></tr></thead>

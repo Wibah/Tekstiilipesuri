@@ -32,12 +32,16 @@ const ukk = [
 		vastaus: 'Käytä tekstiilipesurille tarkoitettua pesuainetta. Liika vaahto haittaa tekstiilipesurin työtä, ja tavalliset pesuaineet voivat vaahdota liikaa. Kärcher myy ammattilaitteisiin jopa erillistä vaahdonestoainetta (RM 761) likavesisäiliöön.',
 	},
 	{
+		kysymys: 'Voiko Kärcher tekstiilipesurissa käyttää mäntysuopaa?',
+		vastaus: 'Kärcher ei mainitse mäntysuopaa, vaan suosittelee SE- ja Puzzi-tekstiilipesureihin omia pesuaineitaan, kuten RM 519:ää ja RM 760:tä. Mäntysuopa vaahtoaa, ja vaahto on ongelma imevissä laitteissa: Kärcher varoittaa <a href="https://www.karcher.com/fi/palvelut/asiakaspalvelu/usein-kysyttyae.html" target="_blank" rel="nofollow noopener">usein kysytyissä kysymyksissään</a> vaahtoavista aineista imevien ikkunapesurien kohdalla ja myy ammattilaitteisiin erillistä vaahdonestoainetta (RM 761). Käytä siis tekstiilipesurille tarkoitettua pesuainetta ja tarkista laitteen käyttöohje.',
+	},
+	{
 		kysymys: 'Paljonko pesuainetta tekstiilipesuriin laitetaan?',
 		vastaus: `Noudata pesuaineen pakkauksen ohjetta. Parkersin ja CAR Magazinen mukaan Kärcher SE 3-18:n ohje on 100–200 ml pesuainetta neljään litraan vettä likaisuuden mukaan. Kärcher SE 3 Compactin ${luku(s3)} litran säiliöön tämä tarkoittaa noin ${annos(s3)} pesuainetta ja SE 4 Plussan ${luku(s4)} litran säiliöön ${annos(s4)}.`,
 	},
 	{
 		kysymys: 'Mikä ero on Kärcherin RM 519:llä ja RM 519N:llä?',
-		vastaus: `Kumpikin on Kärcherin nestemäinen pesuaine kotimalleihin. RM 519N Beyond koostuu Kärcherin mukaan yli 99-prosenttisesti luonnollisista ainesosista, ja Kärcher markkinoi sitä perheille, allergikoille ja lemmikkikoteihin. Kärcher.comissa RM 519N maksaa ${euroa(rm519n.hinta!)} ja RM 519 ${euroa(rm519.hinta!)}.`,
+		vastaus: `Kumpikin on Kärcherin nestemäinen pesuaine kotikäyttöön tarkoitettuihin malleihin. RM 519N Beyond koostuu Kärcherin mukaan yli 99-prosenttisesti luonnollisista ainesosista, ja Kärcher markkinoi sitä perheille, allergikoille ja lemmikkikoteihin. Kärcher.comissa RM 519N maksaa ${euroa(rm519n.hinta!)} ja RM 519 ${euroa(rm519.hinta!)}.`,
 	},
 	{
 		kysymys: 'Sopiiko Kärcherin pesuaine Bissellin tekstiilipesuriin?',
@@ -51,17 +55,17 @@ const ukk = [
 ---
 <Layout
 	title="Tekstiilipesuri pesuaine – Kärcherin RM 519, RM 519N ja RM 760 -tabletit vertailussa (2026)"
-	description="Mikä pesuaine tekstiilipesuriin? Kärcherin RM 519, RM 519N, RM 762 ja RM 760 -tabletit vertailussa, hinnat Kärcher.comista ja annostelu SE 3- ja SE 4 -malleihin."
+	description="Tekstiilipesurien pesuaineet vertailussa: Kärcher tekstiilipesuri pesuaine ja tabletit sekä Bissellin ja muiden merkkien aineet. Hinnat ja annostelu."
 >
 	<main class="article-layout">
 		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Tekstiilipesurin pesuaine', sivu: '/tekstiilipesurin-pesuaine/' }]} />
 		<span class="tp-label">Opas</span>
-		<h1>Tekstiilipesurin pesuaine</h1>
-		<p>Tekstiilipesuriin laitetaan vähän vaahtoavaa tekstiilipesuainetta, joka on tehty juuri ruiskutus- ja imupesuun. Kärcherin kotimalleihin sopii RM 519 ({euroa(rm519.hinta!)} / litra) tai sen luonnollisista ainesosista valmistettu versio RM 519N ({euroa(rm519n.hinta!)} / litra). Puzzi-ammattilaitteisiin Kärcher myy RM 760 -pesuainetta tabletteina ja jauheena.</p>
+		<h1>Tekstiilipesuri pesuaine – mitkä aineet sopivat mihinkin pesureihin?</h1>
+		<p>Tekstiilipesuriin laitetaan vähän vaahtoavaa tekstiilipesuainetta, joka on tehty juuri ruiskutus- ja imupesuun. Kärcherin kotikäyttöön tarkoitettuihin malleihin sopii RM 519 ({euroa(rm519.hinta!)} / litra) tai sen luonnollisista ainesosista valmistettu versio RM 519N ({euroa(rm519n.hinta!)} / litra). Puzzi-ammattilaitteisiin Kärcher myy RM 760 -pesuainetta tabletteina ja jauheena.</p>
 		<p>Tällä sivulla ovat kaikki Kärcher.comin tekstiilipesuaineet ja -hoitoaineet, niiden erot ja annostelu. Lopussa on vinkkejä siihen, miten pesuainetta käytetään niin, ettei kankaaseen jää jäämiä.</p>
 
-		<h2>Kärcherin pesuaineet kotimalleihin</h2>
-		<p>Kärcherin SE-mallien mukana tulee RM 519 -pesuainetta: SE 3 Compactin mukana 100 ml ja SE 4 Plussan mukana litra. Kärcher.com myy kotimalleihin kolmea ainetta:</p>
+		<h2>Kärcher tekstiilipesuri pesuaine kotikäyttöön sopiviin malleihin</h2>
+		<p>Kärcherin SE-mallien mukana tulee RM 519 -pesuainetta: SE 3 Compactin mukana 100 ml ja SE 4 Plussan mukana litra. Kärcher.com myy näihin malleihin kolmea ainetta:</p>
 		<ul>
 			<li><strong>RM 519</strong> on nestemäinen pesuaine mattojen, huonekalujen verhoilujen ja auton penkkien ylläpitopesuun. Kärcherin mukaan se kuivuu nopeasti.</li>
 			<li><strong>RM 519N Beyond</strong> on Kärcherin mukaan yli 99-prosenttisesti luonnollisista ainesosista valmistettu pesuaine. Se on Kärcher.comissa RM 519:ää edullisempi ({euroa(rm519n.hinta!)} ja {euroa(rm519.hinta!)}).</li>
@@ -69,7 +73,7 @@ const ukk = [
 		</ul>
 		<PesuaineTaulu ammatti={false} />
 
-		<h2>Kärcherin ammattiaineet Puzzi-laitteisiin</h2>
+		<h2>Kärcher tekstiilipesuri tabletti ja jauhe Puzzi-laitteisiin</h2>
 		<p>Ammattisarjan aineet on tehty Puzzi-painehuuhtelukoneisiin, mutta osa niistä sopii Kärcherin mukaan tekstiilipesureihin yleisesti. Kärcher.com myy kuluttajille kahta niistä: RM 760 -tabletteja ({rm760t.pakkauskoko?.replace('Tablets', 'tablettia')}, {euroa(rm760t.hinta!)}) ja RM 760 -jauhetta ({rm760j.pakkauskoko}, {euroa(rm760j.hinta!)}). Kärcherin mukaan jauhe sopii myös villakuiduille. Kärcher Center Vantaa kuvaa tabletteja helpoiksi annostella.</p>
 		<PesuaineTaulu ammatti={true} />
 		<p class="tp-lahde">Kuvaukset ja hinnat: Kärcher.com, tarkistettu {paiva(rm519.haettu)}.</p>
@@ -96,6 +100,7 @@ const ukk = [
 		</ol>
 
 		<h2>Muiden merkkien pesuaineet</h2>
+		<h3>Bissell pesuaine</h3>
 		<p>Bissell myy SpotClean-, PowerWash- ja ProHeat-laitteisiinsa omia aineitaan, esimerkiksi Spot &amp; Stain-, Wash &amp; Protect- ja Oxygen Boost -nimisiä aineita. Suomalaisissa verkkokaupoissa ne maksoivat lokakuussa 2026 noin 14–22 € pullolta (1–1,5 litraa). Käytä laitteessa sen valmistajan suosittelemaa ainetta ja annostele laitteen omien ohjeiden mukaan.</p>
 
 		<p>Tekstiilipesurin valinnasta kerrotaan <a href="/">etusivun ostajan oppaassa</a> ja Kärcherin malleista <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurit-sivulla</a>.</p>

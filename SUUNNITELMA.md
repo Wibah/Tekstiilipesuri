@@ -8,6 +8,14 @@ Siirretty keskustelusta ”Uudet ideat saitteihin” (2026-10-04). **Ensimmäine
 - Rakennetaan `semantic-content-network`-skillin mukaan, ja tekstit kirjoitetaan `microsemantic-writer`- ja `finnish-humanizer`-skilleillä. Mitään ei keksitä.
 - Ahrefs-data: https://docs.google.com/spreadsheets/d/1xpF1KUAiwyBSNvJiGO7uPAW6hxgu7_wkuCkIZn6Yc00/ (välilehti gid=751298767 on tekstiilipesuri). CSV-export: `.../export?format=csv&gid=751298767`.
 
+- **Merkkikohtaiset Ahrefs-exportit (Ville 2026-10-10)**, tallennettu myös kansioon `data/ahrefs/` merkkisivuja varten:
+  - Bissell: https://docs.google.com/spreadsheets/d/1VJwldjiZok2mL_ZP7xYz_3PUAw_3DlWELdEgTUBL7jk/ (100 hakusanaa, noin 1 360 hakua, joista tekstiilipesureihin liittyy noin 1 240)
+  - Ryobi: https://docs.google.com/spreadsheets/d/1D_qFbEfuKEUYR-CFzEsoYajJDGg-Q-1r-kK9Tut6VOc/ (15, noin 830)
+  - Tefal: https://docs.google.com/spreadsheets/d/1iHsNrCdfYwySHiXYHnEHQVqlzebPqC_VreJy6ncoWEQ/ (9, noin 470)
+  - Parkside: https://docs.google.com/spreadsheets/d/1nzF0oNWzErWprwHFQKjNkIIr1cifaX9QAu5JDcjTcDI/ (6, noin 270)
+  - Ströme: https://docs.google.com/spreadsheets/d/1erqttXrSr3DmQErkkR5ICMC1EzJ1rAf0xRw0LGe7qdw/ (20, noin 340)
+  - Yleinen tekstiilipesuri-export (300 riviä, katkaistu): `data/ahrefs/tekstiilipesuri.csv`
+
 ## Havainnot datasta
 - 300 hakusanaa, yhteensä noin 41 000 hakua kuukaudessa. ”tekstiilipesuri” saa 15 000 hakua (KD 0, Traffic potential 8 600) ja ”kärcher tekstiilipesuri” 4 700 (TP 10 000). Kasvu Ahrefsin mukaan nouseva.
 - **Kärcher:** noin 9 760 hakua sisältää sanan Kärcher. Mallihakuja: SE 2 Spot Pure / Spot Care, SE 3 Compact (Home ja Floor), SE 3-18 (akku), SE 4 Plus ja SE 4001, SE 5 ja SE 5 Car, SE 6 Signature Line ja SE 6.100, Puzzi 8/1 ja 10/1. Kärcherin oma ohjelma (12 %) osuu hakujen ytimeen.
