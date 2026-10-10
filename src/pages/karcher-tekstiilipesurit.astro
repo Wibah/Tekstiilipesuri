@@ -30,7 +30,7 @@ const t = suositus.tekniset;
 
 const ukk = [
 	{
-		kysymys: 'Mikä Kärcherin tekstiilipesuri kannattaa ostaa?',
+		kysymys: 'Mikä Kärcher tekstiilipesuri kannattaa ostaa?',
 		vastaus: `Useimpiin koteihin suosittelemme <a href="${mallisivut['SE 3']}">SE 3 Compact Flooria</a> (${euroa(suositus.hinta!)}). Se on kompakti, pesee sohvat ja auton penkit, ja lattiasuulakkeella pesee myös pienen maton. Jos peset paljon mattoja tai tarvitset myös märkä-kuivaimurin, valitse <a href="${mallisivut['SE 4']}">SE 4 Plus</a> (${euroa(se4.hinta!)}).`,
 	},
 	{
@@ -48,13 +48,13 @@ const ukk = [
 ];
 ---
 <Layout
-	title="Kärcher tekstiilipesurit kokemuksia – SE- ja Puzzi-mallit, hinnat ja tarjoukset (2026)"
-	description={`Kaikki Kärcherin tekstiilipesurit vertailussa: SE 2, SE 3 Compact, SE 4, SE 5, SE 6 ja Puzzi. Hinnat Kärcher.comista, tekniset tiedot ja suositus siitä, mikä malli sopii sohvalle, matolle ja autolle.`}
+	title="Kärcher tekstiilipesuri kokemuksia – SE- ja Puzzi-mallit, hinnat ja tarjoukset (2026)"
+	description="Kärcher tekstiilipesurit vertailussa: SE 2, SE 3 Compact, SE 4, SE 5, SE 6 ja Puzzi. Hinnat, tarjoukset ja käyttäjien kokemukset."
 >
 	<main class="article-layout">
 		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher-tekstiilipesurit', sivu: '/karcher-tekstiilipesurit/' }]} />
 		<TuoteSchema tuote={suositus} />
-		<TuoteHero tuote={suositus} otsikko="Kärcher-tekstiilipesurit" yla="Kärcher · Koko mallisto" merkinta="Suosituksemme">
+		<TuoteHero tuote={suositus} otsikko="Kärcher tekstiilipesurit – kaikki mallit ja hinnat 2026" yla="Kärcher · Koko mallisto" merkinta="Suosituksemme">
 			<p>Kärcher myy Suomessa kahta tekstiilipesurisarjaa. SE-sarja on kotikäyttöön, ja Kärcher.comissa on nyt myynnissä {myynnissaKoti.length} SE-mallia hintaan {hintavali(myynnissaKoti)}. Puzzi-sarja on ammattikäyttöön, ja Puzzeja vuokraavat myös vuokraamot.</p>
 			<p>Suosittelemme useimpiin koteihin Kärcher {suositus.nimi} -mallia. Se painaa {luku(t.painoKg!)} kg, pesee sohvan ja auton penkit, ja lattiasuulakkeella pesee myös pienen maton.</p>
 		</TuoteHero>
@@ -77,7 +77,15 @@ const ukk = [
 		</div>
 		<p>SE-sarjan numero kertoo koon. SE 2 on pieni kannettava tahrapesuri. SE 3 on kompakti verkkovirta- tai akkumalli. SE 4, SE 5 ja SE 6 ovat isompia laitteita, joissa on 1000 watin teho, 4 litran säiliöt ja märkä-kuivaimurin toiminto. Erot isompien mallien välillä ovat varusteissa ja rungossa. Lue lisää <a href={mallisivut['SE 4']}>SE 4 Plussan sivulta</a>.</p>
 
-		<Merkkikortit tuotteet={koti} otsikko="Kärcherin kotimallit hintajärjestyksessä" ohita={suositus.id} sivut={sivut} nimet={nimet} />
+		<h2>Tekstiilipesuri Kärcher vai muu merkki?</h2>
+		<p>Tarkistimme lokakuussa 2026 yhdeksän suomalaisen verkkokaupan tuotevalikoimat, ja Kärcherillä oli niissä eniten tekstiilipesureita: 33 mallia. Bissellillä oli 25 mallia. Muilla merkeillä oli enintään muutama malli.</p>
+		<ul>
+			<li><strong>Kärcher</strong> myy sekä kotimalleja (SE-sarja) että ammattilaitteita (Puzzi). Kärcher myy omia pesuaineitaan sekä koti- että ammattimalleihin, ja Puzzin voi myös vuokrata. Kärcherin kotimalleissa ei ole höyrytoimintoa eikä harjatelaa.</li>
+			<li><strong>Bissell</strong> myy kannettavia SpotClean-malleja sekä pystymalleja, joissa on harjatela koko maton pesuun (PowerWash, ProHeat ja Revolution HydroSteam). HydroSteam-malleissa on myös höyry. Brittiläinen Independent valitsi testissään (23.4.2026) Bissell SpotClean Pron parhaaksi pinttyneisiin tahroihin.</li>
+		</ul>
+		<p>Valitse siis Kärcher, jos haluat kompaktin laitteen sohvalle ja autolle tai laitteen, joka toimii myös märkä-kuivaimurina. Jos peset paljon kokolattiamattoa, harjatelallinen pystymalli voi sopia paremmin. Merkkien vertailu ja testit ovat <a href="/">etusivulla</a>.</p>
+
+		<Merkkikortit tuotteet={koti} otsikko="Kärcher tekstiilipesuri tarjous ja hinta: kotikäyttöön sopivat mallit hintajärjestyksessä" ohita={suositus.id} sivut={sivut} nimet={nimet} />
 
 		<h2>Kärcherin SE-mallisto taulukkona</h2>
 		<p>Taulukossa ovat kaikki Kärcher.comin SE-mallit, myös ne, joita Kärcher.com ei tällä hetkellä myy. Niitä voi silti löytyä muista kaupoista.</p>
