@@ -75,6 +75,9 @@ Feedit ladattiin kokonaan kaikista yhdeksästä kumppanikaupasta. eStore lisätt
 - **Rivit ilman otsikkoa:** niitä oli vain Virtasenkaupan feedissä (236 kpl). Ne ovat tuotekuvausten rivinvaihdoista syntyneitä katkelmia, eivätkä ne ole tuotteita. Raakatiedostosta tarkistettiin, ettei yhtään tekstiilipesuria jäänyt pois.
 - **Feedien virheet:** osa laitteista on nimetty feedissä väärin, esim. CS Megastoren Puzzi 8/1 ja Bissell 1558N ovat nimellä ”Matonpuhdistusaine”. Bissell 1558N:llä ja Shark PX200EUT:llä on lisäksi kaksi eri EAN-koodia. Vastaavuudet on tarkistettava käsin affiliate-kohteita tehtäessä, kuten painepesurit.fi:ssä.
 
+## Ennen julkaisua (Villen päätös 2026-10-10)
+Sivustoa ei julkaista tekstiilipesuri.comissa ennen kuin lisäsivuja on tehty. Esikatselu: https://tekstiilipesuri.vercel.app. Ehdotetut sivut (painopiste feedien tuotteissa): Bissell-merkkisivu, Kärcher SE 5 / SE 5 Car, SE 2 Spot Pure / Spot Care, Bissell SpotClean Pro, Kärcher-varaosat, vianetsintä, käyttökohteet (sohva, auto, matto, akku), Tefal ja SE 6. Lisäksi hakusanatarkistus SE 3-, SE 4-, Puzzi- ja siltasivulle.
+
 ## Avoimet tehtävät
 1. ~~Feedilaskenta~~ tehty 2026-10-05 (ks. yllä).
    **Kärcherin ostopaikkajärjestys (Villen päätös 2026-10-05):** 1) Kärcherin oma ohjelma (12 %), 2) eStore (12 %), 3) muut kaupat (noin 4 %). Kärcherin malli saa muun kaupan linkin vain, jos sitä ei ole saatavilla Kärcherin omasta ohjelmasta eikä eStoresta.
