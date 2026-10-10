@@ -27,6 +27,6 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 ## Aukot (seuraavat sivut)
 
 1. **Varaosat ja vianetsintä:** `/karcher-tekstiilipesuri-varaosat/` (varaosat 200, tiiviste 90, suodatin 90) ja `/karcher-tekstiilipesuri-ei-tule-vetta/` (150, käyttöohje 210).
-2. **Mallisivut:** SE 5 ja SE 5 Car (noin 200; Kärcher.com ei nyt myy, odottaa affiliate-kanavaa), SE 2 (160), SE 6 Signature Line (noin 90).
+2. **Mallisivut:** SE 5 ja SE 5 Car (noin 200), SE 2 ja SE 2 Spot Pure (noin 160), SE 6 Signature Line (noin 90). **Tehdään vasta, kun malleihin saadaan affiliate-linkit (Villen päätös 2026-10-10).** Siihen asti niiden haut jäävät ilman omaa otsikkoa, eikä hubiin tehdä niille omaa osiota.
 3. **Merkkisivut:** Bissell (250), Tefal (250), Shark. Ryobi (840), Ströme (360), Parkside (620) ja Lumira (250) puuttuvat kumppanifeedeistä, joten niiden sivut tehdään ilman affiliate-linkkejä, jos tehdään.
 4. **Käyttökohteet:** sohvan pesu (100), akkukäyttöinen (80 + 70), auton penkit (60 + 50), matto ja villamatto (noin 70).
