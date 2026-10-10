@@ -14,6 +14,10 @@ Siirretty keskustelusta ”Uudet ideat saitteihin” (2026-10-04). **Ensimmäine
   - Tefal: https://docs.google.com/spreadsheets/d/1iHsNrCdfYwySHiXYHnEHQVqlzebPqC_VreJy6ncoWEQ/ (9, noin 470)
   - Parkside: https://docs.google.com/spreadsheets/d/1nzF0oNWzErWprwHFQKjNkIIr1cifaX9QAu5JDcjTcDI/ (6, noin 270)
   - Ströme: https://docs.google.com/spreadsheets/d/1erqttXrSr3DmQErkkR5ICMC1EzJ1rAf0xRw0LGe7qdw/ (20, noin 340)
+  - Mag-Pro: https://docs.google.com/spreadsheets/d/1r0GGcbrE3v2od3dWRjLHaN5j3fLfEJyjQGwkiTJCcEA/ (18, noin 260)
+  - Lumira: https://docs.google.com/spreadsheets/d/1us1Tys60zNUtEqDxxyAiwPHiFZd0goxnTsBlZobs2c8/ (5, noin 260)
+  - Norada ja Makita: Villen chatissa antamat Terms match -luvut, `data/ahrefs/norada.csv` (noin 120) ja `makita.csv` (noin 110)
+  - Kumppanifeedeissä (2026-10-10) näistä merkeistä ovat vain Bissell ja Tefal. Ryobi, Parkside, Ströme, Mag-Pro, Lumira, Norada ja Makita (vain painepesureita) puuttuvat.
   - Yleinen tekstiilipesuri-export (300 riviä, katkaistu): `data/ahrefs/tekstiilipesuri.csv`
 
 ## Havainnot datasta
