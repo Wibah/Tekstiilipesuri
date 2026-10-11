@@ -143,5 +143,105 @@
 		"valmistajanKuva": null,
 		"lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/sv_SE/1.081-230.0_PI_sv_SE.pdf",
 		"haettu": "2026-10-11"
+	},
+	{
+		"id": "se-3-compact-home-n1",
+		"merkki": "Kärcher",
+		"nimi": "SE 3 Compact Home N1",
+		"sarja": "SE 3",
+		"ammattilaite": false,
+		"tuotenumero": "1.081-539.0",
+		"kuvaus": null,
+		"tekniset": {
+			"tehoW": 500,
+			"imuturbiiniW": null,
+			"puhdasvesiL": 1.7,
+			"likavesiL": 2.9,
+			"painoKg": 4.3,
+			"virtajohtoM": 3.6,
+			"kayttosadeM": 5.8,
+			"letkuM": 1.9,
+			"tyoleveysMm": null,
+			"tyosuoritusM2h": null,
+			"meluDb": null,
+			"akkujanniteV": null,
+			"akkuKayttoaika": null,
+			"mitatMm": "450 x 225 x 260"
+		},
+		"teknisetValmistajalta": {
+			"Lähde": "Kärcherin tietolomake (de_DE, 2026-10-09), suomen- ja ruotsinkielistä ei ole"
+		},
+		"toimitusSisaltaa": [
+			"Imuletkun pituus: 1.9 m",
+			"Verhoilusuulake: 88 mm",
+			"Rakosuulake",
+			"Puhdistusaineet: Luonnollinen tekstiilipuhdistusaine RM 519N, 1 l",
+			"2 in 1, integroitu paine- ja imuletku"
+		],
+		"ominaisuudet": [],
+		"hinta": 186.0,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Proshop",
+			"url": "https://www.proshop.fi/Tekstiilipesuri/Kaercher-Tekstiilipesuri-Spray-extraction-cleaner-SE-3-Compact-Home-N1/3384570",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/de_DE/1.081-539.0_PI_de_DE.pdf",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "se-3-18-compact-ilman-akkua",
+		"merkki": "Kärcher",
+		"nimi": "SE 3-18 Compact ilman akkua",
+		"sarja": "SE 3-18",
+		"ammattilaite": false,
+		"tuotenumero": "1.081-500.0",
+		"kuvaus": null,
+		"tekniset": {
+			"tehoW": 184,
+			"imuturbiiniW": null,
+			"puhdasvesiL": 1.7,
+			"likavesiL": 2.9,
+			"painoKg": 3.6,
+			"virtajohtoM": null,
+			"kayttosadeM": null,
+			"letkuM": 1.9,
+			"tyoleveysMm": 75,
+			"tyosuoritusM2h": null,
+			"meluDb": null,
+			"akkujanniteV": 18,
+			"akkuKayttoaika": "n. 12 (2,5 Ah) / n. 24 (5,0 Ah)",
+			"mitatMm": "414 x 225 x 261"
+		},
+		"teknisetValmistajalta": {
+			"Lähde": "Kärcherin tietolomake (fi_FI, 2024-11-15)",
+			"Akkusarja": "18 V -akkusarja"
+		},
+		"toimitusSisaltaa": [
+			"Malliversio:: Akku ja laturi eivät sisälly toimitukseen",
+			"Imuletkun pituus: 1.9 m",
+			"Pesusuulake huonekaluille ja auton istuimille",
+			"Rakosuulake tekstiilien pesuun",
+			"Puhdistusaineet: RM 519 Mattojen puhdistusaine, 100 ml",
+			"Toimii myös märkäkuivaimurina"
+		],
+		"ominaisuudet": [],
+		"hinta": 158.9,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Proshop",
+			"url": "https://www.proshop.fi/Tekstiilipesuri/Kaercher-Tekstiilipesuri-SE-3-18-Compact/3149630",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/fi_FI/1.081-500.0_PI_fi_FI.pdf",
+		"haettu": "2026-10-11"
 	}
 ]

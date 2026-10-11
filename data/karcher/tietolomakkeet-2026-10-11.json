@@ -1,5 +1,124 @@
 [
-{"id":"se-2-spot","nimi":"SE 2 Spot","tuotenumero":"1.081-410.0","sarja":"SE 2","lahde":"https://s1.kaercher-media.com/documents/datasheets/machines/fi_FI/1.081-410.0_PI_fi_FI.pdf","lahdeKuvaus":"Kärcherin tietolomake (fi_FI, 2025-10-12)","tekniset":{"tehoW":450,"puhdasvesiL":1.5,"likavesiL":0.8,"painoKg":4,"virtajohtoM":4.5,"kayttosadeM":6.3,"letkuM":1.8,"tyoleveysMm":null,"mitatMm":"385 x 215 x 310"},"toimitus":["Imuletkun pituus: 1.8 m","Verhoilusuulake: 88 mm","Puhdistusaineet: RM 519 Mattojen puhdistusaine, 100 ml","2 in 1, integroitu paine- ja imuletku"]},
-{"id":"se-2-spot-pure","nimi":"SE 2 Spot Pure","tuotenumero":"1.081-416.0","sarja":"SE 2","lahde":"https://s1.kaercher-media.com/documents/manuals/html/BTA-5939401-000-04/FI.html","lahdeKuvaus":"Kärcher ei julkaise SE 2 Spot Puresta tuotesivua eikä tietolomaketta (tarkistettu 2026-10-11). Lähde on SE 2 Spot -sarjan käyttöohje, mutta mallikohtaisia teknisiä tietoja ei käytetä (Villen päätös 2026-10-11).","tekniset":{},"toimitus":[]},
-{"id":"se-5","nimi":"SE 5","tuotenumero":"1.081-230.0","sarja":"SE 5","lahde":"https://s1.kaercher-media.com/documents/datasheets/machines/sv_SE/1.081-230.0_PI_sv_SE.pdf","lahdeKuvaus":"Kärcherin tietolomake (sv_SE, 2026-10-09), suomenkielistä ei ole","tekniset":{"tehoW":1000,"puhdasvesiL":4,"likavesiL":4,"painoKg":7.5,"virtajohtoM":6,"kayttosadeM":null,"letkuM":2,"tyoleveysMm":227,"mitatMm":"424 x 320 x 466"},"toimitus":["Imuletkun pituus: 2 m","Painehuuhteluputket: 2 kpl, 0.5 m, Muovi","Lattiasuulake koville pinnoille: 227 mm","Rakosuulake","Lattiasuulake kuivaimurointiin: Vaihdettava","Kalustesuulake","Laakasuodatin: Standardi","Puhdistusaineet: RM 519 Mattojen puhdistusaine, 100 ml","Fleece-pölypussi: 1 kpl","2 in 1, integroitu paine- ja imuletku"]}
+ {
+  "id": "se-2-spot",
+  "nimi": "SE 2 Spot",
+  "tuotenumero": "1.081-410.0",
+  "sarja": "SE 2",
+  "lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/fi_FI/1.081-410.0_PI_fi_FI.pdf",
+  "lahdeKuvaus": "Kärcherin tietolomake (fi_FI, 2025-10-12)",
+  "tekniset": {
+   "tehoW": 450,
+   "puhdasvesiL": 1.5,
+   "likavesiL": 0.8,
+   "painoKg": 4,
+   "virtajohtoM": 4.5,
+   "kayttosadeM": 6.3,
+   "letkuM": 1.8,
+   "tyoleveysMm": null,
+   "mitatMm": "385 x 215 x 310"
+  },
+  "toimitus": [
+   "Imuletkun pituus: 1.8 m",
+   "Verhoilusuulake: 88 mm",
+   "Puhdistusaineet: RM 519 Mattojen puhdistusaine, 100 ml",
+   "2 in 1, integroitu paine- ja imuletku"
+  ]
+ },
+ {
+  "id": "se-2-spot-pure",
+  "nimi": "SE 2 Spot Pure",
+  "tuotenumero": "1.081-416.0",
+  "sarja": "SE 2",
+  "lahde": "https://s1.kaercher-media.com/documents/manuals/html/BTA-5939401-000-04/FI.html",
+  "lahdeKuvaus": "Kärcher ei julkaise SE 2 Spot Puresta tuotesivua eikä tietolomaketta (tarkistettu 2026-10-11). Lähde on SE 2 Spot -sarjan käyttöohje, mutta mallikohtaisia teknisiä tietoja ei käytetä (Villen päätös 2026-10-11).",
+  "tekniset": {},
+  "toimitus": []
+ },
+ {
+  "id": "se-5",
+  "nimi": "SE 5",
+  "tuotenumero": "1.081-230.0",
+  "sarja": "SE 5",
+  "lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/sv_SE/1.081-230.0_PI_sv_SE.pdf",
+  "lahdeKuvaus": "Kärcherin tietolomake (sv_SE, 2026-10-09), suomenkielistä ei ole",
+  "tekniset": {
+   "tehoW": 1000,
+   "puhdasvesiL": 4,
+   "likavesiL": 4,
+   "painoKg": 7.5,
+   "virtajohtoM": 6,
+   "kayttosadeM": null,
+   "letkuM": 2,
+   "tyoleveysMm": 227,
+   "mitatMm": "424 x 320 x 466"
+  },
+  "toimitus": [
+   "Imuletkun pituus: 2 m",
+   "Painehuuhteluputket: 2 kpl, 0.5 m, Muovi",
+   "Lattiasuulake koville pinnoille: 227 mm",
+   "Rakosuulake",
+   "Lattiasuulake kuivaimurointiin: Vaihdettava",
+   "Kalustesuulake",
+   "Laakasuodatin: Standardi",
+   "Puhdistusaineet: RM 519 Mattojen puhdistusaine, 100 ml",
+   "Fleece-pölypussi: 1 kpl",
+   "2 in 1, integroitu paine- ja imuletku"
+  ]
+ },
+ {
+  "id": "se-3-compact-home-n1",
+  "nimi": "SE 3 Compact Home N1",
+  "tuotenumero": "1.081-539.0",
+  "sarja": "SE 3",
+  "lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/de_DE/1.081-539.0_PI_de_DE.pdf",
+  "lahdeKuvaus": "Kärcherin tietolomake (de_DE, 2026-10-09), suomen- ja ruotsinkielistä ei ole",
+  "tekniset": {
+   "tehoW": 500,
+   "puhdasvesiL": 1.7,
+   "likavesiL": 2.9,
+   "painoKg": 4.3,
+   "virtajohtoM": 3.6,
+   "kayttosadeM": 5.8,
+   "letkuM": 1.9,
+   "tyoleveysMm": null,
+   "mitatMm": "450 x 225 x 260"
+  },
+  "toimitus": [
+   "Imuletkun pituus: 1.9 m",
+   "Verhoilusuulake: 88 mm",
+   "Rakosuulake",
+   "Puhdistusaineet: Luonnollinen tekstiilipuhdistusaine RM 519N, 1 l",
+   "2 in 1, integroitu paine- ja imuletku"
+  ]
+ },
+ {
+  "id": "se-3-18-compact-ilman-akkua",
+  "nimi": "SE 3-18 Compact ilman akkua",
+  "tuotenumero": "1.081-500.0",
+  "sarja": "SE 3-18",
+  "lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/fi_FI/1.081-500.0_PI_fi_FI.pdf",
+  "lahdeKuvaus": "Kärcherin tietolomake (fi_FI, 2024-11-15)",
+  "akku": true,
+  "tekniset": {
+   "tehoW": 184,
+   "puhdasvesiL": 1.7,
+   "likavesiL": 2.9,
+   "painoKg": 3.6,
+   "virtajohtoM": null,
+   "kayttosadeM": null,
+   "letkuM": 1.9,
+   "tyoleveysMm": 75,
+   "akkujanniteV": 18,
+   "akkuKayttoaika": "n. 12 (2,5 Ah) / n. 24 (5,0 Ah)",
+   "mitatMm": "414 x 225 x 261"
+  },
+  "toimitus": [
+   "Malliversio:: Akku ja laturi eivät sisälly toimitukseen",
+   "Imuletkun pituus: 1.9 m",
+   "Pesusuulake huonekaluille ja auton istuimille",
+   "Rakosuulake tekstiilien pesuun",
+   "Puhdistusaineet: RM 519 Mattojen puhdistusaine, 100 ml",
+   "Toimii myös märkäkuivaimurina"
+  ]
+ }
 ]

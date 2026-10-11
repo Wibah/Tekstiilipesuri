@@ -5,7 +5,7 @@ Käyttö: python3 scripts/hae_karcher_kumppanit.py   (npm run hae:kumppanit, aja
 1. src/data/kumppanihinnat.json: hinta ja ostopaikka niille karcher.json-malleille, joita Kärcher.com ei nyt myy
    (esim. SE 4 Plus, SE 5 Car). content.config.ts yhdistää ne tuotteisiin vain, jos Kärcher.com ei myy mallia.
 2. src/data/tuotteet/karcher-lisamallit.json: mallit, jotka puuttuvat Kärcher.comin listauksesta mutta joita
-   myydään Suomessa (SE 2 Spot, SE 2 Spot Pure, SE 5). Tekniset tiedot on kirjoitettu käsin Kärcherin
+   myydään Suomessa (SE 2 Spot, SE 2 Spot Pure, SE 5, SE 3 Compact Home N1, SE 3-18 Compact ilman akkua). Tekniset tiedot on kirjoitettu käsin Kärcherin
    tietolomakkeista tiedostoon data/karcher/tietolomakkeet-<päivä>.json. SE 2 Spot Puresta Kärcher ei julkaise
    tietoja, joten sille ei anneta teknisiä lukuja (Villen päätös 2026-10-11).
 
@@ -57,7 +57,7 @@ for r in raaka:
         'id': r['id'], 'merkki': 'Kärcher', 'nimi': r['nimi'], 'sarja': r['sarja'], 'ammattilaite': False,
         'tuotenumero': r['tuotenumero'], 'kuvaus': None,
         'tekniset': {**TYHJA, **r['tekniset']},
-        'teknisetValmistajalta': {'Lähde': r['lahdeKuvaus']},
+        'teknisetValmistajalta': {'Lähde': r['lahdeKuvaus'], **({'Akkusarja': '18 V -akkusarja'} if r.get('akku') else {})},
         'toimitusSisaltaa': r['toimitus'], 'ominaisuudet': [],
         'hinta': paras['hinta'] if paras else None,
         'hintaEnnenAlennusta': paras['ennen'] if paras else None,
