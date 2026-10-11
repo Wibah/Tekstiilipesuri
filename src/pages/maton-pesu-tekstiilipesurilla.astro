@@ -1,0 +1,99 @@
+---
+// SCN: tuki (käyttökohde), intentti Use Case, emopilari /. Hakusanat: tekstiilipesuri maton pesu 50, tekstiilipesuri
+// matto 30, villamatto tekstiilipesuri 20, tekstiilipesuri villamatto 20, kärcher tekstiilipesuri maton pesu 20,
+// tekstiilipesuri mattojen pesu 10 (Ahrefs 2026-10, noin 150). Otsikot, meta ja UKK Villen hyväksymät 2026-10-11.
+// Kirjoitettu tekstiilipesuri-writer-skillillä. Lähteet: tietopohja (Consumer Reports 30.1.2026, Telegraph
+// 29.9.2026, The Spruce 2.10.2026, K-Rauta 15.5.2025). Mallit ja luvut tuotedatasta.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import { tuote, luku, euroa, mallisivut } from '../lib/tuotteet';
+
+const SIVU = '/maton-pesu-tekstiilipesurilla/';
+const se4 = await tuote('se-4-plus');
+const floor = await tuote('se-3-compact-floor');
+const revolution = await tuote('bissell-revolution-hydrosteam-3670n');
+const proheat = await tuote('bissell-proheat-2x-revolution-1858n');
+const puzzi = await tuote('puzzi-8-1-anniversary-edition');
+
+const ukk = [
+	{
+		kysymys: 'Voiko villamaton pestä tekstiilipesurilla?',
+		vastaus: 'Lähteet ovat tästä eri mieltä. Consumer Reports neuvoo välttämään herkkiä kankaita, kuten villaa, kun taas Telegraphin haastattelema asiantuntija pitää märkäpesua villamatolle tehokkaimpana. Tarkista siis maton valmistajan pesuohje, kokeile pesuainetta ensin maton reunaan ja tee runsaasti kuivausvetoja pelkällä imulla.',
+	},
+	{
+		kysymys: 'Kuinka usein matto kannattaa pestä?',
+		vastaus: 'Telegraphin mukaan lemmikkiperheissä ja kulkureiteillä matto kannattaa pestä 3–6 kuukauden välein ja makuuhuoneissa 6–18 kuukauden välein. Independent suosittaa kahta pesua vuodessa ja perheille pesua neljännesvuosittain.',
+	},
+	{
+		kysymys: 'Kannattaako iso matto pestä itse vai vuokrata laite?',
+		vastaus: `Jos peset ison maton tai kokolattiamaton harvoin, vuokraa ammattilaite. Kärcher Puzzi 8/1:n puhdasvesisäiliö on ${luku(puzzi.tekniset.puhdasvesiL!)} litraa, ja kaikki tarkistamamme vuokraamot vuokraavat sitä. Consumer Reportsin mukaan oma laite kannattaa, jos peset useammin kuin kerran vuodessa. Laskelma on <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.`,
+	},
+	{
+		kysymys: 'Voiko räsymaton pestä tekstiilipesurilla?',
+		vastaus: 'Voi. K-Raudan julkaisemassa kuluttajatestaajan arviossa (päivitetty 15.5.2025) räsymatto pestiin Kärcher SE 3 Compactilla. Tarkista ensin, kestääkö maton väri märkäpesun, ja anna maton kuivua kokonaan.',
+	},
+];
+---
+<Layout
+	title="Tekstiilipesuri maton pesu – matot ja villamatto kotona 2026"
+	description="Näin peset maton tekstiilipesurilla: kannettava vai pystymalli, vaiheittainen ohje, villamaton pesu, kuivumisajat ja matoille sopivat Kärcherin ja Bissellin mallit."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Maton pesu', sivu: SIVU }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Maton pesu tekstiilipesurilla</h1>
+		<p>Pieni tai keskikokoinen matto pestään tekstiilipesurilla, jossa on lattia- tai mattosuulake. Koko maton tai kokolattiamaton pesuun sopii paremmin pystymalli, jonka harjatela irrottaa likaa syvemmältä. Laitteeseen laitetaan vähän vaahtoavaa tekstiilipesuainetta. Ennen pesua matto imuroidaan ja pesuainetta kokeillaan maton reunaan.</p>
+		<p>Syväpesty matto kuivuu Telegraphin mukaan tyypillisesti 6–12 tunnissa, joten pese matto päivällä ja tuuleta huone.</p>
+
+		<h2>Tekstiilipesuri matto: kannettava vai pystymalli?</h2>
+		<p>Maton koko ratkaisee, millainen laite kannattaa valita:</p>
+		<ul>
+			<li><strong>Pieni matto ja tahrat:</strong> kannettava tekstiilipesuri tai monitoimimalli, jossa on lattiasuulake. K-Raudan kuluttajatestaajan arvion mukaan maton pesu ilman lattiasuulaketta on ergonomisesti raskasta, ja matolle suositeltiin SE 3 Compactin Floor-versiota.</li>
+			<li><strong>Iso matto ja kokolattiamatto:</strong> harjatelallinen pystymalli, kuten Bissell Revolution HydroSteam tai ProHeat 2x Revolution. Pystymalli pesee kuten pölynimuri, mutta painaa {luku(proheat.tekniset.painoKg!)}–{luku(revolution.tekniset.painoKg!)} kg eikä mahdu huonekalujen alle.</li>
+			<li><strong>Kerran vuodessa pestävä iso matto:</strong> vuokrattava ammattilaite, kuten <a href={mallisivut['Puzzi 8/1']}>Kärcher Puzzi 8/1</a>.</li>
+		</ul>
+
+		<h2>Näin peset maton tekstiilipesurilla</h2>
+		<ol>
+			<li><strong>Imuroi matto huolellisesti.</strong> Irtolika ja karvat imuroidaan pois ennen märkäpesua.</li>
+			<li><strong>Tarkista pesuohje ja kokeile reunaan.</strong> Pesuaine voi värjätä tai vahingoittaa mattoa, joten kokeile ensin huomaamattomaan kohtaan.</li>
+			<li><strong>Esikäsittele tahrat</strong> ja anna pesuaineen vaikuttaa ennen imua.</li>
+			<li><strong>Pese hitain vedoin.</strong> Vedä suulaketta rauhallisesti ja painamatta. Tee lopuksi vetoja pelkällä imulla, jotta mattoon jää mahdollisimman vähän vettä.</li>
+			<li><strong>Kuivata matto kokonaan</strong> ennen kuin sen päällä kävellään tai sen päälle asetetaan huonekaluja.</li>
+			<li><strong>Puhdista laite</strong> tyhjentämällä ja huuhtelemalla likavesisäiliö sekä huuhtelemalla letku ja suulake.</li>
+		</ol>
+		<p>Annostele pesuaine laitteen ohjeen mukaan, sillä liika vaahto haittaa työtä. Sopivat aineet ovat <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.</p>
+
+		<h2>Villamatto ja tekstiilipesuri</h2>
+		<p>Villamaton pesusta lähteet ovat eri mieltä. Consumer Reports neuvoo välttämään tekstiilipesurilla herkkiä kankaita, kuten villaa ja silkkiä. Telegraphin haastattelema asiantuntija taas pitää märkäpesua villamatolle tehokkaimpana menetelmänä.</p>
+		<p>Koska ohjeet vaihtelevat, ratkaisevat maton valmistajan ohje ja koekohta. Kokeile pesuainetta ensin maton reunaan ja anna kohdan kuivua, ennen kuin peset koko maton. Tee runsaasti kuivausvetoja pelkällä imulla, sillä Telegraphin mukaan paksu nukka pidättää vettä pidempään.</p>
+
+		<h2>Kärcher tekstiilipesuri maton pesu</h2>
+		<p>Kärcherin kotikäyttöön tarkoitetuissa malleissa ei ole harjatelaa, joten mattoa pestään lattiasuulakkeella:</p>
+		<ul>
+			<li><strong>SE 3 Compact Floor</strong> ({euroa(floor.hinta!)}): mukana tulevat 2-in-1 XXL -tekstiilisuutin ja kaksi 0,5 metrin jatkoputkea. Sopii pienille ja keskikokoisille matoille.</li>
+			<li><strong>SE 4 Plus</strong> ({euroa(se4.hinta!)}): {luku(se4.tekniset.tyoleveysMm!)} mm:n lattiasuulake ja {luku(se4.tekniset.puhdasvesiL!)} litran säiliöt. Isompi säiliö riittää pidempään pesuun.</li>
+			<li><strong>Puzzi 8/1:</strong> ammattilaite isoille matoille, saatavana myös vuokralle.</li>
+		</ul>
+		<p>Mattosuulakkeet ja lisävarusteet ovat <a href="/karcher-tekstiilipesuri-varaosat/">varaosasivulla</a>, ja mallien erot <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurien sivulla</a>.</p>
+
+		<h2>Kuinka kauan matto kuivuu?</h2>
+		<p>Telegraphin mukaan syväpesty kokolattiamatto kuivuu tyypillisesti 6–12 tunnissa, ja paksu nukka pidättää vettä pidempään. Testeissä ajat vaihtelivat paljon: Bissell Revolution HydroSteam kuivui Telegraphin testissä Max-tilassa 8 tunnissa ja pikatilassa noin 30 minuutissa, mutta The Sprucen testissä (päivitetty 2.10.2026) matto kuivui noin 15 tunnissa.</p>
+		<p>Kannettavat pesurit kuivattavat Telegraphin mukaan nopeammin, koska ne käyttävät vähemmän vettä. Matto on kuitenkin kuivattava kokonaan, jotta se ei homehdu. Tuuleta huone ja pidä se lämpimänä. Suomen lämmityskaudella sisäilma on kuiva, mikä nopeuttaa kuivumista.</p>
+
+		<h2>Sopivat mallit</h2>
+		<div class="mk-lista">
+			<Korttirivi tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kuvaus={`Lattiasuulake ${luku(se4.tekniset.tyoleveysMm!)} mm, toimii myös märkä-kuivaimurina`} tagi="Matoille ja lattioille" versio />
+			<Korttirivi tuote={floor} otsikko="Kärcher SE 3 Compact Floor" sivu={mallisivut['SE 3']} kuvaus="Kompakti malli, mukana XXL-suutin matoille" tagi="Pienille matoille" versio />
+			<Korttirivi tuote={revolution} otsikko="Bissell Revolution HydroSteam" sivu="/bissell-tekstiilipesurit/" ankkuri={revolution.id} kuvaus="Pystymalli, harjatela ja höyry koko maton pesuun" tagi="Kokolattiamatoille" versio />
+			<Korttirivi tuote={proheat} otsikko="Bissell ProHeat 2x Revolution" sivu="/bissell-tekstiilipesurit/" ankkuri={proheat.id} kuvaus="Pystymalli harjatelalla" tagi="Pystymalli" versio />
+		</div>
+		<p>Sohvan pesu on <a href="/sohvan-pesu-tekstiilipesurilla/">sohvan pesu -sivulla</a>, ja kaikki mallit ovat <a href="/">tekstiilipesurivertailussa</a>.</p>
+
+		<p class="tp-lahde">Lähteet: Consumer Reports (päivitetty 30.1.2026), Telegraph (päivitetty 29.9.2026), The Spruce (päivitetty 2.10.2026), Independent (23.4.2026) ja K-Raudan kuluttajatestaajan arvio (päivitetty 15.5.2025).</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
