@@ -1,0 +1,99 @@
+---
+// SCN: pilari (merkki), intentti Comparison, emopilari /. Hakusanat: ströme tekstiilipesuri 150, ströme tekstiilipesuri
+// käyttöohje 50, ströme powerclean 56a tekstiilipesuri 40, ströme tekstiilipesuri kokemuksia 20, ströme tekstiilipesuri
+// pesuaine 10, tekstiilipesuri ströme 10 (Ahrefs 2026-10, noin 280). T203-haut jätetty pois: mallia ei enää myydä
+// (Villen päätös 2026-10-11). Otsikot, meta ja UKK Villen hyväksymät 2026-10-11. UKK:n 4. kysymys vaihdettu, koska
+// Ströme PowerClean -tarvikesarja on pölynimureille. Kirjoitettu tekstiilipesuri-writer-skillillä. Tiedot:
+// npm run hae:strome (Verkkokauppa.comin tuotesivu ja käyttöohje, tarkistettu 2026-10-11).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { tuote, luku, euroa, paiva, mallisivut } from '../lib/tuotteet';
+
+const SIVU = '/strome-tekstiilipesurit/';
+const s = await tuote('strome-powerclean-56a');
+const se3 = await tuote('se-3-compact');
+const plus = await tuote('bissell-spotclean-plus-3724n');
+const t = s.tekniset;
+const v = (k: string) => s.teknisetValmistajalta[k];
+const OHJE = v('Käyttöohje');
+const ml = (l: number) => (l >= 1 ? `${luku(l)} l` : `${luku(l * 1000)} ml`);
+const rel = 'nofollow noopener';
+
+const ukk = [
+	{
+		kysymys: 'Kuka valmistaa Ströme-tekstiilipesurin?',
+		vastaus: 'Ströme on Verkkokauppa.comin oma tuotemerkki. Ströme PowerClean 56A:n tuotesivulla valmistajaksi on merkitty Verkkokauppa.com Oyj, ja laite on valmistettu Kiinassa. Takuu- ja huoltoasiat hoidetaan Verkkokauppa.comin kautta.',
+	},
+	{
+		kysymys: 'Toimiiko Ströme PowerClean 56A lämpimällä vedellä?',
+		vastaus: `Tuotesivun teknisten tietojen mukaan veden enimmäislämpötila on ${v('Veden maksimilämpötila').replace('≤ ', '')}. Laitteen käyttöohje neuvoo kuitenkin täyttämään puhdasvesisäiliön kylmällä hanavedellä. Noudata siis käyttöohjetta, ja jos haluat käyttää lämmintä vettä, älä ylitä 60 astetta.`,
+	},
+	{
+		kysymys: 'Onko Strömessä itsepuhdistus?',
+		vastaus: 'On. Verkkokauppa.comin mukaan itsepuhdistustoiminto huuhtelee ensin letkun sisäpinnan ja imee sen jälkeen puhdasvesisäiliön veden koko putkiston läpi, kunnes säiliö on tyhjä. Mukana tulee erillinen itsepuhdistuva suulake.',
+	},
+	{
+		kysymys: 'Voiko Strömen suulakkeet ja säiliöt pestä astianpesukoneessa?',
+		vastaus: `Ei voi. <a href="${OHJE}" target="_blank" rel="${rel}">Käyttöohjeen</a> mukaan suulakkeet pestään käsin lämpimällä vedellä ja hellävaraisella pesuaineella, eikä niitä saa pestä astianpesukoneessa. Säiliöt pestään käsin lämpimällä vedellä, astianpesuaineella ja tiskiharjalla.`,
+	},
+];
+---
+<Layout
+	title="Ströme tekstiilipesuri kokemuksia – PowerClean 56A, käyttöohje ja hinta 2026"
+	description="Ströme PowerClean 56A -tekstiilipesurin tekniset tiedot, käyttöohje, käyttäjien arviot ja vertailu Kärcheriin ja Bisselliin."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Ströme-tekstiilipesuri', sivu: SIVU }]} />
+		<TuoteSchema tuote={s} />
+		<TuoteHero tuote={s} otsikko="Ströme tekstiilipesuri – PowerClean 56A" yla="Ströme · Verkkokauppa.comin oma merkki" merkinta="Ströme">
+			<p>Ströme PowerClean 56A on Verkkokauppa.comin oman Ströme-merkin tekstiilipesuri mattojen, huonekalujen ja auton penkkien pesuun. Sen teho on {luku(t.tehoW!)} W, puhdasvesisäiliö {ml(t.puhdasvesiL!)} ja likavesisäiliö {ml(t.likavesiL!)}, ja se painaa {luku(t.painoKg!)} kg. Laitteessa on itsepuhdistus.</p>
+			<p>PowerClean 56A maksaa Verkkokauppa.comissa {euroa(s.hinta!)}, ja sitä myydään mustana ja valkoisena. PowerClean 56A on tällä hetkellä Verkkokauppa.comin ainoa Ströme-tekstiilipesuri.</p>
+		</TuoteHero>
+
+		<h2>Ströme PowerClean 56A tekstiilipesuri</h2>
+		<p>PowerClean 56A on johdollinen kannettava tekstiilipesuri. Se toimii samalla periaatteella kuin muutkin tekstiilipesurit: laite suihkuttaa veden ja pesuaineen seosta kankaaseen ja imee sen takaisin likavesisäiliöön. Mukana tulevat standardisuulake, leveä suulake ja itsepuhdistuva suulake. Letku on {luku(t.letkuM!)} metriä ja virtajohto {luku(t.virtajohtoM!)} metriä.</p>
+		<p>Käyttöohjeen mukaan pinttyneeseen tahraan voi ensin suihkuttaa pesuaineliuosta ja antaa sen vaikuttaa hetken. Ohje muistuttaa myös, ettei tekstiili välttämättä puhdistu yhdellä kerralla, joten pesu kannattaa tarvittaessa toistaa.</p>
+
+		<h2>Tekniset tiedot ja toimitussisältö</h2>
+		<TeknisetTiedot tuote={s} />
+		<p>Lisäksi Verkkokauppa.com ilmoittaa imupaineeksi {v('Imupaine')}, suihkutusveden määräksi {v('Suihkutusveden määrä')}, melutasoksi {v('Melutaso')} ja suojausluokaksi {v('IP-suojausluokka')}. Pumppu on kalvopumppu.</p>
+		<p class="tp-lahde">Tiedot ja hinta: Verkkokauppa.com, tarkistettu {paiva(s.haettu)}.</p>
+
+		<h2>Ströme tekstiilipesuri kokemuksia ja arviot</h2>
+		<p>Ströme PowerClean 56A:sta ei ole julkaistu toimituksellisia testejä. Verkkokauppa.comissa laitteen käyttäjät olivat antaneet sille keskimäärin {v('Arviot')} (tarkistettu {paiva(s.haettu)}). Arviot ovat kaupan omia, ja ne koskevat Verkkokauppa.comin omaa tuotemerkkiä, mikä kannattaa pitää mielessä niitä lukiessa.</p>
+		<p>Jos sinulla on Ströme-tekstiilipesuri, kerro kokemuksesi sivun lopussa olevalla lomakkeella.</p>
+
+		<h2>Ströme tekstiilipesuri käyttöohje</h2>
+		<p>Ströme PowerClean 56A:n käyttöohje on ladattavissa Verkkokauppa.comista: <a href={OHJE} target="_blank" rel={rel}>Ströme PowerClean 56A -käyttöohje (PDF)</a>. Ohjeen tärkeimmät kohdat:</p>
+		<ul>
+			<li><strong>Täyttö:</strong> puhdasvesisäiliö täytetään kylmällä hanavedellä enimmäistäyttörajaan asti.</li>
+			<li><strong>Pesuaine:</strong> lisää tarvittaessa pesuainetta pesuainepakkauksen annosteluohjeen mukaan, ja käytä vain tekstiilipesureille soveltuvaa ainetta.</li>
+			<li><strong>Pesu:</strong> imuroi tekstiili ensin, suihkuta tasaisesti samaan kohtaan liian pitkään suihkuttamatta, anna aineen vaikuttaa ja imuroi likavesi huolellisesti pois.</li>
+			<li><strong>Kuivatus:</strong> anna tekstiilin kuivua kunnolla ennen käyttöä.</li>
+			<li><strong>Puhdistus:</strong> pese säiliöt ja suulakkeet käsin. Suulakkeita ei saa pestä astianpesukoneessa.</li>
+			<li><strong>Huolto:</strong> laitteessa ei ole käyttäjän huollettavia osia, joten viat korjaa valtuutettu huoltohenkilö.</li>
+		</ul>
+
+		<h2>Ströme vai Kärcher SE 3 Compact tai Bissell SpotClean Plus?</h2>
+		<p>Ströme PowerClean 56A on samaa kokoluokkaa kuin Kärcher SE 3 Compact ja Bissell SpotClean Plus. Strömen puhdasvesisäiliö ({ml(t.puhdasvesiL!)}) on lähes yhtä suuri kuin SE 3 Compactin ({luku(se3.tekniset.puhdasvesiL!)} l) ja suurempi kuin SpotClean Plussan ({luku(plus.tekniset.puhdasvesiL!)} l). Likavesisäiliö on SE 3 Compactissa selvästi suurempi ({luku(se3.tekniset.likavesiL!)} l). Kärcheristä ja Bissellistä on julkaistu testejä, Strömestä ei.</p>
+		<div class="mk-lista">
+			<Korttirivi tuote={s} otsikko="Ströme PowerClean 56A" kuvaus="Verkkokauppa.comin oma merkki, itsepuhdistus" tagi="Ströme" versio />
+			<Korttirivi tuote={se3} otsikko="Kärcher SE 3 Compact" sivu={mallisivut['SE 3']} kuvaus="Kompakti verkkovirtamalli, isompi likavesisäiliö" tagi="Suosituksemme" versio />
+			<Korttirivi tuote={plus} otsikko="Bissell SpotClean Plus" sivu="/bissell-tekstiilipesurit/" ankkuri={plus.id} kuvaus="Kevyt kannettava malli tahroihin" tagi="Kevyt" versio />
+		</div>
+
+		<h2>Ströme tekstiilipesuri pesuaine</h2>
+		<p>Strömen käyttöohje ei nimeä tiettyä pesuainetta. Ohjeen mukaan laitteessa käytetään tekstiilipesureille soveltuvaa pesuainetta pakkauksen annosteluohjeen mukaan. Sopivat aineet ovat <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineoppaassa</a>.</p>
+
+		<Kokemuslomake malli="Ströme PowerClean 56A" polku={SIVU} otsikko="Kerro Ströme-tekstiilipesurin kokemuksesi">
+			<p>Keräämme Ströme PowerClean 56A:n käyttäjien kokemuksia. Kerro, mitä peset ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

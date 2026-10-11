@@ -1,0 +1,72 @@
+[
+	{
+		"id": "strome-powerclean-56a",
+		"merkki": "Ströme",
+		"nimi": "PowerClean 56A",
+		"sarja": "Ströme PowerClean",
+		"ammattilaite": false,
+		"tuotenumero": "6438148054533",
+		"kuvaus": null,
+		"tekniset": {
+			"tehoW": 1200.0,
+			"imuturbiiniW": null,
+			"puhdasvesiL": 1.6,
+			"likavesiL": 0.95,
+			"painoKg": 4.5,
+			"virtajohtoM": 5.0,
+			"kayttosadeM": null,
+			"letkuM": 1.7,
+			"tyoleveysMm": null,
+			"tyosuoritusM2h": null,
+			"meluDb": null,
+			"akkujanniteV": null,
+			"akkuKayttoaika": null,
+			"mitatMm": "370 x 226 x 327"
+		},
+		"teknisetValmistajalta": {
+			"Teho": "1200 W",
+			"Imupaine": "15 kPa",
+			"Suihkutusveden määrä": "0,25 l/min",
+			"Suihkutusveden paine": "0,2 MPa",
+			"Melutaso": "83 dB",
+			"IP-suojausluokka": "IPX4",
+			"Virtajohdon pituus": "5 m",
+			"Puhdasvesisäiliön tilavuus": "1600 ml",
+			"Likavesisäiliön tilavuus": "950 ml",
+			"Pumpun tyyppi": "Kalvopumppu",
+			"Veden maksimilämpötila": "≤ 60 °C",
+			"Letkun pituus": "1,7 m",
+			"Mitat": "370 mm x 226 mm x 327 mm",
+			"Paino": "4,5 kg",
+			"Käyttöohje": "https://cdn.verkkokauppa.com/files/67b6d/0321a/073fa/1aa05/c832.pdf",
+			"Arviot": "4.3/5 (117 arviota)",
+			"Värit": "musta, valkoinen"
+		},
+		"toimitusSisaltaa": [
+			"Standardisuulake",
+			"Leveä suulake",
+			"Itsepuhdistuva suulake",
+			"Käyttöohje"
+		],
+		"ominaisuudet": [
+			"Itsepuhdistustoiminto: huuhtelee letkun ja imee puhdasvesisäiliön vettä koko putkiston läpi",
+			"Täyttö: Puhdasvesisäiliö täytetään kylmällä hanavedellä enimmäistäyttörajaan asti.",
+			"Pesuaine: Pesuainetta lisätään tarvittaessa pesuainepakkauksen annosteluohjeen mukaan. Käytä ainoastaan tekstiilipesureille soveltuvaa pesuainetta.",
+			"Puhdistus: Säiliöt pestään käsin lämpimällä vedellä ja astianpesuaineella. Suulakkeita ei saa pestä astianpesukoneessa.",
+			"Huolto: Laitteessa ei ole käyttäjän huollettavia osia; huollon tekee valtuutettu huoltohenkilö."
+		],
+		"hinta": 169.99,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Verkkokauppa.com",
+			"url": "https://www.verkkokauppa.com/fi/product/916972/Strome-PowerClean-56A-tekstiilipesuri-musta",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://www.verkkokauppa.com/fi/product/916972/Strome-PowerClean-56A-tekstiilipesuri-musta",
+		"haettu": "2026-10-11"
+	}
+]

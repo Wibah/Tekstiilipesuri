@@ -8,7 +8,8 @@ import { z } from 'astro/zod';
 // tefal.json: npm run hae:tefal (OBH Nordican Tefal-kauppa, raakadata kirjoitettu käsin tuotekuvauksista, ks. scripts/muunna_tefal.py).
 // karcher-lisamallit.json: npm run hae:kumppanit (Kärcher.comin listauksesta puuttuvat mallit, ks. scripts/hae_karcher_kumppanit.py).
 // ryobi.json: npm run hae:ryobi (fi.ryobitools.eu, kaupan hinta käsin, ks. scripts/muunna_ryobi.py).
-const MERKKITIEDOSTOT = ['karcher', 'karcher-lisamallit', 'bissell', 'tefal', 'ryobi'];
+// strome.json: npm run hae:strome (Verkkokauppa.comin oma merkki, ks. scripts/muunna_strome.py).
+const MERKKITIEDOSTOT = ['karcher', 'karcher-lisamallit', 'bissell', 'tefal', 'ryobi', 'strome'];
 
 // Affiliate-tiedot (hinta, ostolinkki ja kuva kumppanikaupasta) tulevat erillisestä tiedostosta, jonka
 // tuottaa `npm run hae:affiliate` (scripts/hae_affiliate.py). Ne yhdistetään tässä tuotteisiin, jotta
