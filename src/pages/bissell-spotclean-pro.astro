@@ -1,0 +1,130 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /bissell-tekstiilipesurit/. Hakusanat: bissell spotclean pro 150,
+// bissell spotclean professional 40, spot clean pro 10, spotclean pro 1558n 10, spotclean pet pro 10, pet pro plus 10
+// (Ahrefs 2026-10, noin 230). Otsikot Villen hyväksymät 2026-10-11. Kirjoitettu tekstiilipesuri-writer-skillillä.
+// Tekniset tiedot bissell.de (npm run hae:bissell), hinnat kumppanikauppojen feedeistä ilman provisiota.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { merkinTuotteet, paatuote, luku, euroa, paiva, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+
+const SIVU = '/bissell-spotclean-pro/';
+const HUB = '/bissell-tekstiilipesurit/';
+const bissell = await merkinTuotteet('Bissell');
+const sku = (s: string) => bissell.find((t) => t.tuotenumero === s)!;
+const suositus = sku('1558N');
+const petPro = sku('15585');
+const petProPlus = sku('37252');
+const versiot = [suositus, petPro, petProPlus].sort((a, b) => (a.hinta ?? Infinity) - (b.hinta ?? Infinity));
+const plus = sku('3724N');
+const hydro = sku('3697N');
+const cordless = sku('3681N');
+const proheat = sku('1858N');
+const se3 = await paatuote('SE 3');
+
+const t = suositus.tekniset;
+const tp = plus.tekniset;
+const mitat = (m: string) => m.split(' x ').map((x) => luku(Number(x) / 10)).join(' × ');
+
+const ukk = [
+	{
+		kysymys: 'Kumpi kannattaa, Bissell SpotClean Pro vai ProHeat 2x Revolution?',
+		vastaus: `Ne ovat eri laitetyyppejä. SpotClean Pro on kannettava tekstiilipesuri sohvalle, portaisiin ja yksittäisiin tahroihin. ProHeat 2x Revolution on pystymalli, joka pesee koko maton tai kokolattiamaton harjatelalla. ProHeat painaa ${luku(proheat.tekniset.painoKg!)} kg, ja sen säiliöt ovat ${luku(proheat.tekniset.puhdasvesiL!)} / ${luku(proheat.tekniset.likavesiL!)} l. Jos peset lähinnä sohvaa ja tahroja, valitse SpotClean Pro. Jos peset kokonaisia mattoja, valitse ProHeat.`,
+	},
+	{
+		kysymys: 'Mitä eroa on SpotClean Prolla ja SpotClean Plussalla?',
+		vastaus: `SpotClean Pro on isompi: teho on ${luku(t.tehoW!)} W, kun Plussassa se on ${luku(tp.tehoW!)} W, ja puhdasvesisäiliö on ${luku(t.puhdasvesiL!)} litraa, kun Plussassa se on ${luku(tp.puhdasvesiL!)} litraa. Plus painaa ${luku(tp.painoKg!)} kg eli ${luku(t.painoKg! - tp.painoKg!)} kg vähemmän, ja sen letku on pidempi (${luku(tp.letkuM!)} m). Pro sopii koko sohvan pesuun, Plus yksittäisiin tahroihin.`,
+	},
+	{
+		kysymys: 'Sopiiko SpotClean Pro auton penkkien pesuun?',
+		vastaus: `Sopii, jos auton lähellä on pistorasia. Virtajohto on ${luku(t.virtajohtoM!)} metriä, joten pihalla tarvitset usein jatkojohdon. Ilman pistorasiaa akkukäyttöinen SpotClean Cordless (${euroa(cordless.hinta!)}) on parempi. Parkersin (16.3.2026) ja CAR Magazinen (13.4.2026) testeissä se oli paras autoon.`,
+	},
+	{
+		kysymys: 'Kuinka kova ääni Bissell SpotClean Prossa on?',
+		vastaus: `Bissell ilmoittaa äänitasoksi ${luku(t.meluDb!)} dB. Consumer Reportsin mukaan tekstiilipesurin melu voi nousta 90 desibeliin, ja melu toistuu moitteena lähes kaikissa tekstiilipesurien testeissä.`,
+	},
+];
+---
+<Layout
+	title="Bissell SpotClean Pro kokemuksia – SpotClean Professional, Pet Pro ja hinta 2026"
+	description="Bissell SpotClean Pro 1558N ja Pet Pro -versiot: tekniset tiedot, hinta, testit ja kenelle kannettava tekstiilipesuri sopii."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Bissell', sivu: HUB }, { nimi: 'Bissell SpotClean Pro', sivu: SIVU }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Bissell SpotClean Pro -tekstiilipesuri" yla="Bissell · Kannettava tekstiilipesuri" merkinta="Suosituksemme">
+			<p>Bissell SpotClean Pro on kannettava tekstiilipesuri sohvan, nojatuolien, portaiden ja yksittäisten mattotahrojen pesuun. Sen teho on {luku(t.tehoW!)} W, puhdasvesisäiliö {luku(t.puhdasvesiL!)} litraa ja likavesisäiliö {luku(t.likavesiL!)} litraa. Säiliöt ovat Bissellin kannettavista malleista suurimmat.</p>
+			<p>Suomen verkkokaupoissa SpotClean Prota myydään kolmena versiona: SpotClean Pro (1558N), Pet Pro (15585) ja Pet Pro Plus (37252).</p>
+		</TuoteHero>
+
+		<h2>Kenelle Bissell SpotClean Pro sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Sohvan ja nojatuolien pesuun: {luku(t.puhdasvesiL!)} litran säiliötä tarvitsee täyttää harvemmin kuin SpotClean Plussan {luku(tp.puhdasvesiL!)} litran säiliötä</li>
+					<li>Pinttyneisiin tahroihin: Independent valitsi SpotClean Pron testissään (23.4.2026) parhaaksi pinttyneisiin tahroihin</li>
+					<li>Lemmikkiperheisiin, joissa tahroja tulee usein: Pet-versiot on suunnattu juuri heille</li>
+					<li>Työskentelyyn yhdestä pistorasiasta: virtajohto on {luku(t.virtajohtoM!)} metriä</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Koko maton tai kokolattiamaton pesuun: silloin harjatelallinen <a href={HUB}>Bissellin pystymalli</a> on nopeampi</li>
+					<li>Autoon ilman pistorasiaa: SpotClean Pro toimii vain verkkovirralla (katso akkukäyttöinen SpotClean Cordless)</li>
+					<li>Kevyeksi kantolaitteeksi: SpotClean Pro painaa {luku(t.painoKg!)} kg, ja Independent moitti sen painoa</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>SpotClean Pro, Pet Pro ja Pet Pro Plus – mitä eroa?</h2>
+		<p>Bissell.de:n teknisissä tiedoissa SpotClean Prolla ja Pet Prolla ei ole eroa. Molemmissa on {luku(t.tehoW!)} watin teho, {luku(t.puhdasvesiL!)} / {luku(t.likavesiL!)} litran säiliöt, {luku(t.letkuM!)} metrin letku ja {luku(t.virtajohtoM!)} metrin virtajohto, ja molemmat painavat {luku(t.painoKg!)} kg. Pet Pro on suunnattu lemmikkiperheille.</p>
+		<p>Pet Pro Plussan teho ja säiliöt ovat samat, mutta runko on eri muotoinen ({mitat(petProPlus.tekniset.mitatMm!)} cm, kun Prossa mitat ovat {mitat(t.mitatMm!)} cm). Pet Pro Plussan virtajohto on pidempi ({luku(petProPlus.tekniset.virtajohtoM!)} m), ja laite painaa {luku(petProPlus.tekniset.painoKg!)} kg. Bissell.de ei kerro versioiden toimitussisällöstä, joten tarkista suulakkeet kaupan tuotesivulta.</p>
+		<p>Koska tekniset tiedot ovat samat, suosittelemme versioista halvinta. Tällä hetkellä se on {versiot[0].nimi.replace(/ \d.*$/, '')} ({euroa(versiot[0].hinta!)}).</p>
+		<VersioVertailu versiot={versiot} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat: suomalaisten verkkokauppojen tuotetiedot, tarkistettu {paiva(suositus.haettu)}.</p>
+
+		<h2>Tekniset tiedot: Bissell SpotClean Pro 1558N</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>Bissell SpotClean Professional testeissä</h2>
+		<p>SpotClean Pro ja Pet Pro ovat olleet mukana brittiläisissä tekstiilipesurien testeissä.</p>
+		<ul>
+			<li><strong>Independent (23.4.2026):</strong> SpotClean Pro valittiin parhaaksi pinttyneisiin tahroihin. Laite irrotti likaa myös matosta, joka näytti siistiltä. Testaaja moitti laitetta odotettua painavammaksi.</li>
+			<li><strong>CAR Magazine (13.4.2026):</strong> autojen pesua testattaessa SpotClean Pet Pro oli tilava mutta kookas.</li>
+		</ul>
+		<p>Kumpikaan testi ei mitannut, miten laite kestää vuosien käytössä. Kerro oma kokemuksesi alla olevalla lomakkeella.</p>
+		<p class="tp-lahde">Lähteet: <a href="https://www.independent.co.uk/extras/indybest/house-garden/vacuum-cleaners/best-carpet-cleaners-stairs-upholstery-b2397413.html" target="_blank" rel="nofollow noopener">Independent</a>, <a href="https://www.carmagazine.co.uk/car-advice/maintenance/the-best-car-carpet-cleaners/" target="_blank" rel="nofollow noopener">CAR Magazine</a>.</p>
+
+		<h2>Näin peset sohvan SpotClean Prolla</h2>
+		<ol>
+			<li>Imuroi sohva huolellisesti, jotta irtolika ja karvat eivät muutu märiksi.</li>
+			<li>Tarkista verhoilun pesumerkintä ja kokeile pesuainetta piilossa olevaan kohtaan.</li>
+			<li>Täytä puhdasvesisäiliö vedellä ja Bissellin pesuaineella laitteen ohjeen mukaan.</li>
+			<li>Ruiskuta tahraan ja anna pesuaineen vaikuttaa hetki. Vanhat tahrat vaativat usein useamman kierroksen.</li>
+			<li>Vedä suulaketta hitaasti ja tee lopuksi vetoja pelkällä imulla, jotta kangas jää mahdollisimman kuivaksi.</li>
+			<li>Huuhtele letku ja suulake puhtaalla vedellä, ja tyhjennä ja huuhtele likavesisäiliö käytön jälkeen.</li>
+		</ol>
+		<p>Anna sohvan kuivua kokonaan ennen käyttöä. Lämmin ja tuuletettu huone nopeuttaa kuivumista.</p>
+
+		<h2>Vaihtoehdot</h2>
+		<div class="mk-lista">
+			<Korttirivi tuote={plus} otsikko="Bissell SpotClean Plus" sivu={HUB} ankkuri={plus.id} kuvaus="Kevyempi ja pidempi letku, pienemmät säiliöt" tagi="Kevyempi" versio />
+			<Korttirivi tuote={hydro} otsikko="Bissell SpotClean HydroSteam" sivu={HUB} ankkuri={hydro.id} kuvaus="Pesuun yhdistetään höyry" tagi="Höyryllä" versio />
+			<Korttirivi tuote={se3} otsikko="Kärcher SE 3 Compact" sivu={mallisivut['SE 3']} kuvaus={sarjakuvaukset['SE 3']} tagi="Kärcherin vaihtoehto" versio />
+		</div>
+
+		<h2>Pesuaine SpotClean Prohon</h2>
+		<p>Käytä SpotClean Prossa Bissellin omaa pesuainetta ja annostele se laitteen ohjeen mukaan. Bissellin aineiden erot ovat <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineoppaassa</a>.</p>
+
+		<Kokemuslomake malli="Bissell SpotClean Pro" polku={SIVU} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
