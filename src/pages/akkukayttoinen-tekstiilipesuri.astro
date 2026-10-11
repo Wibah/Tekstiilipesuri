@@ -1,0 +1,125 @@
+---
+// SCN: tuki (laitetyyppi), intentti Comparison, emopilari /. Hakusanat: akkukäyttöinen tekstiilipesuri 80, akku
+// tekstiilipesuri 40, tekstiilipesuri akkukäyttöinen 30, kärcher tekstiilipesuri akku 20 (Ahrefs 2026-10, noin 170).
+// Otsikot, meta, UKK ja Puzzi-osio Villen hyväksymät 2026-10-11. Kirjoitettu tekstiilipesuri-writer-skillillä.
+// Lähteet: tuotedata (Kärcher.com, bissell.de), Kärcher SE 3-18 Compactin käyttöohje (BTA-5916492), Parkers
+// 16.3.2026, CAR Magazine 13.4.2026, io-tech 2022 (tietopohja).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import { tuote, luku, euroa, mallisivut } from '../lib/tuotteet';
+
+const SIVU = '/akkukayttoinen-tekstiilipesuri/';
+const OHJE = 'https://s1.kaercher-media.com/documents/manuals/html/BTA-5916492-000-06/FI.html';
+const se318 = await tuote('se-3-18-compact-akulla');
+const home = await tuote('se-3-18-compact-home-akulla');
+const cordless = await tuote('bissell-spotclean-cordless-3681n');
+const mini = await tuote('bissell-spotclean-mini-cordless-4065n');
+const puzzi2 = await tuote('puzzi-2-1-bp');
+const puzzi9 = await tuote('puzzi-9-1-bp-runkomalli');
+const se3 = await tuote('se-3-compact');
+
+// Akun kapasiteetti ja laturi toimitussisällöstä, esim. "Akku: 18 V / 2.5 Ah Battery Power -akku (1 kpl)".
+const rivi = (t: typeof se318, alku: string) => t.toimitusSisaltaa.find((r) => r.startsWith(alku))?.replace(new RegExp(`^${alku}\\s*`), '') ?? '';
+const ah = (t: typeof se318) => luku(Number(rivi(t, 'Akku:').match(/([\d.]+) Ah/)?.[1]));
+const laturi = (t: typeof se318) => rivi(t, 'Latausvarusteet:').replace(/^18 V /, '').replace(/ \(1 kpl\)$/, '');
+const kayntiaika = (t: typeof se318) => t.tekniset.akkuKayttoaika?.replace(/^n\. /, 'noin ').replace(/ \(.*\)$/, ' min') ?? '–';
+const halvempi = home.hinta! < se318.hinta!;
+
+const vertailu = [
+	{ t: se318, nimi: 'Kärcher SE 3-18 Compact akulla', akku: `18 V, ${ah(se318)} Ah`, aika: `${kayntiaika(se318)} (Kärcher)` },
+	{ t: home, nimi: 'Kärcher SE 3-18 Compact Home akulla', akku: `18 V, ${ah(home)} Ah`, aika: `${kayntiaika(home)} (Kärcher)` },
+	{ t: cordless, nimi: 'Bissell SpotClean Cordless', akku: `${luku(cordless.tekniset.akkujanniteV!)} V`, aika: 'noin 35 min Eco-tilassa (Parkers)' },
+	{ t: mini, nimi: 'Bissell SpotClean Mini Cordless', akku: 'ei ilmoitettu', aika: 'ei ilmoitettu' },
+];
+
+const ukk = [
+	{
+		kysymys: 'Mikä on paras akkukäyttöinen tekstiilipesuri?',
+		vastaus: `Autoon paras oli brittiläisissä testeissä Bissell SpotClean Cordless (${euroa(cordless.hinta!)}), jonka Parkers (16.3.2026) ja CAR Magazine (13.4.2026) valitsivat parhaaksi autoon. Kärcherin akkumalleista suosittelemme SE 3-18 Compact Home akulla -versiota (${euroa(home.hinta!)}), koska sen ${ah(home)} Ah:n akku riittää Kärcherin mukaan noin kaksi kertaa pidempään kuin perusversion ${ah(se318)} Ah:n akku.`,
+	},
+	{
+		kysymys: 'Sopiiko Kärcherin 18 voltin akku SE 3-18:aan muista laitteista?',
+		vastaus: `Sopii, jos akku kuuluu Kärcherin Battery Power- tai Battery Power+ -sarjaan ja sen nimellisjännite on 18 V. <a href="${OHJE}" target="_blank" rel="nofollow noopener">SE 3-18 Compactin käyttöohjeen</a> mukaan laitteessa saa käyttää vain näitä akkuja. Muiden merkkien akut eivät sovi.`,
+	},
+	{
+		kysymys: 'Kuinka kauan akun lataus kestää?',
+		vastaus: `Bissell.de ilmoittaa SpotClean Cordlessin latausajaksi ${cordless.teknisetValmistajalta['Ladezeit'].replace(' h', ' tuntia')}. Kärcherin SE 3-18:n käyttöohje ei kerro latausaikaa, vaan viittaa akun ja laturin omiin ohjeisiin. Aika riippuu akusta ja laturista. SE 3-18 Compact Home akulla -version mukana tulee ${laturi(home)}, ja perusversion mukana ${laturi(se318)}.`,
+	},
+	{
+		kysymys: 'Kannattaako akkukäyttöinen tekstiilipesuri sohvan pesuun?',
+		vastaus: `Tahroihin ja pieneen sohvaan kyllä. Koko sohvan pesuun 12–24 minuutin käyntiaika voi kuitenkin loppua kesken, joten johdollinen malli on silloin varmempi. SE 3-18:n puhdasvesisäiliö on yhtä suuri (${luku(se318.tekniset.puhdasvesiL!)} l) kuin johdollisen SE 3 Compactin (${euroa(se3.hinta!)}), mutta SE 3 Compact toimii niin kauan kuin tarvitaan. Ohje on <a href="/sohvan-pesu-tekstiilipesurilla/">sohvan pesu -sivulla</a>.`,
+	},
+];
+---
+<Layout
+	title="Akkukäyttöinen tekstiilipesuri – mallit, käyntiajat ja vertailu 2026"
+	description="Akkukäyttöiset tekstiilipesurit vertailussa: Kärcher SE 3-18 Compact ja Bissell SpotClean Cordless. Käyntiajat, akut, hinnat ja milloin akku kannattaa johdon sijaan."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Akkukäyttöinen tekstiilipesuri', sivu: SIVU }]} />
+		<span class="tp-label">Vertailu</span>
+		<h1>Akkukäyttöinen tekstiilipesuri</h1>
+		<p>Akkukäyttöinen tekstiilipesuri toimii ilman johtoa, joten se sopii autoon, portaisiin ja paikkoihin, joissa pistorasia on kaukana. Tarkistamissamme suomalaisissa verkkokaupoissa on kotikäyttöön kaksi akkukäyttöistä tekstiilipesurisarjaa: Kärcher SE 3-18 Compactia ja Bissell SpotClean Cordlessia. Akku rajaa työn kokoa, sillä Kärcherin mukaan SE 3-18 toimii yhdellä latauksella noin 12–24 minuuttia akusta riippuen.</p>
+		<p>Valitse akkumalli, jos peset autoa tai tuoreita tahroja. Jos peset koko sohvan tai isoja mattoja, johdollinen malli on varmempi.</p>
+
+		<h2>Akkutekstiilipesuri: mitä malleja Suomessa myydään?</h2>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Hinta</th><th scope="col">Akku</th><th scope="col">Käyntiaika</th><th scope="col">Puhdasvesisäiliö</th><th scope="col">Paino</th></tr></thead>
+				<tbody>
+					{vertailu.map((v) => (
+						<tr>
+							<th scope="row"><a href={v.t.ostopaikka.url} target="_blank" rel="nofollow noopener">{v.nimi}</a></th>
+							<td>{v.t.hinta != null ? euroa(v.t.hinta) : '–'}</td>
+							<td>{v.akku}</td>
+							<td>{v.aika}</td>
+							<td>{luku(v.t.tekniset.puhdasvesiL!)} l</td>
+							<td>{luku(v.t.tekniset.painoKg!)} kg</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p>Ammattikäyttöön Kärcher myy myös akkukäyttöisiä Puzzi-malleja, ja niistä kerrotaan sivun lopussa.</p>
+
+		<h2>Kärcher tekstiilipesuri akku: SE 3-18 Compact</h2>
+		<p>SE 3-18 Compact on Kärcherin SE 3 Compactin akkuversio. Siinä on {luku(se318.tekniset.puhdasvesiL!)} litran puhdasvesisäiliö ja {luku(se318.tekniset.likavesiL!)} litran likavesisäiliö, ja se painaa {luku(se318.tekniset.painoKg!)} kg. Käyttöohjeen mukaan laitteessa käytetään Kärcherin 18 voltin Battery Power- tai Battery Power+ -akkuja. Mallin tarkempi esittely on <a href={mallisivut['SE 3']}>SE 3 Compactin sivulla</a>.</p>
+		<p>Parkersin testissä (16.3.2026) SE 3-18 Compact sai 4/5. Testaajat kehuivat sitä tyylikkääksi ja tehokkaaksi, mutta moittivat suurta vedenkulutusta ja hankalaa laimennusohjetta. CAR Magazine (13.4.2026) kehui muotoilua, mutta moitti samoin laimennusohjetta.</p>
+
+		<h3>SE 3-18 Compact akulla vai Home akulla?</h3>
+		<p>Versiot eroavat akussa ja laturissa. SE 3-18 Compact akulla -version ({euroa(se318.hinta!)}) mukana tulee {ah(se318)} Ah:n akku ja {laturi(se318)}. Home akulla -version ({euroa(home.hinta!)}) mukana tulee {ah(home)} Ah:n akku ja {laturi(home)}. Kärcherin mukaan isommalla akulla laite toimii noin 24 minuuttia ja pienemmällä noin 12 minuuttia.</p>
+		<p>{halvempi ? `Home akulla on nyt halvempi, vaikka siinä on isompi akku ja pikalaturi, joten se on parempi valinta.` : `Home akulla maksaa ${euroa(home.hinta! - se318.hinta!)} enemmän, ja siinä on kaksinkertainen käyntiaika ja pikalaturi.`} Jos sinulla on jo Kärcherin 18 voltin Battery Power -akku, tarkista Kärcher.comista, myydäänkö laitetta myös ilman akkua.</p>
+
+		<h2>Bissell SpotClean Cordless ja Mini Cordless</h2>
+		<p>SpotClean Cordless on Bissellin akkukäyttöinen kannettava tekstiilipesuri. Siinä on {luku(cordless.tekniset.akkujanniteV!)} voltin akku, {luku(cordless.tekniset.puhdasvesiL!)} litran puhdasvesisäiliö, ja se painaa {luku(cordless.tekniset.painoKg!)} kg. Parkers ja CAR Magazine valitsivat sen parhaaksi autoon. Parkersin testissä sillä pesi noin 35 minuuttia Eco-tilassa ja kaksi autoa yhdellä latauksella.</p>
+		<p>Mini Cordless on Bissellin pienin akkukäyttöinen malli. Sen puhdasvesisäiliö on {luku(mini.tekniset.puhdasvesiL!)} litraa, ja laite painaa {luku(mini.tekniset.painoKg!)} kg. Bissell.de ei ilmoita akun jännitettä eikä käyntiaikaa, eikä mallia ole testattu lähteissämme. Sopii tuoreisiin tahroihin.</p>
+
+		<h2>Kuinka kauan akku riittää?</h2>
+		<ul>
+			<li><strong>Kärcher SE 3-18 Compact:</strong> Kärcherin käyttöohjeen mukaan noin 12 minuuttia 2,5 Ah:n akulla ja noin 24 minuuttia 5 Ah:n akulla normaalikäytössä. io-techin keskustelussa (2022) yksi käyttäjä kertoi käyntiajaksi noin 15 minuuttia. Parkersin testissä akusta oli kahden automaton pesun jälkeen jäljellä 61 %.</li>
+			<li><strong>Bissell SpotClean Cordless:</strong> Parkersin testissä noin 35 minuuttia Eco-tilassa.</li>
+		</ul>
+		<p>Käyntiaika riittää siis auton penkkeihin ja mattoihin sekä tuoreisiin tahroihin. Koko sohvan tai ison maton pesussa akku voi loppua kesken, joten varaa toinen akku tai valitse johdollinen malli.</p>
+
+		<h2>Akku vai johto?</h2>
+		<p>Akkumalli on kätevin silloin, kun pistorasiaa ei ole lähellä, kuten autossa tai portaissa. Johdollinen malli toimii niin kauan kuin tarvitaan, joten se sopii paremmin isoihin pesuihin. Ruotsalainen M3 (huhtikuu 2025) moitti, että johdollisen Kärcher SE 3 Compactin johto rajoittaa auton pesua. SE 3 Compactin johto on {luku(se3.tekniset.virtajohtoM!)} metriä, ja se maksaa {euroa(se3.hinta!)}.</p>
+		<p>Auton pesu on tarkemmin <a href="/auton-penkkien-pesu-tekstiilipesurilla/">auton penkkien pesu -sivulla</a>.</p>
+
+		<h2>Akkukäyttöiset ammattilaitteet: Puzzi 2/1 Bp ja 9/1 Bp</h2>
+		<p>Ammattikäyttöön Kärcher myy 36 voltin akulla toimivia Puzzi-malleja. Puzzi 2/1 Bp ({euroa(puzzi2.hinta!)}, ilman akkua ja laturia) on kannettava malli, jossa on {luku(puzzi2.tekniset.puhdasvesiL!)} litran puhdasvesisäiliö. Puzzi 9/1 Bp on isompi laite, jossa on {luku(puzzi9.tekniset.puhdasvesiL!)} litran puhdasvesisäiliö. Kärcherin mukaan Puzzi 9/1 Bp toimii 7,5 Ah:n akulla noin 35 minuuttia. Kotikäyttöön ne ovat kalliita, ja isoihin pesuihin Puzzi kannattaa yleensä <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokrata</a>.</p>
+
+		<h2>Sopivat mallit</h2>
+		<div class="mk-lista">
+			<Korttirivi tuote={home} otsikko="Kärcher SE 3-18 Compact Home akulla" sivu={mallisivut['SE 3']} kuvaus={`${ah(home)} Ah:n akku ja pikalaturi, noin 24 minuutin käyntiaika`} tagi="Suosituksemme" versio />
+			<Korttirivi tuote={cordless} otsikko="Bissell SpotClean Cordless" sivu="/bissell-tekstiilipesurit/" ankkuri={cordless.id} kuvaus="Paras autoon Parkersin ja CAR Magazinen testeissä" tagi="Paras autoon" versio />
+			<Korttirivi tuote={se318} otsikko="Kärcher SE 3-18 Compact akulla" sivu={mallisivut['SE 3']} kuvaus={`${ah(se318)} Ah:n akku, noin 12 minuutin käyntiaika`} tagi="Pienempi akku" versio />
+			<Korttirivi tuote={mini} otsikko="Bissell SpotClean Mini Cordless" sivu="/bissell-tekstiilipesurit/" ankkuri={mini.id} kuvaus="Pienin akkumalli tuoreisiin tahroihin" tagi="Pienin" versio />
+		</div>
+
+		<p class="tp-lahde">Lähteet: Kärcher.com ja bissell.de (tekniset tiedot), <a href={OHJE} target="_blank" rel="nofollow noopener">Kärcher SE 3-18 Compactin käyttöohje</a>, Parkers (16.3.2026), CAR Magazine (13.4.2026), M3 (huhtikuu 2025) ja io-tech-foorumi (2022).</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

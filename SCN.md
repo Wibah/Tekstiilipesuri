@@ -20,6 +20,7 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 | `/sohvan-pesu-tekstiilipesurilla/` | Tuki (käyttökohde) | `/` | Use Case | sohvan pesu tekstiilipesurilla | tekstiilipesuri sohvan pesu 100, tekstiilipesuri sohva 30 (noin 130) |
 | `/auton-penkkien-pesu-tekstiilipesurilla/` | Tuki (käyttökohde) | `/` | Use Case | auton penkkien pesu tekstiilipesurilla | tekstiilipesuri auton penkit 60, auton tekstiilipesuri 30, tekstiilipesuri autoon 20 (noin 110) |
 | `/maton-pesu-tekstiilipesurilla/` | Tuki (käyttökohde) | `/` | Use Case | maton pesu tekstiilipesurilla | tekstiilipesuri maton pesu 50, tekstiilipesuri matto 30, villamatto tekstiilipesuri 20, tekstiilipesuri villamatto 20, kärcher tekstiilipesuri maton pesu 20, tekstiilipesuri mattojen pesu 10 (noin 150) |
+| `/akkukayttoinen-tekstiilipesuri/` | Tuki (laitetyyppi) | `/` | Comparison | akkukäyttöinen tekstiilipesuri | akkukäyttöinen tekstiilipesuri 80, akku tekstiilipesuri 40, tekstiilipesuri akkukäyttöinen 30, kärcher tekstiilipesuri akku 20 (noin 170) |
 | `/tekstiilipesuri-vai-hoyrypesuri/` | Silta → hoyrypesuri.fi | `/` | Comparison | tekstiilipesuri vs. höyrypesuri | vai-haut noin 180 |
 
 ## Linkkikartta
@@ -30,8 +31,9 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 - **Vianetsintä** → Kärcher-hub (murupolku), varaosat, pesuaine; Kärcherin käyttöohjeet. Linkit sisään: Kärcher-valikko, varaosasivun UKK.
 - **Varaosat** → Kärcher-hub (murupolku), SE 3, SE 4, vianetsintä (UKK). Linkit sisään: Kärcher-valikko, Kärcher-hub (pesuainekappale).
 - **Sohvan pesu** → SE 3, SpotClean Pro, Bissell-hub, Kärcher-hub (kortit), pesuaine, vuokraus, etusivu. Linkit sisään: etusivun pikavalinta Sohva ja käyttökohdelista.
-- **Auton penkit** → SE 3 (SE 3-18), Bissell-hub (kortit), pesuaine, sohvan pesu, etusivu. Linkit sisään: etusivun pikavalinta Auto ja käyttökohdelista. Linkki akkusivulle lisätään, kun se on tehty.
+- **Auton penkit** → SE 3 (SE 3-18), Bissell-hub (kortit), pesuaine, sohvan pesu, etusivu. Linkit sisään: etusivun pikavalinta Auto ja käyttökohdelista. Linkittää akkusivulle.
 - **Maton pesu** → SE 3, SE 4, Puzzi 8/1, Bissell-hub (kortit), Kärcher-hub, varaosat, pesuaine, vuokraus, sohvan pesu, etusivu. Linkit sisään: etusivun pikavalinta Matto, laitetyyppikortti Matoille ja käyttökohdelista.
+- **Akkukäyttöinen** → SE 3 (SE 3-18), Bissell-hub (kortit), auton penkit, sohvan pesu, vuokraus, etusivu. Linkit sisään: etusivun laitetyyppikortti Akkukäyttöinen ja autosivu.
 - **Kärcher-hub** → mallisivut (taulukot, kortit ja UKK), pesuaine, vuokraus; ylös etusivulle (murupolku).
 - **Mallisivut** → hub (murupolku), toisilleen sivuttain (vaihtoehdot ja UKK), pesuaine (työtapa ja UKK), vuokraus (SE 3 ja Puzzi).
 - **Pesuaine** → SE 3, SE 4, Puzzi 8/1 (annostelutaulukko ja UKK), etusivu ja hub.
@@ -43,4 +45,4 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 1. **Varaosat ja vianetsintä:** molemmat tehty 2026-10-11.
 2. **Mallisivut:** SE 5 ja SE 5 Car (noin 200), SE 2 ja SE 2 Spot Pure (noin 160), SE 6 Signature Line (noin 90), Bissell SpotClean Pro (tehty 2026-10-11). Ville päätti 2026-10-11 tehdä nämä ennen julkaisua (aiempi päätös odottaa affiliate-linkkejä kumottu).
 3. **Merkkisivut:** Bissell tehty 2026-10-11. Tefal (noin 470), Shark. Ryobi (840), Ströme (360), Parkside (620) ja Lumira (250) puuttuvat kumppanifeedeistä, joten niiden sivut tehdään ilman affiliate-linkkejä, jos tehdään.
-4. **Käyttökohteet:** sohvan pesu, auton penkit ja matto tehty 2026-10-11. Seuraavaksi akkukäyttöinen (/akkukayttoinen-tekstiilipesuri/). Etusivun laitetyyppikortit Akkukäyttöinen ja Matoille sekä pikavalinnat Matto ja Auto vaihdetaan linkittämään niihin (Villen hyväksyntä 2026-10-11).
+4. **Käyttökohteet:** sohvan pesu, auton penkit, matto ja akkukäyttöinen tehty 2026-10-11. Etusivun pikavalinnat ja laitetyyppikortit linkittävät niihin.
