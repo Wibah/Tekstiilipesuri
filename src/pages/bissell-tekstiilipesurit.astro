@@ -1,0 +1,142 @@
+---
+// SCN: pilari (merkki), intentti Comparison, emopilari /. Hakusanat: bissell tekstiilipesuri 250, bissell spotclean 150,
+// bissell 150, bissell tekstiilipesuri kokemuksia 50, spotclean plus 50, tekstiilipesuri bissell 40, spot clean 40,
+// spotclean hydrosteam 40 (Ahrefs 2026-10). "bissell spotclean pro" (150) ja "professional" (40) kuuluvat tulevalle
+// SpotClean Pro -mallisivulle, ja "bissell pesuaine" (50) pesuainesivulle, joten niiden osiot ovat tässä lyhyitä
+// (Villen ohje 2026-10-11). Otsikot Villen hyväksymät 2026-10-11. Kirjoitettu tekstiilipesuri-writer-skillillä.
+// Tekniset tiedot bissell.de (npm run hae:bissell), hinnat kumppanikauppojen feedeistä ilman provisiota.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { merkinTuotteet, paatuote, luku, euroa, paiva, hintavali, type Tuote } from '../lib/tuotteet';
+
+const kaikki = await merkinTuotteet('Bissell');
+const sku = (s: string) => kaikki.find((t) => t.tuotenumero === s)!;
+const ostettavat = (...skut: string[]) => skut.map(sku).filter((t) => t.myynnissa && t.hinta != null);
+const myynnissa = kaikki.filter((t) => t.myynnissa);
+
+const pro = sku('1558N');
+const plus = sku('3724N');
+const hydro = sku('3697N');
+const cordless = sku('3681N');
+const mini = sku('4065N');
+const c5 = sku('3931N');
+const auto = sku('3730N');
+const revolution = sku('3670N');
+const proheat = sku('1858N');
+const powerwash = sku('3878N');
+const karcher = await paatuote('SE 3');
+
+const ryhmat = {
+	pro: ostettavat('1558N', '15585', '37252'),
+	plus: ostettavat('3724N', '37241', '37288', '4720M'),
+	hydro: ostettavat('3697N', '3700N', '3689N'),
+	pienet: ostettavat('3931N', '3681N', '4065N'),
+	auto: ostettavat('3730N'),
+	pysty: ostettavat('3878N', '1858N', '3670N', '4199N'),
+};
+const kortit = (tt: Tuote[]) => tt.sort((a, b) => a.hinta! - b.hinta!);
+const kannettavat = kaikki.filter((t) => t.sarja === 'Bissell SpotClean' || t.sarja === 'Bissell MultiClean');
+const pystymallit = kaikki.filter((t) => !kannettavat.includes(t));
+const k = (t: Tuote) => t.tekniset;
+const pystyPainot = pystymallit.map((t) => t.tekniset.painoKg).filter((p): p is number => p != null);
+
+const ukk = [
+	{
+		kysymys: 'Mikä Bissell tekstiilipesuri kannattaa ostaa?',
+		vastaus: `Sohvan, portaiden ja yksittäisten tahrojen pesuun suosittelemme SpotClean Prota (${euroa(pro.hinta!)}). Siinä on Bissellin kannettavista malleista suurimmat säiliöt (${luku(k(pro).puhdasvesiL!)} / ${luku(k(pro).likavesiL!)} l), ja Independent valitsi sen testissään (23.4.2026) parhaaksi pinttyneisiin tahroihin. Jos peset kokonaisia mattoja tai kokolattiamattoa, valitse pystymalli, esimerkiksi Revolution HydroSteam (${euroa(revolution.hinta!)}).`,
+	},
+	{
+		kysymys: 'Mitä eroa on SpotClean Pro- ja Pet Pro -malleilla?',
+		vastaus: `Bissell.de:n teknisissä tiedoissa niillä ei ole eroa: kummassakin on ${luku(k(pro).tehoW!)} watin teho, ${luku(k(pro).puhdasvesiL!)} litran puhdasvesisäiliö ja ${luku(k(pro).letkuM!)} metrin letku. Pet-mallit on suunnattu lemmikkiperheille. Tarkista toimitussisältö kaupan tuotesivulta, jos vertaat malleja.`,
+	},
+	{
+		kysymys: 'Mistä löydän Bissell SpotClean Plussan käyttöohjeen?',
+		vastaus: 'Bissellillä ei ole suomenkielistä verkkosivustoa. Bissellin Saksan sivuston SpotClean Plus -sivulla oli 11.10.2026 ladattavana vain turvallisuusohjeet ja pesuaineen käyttöturvallisuustiedote, ei varsinaista käyttöohjetta. Kysy käyttöohjetta kaupasta, josta ostit laitteen, tai Bissellin asiakaspalvelusta.',
+	},
+	{
+		kysymys: 'Onko Bissellillä akkukäyttöistä tekstiilipesuria?',
+		vastaus: `On kaksi: SpotClean Cordless (${luku(k(cordless).akkujanniteV!)} V, ${euroa(cordless.hinta!)}) ja pienempi SpotClean Mini Cordless (${euroa(mini.hinta!)}). Parkersin (16.3.2026) ja CAR Magazinen (13.4.2026) testeissä SpotClean Cordless oli paras autoon.`,
+	},
+	{
+		kysymys: 'Käyttääkö Bissell HydroSteam höyryä?',
+		vastaus: 'Käyttää. HydroSteam-mallit ovat tekstiilipesureita, joissa pesuun yhdistetään höyry. Ne pesevät ruiskuttamalla ja imemällä kuten muutkin tekstiilipesurit. Tekstiilipesurin ja höyrypesurin erot ovat <a href="/tekstiilipesuri-vai-hoyrypesuri/">tekstiilipesuri vai höyrypesuri -sivulla</a>.',
+	},
+];
+---
+<Layout
+	title="Bissell tekstiilipesuri kokemuksia – SpotClean-mallit ja hinnat 2026"
+	description="Vertailussa Suomessa myytävät Bissellin tekstiilipesurit: SpotClean Pro, Plus, HydroSteam ja C5 sekä pystymallit. Tekniset tiedot, erot ja kokemuksia."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Bissell-tekstiilipesurit', sivu: '/bissell-tekstiilipesurit/' }]} />
+		<TuoteSchema tuote={pro} />
+		<TuoteHero tuote={pro} otsikko="Bissell tekstiilipesuri – kaikki SpotClean- ja pystymallit" yla="Bissell · Koko mallisto" merkinta="Suosituksemme">
+			<p>Tarkistamissamme suomalaisissa verkkokaupoissa Bissellillä on Kärcherin jälkeen eniten tekstiilipesureita. Bissellillä ei ole omaa suomalaista verkkokauppaa, mutta kaupoissa on nyt varastossa {myynnissa.length} Bissellin mallia hintaan {hintavali(myynnissa)}. Pääosa niistä on kannettavia SpotClean-malleja tahroihin, sohvalle ja autoon. Koko maton pesuun Bissell myy pystymalleja, joissa on harjatela.</p>
+			<p>Suosittelemme useimpiin koteihin SpotClean Prota sohvan, nojatuolien ja portaiden pesuun. SpotClean Prossa on Bissellin kannettavista malleista suurimmat säiliöt, joten vettä joutuu vaihtamaan harvemmin kuin pienemmissä SpotCleaneissa.</p>
+		</TuoteHero>
+
+		<h2>Bissell SpotClean – mikä malli sopii mihinkin?</h2>
+		<p>SpotClean on Bissellin kannettavien tekstiilipesurien sarja. Kaikki mallit toimivat samalla tavalla: laite ruiskuttaa veden ja pesuaineen seosta kankaaseen ja imee sen heti takaisin irronneen lian kanssa. Mallit eroavat säiliöiden koossa, tehossa, virtalähteessä ja siinä, onko pesussa mukana höyry. Pienen säiliön kanssa vettä joutuu vaihtamaan useammin, mutta laite on kevyempi kantaa portaissa ja autoon.</p>
+
+		<h3>SpotClean Pro ja Pet Pro</h3>
+		<p>SpotClean Pro, Pet Pro ja Pet Pro Plus ovat sarjan suurimmat kannettavat mallit. Niissä on {luku(k(pro).tehoW!)} watin teho, {luku(k(pro).puhdasvesiL!)} litran puhdasvesisäiliö ja {luku(k(pro).likavesiL!)} litran likavesisäiliö, ja ne painavat {luku(k(pro).painoKg!)}–{luku(k(sku('37252')).painoKg!)} kg. Iso säiliö vähentää täyttökertoja, mutta {luku(k(pro).letkuM!)} metrin letkulla laitetta joutuu portaissa siirtämään. Independent valitsi SpotClean Pron testissään (23.4.2026) parhaaksi pinttyneisiin tahroihin, mutta moitti sen painoa.</p>
+		<div class="mk-lista">{kortit(ryhmat.pro).map((t) => <Korttirivi tuote={t} taso="h4" />)}</div>
+
+		<h3>SpotClean Plus ja Pet Plus</h3>
+		<p>SpotClean Plus, Pet Plus ja Pet Select ovat Pro-malleja pienempiä. Niissä on {luku(k(plus).tehoW!)} watin teho ja {luku(k(plus).puhdasvesiL!)} litran puhdasvesisäiliö, ja ne painavat {luku(k(plus).painoKg!)} kg. Plus ja Pet Plus sopivat yksittäisiin tahroihin ja nojatuoliin, mutta koko sohvalla säiliötä joutuu täyttämään useammin kuin Pro-malleissa. Plussan ja Pet Plussan letku on {luku(k(plus).letkuM!)} metriä, mikä on enemmän kuin Pro-malleissa. MultiClean Spot &amp; Stain on samaa kokoluokkaa, mutta sen likavesisäiliö on suurempi ({luku(k(sku('4720M')).likavesiL!)} l).</p>
+		<div class="mk-lista">{kortit(ryhmat.plus).map((t) => <Korttirivi tuote={t} taso="h4" />)}</div>
+
+		<h3>SpotClean HydroSteam, Select ja Pro</h3>
+		<p>HydroSteam-malleissa pesuun yhdistetään höyry. Niissä on {luku(k(hydro).tehoW!)} watin teho, {luku(k(hydro).puhdasvesiL!)} litran puhdasvesisäiliö ja {luku(k(hydro).likavesiL!)} litran likavesisäiliö. Suomalaisissa verkkokaupoissa on nyt varastossa Select- ja Pro-versiot, joiden tekniset tiedot ovat bissell.de:ssä samat kuin perusmallin. Brittiläiset Ideal Home (päivitetty 2.9.2026) ja The English Home (2.12.2025) valitsivat SpotClean HydroSteamin parhaaksi kannettavaksi tekstiilipesuriksi. CAR Magazinen testissä (13.4.2026) SpotClean HydroSteam pesi matot hyvin, mutta auton kangaspenkit eivät puhdistuneet eivätkä kuivuneet kunnolla.</p>
+		<div class="mk-lista">{kortit(ryhmat.hydro).map((t) => <Korttirivi tuote={t} taso="h4" />)}</div>
+
+		<h3>SpotClean C5 Pro ja johdottomat mallit</h3>
+		<p>Pienimmät SpotCleanit sopivat tuoreisiin tahroihin ja paikkoihin, joihin isoa laitetta ei viitsi kantaa. C5 Pro on verkkovirtamalli, jossa on {luku(k(c5).tehoW!)} watin teho ja {luku(k(c5).puhdasvesiL!)} litran puhdasvesisäiliö, ja se painaa {luku(k(c5).painoKg!)} kg. SpotClean Cordlessissa on {luku(k(cordless).akkujanniteV!)} voltin akku, ja bissell.de ilmoittaa latausajaksi {cordless.teknisetValmistajalta['Ladezeit'].replace(' h', ' tuntia')}. Parkersin testissä (16.3.2026) SpotClean Cordlessilla pesi noin 35 minuuttia Eco-tilassa ja kaksi autoa yhdellä latauksella. Mini Cordless on sarjan pienin: puhdasvesisäiliö on {luku(k(mini).puhdasvesiL!)} litraa, ja laite painaa {luku(k(mini).painoKg!)} kg.</p>
+		<div class="mk-lista">{kortit(ryhmat.pienet).map((t) => <Korttirivi tuote={t} taso="h4" />)}</div>
+
+		<h3>SpotClean Auto Pro Select autoon</h3>
+		<p>Auto Pro Select on tehty auton penkkeihin ja mattoihin. Teho ja säiliöt ovat samat kuin SpotClean Prossa ({luku(k(auto).tehoW!)} W, {luku(k(auto).puhdasvesiL!)} / {luku(k(auto).likavesiL!)} l), ja virtajohto on {luku(k(auto).virtajohtoM!)} metriä. Laite tarvitsee pistorasian, joten pihalla tarvitset jatkojohdon. Jos autolle ei ole pistorasiaa lähellä, akkukäyttöinen SpotClean Cordless sopii paremmin.</p>
+		<div class="mk-lista">{kortit(ryhmat.auto).map((t) => <Korttirivi tuote={t} taso="h4" />)}</div>
+
+		<h2>Bissellin pystymallit mattojen pesuun</h2>
+		<p>Pystymalli pesee koko maton tai kokolattiamaton kuten pölynimuri, ja sen harjatela irrottaa likaa syvemmältä kuin kannettavan pesurin pieni suulake. Bissellin pystymallit painavat kuitenkin {luku(Math.min(...pystyPainot))}–{luku(Math.max(...pystyPainot))} kg, vaativat säilytystilaa eivätkä mahdu huonekalujen alle. Sohvan ja portaiden pesuun kannettava SpotClean on kätevämpi.</p>
+		<ul>
+			<li><strong>PowerWash Pet</strong> ({euroa(powerwash.hinta!)}): {luku(k(powerwash).tehoW!)} W, {luku(k(powerwash).puhdasvesiL!)} litran puhdasvesisäiliö, {luku(k(powerwash).painoKg!)} kg.</li>
+			<li><strong>ProHeat 2x Revolution</strong> ({euroa(proheat.hinta!)}): {luku(k(proheat).tehoW!)} W, säiliöt {luku(k(proheat).puhdasvesiL!)} / {luku(k(proheat).likavesiL!)} l, {luku(k(proheat).painoKg!)} kg.</li>
+			<li><strong>Revolution HydroSteam</strong> ({euroa(revolution.hinta!)}): {luku(k(revolution).tehoW!)} W, säiliöt {luku(k(revolution).puhdasvesiL!)} / {luku(k(revolution).likavesiL!)} l, {luku(k(revolution).painoKg!)} kg, ja pesussa on mukana höyry.</li>
+		</ul>
+		<p>Telegraph valitsi Revolution HydroSteamin testissään (päivitetty 29.9.2026) parhaaksi ostokseksi, koska höyry irrotti kuivuneetkin viinitahrat. Telegraph kuitenkin moitti laitetta painavaksi ja kertoi, että laite kulutti paljon pesuainetta. The Sprucen testissä (päivitetty 2.10.2026) laite oli kova-ääninen, ja matto kuivui noin 15 tunnissa.</p>
+		<div class="mk-lista">{kortit(ryhmat.pysty).map((t) => <Korttirivi tuote={t} taso="h3" />)}</div>
+
+		<h2>Kaikki Bissell-mallit teknisinä tietoina</h2>
+		<p>Taulukossa ovat kaikki Bissellin tekstiilipesurit, joiden tekniset tiedot löytyvät bissell.de:stä. Mallit, joita yksikään tarkistamamme verkkokauppa ei nyt myy, ovat mukana ilman hintaa.</p>
+		<h3>SpotClean ja muut kannettavat mallit</h3>
+		<MallistoTaulu tuotteet={kannettavat} suositusId={pro.id} />
+		<h3>Pystymallit</h3>
+		<MallistoTaulu tuotteet={pystymallit} />
+
+		<h2>Tekstiilipesuri Bissell vai Kärcher?</h2>
+		<p>Kärcherillä ja Bissellillä on tarkistamissamme suomalaisissa verkkokaupoissa eniten tekstiilipesureita, ja niiden mallistot eroavat toisistaan:</p>
+		<ul>
+			<li><strong>Bissell</strong> myy Kärcheriä enemmän kannettavia malleja tahroihin, höyryä käyttäviä HydroSteam-malleja sekä harjatelallisia pystymalleja koko maton pesuun. Bisselliä myyvät verkkokaupat, joten hinta vaihtelee kaupan mukaan.</li>
+			<li><strong>Kärcher</strong> myy kompakteja SE 3 -malleja sekä isompia SE 4–SE 6 -malleja, jotka toimivat myös märkä-kuivaimurina. Kärcherin kotikäyttöön tarkoitetuissa malleissa ei ole höyrytoimintoa eikä harjatelaa. Ammattikäyttöön Kärcher myy Puzzi-sarjaa, jota myös vuokraamot vuokraavat.</li>
+		</ul>
+		<p>Valitse Bissell, jos peset paljon kokolattiamattoa tai haluat höyryä käyttävän laitteen. Valitse Kärcher, jos haluat kompaktin laitteen sohvalle ja autolle, kuten <a href="/karcher-se-3-compact/">SE 3 Compactin</a> ({euroa(karcher.hinta!)}), tai laitteen, joka toimii myös märkä-kuivaimurina, kuten <a href="/karcher-se-4-plus/">SE 4 Plussan</a>. Kärcherin kaikki mallit ovat <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurien sivulla</a>.</p>
+
+		<h2>Bissell pesuaine</h2>
+		<p>Käytä Bissellin laitteessa Bissellin omaa pesuainetta ja annostele se laitteen ohjeen mukaan. Aineiden erot ja hinnat ovat pesuaineoppaan <a href="/tekstiilipesurin-pesuaine/">Bissell pesuaine</a> -osiossa.</p>
+
+		<p class="tp-lahde">Tekniset tiedot: bissell.de, haettu {paiva(pro.haettu)}. Hinnat: suomalaisten verkkokauppojen tuotetiedot, tarkistettu {paiva(pro.haettu)}.</p>
+
+		<Kokemuslomake malli="Bissell" polku="/bissell-tekstiilipesurit/" mallikentta otsikko="Bissell tekstiilipesuri kokemuksia – kerro omasi">
+			<p>Keräämme Bissellin tekstiilipesurien käyttäjien kokemuksia. Kerro, mikä malli sinulla on, mitä peset ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

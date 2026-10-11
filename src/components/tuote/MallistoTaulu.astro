@@ -41,7 +41,7 @@ const n = (v: number | null, yksikko = '') => (v == null ? '–' : `${luku(v)}${
 						)}
 						{t.id === suositusId && <span class="tp-tagi">Suosituksemme</span>}
 					</th>
-					{naytaHinta && <td>{t.vainTuotetiedot ? '–' : t.myynnissa && t.hinta != null ? euroa(t.hinta) : 'Ei myynnissä Kärcher.comissa'}</td>}
+					{naytaHinta && <td>{t.vainTuotetiedot ? '–' : t.myynnissa && t.hinta != null ? euroa(t.hinta) : (t.merkki === 'Kärcher' ? 'Ei myynnissä Kärcher.comissa' : 'Ei varastossa')}</td>}
 					<td>{n(t.tekniset.tehoW, ' W')}</td>
 					<td>{sailiot(t) ?? '–'}</td>
 					<td>{n(t.tekniset.painoKg, ' kg')}</td>

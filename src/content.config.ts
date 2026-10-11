@@ -94,6 +94,9 @@ const tuotteet = defineCollection({
 		valmistajanKuva: z.string().url().nullable(),
 		// Affiliate-kauppa (true) vai valmistajan sivu (false). Vaikuttaa linkin rel-attribuuttiin.
 		affiliate: z.boolean().default(false),
+		// Ostopaikka on kumppanikauppa ilman affiliate-linkkiä (esim. Bissell, jolla ei ole suomalaista verkkokauppaa).
+		// Kaupan nimeä ei näytetä, kuten affiliate-kaupoillakaan.
+		kumppanikauppa: z.boolean().default(false),
 		// Kuvatiedoston nimi kansiossa src/assets/tuotteet/ (Adtraction-feedistä), null = paikkamerkki.
 		kuva: z.string().nullable().default(null),
 		lahde: z.string().url(),

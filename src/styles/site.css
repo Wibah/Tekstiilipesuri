@@ -253,9 +253,9 @@ td:first-child { font-weight: 600; color: #334155; }
 .mk-sija { position: absolute; top: -10px; left: -10px; width: 28px; height: 28px; border-radius: 50%; background: #18447e; color: #fff; font-size: 0.85rem; font-weight: 800; display: flex; align-items: center; justify-content: center; z-index: 1; }
 .mk-sisalto { flex: 1; min-width: 0; }
 .mk-sisalto .tp-tagi { margin: 0 0 0.35rem; }
-.mk-sisalto h3 { font-size: 1.25rem; font-weight: 800; margin: 0 0 0.2rem; color: #18447e; }
-.mk-sisalto h3 a { color: #18447e; text-decoration: none; }
-.mk-sisalto h3 a:hover { text-decoration: underline; }
+.mk-sisalto :is(h3, h4) { font-size: 1.25rem; font-weight: 800; margin: 0 0 0.2rem; color: #18447e; }
+.mk-sisalto :is(h3, h4) a { color: #18447e; text-decoration: none; }
+.mk-sisalto :is(h3, h4) a:hover { text-decoration: underline; }
 .mk-versio { font-size: 0.85rem; color: #64748b; margin: 0 0 0.3rem; }
 .mk-kuvaus { color: #475d78; font-size: 0.9rem; margin: 0 0 0.8rem; }
 .mk-sisalto ul { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
@@ -272,7 +272,7 @@ td:first-child { font-weight: 600; color: #334155; }
 .mk-osta:hover { background: #16a34a; }
 .mk-tiedot { background: #eef2f7; color: #2c4461; border: 1px solid #dce4ee; font-weight: 600; }
 .mk-tiedot:hover { background: #dce4ee; }
-.mk-osta:focus-visible, .mk-tiedot:focus-visible, .mk-sisalto h3 a:focus-visible { outline: 3px solid #f2c200; outline-offset: 2px; }
+.mk-osta:focus-visible, .mk-tiedot:focus-visible, .mk-sisalto :is(h3, h4) a:focus-visible { outline: 3px solid #f2c200; outline-offset: 2px; }
 .tp-mini-kuva { width: 48px; height: 48px; object-fit: contain; vertical-align: middle; margin-right: 0.6rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; }
 .tp-merkinta { position: absolute; top: 0.9rem; left: 0.9rem; background: #18447e; color: #fff; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 6px; }
 

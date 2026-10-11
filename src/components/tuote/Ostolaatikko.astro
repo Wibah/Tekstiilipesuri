@@ -12,7 +12,7 @@ const alennus = tuote.hinta != null && tuote.hintaEnnenAlennusta != null && tuot
 <div class="tp-osto">
 	<div class="tp-osto-rivi">
 		<div>
-			{tuote.affiliate ? (
+			{tuote.affiliate || tuote.kumppanikauppa ? (
 				// Kumppanikaupan nimeä ei näytetä (Villen ohje 2026-09-25): hinta ja linkki riittävät.
 				<>
 					<span class="tp-label">Saatavuus</span>

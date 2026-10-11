@@ -89,8 +89,10 @@ export function hintavali(vv: Tuote[]): string {
 	return min === max ? euroa(min) : `${euroa(min)}–${euroa(max)}`;
 }
 
-// Akkukäyttöinen, jos valmistaja ilmoittaa akkusarjan.
-export const akkukayttoinen = (t: Tuote) => t.tekniset.akkujanniteV != null || 'Akkusarja' in t.teknisetValmistajalta;
+// Akkukäyttöinen, jos valmistaja ilmoittaa akkusarjan tai akun jännitteen tai mallin nimessä on Cordless
+// (Bissell SpotClean Mini Cordless, jonka teknisissä tiedoissa ei ole jännitettä).
+export const akkukayttoinen = (t: Tuote) =>
+	t.tekniset.akkujanniteV != null || 'Akkusarja' in t.teknisetValmistajalta || /\bCordless\b/.test(t.nimi);
 
 // Säiliöt muodossa "1,7 / 2,9 l" (puhdas / likavesi).
 export const sailiot = (t: Tuote) =>

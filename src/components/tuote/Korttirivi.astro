@@ -16,9 +16,11 @@ interface Props {
 	versio?: boolean; // näytä "Suositeltu versio: <nimi>"
 	otsikkoH3?: string; // kortin otsikkoteksti, jos se poikkeaa napin mallinimestä (esim. "Paras tekstiilipesuri kotiin: Kärcher SE 3 Compact")
 	ankkuri?: string; // kohta sivulla, jos malli ei ole siellä korttina (esim. MallistoTaulun rivi "malli-<id>")
+	taso?: 'h3' | 'h4'; // kortin otsikon taso: h4, kun kortit ovat H3-osion alla
 }
 
-const { tuote: t, otsikko: otsikkoAnnettu, otsikkoH3, sivu, kuvaus, tagi, sija, versio = false, ankkuri } = Astro.props;
+const { tuote: t, otsikko: otsikkoAnnettu, otsikkoH3, sivu, kuvaus, tagi, sija, versio = false, ankkuri, taso = 'h3' } = Astro.props;
+const Otsikko = taso;
 const otsikko = otsikkoH3 ?? otsikkoAnnettu ?? `${t.merkki} ${t.nimi}`;
 const kuvat = import.meta.glob<{ default: ImageMetadata }>('/src/assets/tuotteet/*', { eager: true });
 const kuva = t.kuva ? kuvat[`/src/assets/tuotteet/${t.kuva}`]?.default : undefined;
@@ -50,7 +52,7 @@ const linkki = sivu && ankkuri ? `${sivu}#${ankkuri}` : sivu;
 	)}
 	<div class="mk-sisalto">
 		{tagi && <span class="tp-tagi">{tagi}</span>}
-		<h3>{sivu ? <a href={linkki}>{otsikko}</a> : otsikko}</h3>
+		<Otsikko>{sivu ? <a href={linkki}>{otsikko}</a> : otsikko}</Otsikko>
 		{versio && <p class="mk-versio">Suositeltu versio: {t.nimi}</p>}
 		{kuvaus && <p class="mk-kuvaus">{kuvaus}</p>}
 		{rivit.length > 0 && <ul>{rivit.map((r) => <li>{r}</li>)}</ul>}
