@@ -8,8 +8,8 @@ Suomenkielinen affiliate-sivusto, joka vertailee Suomessa myytäviä tekstiilipe
 - Node 22 (nvm: `~/.nvm/versions/node/v22.23.2`). Dev-palvelin: `.claude/launch.json` → `tekstiilipesuri-dev`, portti 4331 (painepesurit.fi käyttää porttia 4321).
 - **Kanoninen domain on `https://tekstiilipesuri.com`.** `site` tiedostossa `astro.config.mjs` on oltava sama kuin domain, jolta sisältö tarjoillaan.
 - **GitHub:** `Wibah/Tekstiilipesuri` (yksityinen), päähaara `main` (luotu 2026-10-05).
-- **Vercel:** projekti `tekstiilipesuri` (Ville Hinkkanen's projects, luotu 2026-10-10). Jokainen push `main`-haaraan julkaisee osoitteeseen https://tekstiilipesuri.vercel.app, joten aja `npm run build` ennen pushia.
-- **Ei vielä julkinen (Villen päätös 2026-10-10):** domainia tekstiilipesuri.com ei ole lisätty Verceliin, koska ennen julkaisua tarvitaan lisää sivuja (ks. SUUNNITELMA.md). Kun sivusto julkaistaan: vaihda `JULKAISTU = true` tiedostossa `src/layouts/Layout.astro` (poistaa esikatselun noindexin), lisää domain ja www-uudelleenohjaus Vercelissä, päivitä DNS, lisää Search Consolen vahvistustagi ja hae Adtraction-kanava.
+- **Vercel:** projekti `tekstiilipesuri` (Ville Hinkkanen's projects, luotu 2026-10-10). Jokainen push `main`-haaraan julkaisee osoitteeseen https://tekstiilipesuri.com (ja esikatseluun tekstiilipesuri.vercel.app), joten aja `npm run build` ennen pushia.
+- **Julkaistu 2026-10-11:** tekstiilipesuri.com osoittaa Verceliin (Zonerin DNS: A `216.198.79.1`, CNAME www → Vercelin projektikohtainen osoite; www ohjautuu 308:lla osoitteeseen tekstiilipesuri.com). `JULKAISTU = true` tiedostossa `src/layouts/Layout.astro`, `public/robots.txt` viittaa sivukarttaan, ja `vercel.json` antaa esikatseluosoitteelle tekstiilipesuri.vercel.app otsakkeen `X-Robots-Tag: noindex`. Jäljellä: Search Consolen vahvistus (DNS-TXT Zonerissa) ja sivukartan lähetys, Adtraction-kanava ja OBH Nordican ohjelma.
 - Google Search Consolen vahvistustagi lisätään tiedostoon `src/layouts/Layout.astro`, kun domain vahvistetaan.
 
 ## Rakenne

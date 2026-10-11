@@ -16,9 +16,9 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-// Sivusto ei ole vielä julkinen (Villen päätös 2026-10-10): esikatselu tekstiilipesuri.vercel.app ei saa päätyä
-// Googleen. Vaihda true, kun domain tekstiilipesuri.com julkaistaan, jolloin noindex poistuu.
-const JULKAISTU = false;
+// Sivusto julkaistiin osoitteessa tekstiilipesuri.com 2026-10-11 (Villen päätös). Vaihda false vain, jos sivusto
+// halutaan taas pois hakukoneista. Vercel-esikatselu (*.vercel.app) saa noindexin vercel.json-otsakkeesta.
+const JULKAISTU = true;
 ---
 <html lang="fi">
 	<head>

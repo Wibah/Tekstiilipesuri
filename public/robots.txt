@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tekstiilipesuri.com/sitemap-index.xml
