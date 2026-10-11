@@ -22,3 +22,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vercel
+
+# Adtraction-feedit (ladataan scripts/lataa_feedit.py:llä, ~900 Mt)
+.feedit/

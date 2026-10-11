@@ -14,7 +14,9 @@
     "hae:affiliate": "python3 scripts/hae_affiliate.py",
     "hae": "npm run hae:karcher && npm run hae:pesuaineet && npm run hae:kuvat",
     "hae:pesuaineet": "node scripts/hae-pesuaineet.mjs",
-    "hae:kuvat": "python3 scripts/hae_kuvat.py"
+    "hae:kuvat": "python3 scripts/hae_kuvat.py",
+    "lataa:feedit": "python3 scripts/lataa_feedit.py",
+    "hae:bissell": "python3 scripts/muunna_bissell.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
