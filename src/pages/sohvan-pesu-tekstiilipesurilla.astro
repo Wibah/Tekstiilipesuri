@@ -1,0 +1,94 @@
+---
+// SCN: tuki (käyttökohde), intentti Use Case, emopilari /. Hakusanat: tekstiilipesuri sohvan pesu 100, tekstiilipesuri
+// sohva 30 (Ahrefs 2026-10). Otsikot Villen hyväksymät 2026-10-11. Kirjoitettu tekstiilipesuri-writer-skillillä.
+// Työtapa ja testihavainnot: tietopohja (Consumer Reports 30.1.2026, Telegraph 29.9.2026, K-Rauta 15.5.2025,
+// TM 22.2.2025, io-tech 2022). Mallit ja luvut tuotedatasta.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import { merkinTuotteet, tuote, luku, euroa, mallisivut } from '../lib/tuotteet';
+
+const SIVU = '/sohvan-pesu-tekstiilipesurilla/';
+const se3 = await tuote('se-3-compact');
+const se2 = await tuote('se-2-spot-care');
+const bissell = await merkinTuotteet('Bissell');
+const pro = bissell.find((t) => t.tuotenumero === '1558N')!;
+const plus = bissell.find((t) => t.tuotenumero === '3724N')!;
+const letku = (t: typeof se3) => t.toimitusSisaltaa.find((r) => r.startsWith('Imuletkun pituus'))?.replace(/^Imuletkun pituus:\s*/, '').replace('.', ',');
+
+const ukk = [
+	{
+		kysymys: 'Voiko sohvan pestä tekstiilipesurilla?',
+		vastaus: 'Useimmat kangasverhoillut sohvat voi, mutta tarkista ensin pesumerkintä. Consumer Reports neuvoo välttämään herkkiä kankaita, kuten villaa ja silkkiä. Kokeile pesuainetta aina ensin piilossa olevaan kohtaan, koska aine voi värjätä tai vahingoittaa kangasta.',
+	},
+	{
+		kysymys: 'Millä pesuaineella sohva pestään tekstiilipesurilla?',
+		vastaus: 'Käytä laitteen valmistajan suosittelemaa vähän vaahtoavaa tekstiilipesuainetta ja annostele se ohjeen mukaan, koska liika vaahto haittaa työtä. io-techin keskustelussa (2022) suositeltiin myös levittämään pesuaine erikseen suihkepullolla ja huuhtelemaan laitteella pelkällä vedellä. Aineiden erot ovat <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.',
+	},
+	{
+		kysymys: 'Lähteekö vanha tahra sohvasta tekstiilipesurilla?',
+		vastaus: 'Usein vain osittain. Testeissä tuoreet tahrat lähtivät helposti, mutta vanhat ja rasvaiset tahrat vain vaalenivat. Esikäsittele vanha tahra, anna aineen vaikuttaa ja pese useamman kerran.',
+	},
+	{
+		kysymys: 'Kannattaako sohvan pesuun ostaa vai vuokrata tekstiilipesuri?',
+		vastaus: 'Consumer Reportsin mukaan oma laite kannattaa, jos peset useammin kuin kerran vuodessa, etenkin lemmikki- tai lapsiperheessä. Oma laite on myös heti käsillä, kun tahra on tuore. Laskelma on <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.',
+	},
+];
+---
+<Layout
+	title="Tekstiilipesuri sohvan pesu – näin peset sohvan kotona 2026"
+	description="Näin peset sohvan tekstiilipesurilla: sopiva laite ja suulake, vaiheittainen ohje, pesumerkinnät, tahrat ja kuivuminen sekä sohvalle sopivat mallit."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Sohvan pesu', sivu: SIVU }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Sohvan pesu tekstiilipesurilla</h1>
+		<p>Sohva pestään kannettavalla tekstiilipesurilla tai monitoimimallilla, jossa on verhoilusuulake. Laite ruiskuttaa veden ja pesuaineen seosta kankaaseen ja imee sen heti takaisin irronneen lian kanssa. Laitteeseen laitetaan vähän vaahtoavaa tekstiilipesuainetta. Ennen pesua sohva imuroidaan, pesumerkintä tarkistetaan ja ainetta kokeillaan piilossa olevaan kohtaan.</p>
+		<p>Tuoreet tahrat lähtevät yleensä hyvin, mutta vanhat rasvatahrat usein vain vaalenevat. Kangas jää kosteaksi, joten varaa aikaa kuivumiselle.</p>
+
+		<h2>Mikä tekstiilipesuri sohvalle?</h2>
+		<p>Sohvan pesuun riittää kannettava tekstiilipesuri, jossa on verhoilusuulake. Isoa pystymallia ei tarvita, koska sohvassa pestään pystypintoja, tyynyjä ja saumoja. Katso valitessasi kolmea asiaa:</p>
+		<ul>
+			<li><strong>Puhdasvesisäiliö:</strong> koko sohva vaatii enemmän vettä kuin yksittäinen tahra. Esimerkiksi Bissell SpotClean Prossa säiliö on {luku(pro.tekniset.puhdasvesiL!)} litraa ja SpotClean Plussassa {luku(plus.tekniset.puhdasvesiL!)} litraa.</li>
+			<li><strong>Letku:</strong> pidemmällä letkulla laitetta tarvitsee siirtää harvemmin. Kärcher SE 3 Compactin letku on {letku(se3)} pitkä.</li>
+			<li><strong>Verhoilusuulake:</strong> tarkista, että se kuuluu toimitukseen. Kärcherin SE 2:n ja SE 3 Compactin mukana tulee 88 mm:n verhoilusuulake.</li>
+		</ul>
+		<p>K-Raudan julkaisemassa kuluttajatestaajan arviossa (päivitetty 15.5.2025) Kärcher SE 3 Compact irrotti koiraperheen sohvasta pinttyneetkin tahrat. Independent valitsi Bissell SpotClean Pron testissään (23.4.2026) parhaaksi pinttyneisiin tahroihin.</p>
+
+		<h2>Näin peset sohvan tekstiilipesurilla</h2>
+		<ol>
+			<li><strong>Imuroi sohva.</strong> Irtolika ja karvat imuroidaan pois ennen märkäpesua.</li>
+			<li><strong>Tarkista pesumerkintä ja kokeile koekohtaan.</strong> Ruiskuta ja ime pieni alue sohvan takaosasta tai tyynyn alta ja katso kuivuttua, muuttuiko väri.</li>
+			<li><strong>Esikäsittele tahrat.</strong> Ruiskuta pesuainetta tahraan ja anna sen vaikuttaa ennen imua. K-Raudan kuluttajatestaaja (2025) suositteli juuri tätä.</li>
+			<li><strong>Pese hitain vedoin.</strong> Vedä suulaketta rauhallisesti ja painamatta.</li>
+			<li><strong>Tee lopuksi kuivausvedot.</strong> Vedä suulaketta pelkällä imulla ilman ruiskutusta. Mitä enemmän vettä imet pois, sitä nopeammin sohva kuivuu.</li>
+			<li><strong>Puhdista laite.</strong> Tyhjennä ja huuhtele likavesisäiliö ja huuhtele letku ja suulake puhtaalla vedellä.</li>
+		</ol>
+		<p>Suojaa lattia, jos sohva on parketilla. K-Raudan arvion mukaan pesuneste voi valua parketille.</p>
+
+		<h2>Pesumerkintä ja kangas</h2>
+		<p>Consumer Reports neuvoo katsomaan verhoilun pesumerkinnän ennen pesua ja välttämään herkkiä kankaita, kuten villaa ja silkkiä. Telegraphin haastattelema asiantuntija Emily Barron taas neuvoo kokeilemaan pesuainetta aina ensin piilossa olevaan kohtaan, koska aine voi värjätä tai vahingoittaa kangasta. Villan kanssa ohjeet siis vaihtelevat, ja sohvan valmistajan ohje sekä koekohta ratkaisevat.</p>
+		
+		<h2>Mitkä tahrat lähtevät?</h2>
+		<p>Lähteet ovat tästä yksimielisiä: tuoreet tahrat lähtevät helposti, mutta vanhat ja rasvaiset tahrat vain vaalenevat. Tekniikan Maailman pikakokeessa (22.2.2025) tuoreet tahrat lähtivät tehokkaasti, mutta pinttynyt rasvalika vain vaaleni. Pese siis tahra mahdollisimman pian. Oman laitteen etu vuokralaitteeseen nähden on juuri se, että laite on heti käsillä.</p>
+		<p>Vanhan tahran kohdalla esikäsittely ja useampi kierros auttavat. Odota tulosta silti realistisesti: tekstiilipesuri ei tee vanhasta sohvasta uutta.</p>
+
+		<h2>Kuinka kauan sohva kuivuu?</h2>
+		<p>Kuivumisaika riippuu laitteesta, kankaasta ja huoneesta, eikä testeissä ole yhteistä lukua sohvalle. Telegraphin mukaan kannettavat pesurit kuivattavat nopeammin kuin isot laitteet, koska ne käyttävät vähemmän vettä. Kangas on kuitenkin kuivattava kokonaan, jotta se ei homehdu.</p>
+		<p>Nopeuta kuivumista tekemällä kuivausvetoja pelkällä imulla, tuulettamalla ja pitämällä huone lämpimänä. Suomen lämmityskaudella sisäilma on kuiva, mikä nopeuttaa kuivumista. Älä istu sohvalle ennen kuin se on kuiva.</p>
+
+		<h2>Sopivat mallit</h2>
+		<div class="mk-lista">
+			<Korttirivi tuote={se3} otsikko="Kärcher SE 3 Compact" sivu={mallisivut['SE 3']} kuvaus="Kompakti verkkovirtamalli sohvalle, nojatuoleille ja autolle" tagi="Suosituksemme" versio />
+			<Korttirivi tuote={pro} otsikko="Bissell SpotClean Pro" sivu="/bissell-spotclean-pro/" kuvaus="Isot säiliöt koko sohvan pesuun" tagi="Isot säiliöt" versio />
+			<Korttirivi tuote={plus} otsikko="Bissell SpotClean Plus" sivu="/bissell-tekstiilipesurit/" ankkuri={plus.id} kuvaus="Kevyt malli tahroihin ja nojatuoleille" tagi="Kevyt" versio />
+			<Korttirivi tuote={se2} otsikko="Kärcher SE 2 Spot Care" sivu="/karcher-tekstiilipesurit/" ankkuri={`malli-${se2.id}`} kuvaus="Pieni kannettava malli tuoreisiin tahroihin" tagi="Edullisin Kärcher" versio />
+		</div>
+		<p>Kaikki mallit ja niiden erot ovat <a href="/">tekstiilipesurivertailussa</a>.</p>
+
+		<p class="tp-lahde">Lähteet: Consumer Reports (päivitetty 30.1.2026), Telegraph (päivitetty 29.9.2026), Independent (23.4.2026), K-Raudan kuluttajatestaajan arvio (päivitetty 15.5.2025), Tekniikan Maailma (22.2.2025) ja io-tech-foorumi (2022).</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
