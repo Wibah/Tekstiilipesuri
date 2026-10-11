@@ -1,0 +1,91 @@
+---
+// SCN: tuki (käyttökohde), intentti Use Case, emopilari /. Hakusanat: tekstiilipesuri auton penkit 60, auton
+// tekstiilipesuri 30, tekstiilipesuri autoon 20 (Ahrefs 2026-10, noin 110). Otsikot Villen hyväksymät 2026-10-11.
+// Kirjoitettu tekstiilipesuri-writer-skillillä. Testihavainnot: Parkers 16.3.2026, CAR Magazine 13.4.2026, M3 2025
+// (tietopohja). SE 3-18:n käyntiajat Kärcherin käyttöohjeesta (BTA-5916492). Mallit ja luvut tuotedatasta.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import { tuote, luku, euroa, mallisivut } from '../lib/tuotteet';
+
+const SIVU = '/auton-penkkien-pesu-tekstiilipesurilla/';
+const se318 = await tuote('se-3-18-compact-akulla');
+const se318home = await tuote('se-3-18-compact-home-akulla');
+const se3 = await tuote('se-3-compact');
+const cordless = await tuote('bissell-spotclean-cordless-3681n');
+const autoPro = await tuote('bissell-spotclean-auto-pro-select-3730n');
+// Akun kapasiteetti toimitussisällöstä: "Akku: 18 V / 2.5 Ah Battery Power -akku (1 kpl)" → "2,5".
+const ah = (t: typeof se318) => luku(Number(t.toimitusSisaltaa.find((r) => r.startsWith('Akku:'))?.match(/([\d.]+) Ah/)?.[1]));
+
+const ukk = [
+	{
+		kysymys: 'Mikä on paras tekstiilipesuri autoon?',
+		vastaus: `Brittiläisissä autotesteissä paras oli akkukäyttöinen Bissell SpotClean Cordless (${euroa(cordless.hinta!)}). Parkers (16.3.2026) ja CAR Magazine (13.4.2026) valitsivat sen parhaaksi autoon. Kärcherin vaihtoehto on <a href="${mallisivut['SE 3']}">SE 3-18 Compact</a> (${euroa(se318.hinta!)}), joka sai Parkersin testissä 4/5. Jos auton lähellä on pistorasia, myös johdollinen malli toimii.`,
+	},
+	{
+		kysymys: 'Riittääkö akku koko auton pesuun?',
+		vastaus: `Testien perusteella riittää pieneen autoon. Parkersin testissä Bissell SpotClean Cordlessilla pesi noin 35 minuuttia Eco-tilassa ja kaksi autoa yhdellä latauksella. Kärcherin käyttöohjeen mukaan SE 3-18 Compact toimii normaalikäytössä 12 minuuttia 2,5 Ah:n akulla ja 24 minuuttia 5 Ah:n akulla. Parkersin testissä SE 3-18:n akusta oli kahden automaton pesun jälkeen jäljellä 61 %.`,
+	},
+	{
+		kysymys: 'Kuinka kauan auton penkit kuivuvat tekstiilipesun jälkeen?',
+		vastaus: 'Testeissä ei ole yhteistä lukua, koska kuivuminen riippuu kankaasta, laitteesta ja ilmasta. Tee lopuksi vetoja pelkällä imulla, jotta kankaaseen jää mahdollisimman vähän vettä, ja tuuleta autoa. Penkkien on annettava kuivua kokonaan, jotta ne eivät homehdu.',
+	},
+	{
+		kysymys: 'Voiko auton penkit pestä höyryä käyttävällä tekstiilipesurilla?',
+		vastaus: 'CAR Magazinen testissä (13.4.2026) höyryä käyttävä Bissell SpotClean HydroSteam pesi automatot hyvin, mutta Volvo C30:n kangaspenkit eivät puhdistuneet eivätkä kuivuneet kunnolla. Penkkeihin akkukäyttöinen tai tavallinen kannettava malli sopi testeissä paremmin.',
+	},
+];
+---
+<Layout
+	title="Tekstiilipesuri auton penkit – näin peset penkit ja matot 2026"
+	description="Näin peset auton penkit ja matot tekstiilipesurilla: akku vai johto, vaiheittainen ohje, autotestien tulokset ja autoon sopivat mallit."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Auton penkkien pesu', sivu: SIVU }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Auton penkkien pesu tekstiilipesurilla</h1>
+		<p>Auton kangaspenkit ja tekstiilimatot pestään kannettavalla tekstiilipesurilla, jossa on pieni verhoilu- tai rakosuulake. Paras on akkukäyttöinen malli, koska autolla ei yleensä ole pistorasiaa lähellä. Brittiläisissä autotesteissä paras oli Bissell SpotClean Cordless, ja Kärcherin akkumalli SE 3-18 Compact sai hyvän arvion.</p>
+		<p>Imuroi auto ennen pesua, käytä vähän vaahtoavaa pesuainetta ja tee lopuksi vetoja pelkällä imulla, jotta penkit kuivuvat nopeammin.</p>
+
+		<h2>Millainen tekstiilipesuri autoon?</h2>
+		<p>Autossa pestään ahtaissa paikoissa: penkkien saumoja, istuinten väliä ja jalkatilaa. Siksi auton tekstiilipesurin tärkeimmät ominaisuudet ovat:</p>
+		<ul>
+			<li><strong>Pieni suulake:</strong> verhoilusuulake penkkeihin ja rakosuulake saumoihin. Kärcher SE 3-18 Compactin mukana tulee pesusuulake huonekaluille ja auton istuimille sekä rakosuulake.</li>
+			<li><strong>Kevyt runko:</strong> laite nostetaan autoon tai sen viereen. SE 3-18 Compact painaa {luku(se318.tekniset.painoKg!)} kg ja SpotClean Cordless {luku(cordless.tekniset.painoKg!)} kg.</li>
+			<li><strong>Virtalähde:</strong> akku tai riittävän pitkä johto. Lue lisää alta.</li>
+		</ul>
+		<p>Isoa monitoimimallia tai pystymallia ei tarvita. CAR Magazinen testissä (13.4.2026) isompi SpotClean Pet Pro oli tilava mutta kookas autoon.</p>
+
+		<h2>Akku vai johto?</h2>
+		<p>Akkukäyttöinen tekstiilipesuri on autossa kätevin, koska se ei tarvitse pistorasiaa. Akun käyntiaika rajaa kuitenkin työn kokoa. Kärcherin käyttöohjeen mukaan SE 3-18 Compact toimii normaalikäytössä 12 minuuttia 2,5 Ah:n akulla ja 24 minuuttia 5 Ah:n akulla. SE 3-18 Compact akulla -version ({euroa(se318.hinta!)}) mukana tulee {ah(se318)} Ah:n akku ja Home akulla -version ({euroa(se318home.hinta!)}) mukana {ah(se318home)} Ah:n akku. Parkersin testissä (16.3.2026) Bissell SpotClean Cordlessilla pesi noin 35 minuuttia Eco-tilassa ja kaksi autoa yhdellä latauksella.</p>
+		<p>Johdollinen malli toimii niin kauan kuin tarvitaan, mutta se vaatii pistorasian. Ruotsalainen M3 (huhtikuu 2025) moitti, että Kärcher SE 3 Compactin johto rajoittaa auton pesua. SE 3 Compactin johto on {luku(se3.tekniset.virtajohtoM!)} metriä, ja Bissell SpotClean Auto Pro Selectin johto on {luku(autoPro.tekniset.virtajohtoM!)} metriä. Pihalla tarvitset usein jatkojohdon.</p>
+
+		<h2>Näin peset auton penkit</h2>
+		<ol>
+			<li><strong>Imuroi auto huolellisesti.</strong> Hiekka, murut ja karvat imuroidaan pois ennen märkäpesua, myös penkkien saumoista.</li>
+			<li><strong>Kokeile pesuainetta piilossa olevaan kohtaan,</strong> esimerkiksi penkin alaosaan, koska aine voi värjätä kangasta.</li>
+			<li><strong>Esikäsittele tahrat</strong> ja anna pesuaineen vaikuttaa ennen imua.</li>
+			<li><strong>Pese hitain vedoin.</strong> Vedä suulaketta rauhallisesti ja painamatta. Imuroi lopuksi pelkällä imulla, jotta kankaaseen jää mahdollisimman vähän vettä.</li>
+			<li><strong>Tuuleta auto.</strong> Anna penkkien kuivua kokonaan, jotta ne eivät homehdu.</li>
+			<li><strong>Puhdista laite</strong> tyhjentämällä ja huuhtelemalla likavesisäiliö ja huuhtelemalla letku ja suulake.</li>
+		</ol>
+		<p>Annostele pesuaine tarkasti. Parkers ja CAR Magazine moittivat SE 3-18:n laimennusohjetta hankalaksi, koska ohje on 100–200 ml pesuainetta 4 litraan, mutta säiliö on 1,7 litraa eikä siinä ole asteikkoa. Pesuaineet ovat <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.</p>
+
+		<h2>Auton tekstiilimatot</h2>
+		<p>Ota tekstiilimatot pois autosta ja imuroi ne ennen pesua. Talvella matoissa on hiekoitussepeliä, joten imuroi ne erityisen huolellisesti. Pese matto samalla tavalla kuin penkit ja anna sen kuivua kokonaan ennen kuin laitat sen takaisin autoon. Parkersin testissä Kärcher SE 3-18:lla pestiin Mazda MX-5:n kaksi mattoa, ja akkua oli sen jälkeen jäljellä 61 %.</p>
+
+		<h2>Sopivat mallit</h2>
+		<div class="mk-lista">
+			<Korttirivi tuote={cordless} otsikko="Bissell SpotClean Cordless" sivu="/bissell-tekstiilipesurit/" ankkuri={cordless.id} kuvaus="Akkukäyttöinen, paras autoon Parkersin ja CAR Magazinen testeissä" tagi="Paras autoon" versio />
+			<Korttirivi tuote={se318} otsikko="Kärcher SE 3-18 Compact" sivu={mallisivut['SE 3']} kuvaus="Kärcherin akkumalli, toimii myös märkä-kuivaimurina" tagi="Kärcherin akkumalli" versio />
+			<Korttirivi tuote={autoPro} otsikko="Bissell SpotClean Auto Pro Select" sivu="/bissell-tekstiilipesurit/" ankkuri={autoPro.id} kuvaus={`Johdollinen automalli, ${luku(autoPro.tekniset.puhdasvesiL!)} litran puhdasvesisäiliö`} tagi="Johdollinen" versio />
+			<Korttirivi tuote={se3} otsikko="Kärcher SE 3 Compact" sivu={mallisivut['SE 3']} kuvaus="Kompakti verkkovirtamalli sohvalle ja autolle" tagi="Edullinen" versio />
+		</div>
+		<p>Sohvan pesu on <a href="/sohvan-pesu-tekstiilipesurilla/">sohvan pesu -sivulla</a>, ja kaikki mallit ovat <a href="/">tekstiilipesurivertailussa</a>.</p>
+
+		<p class="tp-lahde">Lähteet: Parkers (16.3.2026), CAR Magazine (13.4.2026), M3 (huhtikuu 2025) ja Kärcher SE 3-18 Compactin käyttöohje.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
