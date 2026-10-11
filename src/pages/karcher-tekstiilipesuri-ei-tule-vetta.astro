@@ -1,0 +1,127 @@
+---
+// SCN: tuki, intentti Risk, emopilari /karcher-tekstiilipesurit/. Hakusanat: kärcher tekstiilipesuri ei tule vettä 150,
+// kärcher tekstiilipesuri käyttöohje 40, tekstiilipesuri käyttöohje 40, kärcher tekstiilipesuri ei ime 20,
+// kärcher tekstiilipesuri ei anna vettä 10 (Ahrefs 2026-10, noin 260). Otsikot ja UKK Villen hyväksymät 2026-10-11.
+// Lähde: Kärcherin suomenkieliset käyttöohjeet (luvut "Hoito ja huolto" ja "Ohjeet häiriötilanteissa"), luettu
+// verkkoversioina 2026-10-11. Kirjoitettu tekstiilipesuri-writer-skillillä. Myynnistä poistuneita malleja ei mainita.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Ukk from '../components/Ukk.astro';
+
+const ohje = (id: string) => `https://s1.kaercher-media.com/documents/manuals/html/${id}/FI.html`;
+const OHJEET = [
+	{ mallit: 'SE 2 Spot Care', id: 'BTA-5939401-000-04' },
+	{ mallit: 'SE 3 Compact, SE 3 Compact Home ja SE 3 Compact Floor', id: 'BTA-5877953-000-05' },
+	{ mallit: 'SE 3-18 Compact (akulla)', id: 'BTA-5916492-000-06' },
+	{ mallit: 'SE 4, SE 4 Plus ja SE 4 Plus Special', id: 'BTA-5964032-000-01' },
+	{ mallit: 'SE 5, SE 5 Upholstery, SE 5 Car ja SE 6 Signature Line', id: 'BTA-5858400-000-04' },
+];
+const HUOLTOHAKU = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/jaelleenmyyjaehaku.html';
+const AINEISTOPANKKI = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/aineistopankki.html';
+const rel = 'nofollow noopener';
+
+const ukk = [
+	{
+		kysymys: 'Miksi Kärcherin tekstiilipesurista ei tule vettä, vaikka säiliö on täynnä?',
+		vastaus: 'Kärcherin käyttöohjeiden mukaan syy on silloin puhdasvesisäiliön pohjan suodatin tai siivilä, väärin asennettu puhdasvesisäiliö tai suuttimen ja letkun välinen liitäntä. Puhdista suodatin, asenna säiliö uudelleen ja kiinnitä suutin tukevasti. Jos vettä ei vieläkään tule, puhdistusainepumppu voi olla viallinen, ja silloin ohjeet neuvovat ottamaan yhteyttä asiakaspalveluun.',
+	},
+	{
+		kysymys: 'Missä Kärcherin tekstiilipesurin puhdasvesisuodatin on?',
+		vastaus: 'Suodatin on puhdasvesisäiliön pohjassa. SE 3 Compactissa suodattimeen pääsee, kun säiliö on tyhjä ja irrotettu laitteesta ja sen kansi on avattu. SE 4:ssä siivilä on säiliön sisällä olevan vesiletkun päässä: irrota säiliö, avaa lukitus ja irrota vesiletku säiliöstä. Huuhtele suodatin juoksevan veden alla tai puhdista se varovasti pehmeällä harjalla.',
+	},
+	{
+		kysymys: 'Miksi tekstiilipesuri vaahtoaa?',
+		vastaus: 'SE 4:n käyttöohjeen mukaan vaahto voi johtua väärästä pesuaineen annostelusta, joten noudata pesuaineen valmistajan annostusohjetta. SE 2 Spotin ohje neuvoo lisäämään likavesisäiliöön 2–4 ml FoamStop-vaahdonestoainetta, jos laitteen alta vuotaa vaahtoa tai vettä. Sopivat pesuaineet ovat <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.',
+	},
+	{
+		kysymys: 'Mistä löydän Kärcherin tekstiilipesurin käyttöohjeen suomeksi?',
+		vastaus: `Kärcherin käyttöohjeet ovat luettavissa suomeksi verkossa. Linkit nykyisten SE-mallien ohjeisiin ovat tämän sivun käyttöohjetaulukossa. Muiden laitteiden ohjeet löytyvät <a href="${AINEISTOPANKKI}" target="_blank" rel="${rel}">Kärcherin aineistopankista</a> ja kunkin laitteen tuotesivulta Kärcher.comista.`,
+	},
+	{
+		kysymys: 'Korjaako Kärcher viallisen pumpun takuulla?',
+		vastaus: 'Kärcherin käyttöohjeiden mukaan Kärcher korjaa takuuaikana maksutta häiriöt, jotka johtuvat materiaali- tai valmistusvirheestä. Ota takuutapauksessa yhteyttä myyjään tai lähimpään valtuutettuun huoltoliikkeeseen ja ota ostotosite mukaan.',
+	},
+];
+---
+<Layout
+	title="Kärcher tekstiilipesurista ei tule vettä? Syyt, korjaus ja käyttöohjeet 2026"
+	description="Kun Kärcher tekstiilipesuri ei ime tai siitä ei tule vettä: syyt ja korjaukset Kärcherin käyttöohjeiden mukaan, mallikohtaiset ohjeet ja milloin laite viedään huoltoon."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Ei tule vettä', sivu: '/karcher-tekstiilipesuri-ei-tule-vetta/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Kärcher tekstiilipesurista ei tule vettä – syyt ja korjaus</h1>
+		<p>Kun Kärcherin tekstiilipesurin suuttimesta ei tule vettä, Kärcherin käyttöohjeet listaavat syiksi seuraavat: puhdasvesisäiliö on tyhjä tai väärin paikallaan, säiliön pohjan suodatin on tukossa tai suutin ei ole kunnolla kiinni letkussa. Nämä kolme voit korjata itse. Jos mikään niistä ei auta, vika voi olla puhdistusainepumpussa, joka korjataan huollossa.</p>
+		<p>Ohjeet perustuvat nykyisten SE-mallien suomenkielisiin käyttöohjeisiin. Linkit malleittain ovat sivun lopun <a href="#kayttoohjeet">käyttöohjetaulukossa</a>.</p>
+
+		<h2>Tarkista nämä, kun Kärcher tekstiilipesuri ei anna vettä</h2>
+		<p>Käy kohdat läpi tässä järjestyksessä. Järjestys on sama kuin Kärcherin käyttöohjeiden häiriötaulukossa, ja vain viimeinen kohta vaatii huoltoa.</p>
+
+		<h3>Puhdasvesisäiliö on tyhjä tai väärin paikallaan</h3>
+		<p>Täytä puhdasvesisäiliö ja aseta se takaisin. SE 2 Spotin ohjeen mukaan säiliö painetaan paikalleen suoraan alaspäin. Tyhjä säiliö kuuluu myös äänestä: SE 4:n, SE 5:n ja SE 6:n ohjeiden mukaan puhdistusainepumppu on silloin äänekäs.</p>
+
+		<h3>Puhdasvesisuodatin on likainen</h3>
+		<p>Puhdasvesisäiliön pohjassa on suodatin tai siivilä, johon likahiukkaset kerääntyvät. Tukkeutunut suodatin estää veden virtauksen, joten Kärcher suosittelee puhdistamaan sen säännöllisesti:</p>
+		<ul>
+			<li><strong>SE 3 Compact:</strong> tyhjennä säiliö, irrota se laitteesta ja avaa kansi. Huuhtele suodatin tai puhdista se varovasti pehmeällä harjalla.</li>
+			<li><strong>SE 4:</strong> irrota säiliö, käännä korkki ylöspäin, avaa lukitus ja irrota vesiletku säiliöstä. Siivilä on vesiletkun päässä. Huuhtele siivilä ja säiliö juoksevan veden alla.</li>
+		</ul>
+		<p>Muiden mallien ohjeet ovat niiden käyttöohjeissa luvussa Hoito ja huolto.</p>
+
+		<h3>Suuttimen ja letkun liitäntä on löysällä</h3>
+		<p>Jos suutin ei ole kunnolla kiinni suihku- ja imuletkussa, vesi ei pääse suuttimelle. Irrota suutin ja kiinnitä se uudelleen, kunnes se on tukevasti paikallaan. SE 2 Spotissa tarkista myös sumutussuuttimen ja suutinpidikkeen välinen liitäntä.</p>
+
+		<h3>Puhdistusainepumppu on viallinen</h3>
+		<p>Jos säiliö on täynnä ja oikein paikallaan, suodatin on puhdas ja suutin tukevasti kiinni, mutta vettä ei silti tule, vika voi olla puhdistusainepumpussa. Kärcherin kaikkien SE-mallien ohjeet neuvovat ottamaan silloin yhteyttä asiakaspalveluun. Lue lisää kohdasta <a href="#huolto">Milloin laite kannattaa viedä huoltoon</a>.</p>
+
+		<h2>Suihku on epätasainen</h2>
+		<p>Jos vettä tulee mutta suihku on epätasainen, suuttimen sumutussuutin on todennäköisesti tukossa pesuainejäämistä. Irrota suutinpidike kiertämällä ja vedä sumutussuutin ulos. Huuhtele jäämät juoksevan veden alla. Ohjeiden mukaan sumutussuuttimen O-rengas eli tiivisterengas on tallessa pidettävä ja asetettava takaisin paikalleen, ennen kuin suutin kiinnitetään takaisin kiertämällä.</p>
+
+		<h2>Kärcher tekstiilipesuri ei ime</h2>
+		<p>Kärcherin käyttöohjeet listaavat heikon imun syiksi seuraavat:</p>
+		<ul>
+			<li><strong>Tukos:</strong> suutin, imuletku tai putket ovat tukossa. Tarkista ne ja poista tukos.</li>
+			<li><strong>Vuotoilmaluisti on auki:</strong> sulje suuttimen vuotoilmaluisti. Tämä koskee SE 3-, SE 4-, SE 5- ja SE 6 -malleja.</li>
+			<li><strong>Likavesisäiliö on väärin paikallaan:</strong> paina säiliö alas, kunnes se on kunnolla paikallaan.</li>
+			<li><strong>SE 3 ja SE 3-18:</strong> likavesisäiliön kannen sisäpuolella on kaksi ritilää. Jos ne ovat märät tai likaiset, uimurit eivät välttämättä toimi oikein, ja laite voi muuttua äänekkäämmäksi eikä enää ime likavettä. Irrota kansi ja erotin, puhdista ne kostealla liinalla ja kuivaa ne.</li>
+			<li><strong>SE 2 Spot:</strong> likavesisäiliön alla olevan moottorin suojasuodattimen pinnalle on kertynyt puhdistusjäämiä. Irrota likavesisäiliö ja suodatin ja puhdista suodatin puhtaalla vedellä.</li>
+			<li><strong>SE 4:</strong> suodatinpussi on täynnä tai vaahtomuovisuodatin on likainen tai kulunut. Koputtele kuivaa suodatinta tai huuhtele se vedellä, äläkä hankaa sitä. Kulunut suodatin vaihdetaan.</li>
+			<li><strong>SE 5 ja SE 6:</strong> suodatinpussi on täynnä tai laakasuodatin on likainen tai kulunut.</li>
+		</ul>
+		<p>Suodattimet ja pölypussit ovat <a href="/karcher-tekstiilipesuri-varaosat/">Kärcher tekstiilipesuri varaosat -sivulla</a>.</p>
+
+		<h2>Laitteesta tulee vaahtoa tai vettä</h2>
+		<p>SE 4:n ohjeen mukaan laitepään sivuilta voi tulla vettä, vesihöyryä tai vaahtoa kahdesta syystä. Jos vaahtomuovisuodatin on liian märkä, moottori pumppaa vettä ulos. Sammuta silloin laite ja anna suodattimen ja laitteen kuivua. Suodatin kuivuu nopeammin, kun sen irrottaa. Toinen syy on liika pesuaine, joka vaahtoaa. Noudata pesuaineen valmistajan annostusohjetta.</p>
+		<p>SE 2 Spotin alapuolelta vuotava vaahto tai vesi tarkoittaa ohjeen mukaan, että tarvitaan vaahdonestoainetta. Lisää likavesisäiliöön 2–4 ml (1–2 korkillista) Kärcherin FoamStop-ainetta. FoamStop ei sisälly toimitukseen. Pesuaineiden erot ovat <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.</p>
+
+		<h2>SE 3-18 ei käynnisty tai sammuu itsestään</h2>
+		<p>Akkukäyttöisen SE 3-18 Compactin käyttöohjeessa on omat kohtansa akkuun liittyville vioille:</p>
+		<ul>
+			<li><strong>Ei käynnisty:</strong> työnnä akkua kiinnityskohtaan, kunnes se lukkiutuu. Tarvittaessa irrota akku ja aseta se uudelleen. Tarkista lataustila näytöstä ja lataa akku. Jos akku tai laturi on viallinen, se vaihdetaan.</li>
+			<li><strong>Sammuu itsestään:</strong> laite tai akku on ylikuumentunut, joten odota, että se jäähtyy. Toinen syy voi olla likavesisäiliön kannen märät tai likaiset ritilät. Puhdista ja kuivaa ne.</li>
+		</ul>
+		<p>Ohjeen mukaan SE 3-18 toimii täydellä 2,5 Ah:n akulla normaalikäytössä 12 minuuttia ja 5 Ah:n akulla 24 minuuttia, joten akku voi myös vain loppua kesken pesun.</p>
+
+		<h2 id="kayttoohjeet">Kärcher tekstiilipesuri käyttöohje</h2>
+		<p>Kärcherin käyttöohjeet ovat luettavissa suomeksi verkossa. Häiriötaulukko on jokaisessa ohjeessa luvussa Ohjeet häiriötilanteissa ja suodattimien puhdistusohjeet luvussa Hoito ja huolto.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Mallit</th><th scope="col">Käyttöohje</th></tr></thead>
+				<tbody>
+					{OHJEET.map((o) => (
+						<tr><th scope="row">Kärcher {o.mallit}</th><td><a href={ohje(o.id)} target="_blank" rel={rel}>Lue käyttöohje suomeksi</a></td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p>Muiden Kärcherin laitteiden ohjeet löytyvät <a href={AINEISTOPANKKI} target="_blank" rel={rel}>Kärcherin aineistopankista</a>. Mallien erot ovat <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurien sivulla</a>.</p>
+
+		<h2 id="huolto">Milloin laite kannattaa viedä huoltoon?</h2>
+		<p>Vie laite huoltoon, jos käyttöohjeen tarkistukset eivät auta. Kärcherin ohjeiden mukaan esimerkiksi viallinen puhdistusainepumppu kuuluu asiakaspalvelulle. Takuuaikana Kärcher korjaa materiaali- ja valmistusvirheistä johtuvat häiriöt maksutta. Ota silloin yhteyttä myyjään tai lähimpään valtuutettuun huoltoliikkeeseen ja ota ostotosite mukaan.</p>
+		<p>Suodattimet, pölypussit ja suuttimet voit ostaa itse. Ohjeet ovat <a href="/karcher-tekstiilipesuri-varaosat/">varaosasivulla</a>. Lähimmän huoltoliikkeen löydät <a href={HUOLTOHAKU} target="_blank" rel={rel}>Kärcherin jälleenmyyjä- ja huoltoliikehausta</a>.</p>
+
+		<p class="tp-lahde">Lähde: Kärcherin SE-mallien suomenkieliset käyttöohjeet, luettu 11.10.2026.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
