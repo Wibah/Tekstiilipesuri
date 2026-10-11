@@ -1,0 +1,41 @@
+{
+	"haettu": "2026-10-11",
+	"tuotteet": {
+		"puzzi-9-1-bp-adv-runkomalli": {
+			"hinta": 734.51,
+			"hintaEnnenAlennusta": null,
+			"ostopaikka": {
+				"nimi": "CS Megastore",
+				"url": "https://www.csmegastore.fi/i/8554284/kärcher-puzzi-9-1-bp-adv-matonpuhdistin-550-w-solo",
+				"napinTeksti": "Katso tarjous"
+			}
+		},
+		"se-3-compact-home-shoe": {
+			"hinta": 208.33,
+			"hintaEnnenAlennusta": null,
+			"ostopaikka": {
+				"nimi": "Proshop",
+				"url": "https://www.proshop.fi/Tekstiilipesuri/Kaercher-Tekstiilipesuri-Karcher-SE-3-Compact-Home-Shoe-N1-1081-5400/3436603",
+				"napinTeksti": "Katso tarjous"
+			}
+		},
+		"se-4-plus": {
+			"hinta": 256.47,
+			"hintaEnnenAlennusta": null,
+			"ostopaikka": {
+				"nimi": "Proshop",
+				"url": "https://www.proshop.fi/Poelynimuri/Kaercher-Poelynimuri-SE-4-Plus/3281204",
+				"napinTeksti": "Katso tarjous"
+			}
+		},
+		"se-5-car": {
+			"hinta": 301.38,
+			"hintaEnnenAlennusta": null,
+			"ostopaikka": {
+				"nimi": "CS Megastore",
+				"url": "https://www.csmegastore.fi/i/21854459/kärcher-se-5-auton-tekstiilipesuri",
+				"napinTeksti": "Katso tarjous"
+			}
+		}
+	}
+}

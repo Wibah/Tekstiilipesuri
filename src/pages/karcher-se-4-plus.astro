@@ -19,15 +19,22 @@ const goFurther = await tuote('se-4-go-further-eu');
 const se4versiot = await versiot('SE 4');
 const se6 = await tuote('se-6-signature-line');
 const se5car = await tuote('se-5-car');
+const se5u = await tuote('se-5-upholstery');
 const se3 = await paatuote('SE 3');
 
 const t = suositus.tekniset;
+// Kauppa, josta hinta on: Kärcher.com tai kumppanikauppa (SE 4 Plus ei ole nyt Kärcher.comissa, ks. npm run hae:kumppanit).
+const kauppa = (v: typeof suositus) => (v.kumppanikauppa ? 'verkkokaupassa' : 'Kärcher.comissa');
+const hintaero = (a: typeof suositus, b: typeof suositus) =>
+	a.kumppanikauppa === b.kumppanikauppa
+		? `${a.nimi.replace(/^SE 4 /, '')} maksaa ${kauppa(a)} ${euroa(Math.abs(a.hinta! - b.hinta!))} ${a.hinta! > b.hinta! ? 'enemmän' : 'vähemmän'}.`
+		: `${a.nimi.replace(/^SE 4 /, '')} maksaa ${kauppa(a)} ${euroa(a.hinta!)} ja ${b.nimi.replace(/^SE 4 /, '')} ${kauppa(b)} ${euroa(b.hinta!)}.`;
 const t3 = se3.tekniset;
 
 const ukk = [
 	{
 		kysymys: 'Mikä ero on Kärcher SE 4 Plussalla ja SE 4 Plus Specialilla?',
-		vastaus: `Laite on sama: ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran säiliöt ja ${luku(t.painoKg!)} kg. Special-versiossa on vaihdettava lattiasuulake kuivaimurointiin ja erittäin pitkä rakosuulake. Kärcher.comissa Special maksaa ${euroa(special.hinta! - suositus.hinta!)} enemmän.`,
+		vastaus: `Laite on sama: ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran säiliöt ja ${luku(t.painoKg!)} kg. Special-versiossa on vaihdettava lattiasuulake kuivaimurointiin ja erittäin pitkä rakosuulake. ${hintaero(special, suositus)}`,
 	},
 	{
 		kysymys: 'Toimiiko Kärcher SE 4 Plus märkä-kuivaimurina?',
@@ -35,7 +42,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Mikä ero on Kärcher SE 4 Plussalla ja SE 6 Signature Linella?',
-		vastaus: `Teho, säiliöt ja virtajohto ovat samat. SE 6 Signature Line painaa ${luku(se6.tekniset.painoKg!)} kg, ja sen toimitukseen kuuluvat vaihdettava kuivaimurointisuulake ja laakasuodatin. Kärcher.comissa SE 6 maksaa ${euroa(se6.hinta!)} ja SE 4 Plus ${euroa(suositus.hinta!)}.`,
+		vastaus: `Teho, säiliöt ja virtajohto ovat samat. SE 6 Signature Line painaa ${luku(se6.tekniset.painoKg!)} kg, ja sen toimitukseen kuuluvat vaihdettava kuivaimurointisuulake ja laakasuodatin. SE 6 maksaa ${kauppa(se6)} ${euroa(se6.hinta!)} ja SE 4 Plus ${kauppa(suositus)} ${euroa(suositus.hinta!)}.`,
 	},
 	{
 		kysymys: 'Kumman valitsen, Kärcher SE 3 Compactin vai SE 4 Plussan?',
@@ -77,10 +84,10 @@ const ukk = [
 		</div>
 
 		<h2>SE 4:n versiot vertailussa</h2>
-		<p>Kärcher.com myy SE 4:ää kolmena versiona. Moottori, säiliöt, letku ja paino ovat kaikissa samat, joten versiot eroavat toisistaan vain suulakkeiden osalta. Go!Further maksaa saman verran kuin Plus ({euroa(goFurther.hinta!)}), ja sen mukana tulee lisäksi verhoilusuulake lemmikkien karvoille. Kärcherin mukaan Go!Furtherin rungossa on käytetty 25 prosenttia kierrätysmuovia.</p>
-		<p>Jos kotona on koira tai kissa, Go!Further on siis samalla hinnalla parempi valinta. Muuten Plus riittää. Special-version vaihdettava kuivaimurointisuulake ja pitkä rakosuulake ovat hyödyllisiä lähinnä silloin, kun laitetta käytetään paljon myös imurina.</p>
+		<p>SE 4:ää myydään kolmena versiona. Moottori, säiliöt, letku ja paino ovat kaikissa samat, joten versiot eroavat toisistaan vain suulakkeiden osalta. Go!Furtherin mukana tulee lisäksi verhoilusuulake lemmikkien karvoille. Go!Further maksaa {kauppa(goFurther)} {euroa(goFurther.hinta!)} ja Plus {kauppa(suositus)} {euroa(suositus.hinta!)}. Kärcherin mukaan Go!Furtherin rungossa on käytetty 25 prosenttia kierrätysmuovia.</p>
+		<p>Jos kotona on koira tai kissa, Go!Furtherin lemmikkisuulake on hyödyllinen. Muuten Plus riittää{suositus.hinta! < goFurther.hinta! ? ', ja se on nyt halvempi' : ''}. Special-version vaihdettava kuivaimurointisuulake ja pitkä rakosuulake ovat hyödyllisiä lähinnä silloin, kun laitetta käytetään paljon myös imurina.</p>
 		<VersioVertailu versiot={se4versiot} paatuoteId={suositus.id} />
-		<p class="tp-lahde">Hinnat tarkistettu {paiva(suositus.haettu)} Kärcher.comista.</p>
+		<p class="tp-lahde">Hinnat: Kärcher.com ja suomalaiset verkkokaupat, tarkistettu {paiva(suositus.haettu)}.</p>
 
 		<h2>Tekniset tiedot: Kärcher {suositus.nimi}</h2>
 		<TeknisetTiedot tuote={suositus} />
@@ -88,11 +95,11 @@ const ukk = [
 		<h2>SE 4, SE 5 ja SE 6: mitä eroa?</h2>
 		<p>Kärcherin SE 4-, SE 5- ja SE 6 -mallit ovat samaa kokoluokkaa. Kaikissa on {luku(t.tehoW!)} watin teho, {luku(t.puhdasvesiL!)} litran säiliöt ja {luku(t.virtajohtoM!)} metrin virtajohto. Erot ovat rungossa ja varusteissa:</p>
 		<ul>
-			<li><strong>SE 5 Car</strong> on pakattu auton pesuun, eikä siinä ole lattiasuulaketta. Kärcher.com ei myy sitä tällä hetkellä.</li>
-			<li><strong>SE 5 Upholstery</strong> on varustettu verhoilun ja mattojen pesuun. Kärcher.com ei myy sitäkään tällä hetkellä.</li>
+			<li><strong>SE 5 Car</strong> on pakattu auton pesuun, eikä siinä ole lattiasuulaketta.{se5car.hinta != null ? ` Se maksaa ${kauppa(se5car)} ${euroa(se5car.hinta)}.` : ''}</li>
+			<li><strong>SE 5 Upholstery</strong> on varustettu verhoilun ja mattojen pesuun.{se5u.hinta != null ? ` Se maksaa ${kauppa(se5u)} ${euroa(se5u.hinta)}.` : ''}</li>
 			<li><strong>SE 6 Signature Line</strong> maksaa {euroa(se6.hinta!)}, ja sen mukana tulee litra RM 519 -pesuainetta, vaihdettava kuivaimurointisuulake ja laakasuodatin.</li>
 		</ul>
-		<p>Koska teho ja säiliöt ovat samat, suosittelemme SE 4 Plussaa tai Go!Furtheria. Ne ovat Kärcher.comissa SE-sarjan isoista malleista edullisimmat, ja niissä on lattiasuulake. Kaikki versiot ovat <a href="/karcher-tekstiilipesurit/">Kärcherin mallistotaulukossa</a>.</p>
+		<p>Koska teho ja säiliöt ovat samat, suosittelemme SE 4 Plussaa tai Go!Furtheria. Ne ovat SE-sarjan isoista malleista edullisimpia, ja niissä on lattiasuulake. Kaikki versiot ovat <a href="/karcher-tekstiilipesurit/">Kärcherin mallistotaulukossa</a>.</p>
 		<p class="tp-lahde">SE 5 Carin tiedot: <a href={se5car.lahde} target="_blank" rel="nofollow noopener">Kärcher.com</a>.</p>
 
 		<h2>Näin peset maton SE 4 Plussalla</h2>

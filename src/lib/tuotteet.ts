@@ -64,6 +64,10 @@ export async function versiot(...sarjat: string[]): Promise<Tuote[]> {
 		);
 }
 
+// Kärcher.comin omat hinnat: myynnissä olevat mallit ilman kumppanikauppojen hintoja. Käytä tätä aina, kun teksti
+// sanoo "Kärcher.comissa", koska kumppanihinnat (npm run hae:kumppanit) tulevat muista kaupoista.
+export const karcherComissa = (tt: Tuote[]) => tt.filter((t) => t.myynnissa && t.hinta != null && !t.kumppanikauppa);
+
 // 389 → "389 €", 311.2 → "311,20 €"
 export function euroa(hinta: number): string {
 	const desimaalit = Number.isInteger(hinta) ? 0 : 2;

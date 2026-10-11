@@ -1,0 +1,147 @@
+[
+	{
+		"id": "se-2-spot",
+		"merkki": "Kärcher",
+		"nimi": "SE 2 Spot",
+		"sarja": "SE 2",
+		"ammattilaite": false,
+		"tuotenumero": "1.081-410.0",
+		"kuvaus": null,
+		"tekniset": {
+			"tehoW": 450,
+			"imuturbiiniW": null,
+			"puhdasvesiL": 1.5,
+			"likavesiL": 0.8,
+			"painoKg": 4,
+			"virtajohtoM": 4.5,
+			"kayttosadeM": 6.3,
+			"letkuM": 1.8,
+			"tyoleveysMm": null,
+			"tyosuoritusM2h": null,
+			"meluDb": null,
+			"akkujanniteV": null,
+			"akkuKayttoaika": null,
+			"mitatMm": "385 x 215 x 310"
+		},
+		"teknisetValmistajalta": {
+			"Lähde": "Kärcherin tietolomake (fi_FI, 2025-10-12)"
+		},
+		"toimitusSisaltaa": [
+			"Imuletkun pituus: 1.8 m",
+			"Verhoilusuulake: 88 mm",
+			"Puhdistusaineet: RM 519 Mattojen puhdistusaine, 100 ml",
+			"2 in 1, integroitu paine- ja imuletku"
+		],
+		"ominaisuudet": [],
+		"hinta": 133.24,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "Proshop",
+			"url": "https://www.proshop.fi/Tekstiilipesuri/Kaercher-Tekstiilipesuri-SE-2-Spot-carpet-cleaning-machine/3436563",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/fi_FI/1.081-410.0_PI_fi_FI.pdf",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "se-2-spot-pure",
+		"merkki": "Kärcher",
+		"nimi": "SE 2 Spot Pure",
+		"sarja": "SE 2",
+		"ammattilaite": false,
+		"tuotenumero": "1.081-416.0",
+		"kuvaus": null,
+		"tekniset": {
+			"tehoW": null,
+			"imuturbiiniW": null,
+			"puhdasvesiL": null,
+			"likavesiL": null,
+			"painoKg": null,
+			"virtajohtoM": null,
+			"kayttosadeM": null,
+			"letkuM": null,
+			"tyoleveysMm": null,
+			"tyosuoritusM2h": null,
+			"meluDb": null,
+			"akkujanniteV": null,
+			"akkuKayttoaika": null,
+			"mitatMm": null
+		},
+		"teknisetValmistajalta": {
+			"Lähde": "Kärcher ei julkaise SE 2 Spot Puresta tuotesivua eikä tietolomaketta (tarkistettu 2026-10-11). Lähde on SE 2 Spot -sarjan käyttöohje, mutta mallikohtaisia teknisiä tietoja ei käytetä (Villen päätös 2026-10-11)."
+		},
+		"toimitusSisaltaa": [],
+		"ominaisuudet": [],
+		"hinta": 156.26,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "CS Megastore",
+			"url": "https://www.csmegastore.fi/i/25516881/kärcher-se-2-spot-pure-matonpuhdistin-1-081-416-0",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://s1.kaercher-media.com/documents/manuals/html/BTA-5939401-000-04/FI.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "se-5",
+		"merkki": "Kärcher",
+		"nimi": "SE 5",
+		"sarja": "SE 5",
+		"ammattilaite": false,
+		"tuotenumero": "1.081-230.0",
+		"kuvaus": null,
+		"tekniset": {
+			"tehoW": 1000,
+			"imuturbiiniW": null,
+			"puhdasvesiL": 4,
+			"likavesiL": 4,
+			"painoKg": 7.5,
+			"virtajohtoM": 6,
+			"kayttosadeM": null,
+			"letkuM": 2,
+			"tyoleveysMm": 227,
+			"tyosuoritusM2h": null,
+			"meluDb": null,
+			"akkujanniteV": null,
+			"akkuKayttoaika": null,
+			"mitatMm": "424 x 320 x 466"
+		},
+		"teknisetValmistajalta": {
+			"Lähde": "Kärcherin tietolomake (sv_SE, 2026-10-09), suomenkielistä ei ole"
+		},
+		"toimitusSisaltaa": [
+			"Imuletkun pituus: 2 m",
+			"Painehuuhteluputket: 2 kpl, 0.5 m, Muovi",
+			"Lattiasuulake koville pinnoille: 227 mm",
+			"Rakosuulake",
+			"Lattiasuulake kuivaimurointiin: Vaihdettava",
+			"Kalustesuulake",
+			"Laakasuodatin: Standardi",
+			"Puhdistusaineet: RM 519 Mattojen puhdistusaine, 100 ml",
+			"Fleece-pölypussi: 1 kpl",
+			"2 in 1, integroitu paine- ja imuletku"
+		],
+		"ominaisuudet": [],
+		"hinta": 309.85,
+		"hintaEnnenAlennusta": null,
+		"myynnissa": true,
+		"vainTuotetiedot": false,
+		"kumppanikauppa": true,
+		"ostopaikka": {
+			"nimi": "CS Megastore",
+			"url": "https://www.csmegastore.fi/i/21025359/karcher-pyykkipölynimuri-se-5-eu-1-081-230-0",
+			"napinTeksti": "Katso tarjous"
+		},
+		"valmistajanKuva": null,
+		"lahde": "https://s1.kaercher-media.com/documents/datasheets/machines/sv_SE/1.081-230.0_PI_sv_SE.pdf",
+		"haettu": "2026-10-11"
+	}
+]

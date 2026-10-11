@@ -10,7 +10,7 @@ import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
 import Merkkikortit from '../components/tuote/Merkkikortit.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
-import { merkinTuotteet, paatuote, luku, euroa, paiva, mallisivut, paatuotteet, sarjakuvaukset, hintavali } from '../lib/tuotteet';
+import { merkinTuotteet, paatuote, luku, euroa, paiva, mallisivut, paatuotteet, sarjakuvaukset, hintavali, karcherComissa, tuote } from '../lib/tuotteet';
 
 const kaikki = await merkinTuotteet('Kärcher');
 const koti = kaikki.filter((t) => !t.ammattilaite);
@@ -18,8 +18,10 @@ const ammatti = kaikki.filter((t) => t.ammattilaite);
 const suositus = await paatuote('SE 3');
 const se4 = await paatuote('SE 4');
 const puzzi = await paatuote('Puzzi 8/1');
-const se2 = kaikki.find((t) => t.sarja === 'SE 2')!;
-const myynnissaKoti = koti.filter((t) => t.myynnissa);
+const se2 = await tuote('se-2-spot-care');
+// Kärcher.comin omat hinnat: "Hinta Kärcher.comissa" -sarake ja johdannon luvut eivät sisällä kumppanikauppojen hintoja.
+const myynnissaKoti = karcherComissa(koti);
+const kotiCom = (sarja: string) => karcherComissa(koti.filter((x) => x.sarja === sarja));
 
 // Mallisivut sarjan mukaan: SE 3-18 kuuluu SE 3 Compactin sivulle.
 const sarjanSivu: Record<string, string> = { ...mallisivut, 'SE 3-18': mallisivut['SE 3'] };
@@ -67,11 +69,11 @@ const ukk = [
 				</thead>
 				<tbody>
 					<tr><th scope="row">Kärcher SE 2 Spot Care</th><td>{sarjakuvaukset['SE 2']}</td><td>{euroa(se2.hinta!)}</td></tr>
-					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3 Compact</a></th><td>{sarjakuvaukset['SE 3']}</td><td>{hintavali(koti.filter((x) => x.sarja === 'SE 3'))}</td></tr>
-					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3-18 Compact</a></th><td>{sarjakuvaukset['SE 3-18']}</td><td>{hintavali(koti.filter((x) => x.sarja === 'SE 3-18'))}</td></tr>
-					<tr><th scope="row"><a href={mallisivut['SE 4']}>Kärcher SE 4 Plus</a></th><td>{sarjakuvaukset['SE 4']}</td><td>{hintavali(koti.filter((x) => x.sarja === 'SE 4'))}</td></tr>
-					<tr><th scope="row">Kärcher SE 6 Signature Line</th><td>Sama teho ja säiliöt kuin SE 4:ssä, enemmän suulakkeita</td><td>{hintavali(koti.filter((x) => x.sarja === 'SE 6'))}</td></tr>
-					<tr><th scope="row"><a href={mallisivut['Puzzi 8/1']}>Kärcher Puzzi 8/1</a></th><td>Isot pesut, saatavana myös vuokralle</td><td>{hintavali(ammatti.filter((x) => x.sarja === 'Puzzi 8/1'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3 Compact</a></th><td>{sarjakuvaukset['SE 3']}</td><td>{hintavali(kotiCom('SE 3'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3-18 Compact</a></th><td>{sarjakuvaukset['SE 3-18']}</td><td>{hintavali(kotiCom('SE 3-18'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 4']}>Kärcher SE 4</a></th><td>{sarjakuvaukset['SE 4']}</td><td>{hintavali(kotiCom('SE 4'))}</td></tr>
+					<tr><th scope="row">Kärcher SE 6 Signature Line</th><td>Sama teho ja säiliöt kuin SE 4:ssä, enemmän suulakkeita</td><td>{hintavali(kotiCom('SE 6'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['Puzzi 8/1']}>Kärcher Puzzi 8/1</a></th><td>Isot pesut, saatavana myös vuokralle</td><td>{hintavali(karcherComissa(ammatti.filter((x) => x.sarja === 'Puzzi 8/1')))}</td></tr>
 				</tbody>
 			</table>
 		</div>

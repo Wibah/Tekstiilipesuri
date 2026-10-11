@@ -6,7 +6,8 @@ import { z } from 'astro/zod';
 // karcher.json: npm run hae:karcher (karcher.com/fi, SE-mallit ja Puzzi-ammattilaitteet).
 // bissell.json: npm run hae:bissell (bissell.de:n tekniset tiedot, raakadata kerätty selaimessa, ks. scripts/muunna_bissell.py).
 // tefal.json: npm run hae:tefal (OBH Nordican Tefal-kauppa, raakadata kirjoitettu käsin tuotekuvauksista, ks. scripts/muunna_tefal.py).
-const MERKKITIEDOSTOT = ['karcher', 'bissell', 'tefal'];
+// karcher-lisamallit.json: npm run hae:kumppanit (Kärcher.comin listauksesta puuttuvat mallit, ks. scripts/hae_karcher_kumppanit.py).
+const MERKKITIEDOSTOT = ['karcher', 'karcher-lisamallit', 'bissell', 'tefal'];
 
 // Affiliate-tiedot (hinta, ostolinkki ja kuva kumppanikaupasta) tulevat erillisestä tiedostosta, jonka
 // tuottaa `npm run hae:affiliate` (scripts/hae_affiliate.py). Ne yhdistetään tässä tuotteisiin, jotta
@@ -20,6 +21,19 @@ async function affiliate(): Promise<{ tuotteet: Record<string, any>; haettu: str
 		return { tuotteet: {}, haettu: '' };
 	}
 }
+// Kumppanikauppojen hinnat Kärcherin malleille, joita Kärcher.com ei myy (npm run hae:kumppanit). Yhdistetään vain,
+// jos Kärcher.comilla ei ole mallille hintaa, koska Kärcherin oma kauppa menee ostopaikkajärjestyksessä edelle.
+async function kumppanihinnat(): Promise<{ tuotteet: Record<string, any>; haettu: string }> {
+	try {
+		return JSON.parse(await readFile('src/data/kumppanihinnat.json', 'utf8'));
+	} catch {
+		return { tuotteet: {}, haettu: '' };
+	}
+}
+const kumppani = (t: any, k: any, haettu: string) =>
+	k && !t.myynnissa
+		? { ...t, hinta: k.hinta, hintaEnnenAlennusta: k.hintaEnnenAlennusta, ostopaikka: k.ostopaikka, myynnissa: true, vainTuotetiedot: false, kumppanikauppa: true, haettu }
+		: t;
 // Kärcherin tuotteiden ostopaikkajärjestys (Villen päätös 2026-10-05): 1) Kärcherin oma ohjelma (12 %),
 // 2) eStore (12 %), 3) muut kaupat (noin 4 %). Järjestyksen valitsee hae_affiliate.py, joten tässä
 // yhdistetään sellaisenaan.
@@ -46,12 +60,14 @@ const tuotteet = defineCollection({
 			MERKKITIEDOSTOT.map(async (m) => JSON.parse(await readFile(`src/data/tuotteet/${m}.json`, 'utf8'))),
 		);
 		const a = await affiliate();
+		const kh = await kumppanihinnat();
 		// Käsin lisätyt tuotekuvat: tiedosto src/assets/tuotteet/<tuotteen id>.<pääte>.
 		// Feedin kuva menee edelle, jos tuotteella on sellainen.
 		const kuvat = await readdir('src/assets/tuotteet').catch(() => [] as string[]);
 		const omaKuva = (id: string) => kuvat.find((k) => k.slice(0, k.lastIndexOf('.')) === id) ?? null;
 		return osat
 			.flat()
+			.map((t) => kumppani(t, kh.tuotteet[t.id], kh.haettu))
 			.map((t) => yhdista(t, a.tuotteet[t.id], a.haettu))
 			.map((t) => ({ ...t, kuva: t.kuva ?? omaKuva(t.id) }));
 	},
