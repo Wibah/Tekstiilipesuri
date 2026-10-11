@@ -1,0 +1,121 @@
+---
+// SCN: pilari (merkki), intentti Comparison, emopilari /. Hakusanat: tefal tekstiilipesuri 250, tefal clean it
+// tekstiilipesuri 90, tefal clean it tekstiilipesuri kokemuksia 30, tefal tekstiilipesuri kokemuksia 30, tefal clean it
+// tekstiilipesuri iz5020f0 20, tekstiilipesuri tefal 20, tefal tekstiilipesuri arvostelu 10, tefal tekstiilipesuri
+// pesuaine 10 (Ahrefs 2026-10, noin 460). "tefal tekstiilipesuri pesuaine" kuuluu pesuainesivulle, joten osio on lyhyt.
+// Otsikot, meta ja UKK Villen hyväksymät 2026-10-11, Hot & Cold lisätty Villen pyynnöstä. Kirjoitettu
+// tekstiilipesuri-writer-skillillä. Tiedot: npm run hae:tefal (OBH Nordica), Verkkokauppa.comin arviot ja
+// Android.com.pl 22.12.2025 (Tefalin tuotesijoittelu), tarkistettu 2026-10-11.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { merkinTuotteet, tuote, luku, euroa, paiva, mallisivut, type Tuote } from '../lib/tuotteet';
+
+const SIVU = '/tefal-tekstiilipesurit/';
+const tefal = await merkinTuotteet('Tefal');
+const sku = (s: string) => tefal.find((t) => t.tuotenumero === s)!;
+const cleanIt = sku('IZ5020F0');
+const compact = sku('IZ3020F0');
+const hot = sku('IZ7021F0');
+const se3 = await tuote('se-3-compact');
+const se4 = await tuote('se-4-plus');
+const k = (t: Tuote) => t.tekniset;
+const ohje = (t: Tuote) => t.teknisetValmistajalta['Käyttöohje'];
+const VERKKOKAUPPA = 'https://www.verkkokauppa.com/fi/product/1002892/Tefal-Clean-It-tekstiilipesuri/reviews';
+const ANDROID = 'https://android.com.pl/tech/1001568-odkurzacz-pioracy-nie-boi-sie-plam/';
+const rel = 'nofollow noopener';
+const halvin = [...tefal].sort((a, b) => a.hinta! - b.hinta!)[0];
+
+const ukk = [
+	{
+		kysymys: 'Kumpi Tefal Clean It kannattaa ostaa?',
+		vastaus: `Sohvan ja isompien tahrojen pesuun suosittelemme Clean Itiä (${euroa(cleanIt.hinta!)}), koska sen puhdasvesisäiliö on ${luku(k(cleanIt).puhdasvesiL!)} litraa, kun Compactissa se on ${luku(k(compact).puhdasvesiL!)} litraa. Clean It Compact (${euroa(compact.hinta!)}) on kevyempi ja vie vähemmän tilaa, joten se sopii pieneen kotiin ja tuoreisiin tahroihin. Clean It Hot & Cold (${euroa(hot.hinta!)}) lämmittää veden itse jopa 60 asteeseen.`,
+	},
+	{
+		kysymys: 'Sopiiko Kärcherin pesuaine Tefalin tekstiilipesuriin?',
+		vastaus: 'Käytä Tefalin laitteessa Tefalin omaa pesuainetta tai muuta ainetta vain, jos laitteen käyttöohje sallii sen. Valmistajat antavat annosteluohjeet omille aineilleen ja omille laitteilleen. Tefalin pesuaineesta kerrotaan <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.',
+	},
+	{
+		kysymys: 'Onko Tefal Clean It akkukäyttöinen vai johdollinen?',
+		vastaus: `Kaikki kolme Tefal Clean It -mallia ovat johdollisia. Clean Itin ja Hot & Coldin virtajohto on ${luku(k(cleanIt).virtajohtoM!)} metriä ja Compactin ${luku(k(compact).virtajohtoM!)} metriä. Akkukäyttöiset tekstiilipesurit on vertailtu <a href="/akkukayttoinen-tekstiilipesuri/">akkukäyttöisten tekstiilipesurien sivulla</a>.`,
+	},
+	{
+		kysymys: 'Mistä löydän Tefal Clean It -tekstiilipesurin käyttöohjeen?',
+		vastaus: `Käyttöohjeet ovat ladattavissa Tefalin Suomen verkkokaupasta, jota ylläpitää OBH Nordica: <a href="${ohje(cleanIt)}" target="_blank" rel="${rel}">Clean It</a>, <a href="${ohje(compact)}" target="_blank" rel="${rel}">Clean It Compact</a> ja <a href="${ohje(hot)}" target="_blank" rel="${rel}">Clean It Hot & Cold</a> (PDF).`,
+	},
+];
+---
+<Layout
+	title="Tefal tekstiilipesuri kokemuksia – Clean It ja Clean It Compact, hinnat 2026"
+	description="Tefal Clean It -tekstiilipesurit vertailussa: Clean It (IZ5020F0) ja Clean It Compact (IZ3020F0). Tekniset tiedot, erot, hinnat ja kokemuksia."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Tefal-tekstiilipesurit', sivu: SIVU }]} />
+		<TuoteSchema tuote={cleanIt} />
+		<TuoteHero tuote={cleanIt} otsikko="Tefal tekstiilipesuri – Clean It -mallit vertailussa" yla="Tefal · Koko mallisto" merkinta="Suosituksemme">
+			<p>Tefal myy Suomessa kolmea kannettavaa Clean It -tekstiilipesuria: Clean Itiä, pienempää Clean It Compactia ja vettä lämmittävää Clean It Hot & Coldia. Kaikki ovat johdollisia malleja tahrojen, sohvien, mattojen ja auton penkkien pesuun, ja niiden hinnat ovat nyt {euroa(halvin.hinta!)}–{euroa(hot.hinta!)}.</p>
+			<p>Suosittelemme useimpiin koteihin Clean Itiä. Sen {luku(k(cleanIt).puhdasvesiL!)} litran puhdasvesisäiliö on yhtä suuri kuin kalliimmassa Hot & Coldissa, ja mukana tulee neljä suulaketta.</p>
+		</TuoteHero>
+
+		<h2>Tefal Clean It tekstiilipesuri (IZ5020F0)</h2>
+		<p>Clean It IZ5020F0 on Tefalin perusmalli. Tefalin tietojen mukaan sen puhdasvesisäiliö on {luku(k(cleanIt).puhdasvesiL!)} litraa ja likavesisäiliö {luku(k(cleanIt).likavesiL!)} litraa, ja imupaine on {cleanIt.teknisetValmistajalta['Imupaine']}. Virtajohto on {luku(k(cleanIt).virtajohtoM!)} metriä ja letku {luku(k(cleanIt).letkuM!)} metriä. Tuotekuvauksen mukaan laite painaa {cleanIt.teknisetValmistajalta['Paino (tuotekuvaus)']}, ja tuotetietojen nettopaino on {luku(k(cleanIt).painoKg!)} kg.</p>
+		<p>Mukana tulevat {cleanIt.toimitusSisaltaa.map((r) => r.charAt(0).toLowerCase() + r.slice(1)).join(', ').replace(/, ([^,]*)$/, ' ja $1')}. Laitteessa on auto-clean-itsepuhdistus, joka huuhtelee letkun käytön jälkeen.</p>
+		<div class="mk-lista"><Korttirivi tuote={cleanIt} otsikko="Tefal Clean It IZ5020F0" kuvaus="Isot säiliöt ja neljä suulaketta" tagi="Suosituksemme" taso="h3" /></div>
+		<p>Samasta sarjasta myydään myös Clean It Hot & Cold (IZ7021F0), joka on Tefalin kallein malli. Tefalin mukaan se lämmittää veden jopa 60 asteeseen, ja siinä on erikseen kuuman ja kylmän veden pesutila. Puhdasvesisäiliö on {luku(k(hot).puhdasvesiL!)} litraa ja likavesisäiliö {luku(k(hot).likavesiL!)} litraa, ja nettopaino on {luku(k(hot).painoKg!)} kg. Mukana tulee myös pyörivä harjaspää. Hot & Cold ei ole tarkistamiemme kumppanikauppojen valikoimissa, joten hinta ja linkki ovat Tefalin Suomen verkkokaupasta.</p>
+		<div class="mk-lista"><Korttirivi tuote={hot} otsikko="Tefal Clean It Hot & Cold IZ7021F0" kuvaus="Lämmittää veden jopa 60 °C:een" tagi="Lämmin vesi" taso="h3" /></div>
+
+
+		<h2>Tefal Clean It Compact (IZ3020F0)</h2>
+		<p>Clean It Compact on pienempi ja kevyempi. Sen puhdasvesisäiliö on {luku(k(compact).puhdasvesiL!)} litraa ja likavesisäiliö {luku(k(compact).likavesiL!)} litraa, ja se painaa {luku(k(compact).painoKg!)} kg. Virtajohto on {luku(k(compact).virtajohtoM!)} metriä ja letku {luku(k(compact).letkuM!)} metriä. Mukana tulevat kaksi harjasuulaketta (8 ja 15 cm), nukanpoistoharja lemmikkien karvoille, autoclean-lisäosa letkun huuhteluun ja 250 ml pesuainetta.</p>
+		<p>Compact sopii tuoreisiin tahroihin ja pieneen kotiin, jossa säilytystilaa on vähän. Koko sohvan pesussa pienempää säiliötä joutuu täyttämään useammin.</p>
+		<div class="mk-lista"><Korttirivi tuote={compact} otsikko="Tefal Clean It Compact IZ3020F0" kuvaus="Kevyin ja pienin Tefal" tagi="Kompakti" taso="h3" /></div>
+
+		<h2>Clean It vai Clean It Compact – mitä eroa?</h2>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Hinta</th><th scope="col">Säiliöt (puhdas / lika)</th><th scope="col">Paino</th><th scope="col">Johto / letku</th><th scope="col">Erityistä</th></tr></thead>
+				<tbody>
+					{[cleanIt, compact, hot].map((t) => (
+						<tr>
+							<th scope="row"><a href={t.ostopaikka.url} target="_blank" rel={rel}>Tefal {t.nimi}</a></th>
+							<td>{euroa(t.hinta!)}</td>
+							<td>{luku(k(t).puhdasvesiL!)} / {luku(k(t).likavesiL!)} l</td>
+							<td>{luku(k(t).painoKg!)} kg</td>
+							<td>{luku(k(t).virtajohtoM!)} m / {luku(k(t).letkuM!)} m</td>
+							<td>{t.id === hot.id ? 'Lämmittää veden' : t.id === compact.id ? 'Pienin ja kevyin' : 'Neljä suulaketta'}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p>Clean Itissä ja Hot & Coldissa on yhtä suuri puhdasvesisäiliö ({luku(k(cleanIt).puhdasvesiL!)} l), ja Compactissa se on {luku(k(cleanIt).puhdasvesiL! - k(compact).puhdasvesiL!)} litraa pienempi. Valitse Compact, jos peset lähinnä tuoreita tahroja ja säilytystilaa on vähän. Valitse Clean It, jos peset koko sohvan tai auton penkit. Hot & Cold kannattaa, jos haluat lämpimän veden ilman, että lämmität sitä itse.</p>
+		<p class="tp-lahde">Painot ovat Tefalin tuotetietojen nettopainoja. Hinnat: suomalaisten verkkokauppojen ja Tefalin Suomen verkkokaupan tuotetiedot, tarkistettu {paiva(cleanIt.haettu)}.</p>
+
+		<h2>Tefal tekstiilipesuri arvostelu: mitä testit ja käyttäjät kertovat?</h2>
+		<p>Tefal Clean It -malleista ei ole suomalaisia eikä brittiläisiä vertailutestejä. Löytämämme tiedot ovat käyttäjäarvioita ja yksi käytännön testi:</p>
+		<ul>
+			<li><strong>Verkkokauppa.com:</strong> Clean It IZ5020F0 oli saanut keskiarvon 4,6/5 tähteä 13 käyttäjäarviosta (tarkistettu 11.10.2026). <a href={VERKKOKAUPPA} target="_blank" rel={rel}>Lue arviot</a>.</li>
+			<li><strong>Android.com.pl (22.12.2025):</strong> puolalainen teknologiasivusto testasi Clean It IZ5020:tä matolla, sohvalla, autossa ja kengillä. Testaaja kehui itsepuhdistusta ja kompaktia kokoa, mutta moitti, että puhdasvesisäiliön aukko ei aukea kokonaan, joten säiliön kuivaaminen vie aikaa. Testaajan mukaan suihku toimii vain laitteen ollessa päällä, mikä hankaloittaa pitkää vaikutusaikaa vaativaa esikäsittelyä. Artikkeli on merkitty Tefalin tuotesijoitteluksi. <a href={ANDROID} target="_blank" rel={rel}>Lue artikkeli</a>.</li>
+		</ul>
+		<p>Clean It Compactista ja Hot & Coldista emme löytäneet testejä emmekä suomalaisia käyttäjäarvioita. Kerro oma kokemuksesi alla olevalla lomakkeella.</p>
+
+		<h2>Tekstiilipesuri Tefal vai Kärcher?</h2>
+		<ul>
+			<li><strong>Tefal</strong> myy kannettavia Clean It -malleja tahroihin, sohville ja autoon. Clean Itin {luku(k(cleanIt).puhdasvesiL!)} litran puhdasvesisäiliö on suurempi kuin Kärcher SE 3 Compactin ({luku(k(se3).puhdasvesiL!)} l). Hot & Cold lämmittää veden itse.</li>
+			<li><strong>Kärcher</strong> myy kompaktien <a href={mallisivut['SE 3']}>SE 3 -mallien</a> ({euroa(se3.hinta!)}) lisäksi isompia SE 4–SE 6 -malleja, jotka toimivat myös märkä-kuivaimurina, kuten <a href={mallisivut['SE 4']}>SE 4 Plus</a> ({euroa(se4.hinta!)}). Kärcherillä on myös akkukäyttöinen SE 3-18 ja ammattikäyttöön Puzzi-sarja, jota vuokraamot vuokraavat.</li>
+		</ul>
+		<p>Valitse Tefal, jos haluat kannettavan laitteen isolla säiliöllä tai lämpimällä vedellä. Valitse Kärcher, jos tarvitset akkukäyttöisen mallin, laitteen, joka toimii myös märkä-kuivaimurina, tai ison maton pesuun lattiasuulakkeen. Kaikki Kärcherin mallit ovat <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurien sivulla</a> ja Bissellin <a href="/bissell-tekstiilipesurit/">Bissell-sivulla</a>.</p>
+
+		<h2>Tefal tekstiilipesuri pesuaine</h2>
+		<p>Clean It -mallien mukana tulee 250 ml Tefalin pesuainetta. Lisää ainetta saa Tefalin Clean It -pesuaineena. Aineen annostelu ja muiden merkkien aineet ovat <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineoppaassa</a>.</p>
+
+		<Kokemuslomake malli="Tefal" polku={SIVU} mallikentta otsikko="Tefal Clean It tekstiilipesuri kokemuksia – kerro omasi">
+			<p>Keräämme Tefalin tekstiilipesurien käyttäjien kokemuksia. Kerro, mikä malli sinulla on, mitä peset ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

@@ -21,96 +21,16 @@ tilaan vainTuotetiedot (ei hintaa, nappi vie bissell.de:n tuotesivulle).
 Saksankielinen toimitussisältö ("In der Box") jätetään pois.
 """
 
-import csv
 import json
 import pathlib
 import re
-import statistics
-import sys
-import urllib.error
-import urllib.parse
-import urllib.request
+
+from feedtarjoukset import lataa_kuva, tarjoukset, valitse
 
 JUURI = pathlib.Path(__file__).resolve().parent.parent
 RAAKA = sorted((JUURI / 'data/bissell').glob('bissell-de-*.json'))[-1]
 ULOS = JUURI / 'src/data/tuotteet/bissell.json'
 HAETTU = re.search(r'(\d{4}-\d{2}-\d{2})', RAAKA.name).group(1)
-FEEDIT = JUURI / '.feedit'
-KUVAT = JUURI / 'src/assets/tuotteet'
-# Feedin nimi → kaupan nimi tuotedataan (ei näytetä sivulla).
-KAUPAT = {'estore': 'eStore', 'csmega': 'CS Megastore', 'proshop': 'Proshop', 'multitronic': 'Multitronic',
-          'staypro': 'Staypro', 'hobbybox': 'Hobbybox', 'virtasenkauppa': 'Virtasen kauppa', 'uittokalusto': 'Uittokalusto'}
-# Lisävarusteet ja pesuaineet, joiden otsikossa on laitteen tuotenumero.
-LISAVARUSTE = re.compile(r'aine|formula|solution|harja|suutin|suulake|tool|letku|suodatin|pussi|varaosa|säiliö\b', re.I)
-
-
-def eurot(arvo):
-    m = re.match(r'([\d.]+)', (arvo or '').strip())
-    return float(m.group(1)) if m else None
-
-
-def tarjoukset(skut):
-    """SKU → lista varastossa olevista tarjouksista kaikista feedeistä."""
-    csv.field_size_limit(10**9)
-    tulos = {s: [] for s in skut}
-    if not FEEDIT.exists():
-        print('Kansio .feedit puuttuu (npm run lataa:feedit), joten hintoja ei haeta.', file=sys.stderr)
-        return tulos
-    for kauppa, nimi in KAUPAT.items():
-        polku = FEEDIT / f'{kauppa}.tsv'
-        if not polku.exists():
-            continue
-        for r in csv.DictReader(open(polku, encoding='utf-8'), delimiter='\t', quotechar="'"):
-            otsikko = r.get('title') or ''
-            if 'bissell' not in ((r.get('brand') or '') + otsikko).lower() or LISAVARUSTE.search(otsikko):
-                continue
-            teksti = f"{r.get('mpn') or ''} {otsikko}"
-            for s in skut:
-                if not re.search(r'\b' + re.escape(s) + r'\b', teksti) or r.get('availability') != 'in_stock':
-                    continue
-                hinta, ale = eurot(r.get('price')), eurot(r.get('sale_price'))
-                url = urllib.parse.parse_qs(urllib.parse.urlparse(r['link']).query).get('url', [None])[0]
-                if hinta and url:
-                    tulos[s].append({'kauppa': kauppa, 'nimi': nimi, 'url': url, 'kuva': r.get('image_link'),
-                                     'hinta': ale if ale and ale < hinta else hinta,
-                                     'ennen': hinta if ale and ale < hinta else None})
-    # Feedeissä on virhehintoja (esim. 46112.2 €), joten yli 2,5-kertaa mediaanin tai yli 2000 €:n hinnat pois.
-    for s, tt in tulos.items():
-        if tt:
-            med = statistics.median(t['hinta'] for t in tt)
-            hylatyt = [t for t in tt if t['hinta'] > 2000 or (len(tt) > 1 and t['hinta'] > 2.5 * med)]
-            for t in hylatyt:
-                print(f"  virhehinta ohitettu: {s} {t['nimi']} {t['hinta']} €", file=sys.stderr)
-            tulos[s] = [t for t in tt if t not in hylatyt]
-    return tulos
-
-
-def valitse(tt):
-    if not tt:
-        return None
-    estore = [t for t in tt if t['kauppa'] == 'estore']
-    return min(estore or tt, key=lambda t: t['hinta'])
-
-
-def lataa_kuva(tunnus, tt):
-    """Feedin tuotekuva kansioon src/assets/tuotteet (Ville on antanut luvan feedien kuviin)."""
-    if list(KUVAT.glob(f'{tunnus}.*')):
-        return
-    for t in tt:
-        if not t['kuva']:
-            continue
-        paate = t['kuva'].rsplit('.', 1)[-1].lower().split('?')[0]
-        paate = paate if paate in ('jpg', 'jpeg', 'png', 'webp') else 'jpg'
-        try:
-            pyynto = urllib.request.Request(t['kuva'], headers={'User-Agent': 'Mozilla/5.0 (tekstiilipesuri.com)'})
-            with urllib.request.urlopen(pyynto, timeout=60) as vastaus:
-                (KUVAT / f'{tunnus}.{paate}').write_bytes(vastaus.read())
-            print(f'  kuva ladattu: {tunnus}.{paate}', file=sys.stderr)
-            return
-        except urllib.error.URLError as virhe:
-            print(f'  kuva ei latautunut: {tunnus} ({virhe})', file=sys.stderr)
-
-
 def luku(arvo):
     """'2.8 l' → 2.8, '725 ml' → 0.725, '750 W' → 750"""
     if not arvo:
@@ -134,7 +54,7 @@ def slug(s):
 
 
 raaka = json.loads(RAAKA.read_text(encoding='utf-8'))
-kaikki_tarjoukset = tarjoukset([r['spec']['SKU'] for r in raaka])
+kaikki_tarjoukset = tarjoukset([r['spec']['SKU'] for r in raaka], merkki='bissell')
 tulos = []
 for r in raaka:
     sp = r['spec']

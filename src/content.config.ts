@@ -5,7 +5,8 @@ import { z } from 'astro/zod';
 // Jokaisen merkin data on omassa tiedostossaan, jonka oma hakuskripti tuottaa.
 // karcher.json: npm run hae:karcher (karcher.com/fi, SE-mallit ja Puzzi-ammattilaitteet).
 // bissell.json: npm run hae:bissell (bissell.de:n tekniset tiedot, raakadata kerätty selaimessa, ks. scripts/muunna_bissell.py).
-const MERKKITIEDOSTOT = ['karcher', 'bissell'];
+// tefal.json: npm run hae:tefal (OBH Nordican Tefal-kauppa, raakadata kirjoitettu käsin tuotekuvauksista, ks. scripts/muunna_tefal.py).
+const MERKKITIEDOSTOT = ['karcher', 'bissell', 'tefal'];
 
 // Affiliate-tiedot (hinta, ostolinkki ja kuva kumppanikaupasta) tulevat erillisestä tiedostosta, jonka
 // tuottaa `npm run hae:affiliate` (scripts/hae_affiliate.py). Ne yhdistetään tässä tuotteisiin, jotta

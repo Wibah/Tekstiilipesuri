@@ -17,6 +17,7 @@
     "hae:kuvat": "python3 scripts/hae_kuvat.py",
     "lataa:feedit": "python3 scripts/lataa_feedit.py",
     "hae:bissell": "python3 scripts/muunna_bissell.py",
+    "hae:tefal": "python3 scripts/muunna_tefal.py",
     "hae:varusteet": "python3 scripts/hae_karcher_varusteet.py"
   },
   "dependencies": {
