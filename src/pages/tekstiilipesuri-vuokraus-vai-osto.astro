@@ -10,7 +10,7 @@ import Murupolku from '../components/Murupolku.astro';
 import VuokraTaulu from '../components/tuote/VuokraTaulu.astro';
 import Tuotekortti from '../components/tuote/Tuotekortti.astro';
 import Ukk from '../components/Ukk.astro';
-import { paatuote, tuote, euroa, luku, paiva, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+import { paatuote, tuote, euroa, luku, paiva, mallisivut, sarjakuvaukset, versionimi } from '../lib/tuotteet';
 
 const se3 = await paatuote('SE 3');
 const se3perus = await tuote('se-3-compact');
@@ -48,7 +48,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Mikä tekstiilipesuri kannattaa ostaa vuokraamisen sijaan?',
-		vastaus: `Sohvaan, tuoleihin ja autoon riittää <a href="${mallisivut['SE 3']}">Kärcher SE 3 Compact</a>. Jos peset mattoja, valitse <a href="${mallisivut['SE 4']}">SE 4 Plus</a> (${euroa(se4.hinta!)}), jossa on ${luku(se4.tekniset.puhdasvesiL!)} litran säiliö ja lattiasuulake. Autoon ilman pistorasiaa sopii akkukäyttöinen <a href="${mallisivut['SE 3']}">SE 3-18 Compact Home</a> (${euroa(akku.hinta!)}).`,
+		vastaus: `Sohvaan, tuoleihin ja autoon riittää <a href="${mallisivut['SE 3']}">Kärcher SE 3 Compact</a>. Jos peset mattoja, valitse <a href="${mallisivut['SE 4']}">${versionimi(se4)}</a> (${euroa(se4.hinta!)}), jossa on ${luku(se4.tekniset.puhdasvesiL!)} litran säiliö ja lattiasuulake. Autoon ilman pistorasiaa sopii akkukäyttöinen <a href="${mallisivut['SE 3']}">SE 3-18 Compact Home</a> (${euroa(akku.hinta!)}).`,
 	},
 	{
 		kysymys: 'Paljonko tekstiilipesurin vuokraus maksaa?',

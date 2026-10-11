@@ -11,7 +11,7 @@ import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
 import Tuotekortti from '../components/tuote/Tuotekortti.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
-import { paatuote, tuote, luku, paiva, euroa, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+import { paatuote, tuote, luku, paiva, euroa, mallisivut, sarjakuvaukset, versionimi } from '../lib/tuotteet';
 
 const suositus = await paatuote('SE 6');
 const se4 = await paatuote('SE 4');
@@ -32,7 +32,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Kannattaako SE 6 vai SE 4 Plus?',
-		vastaus: `Teho ja säiliöt ovat samat, joten valinta riippuu varusteista ja hinnasta. SE 6 maksaa ${kauppa(suositus)} ${euroa(suositus.hinta!)} ja SE 4 Plus ${kauppa(se4)} ${euroa(se4.hinta!)}. ${suositus.hinta! > se4.hinta! ? 'Jos et tarvitse SE 6:n laakasuodatinta ja vaihdettavaa kuivaimurointisuulaketta, SE 4 Plus on edullisempi.' : 'SE 6 on nyt yhtä edullinen tai edullisempi, joten se on varusteineen parempi valinta.'} Vertailu on <a href="${mallisivut['SE 4']}">SE 4 Plussan sivulla</a>.`,
+		vastaus: `Teho ja säiliöt ovat samat, joten valinta riippuu varusteista ja hinnasta. SE 6 maksaa ${kauppa(suositus)} ${euroa(suositus.hinta!)} ja ${versionimi(se4)} ${kauppa(se4)} ${euroa(se4.hinta!)}. ${suositus.hinta! > se4.hinta! ? `Jos et tarvitse SE 6:n laakasuodatinta ja vaihdettavaa kuivaimurointisuulaketta, ${versionimi(se4)} on edullisempi.` : 'SE 6 on nyt yhtä edullinen tai edullisempi, joten se on varusteineen parempi valinta.'} Vertailu on <a href="${mallisivut['SE 4']}">SE 4 Plussan sivulla</a>.`,
 	},
 ];
 ---
@@ -76,7 +76,7 @@ const ukk = [
 		<p>SE 6 Signature Linessa ja SE 4 Plussassa on sama {luku(t.tehoW!)} watin teho, {luku(t.puhdasvesiL!)} litran säiliöt ja {luku(t.tyoleveysMm!)} mm:n lattiasuulake. Erot ovat suodattimessa ja kuivaimurointisuulakkeessa:</p>
 		<ul>
 			<li><strong>SE 6 Signature Line:</strong> laakasuodatin ja vaihdettava lattiasuulake kuivaimurointiin. Paino {luku(t.painoKg!)} kg. Hinta {kauppa(suositus)} {euroa(suositus.hinta!)}.</li>
-			<li><strong>SE 4 Plus:</strong> vaahtosuodatin ja clips-suulake lattioiden kuivaimurointiin. Paino {luku(se4.tekniset.painoKg!)} kg. Hinta {kauppa(se4)} {euroa(se4.hinta!)}.</li>
+			<li><strong>{versionimi(se4)}:</strong> vaahtosuodatin ja clips-suulake lattioiden kuivaimurointiin. Paino {luku(se4.tekniset.painoKg!)} kg. Hinta {kauppa(se4)} {euroa(se4.hinta!)}.</li>
 		</ul>
 		<p>Molempien mukana tulee litra RM 519 -pesuainetta. SE 5 Upholsteryssa on samat suulakkeet kuin SE 6:ssa yhtä rakosuulaketta lukuun ottamatta, mutta pesuainetta on mukana vain 100 ml. SE 5 Upholstery maksaa {kauppa(se5u)} {euroa(se5u.hinta!)}. Lue lisää <a href={mallisivut['SE 5']}>SE 5 -sivulta</a>.</p>
 

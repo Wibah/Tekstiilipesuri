@@ -14,7 +14,7 @@ import VersioVertailu from '../components/tuote/VersioVertailu.astro';
 import Tuotekortti from '../components/tuote/Tuotekortti.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
-import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset, karcherComissa } from '../lib/tuotteet';
+import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset, karcherComissa, versionimi } from '../lib/tuotteet';
 
 const suositus = await paatuote('SE 5');
 const car = await tuote('se-5-car');
@@ -92,7 +92,7 @@ const ukk = [
 
 		<h2>SE 5 vai SE 4 Plus?</h2>
 		<p>SE 4 Plus ja SE 5 ovat samaa kokoluokkaa: kummassakin on {luku(t.tehoW!)} watin teho, {luku(t.puhdasvesiL!)} litran säiliöt ja {luku(t.tyoleveysMm!)} mm:n lattiasuulake. Erot ovat suodattimessa ja varusteissa. SE 4 Plussan mukana tulee vaahtosuodatin ja litra RM 519 -pesuainetta, SE 5:n mukana laakasuodatin ja 100 ml pesuainetta. SE 4 Plus painaa {luku(se4.tekniset.painoKg!)} kg.</p>
-		<p>SE 4 Plus maksaa {kauppa(se4)} {euroa(se4.hinta!)} ja SE 5 {kauppa(suositus)} {euroa(suositus.hinta!)}. {se4.hinta! < suositus.hinta! ? 'Koska ominaisuudet ovat lähes samat, SE 4 Plus on nyt edullisempi valinta.' : 'Valitse halvempi, koska ominaisuudet ovat lähes samat.'} Vertailu on <a href={mallisivut['SE 4']}>SE 4 Plussan sivulla</a>.</p>
+		<p>{versionimi(se4)} maksaa {kauppa(se4)} {euroa(se4.hinta!)} ja SE 5 {kauppa(suositus)} {euroa(suositus.hinta!)}. {se4.hinta! < suositus.hinta! ? `Koska ominaisuudet ovat lähes samat, ${versionimi(se4)} on nyt edullisempi valinta.` : 'Valitse halvempi, koska ominaisuudet ovat lähes samat.'} Vertailu on <a href={mallisivut['SE 4']}>SE 4 Plussan sivulla</a>.</p>
 
 		<h2>Vaihtoehdot</h2>
 		<div class="mk-lista">

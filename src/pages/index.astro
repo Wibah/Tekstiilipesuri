@@ -9,7 +9,7 @@ import Layout from '../layouts/Layout.astro';
 import Korttirivi from '../components/tuote/Korttirivi.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
-import { paatuote, tuote, merkinTuotteet, euroa, luku, paiva, mallisivut, sarjakuvaukset, hintavali, karcherComissa } from '../lib/tuotteet';
+import { paatuote, tuote, merkinTuotteet, euroa, luku, paiva, mallisivut, sarjakuvaukset, hintavali, karcherComissa, versionimi } from '../lib/tuotteet';
 
 const se3 = await paatuote('SE 3');
 const se4 = await paatuote('SE 4');
@@ -28,7 +28,7 @@ const alennetut = karcherComissa(karcher).filter((t) => t.hintaEnnenAlennusta !=
 // joten ne esitellään omassa osiossaan testien kanssa.
 const suositukset = [
 	{ t: se3, otsikko: 'Kärcher SE 3 Compact', otsikkoH3: 'Paras tekstiilipesuri kotiin: Kärcher SE 3 Compact', sivu: mallisivut['SE 3'], tagi: 'Paras kotiin', kuvaus: `Kompakti ja ${luku(se3.tekniset.painoKg!)} kg:n painoinen. Pesee sohvan, nojatuolin ja auton penkit, ja Floor-version lattiasuulakkeella myös pienen maton.` },
-	{ t: se4, otsikko: 'Kärcher SE 4 Plus', sivu: mallisivut['SE 4'], tagi: 'Matoille', kuvaus: `${luku(se4.tekniset.puhdasvesiL!)} litran säiliöt ja ${luku(se4.tekniset.tyoleveysMm!)} mm:n lattiasuulake. Toimii myös märkä-kuivaimurina.` },
+	{ t: se4, otsikko: 'Kärcher SE 4', sivu: mallisivut['SE 4'], tagi: 'Matoille', kuvaus: `${luku(se4.tekniset.puhdasvesiL!)} litran säiliöt ja ${luku(se4.tekniset.tyoleveysMm!)} mm:n lattiasuulake. Toimii myös märkä-kuivaimurina.` },
 	{ t: akku, otsikko: 'Kärcher SE 3-18 Compact Home', sivu: mallisivut['SE 3'], tagi: 'Autoon', kuvaus: `Akkukäyttöinen SE 3. Mukana ovat 5,0 Ah:n akku ja pikalaturi, ja hinta on silti alempi kuin pienemmän akun versiossa.` },
 	{ t: se2, otsikko: 'Kärcher SE 2 Spot Care', sivu: '/karcher-tekstiilipesurit/', tagi: 'Edullisin', kuvaus: `Kärcher.comin edullisin tekstiilipesuri. Pieni kannettava malli tuoreisiin tahroihin.` },
 	{ t: puzzi, otsikko: 'Kärcher Puzzi 8/1', sivu: mallisivut['Puzzi 8/1'], tagi: 'Vuokralle', kuvaus: `Ammattilaite, jonka puhdasvesisäiliö on ${luku(puzzi.tekniset.puhdasvesiL!)} litraa. Vuokraamoissa noin 39–45 € vuorokaudelta.` },

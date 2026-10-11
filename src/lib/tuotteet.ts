@@ -6,7 +6,8 @@ export type Tuote = CollectionEntry<'tuotteet'>['data'] & { id: string };
 // Muut saman sarjan versiot näytetään mallisivun vertailutaulukossa.
 export const paatuotteet = {
 	'SE 3': 'se-3-compact-floor',
-	'SE 4': 'se-4-plus',
+	// SE 4: Go!Further (Kärcher.com, 12 %) Villen päätöksellä 2026-10-11, koska SE 4 Plus on vain kumppanikaupoissa.
+	'SE 4': 'se-4-go-further-eu',
 	'Puzzi 8/1': 'puzzi-8-1-anniversary-edition',
 	'SE 2': 'se-2-spot-care',
 	'SE 5': 'se-5',
@@ -73,6 +74,9 @@ export async function versiot(...sarjat: string[]): Promise<Tuote[]> {
 // Kärcher.comin omat hinnat: myynnissä olevat mallit ilman kumppanikauppojen hintoja. Käytä tätä aina, kun teksti
 // sanoo "Kärcher.comissa", koska kumppanihinnat (npm run hae:kumppanit) tulevat muista kaupoista.
 export const karcherComissa = (tt: Tuote[]) => tt.filter((t) => t.myynnissa && t.hinta != null && !t.kumppanikauppa);
+
+// Version nimi teksteihin: "SE 4 Go!Further *EU" → "SE 4 Go!Further".
+export const versionimi = (t: Tuote) => t.nimi.replace(/\s*\*EU$/, '');
 
 // 389 → "389 €", 311.2 → "311,20 €"
 export function euroa(hinta: number): string {

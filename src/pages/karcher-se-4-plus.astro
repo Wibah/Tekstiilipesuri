@@ -16,6 +16,7 @@ import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukse
 const suositus = await paatuote('SE 4');
 const special = await tuote('se-4-plus-special');
 const goFurther = await tuote('se-4-go-further-eu');
+const plus = await tuote('se-4-plus');
 const se4versiot = await versiot('SE 4');
 const se6 = await tuote('se-6-signature-line');
 const se5car = await tuote('se-5-car');
@@ -34,7 +35,7 @@ const t3 = se3.tekniset;
 const ukk = [
 	{
 		kysymys: 'Mikä ero on Kärcher SE 4 Plussalla ja SE 4 Plus Specialilla?',
-		vastaus: `Laite on sama: ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran säiliöt ja ${luku(t.painoKg!)} kg. Special-versiossa on vaihdettava lattiasuulake kuivaimurointiin ja erittäin pitkä rakosuulake. ${hintaero(special, suositus)}`,
+		vastaus: `Laite on sama: ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran säiliöt ja ${luku(t.painoKg!)} kg. Special-versiossa on vaihdettava lattiasuulake kuivaimurointiin ja erittäin pitkä rakosuulake. ${hintaero(special, plus)}`,
 	},
 	{
 		kysymys: 'Toimiiko Kärcher SE 4 Plus märkä-kuivaimurina?',
@@ -42,7 +43,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Mikä ero on Kärcher SE 4 Plussalla ja SE 6 Signature Linella?',
-		vastaus: `Teho, säiliöt ja virtajohto ovat samat. SE 6 Signature Line painaa ${luku(se6.tekniset.painoKg!)} kg, ja sen toimitukseen kuuluvat vaihdettava kuivaimurointisuulake ja laakasuodatin. SE 6 maksaa ${kauppa(se6)} ${euroa(se6.hinta!)} ja SE 4 Plus ${kauppa(suositus)} ${euroa(suositus.hinta!)}.`,
+		vastaus: `Teho, säiliöt ja virtajohto ovat samat. SE 6 Signature Line painaa ${luku(se6.tekniset.painoKg!)} kg, ja sen toimitukseen kuuluvat vaihdettava kuivaimurointisuulake ja laakasuodatin. SE 6 maksaa ${kauppa(se6)} ${euroa(se6.hinta!)} ja SE 4 Plus ${kauppa(plus)} ${euroa(plus.hinta!)}.`,
 	},
 	{
 		kysymys: 'Kumman valitsen, Kärcher SE 3 Compactin vai SE 4 Plussan?',
@@ -60,6 +61,7 @@ const ukk = [
 		<TuoteHero tuote={suositus} otsikko="Kärcher SE 4 Plus -tekstiilipesuri" yla="Kärcher · Matoille ja kuivaimurointiin" merkinta="Suosituksemme">
 			<p>Kärcher SE 4 Plus on tekstiilipesuri ja märkä-kuivaimuri samassa laitteessa. Sen teho on {luku(t.tehoW!)} W, kummankin säiliön tilavuus on {luku(t.puhdasvesiL!)} litraa, ja mukana tulee {luku(t.tyoleveysMm!)} mm:n lattiasuulake. Laite pesee mattoja, sohvia ja auton penkkejä ja imuroi muulloin lattioita.</p>
 			<p>SE 4 Plus painaa {luku(t.painoKg!)} kg eli {luku(t.painoKg! - t3.painoKg!)} kg enemmän kuin SE 3 Compact. Isommalla säiliöllä vettä tarvitsee lisätä harvemmin.</p>
+			<p>Suosittelemme SE 4:n versioista Go!Furtheria, jonka mukana tulee lisäksi verhoilusuulake lemmikkien karvoille.</p>
 		</TuoteHero>
 
 		<h2>Kenelle SE 4 Plus sopii?</h2>
@@ -84,8 +86,8 @@ const ukk = [
 		</div>
 
 		<h2>SE 4:n versiot vertailussa</h2>
-		<p>SE 4:ää myydään kolmena versiona. Moottori, säiliöt, letku ja paino ovat kaikissa samat, joten versiot eroavat toisistaan vain suulakkeiden osalta. Go!Furtherin mukana tulee lisäksi verhoilusuulake lemmikkien karvoille. Go!Further maksaa {kauppa(goFurther)} {euroa(goFurther.hinta!)} ja Plus {kauppa(suositus)} {euroa(suositus.hinta!)}. Kärcherin mukaan Go!Furtherin rungossa on käytetty 25 prosenttia kierrätysmuovia.</p>
-		<p>Jos kotona on koira tai kissa, Go!Furtherin lemmikkisuulake on hyödyllinen. Muuten Plus riittää{suositus.hinta! < goFurther.hinta! ? ', ja se on nyt halvempi' : ''}. Special-version vaihdettava kuivaimurointisuulake ja pitkä rakosuulake ovat hyödyllisiä lähinnä silloin, kun laitetta käytetään paljon myös imurina.</p>
+		<p>SE 4:ää myydään kolmena versiona. Moottori, säiliöt, letku ja paino ovat kaikissa samat, joten versiot eroavat toisistaan vain suulakkeiden osalta. Go!Furtherin mukana tulee lisäksi verhoilusuulake lemmikkien karvoille. Go!Further maksaa {kauppa(goFurther)} {euroa(goFurther.hinta!)} ja Plus {kauppa(plus)} {euroa(plus.hinta!)}. Kärcherin mukaan Go!Furtherin rungossa on käytetty 25 prosenttia kierrätysmuovia.</p>
+		<p>Suosittelemme Go!Furtheria, koska sen mukana tulee Plussan varusteiden lisäksi lemmikkisuulake, ja sitä myy Kärcherin oma verkkokauppa. Jos et tarvitse lemmikkisuulaketta, Plus riittää{plus.hinta! < goFurther.hinta! ? ', ja se on nyt halvempi' : ''}. Special-version vaihdettava kuivaimurointisuulake ja pitkä rakosuulake ovat hyödyllisiä lähinnä silloin, kun laitetta käytetään paljon myös imurina.</p>
 		<VersioVertailu versiot={se4versiot} paatuoteId={suositus.id} />
 		<p class="tp-lahde">Hinnat: Kärcher.com ja suomalaiset verkkokaupat, tarkistettu {paiva(suositus.haettu)}.</p>
 

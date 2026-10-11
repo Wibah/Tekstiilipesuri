@@ -10,7 +10,7 @@ import MallistoTaulu from '../components/tuote/MallistoTaulu.astro';
 import Merkkikortit from '../components/tuote/Merkkikortit.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
-import { merkinTuotteet, paatuote, luku, euroa, paiva, mallisivut, paatuotteet, sarjakuvaukset, hintavali, karcherComissa, tuote } from '../lib/tuotteet';
+import { merkinTuotteet, paatuote, luku, euroa, paiva, mallisivut, paatuotteet, sarjakuvaukset, hintavali, karcherComissa, tuote, versionimi } from '../lib/tuotteet';
 
 const kaikki = await merkinTuotteet('Kärcher');
 const koti = kaikki.filter((t) => !t.ammattilaite);
@@ -26,14 +26,14 @@ const kotiCom = (sarja: string) => karcherComissa(koti.filter((x) => x.sarja ===
 // Mallisivut sarjan mukaan: SE 3-18 kuuluu SE 3 Compactin sivulle.
 const sarjanSivu: Record<string, string> = { ...mallisivut, 'SE 3-18': mallisivut['SE 3'] };
 const sivut = Object.fromEntries(kaikki.filter((t) => t.sarja && sarjanSivu[t.sarja]).map((t) => [t.id, sarjanSivu[t.sarja!]]));
-const nimet = Object.fromEntries(Object.entries(paatuotteet).map(([sarja, id]) => [id, `Kärcher ${({ 'SE 2': 'SE 2 Spot Care', 'SE 3': 'SE 3 Compact', 'SE 4': 'SE 4 Plus', 'SE 6': 'SE 6 Signature Line' } as Record<string, string>)[sarja] ?? sarja}`]));
+const nimet = Object.fromEntries(Object.entries(paatuotteet).map(([sarja, id]) => [id, `Kärcher ${({ 'SE 2': 'SE 2 Spot Care', 'SE 3': 'SE 3 Compact', 'SE 4': 'SE 4', 'SE 6': 'SE 6 Signature Line' } as Record<string, string>)[sarja] ?? sarja}`]));
 
 const t = suositus.tekniset;
 
 const ukk = [
 	{
 		kysymys: 'Mikä Kärcher tekstiilipesuri kannattaa ostaa?',
-		vastaus: `Useimpiin koteihin suosittelemme <a href="${mallisivut['SE 3']}">SE 3 Compact Flooria</a> (${euroa(suositus.hinta!)}). Se on kompakti, pesee sohvat ja auton penkit, ja lattiasuulakkeella pesee myös pienen maton. Jos peset paljon mattoja tai tarvitset myös märkä-kuivaimurin, valitse <a href="${mallisivut['SE 4']}">SE 4 Plus</a> (${euroa(se4.hinta!)}).`,
+		vastaus: `Useimpiin koteihin suosittelemme <a href="${mallisivut['SE 3']}">SE 3 Compact Flooria</a> (${euroa(suositus.hinta!)}). Se on kompakti, pesee sohvat ja auton penkit, ja lattiasuulakkeella pesee myös pienen maton. Jos peset paljon mattoja tai tarvitset myös märkä-kuivaimurin, valitse <a href="${mallisivut['SE 4']}">${versionimi(se4)}</a> (${euroa(se4.hinta!)}).`,
 	},
 	{
 		kysymys: 'Mikä ero on Kärcherin SE-malleilla ja Puzzi-malleilla?',

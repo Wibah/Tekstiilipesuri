@@ -13,7 +13,7 @@ import Tuotekortti from '../components/tuote/Tuotekortti.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
 import { getEntry } from 'astro:content';
-import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset, versionimi } from '../lib/tuotteet';
 
 const suositus = await paatuote('SE 3');
 const perus = await tuote('se-3-compact');
@@ -128,7 +128,7 @@ const ukk = [
 		<p>Mukana tulee 100 ml RM 519 -pesuainetta, joka riittää vain muutamaan pesuun. Litran pullo maksaa Kärcher.comissa {euroa(rm519.hinta!)}. Pesuaineet ja niiden erot on koottu <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaaseen</a>.</p>
 
 		<h2>SE 3 Compact vs. SE 4 Plus ja Puzzi 8/1</h2>
-		<p><a href={mallisivut['SE 4']}>SE 4 Plus</a> on SE 3:a suurempi laite. Sen teho on {luku(t4.tehoW!)} W, kummankin säiliön tilavuus on {luku(t4.puhdasvesiL!)} litraa, ja se toimii myös märkä-kuivaimurina. SE 4 Plus painaa {luku(t4.painoKg!)} kg ja maksaa {euroa(se4.hinta!)}. Ero SE 3 Compact Flooriin on {euroa(se4.hinta! - suositus.hinta!)}.</p>
+		<p><a href={mallisivut['SE 4']}>SE 4 Plus</a> on SE 3:a suurempi laite. Sen teho on {luku(t4.tehoW!)} W, kummankin säiliön tilavuus on {luku(t4.puhdasvesiL!)} litraa, ja se toimii myös märkä-kuivaimurina. {versionimi(se4)} painaa {luku(t4.painoKg!)} kg ja maksaa {euroa(se4.hinta!)}. Ero SE 3 Compact Flooriin on {euroa(se4.hinta! - suositus.hinta!)}.</p>
 		<p>Jos peset kerran vuodessa ison maton tai koko sohvakaluston, ammattilaitteen vuokraaminen voi tulla edullisemmaksi kuin oman laitteen ostaminen. Kaikki kolme tarkistamaamme vuokraamoa vuokraavat <a href={mallisivut['Puzzi 8/1']}>Kärcher Puzzi 8/1</a> -laitetta, jonka puhdasvesisäiliö on {luku(puzzi.tekniset.puhdasvesiL!)} litraa. Laskelma on <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.</p>
 		<div class="mk-lista">
 			<Tuotekortti tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kenelle={sarjakuvaukset['SE 4']} tagi="Isommat säiliöt" />
