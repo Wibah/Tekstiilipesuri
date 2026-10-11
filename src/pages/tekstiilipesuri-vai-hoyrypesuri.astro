@@ -6,13 +6,16 @@
 import Layout from '../layouts/Layout.astro';
 import Murupolku from '../components/Murupolku.astro';
 import Ukk from '../components/Ukk.astro';
-import { paatuote, mallisivut } from '../lib/tuotteet';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import { paatuote, tuote, mallisivut } from '../lib/tuotteet';
 
 // Vaihda true, kun hoyrypesuri.fi on julkaistu. Siihen asti sivu mainitsee sisarsivuston ilman linkkiä.
 const HOYRYPESURI_JULKAISTU = false;
 const hoyry = HOYRYPESURI_JULKAISTU ? '<a href="https://hoyrypesuri.fi/">Höyrypesuri.fi</a>' : 'Höyrypesuri.fi';
 
 const se3 = await paatuote('SE 3');
+// Bissellin HydroSteam-mallit, joilla on hinta (kumppanikaupasta, npm run hae:bissell).
+const hydroKortit = (await Promise.all(['bissell-spotclean-hydrosteam-select-3697n', 'bissell-spotclean-hydrosteam-pro-3700n', 'bissell-revolution-hydrosteam-3670n'].map((id) => tuote(id)))).filter((t) => t.myynnissa && t.hinta != null);
 
 const hydro = [
 	['Bissell SpotClean HydroSteam Pro 3700N', 'kannettava'],
@@ -48,7 +51,7 @@ const ukk = [
 		<h1>Tekstiilipesuri vai höyrypesuri?</h1>
 		<p>Tekstiilipesuri pesee kankaat: sohvat, nojatuolit, matot, patjat ja auton penkit. Höyrypesuri puhdistaa kovat pinnat, kuten laatat, saumat, lieden ja kylpyhuoneen. Jos haluat pestä sohvan tai maton, tarvitset tekstiilipesurin.</p>
 
-		<h2>Ero lyhyesti</h2>
+		<h2>Höyrypesuri vai tekstiilipesuri: ero lyhyesti</h2>
 		<div class="tp-taulu">
 			<table class="tp-versiot">
 				<thead><tr><th scope="col"></th><th scope="col">Tekstiilipesuri</th><th scope="col">Höyrypesuri</th></tr></thead>
@@ -62,7 +65,7 @@ const ukk = [
 		</div>
 		<p>Kärkkäisen opas tiivistää eron samoin: tekstiilipesuri on pehmeille ja huokoisille materiaaleille, ja höyrypesuri koville pinnoille. Kärkkäisen mukaan tekstiilipesurissa pesuvesi imeytyy takaisin laitteeseen, ja pesuri kohtelee kangasta hellävaraisesti.</p>
 
-		<h2>Tekstiilipesurit, joissa on höyry</h2>
+		<h2>Höyry tekstiilipesuri: mallit, joissa on höyry</h2>
 		<p>Osa tekstiilipesureista käyttää lisäksi höyryä. Ne ovat edelleen tekstiilipesureita, koska ne imevät pesuveden pois kankaasta. Suomen verkkokaupoissa on lokakuussa 2026 näitä malleja:</p>
 		<div class="tp-taulu">
 			<table class="tp-versiot">
@@ -70,6 +73,8 @@ const ukk = [
 				<tbody>{hydro.map(([n, tyyppi]) => <tr><th scope="row">{n}</th><td>{tyyppi}</td></tr>)}</tbody>
 			</table>
 		</div>
+		<div class="mk-lista">{hydroKortit.map((t) => <Korttirivi tuote={t} otsikko={`Bissell ${t.nimi.replace(/ \w+$/, '')}`} sivu="/bissell-tekstiilipesurit/" ankkuri={t.id} kuvaus={t.sarja === 'Bissell SpotClean' ? 'Kannettava tekstiilipesuri, jossa on höyry' : 'Pystymalli harjatelalla ja höyryllä'} tagi="Höyry" versio />)}</div>
+		<p>Bissellin kaikki HydroSteam-mallit ja niiden tekniset tiedot ovat <a href="/bissell-tekstiilipesurit/">Bissell-tekstiilipesurien sivulla</a>.</p>
 		<p>Testit kehuvat höyryä pinttyneisiin tahroihin, mutta löytävät myös rajoituksia. Testatut laitteet olivat Britannian ja Yhdysvaltojen myyntiversioita, joten Suomessa myytävän version varusteet voivat poiketa niistä.</p>
 		<ul>
 			<li><strong>Telegraph (päivitetty 29.9.2026)</strong> valitsi Bissell Revolution HydroSteamin testinsä parhaaksi ostokseksi. Höyrykäsittely irrotti kuivuneetkin viinitahrat. Laite kuitenkin kulutti pesuainetta muita enemmän, eikä höyry toiminut lisäsuulakkeissa. Tehokkaimmalla pesutilalla matto kuivui kahdeksassa tunnissa.</li>

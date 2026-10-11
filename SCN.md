@@ -49,7 +49,7 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 - **Mallisivut** (SE 2, SE 3, SE 4, SE 5, SE 6, Puzzi 8/1) → hub (murupolku), toisilleen sivuttain (vaihtoehdot ja UKK), pesuaine (työtapa ja UKK), vuokraus (SE 3 ja Puzzi).
 - **Pesuaine** → SE 3, SE 4, Puzzi 8/1 (annostelutaulukko ja UKK), etusivu ja hub.
 - **Vuokraus** → Puzzi 8/1, SE 3, SE 4, SE 2 (laskelma), pesuaine.
-- **Silta** → SE 3, SE 4; hoyrypesuri.fi, kun se on julkaistu.
+- **Silta** → SE 3, SE 4, Bissell-hub (HydroSteam-kortit); hoyrypesuri.fi, kun se on julkaistu.
 
 ## Aukot (seuraavat sivut)
 
