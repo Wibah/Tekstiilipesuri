@@ -16,6 +16,7 @@ const se318 = await tuote('se-3-18-compact-akulla');
 const home = await tuote('se-3-18-compact-home-akulla');
 const cordless = await tuote('bissell-spotclean-cordless-3681n');
 const mini = await tuote('bissell-spotclean-mini-cordless-4065n');
+const stainforce = await tuote('shark-hx100eut');
 const puzzi2 = await tuote('puzzi-2-1-bp');
 const puzzi9 = await tuote('puzzi-9-1-bp-runkomalli');
 const se3 = await tuote('se-3-compact');
@@ -32,6 +33,7 @@ const vertailu = [
 	{ t: home, nimi: 'Kärcher SE 3-18 Compact Home akulla', akku: `18 V, ${ah(home)} Ah`, aika: `${kayntiaika(home)} (Kärcher)` },
 	{ t: cordless, nimi: 'Bissell SpotClean Cordless', akku: `${luku(cordless.tekniset.akkujanniteV!)} V`, aika: 'noin 35 min Eco-tilassa (Parkers)' },
 	{ t: mini, nimi: 'Bissell SpotClean Mini Cordless', akku: 'ei ilmoitettu', aika: 'ei ilmoitettu' },
+	{ t: stainforce, nimi: 'Shark StainForce HX100EUT', akku: 'ei ilmoitettu', aika: '15 min (Shark)' },
 ];
 
 const ukk = [
@@ -61,7 +63,7 @@ const ukk = [
 		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Akkukäyttöinen tekstiilipesuri', sivu: SIVU }]} />
 		<span class="tp-label">Vertailu</span>
 		<h1>Akkukäyttöinen tekstiilipesuri</h1>
-		<p>Akkukäyttöinen tekstiilipesuri toimii ilman johtoa, joten se sopii autoon, portaisiin ja paikkoihin, joissa pistorasia on kaukana. Tarkistamissamme suomalaisissa verkkokaupoissa on kotikäyttöön kaksi akkukäyttöistä tekstiilipesurisarjaa: Kärcher SE 3-18 Compactia ja Bissell SpotClean Cordlessia. Akku rajaa työn kokoa, sillä Kärcherin mukaan SE 3-18 toimii yhdellä latauksella noin 12–24 minuuttia akusta riippuen.</p>
+		<p>Akkukäyttöinen tekstiilipesuri toimii ilman johtoa, joten se sopii autoon, portaisiin ja paikkoihin, joissa pistorasia on kaukana. Tarkistamissamme suomalaisissa verkkokaupoissa on kotikäyttöön kolme akkukäyttöistä tekstiilipesurisarjaa: Kärcher SE 3-18 Compact, Bissell SpotClean Cordless ja Shark StainForce. Akku rajaa työn kokoa, sillä Kärcherin mukaan SE 3-18 toimii yhdellä latauksella noin 12–24 minuuttia akusta riippuen.</p>
 		<p>Valitse akkumalli, jos peset autoa tai tuoreita tahroja. Jos peset koko sohvan tai isoja mattoja, johdollinen malli on varmempi.</p>
 
 		<h2>Akkutekstiilipesuri: mitä malleja Suomessa myydään?</h2>
@@ -75,8 +77,8 @@ const ukk = [
 							<td>{v.t.hinta != null ? euroa(v.t.hinta) : '–'}</td>
 							<td>{v.akku}</td>
 							<td>{v.aika}</td>
-							<td>{luku(v.t.tekniset.puhdasvesiL!)} l</td>
-							<td>{luku(v.t.tekniset.painoKg!)} kg</td>
+							<td>{v.t.tekniset.puhdasvesiL != null ? `${luku(v.t.tekniset.puhdasvesiL)} l` : '–'}</td>
+							<td>{v.t.tekniset.painoKg != null ? `${luku(v.t.tekniset.painoKg)} kg` : '–'}</td>
 						</tr>
 					))}
 				</tbody>

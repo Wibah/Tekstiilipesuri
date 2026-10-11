@@ -25,6 +25,7 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 | `/maton-pesu-tekstiilipesurilla/` | Tuki (käyttökohde) | `/` | Use Case | maton pesu tekstiilipesurilla | tekstiilipesuri maton pesu 50, tekstiilipesuri matto 30, villamatto tekstiilipesuri 20, tekstiilipesuri villamatto 20, kärcher tekstiilipesuri maton pesu 20, tekstiilipesuri mattojen pesu 10 (noin 150) |
 | `/akkukayttoinen-tekstiilipesuri/` | Tuki (laitetyyppi) | `/` | Comparison | akkukäyttöinen tekstiilipesuri | akkukäyttöinen tekstiilipesuri 80, akku tekstiilipesuri 40, tekstiilipesuri akkukäyttöinen 30, kärcher tekstiilipesuri akku 20 (noin 170) |
 | `/ryobi-tekstiilipesurit/` | Pilari (merkki) | `/` | Comparison | Ryobi (ONE+ Swift Clean RDC18, RDC18BL) | ryobi tekstiilipesuri 600, tekstiilipesuri ryobi 100, ryobi tekstiilipesuri kokemuksia 70, ryobi tekstiilipesuri pesuaine 30, ryobi one+ tekstiilipesuri 10, ryobi swift clean tekstiilipesuri 10 (noin 820). Ei feedeissä; mallisivuja ei tehdä (Villen päätös 2026-10-11) |
+| `/shark-tekstiilipesurit/` | Pilari (merkki) | `/` | Comparison | Shark (StainStriker PX200EUT, PX250EUT, StainForce HX100EUT) | ei hakuvolyymia (Villen tieto 2026-10-11); kumppanifeedeissä |
 | `/strome-tekstiilipesurit/` | Pilari (merkki) | `/` | Comparison | Ströme PowerClean 56A (Verkkokauppa.comin oma merkki) | ströme tekstiilipesuri 150, ströme tekstiilipesuri käyttöohje 50, ströme powerclean 56a tekstiilipesuri 40, ströme tekstiilipesuri kokemuksia 20, ströme tekstiilipesuri pesuaine 10, tekstiilipesuri ströme 10 (noin 280). T203-haut pois (poistunut malli) |
 | `/tefal-tekstiilipesurit/` | Pilari (merkki) | `/` | Comparison | Tefal | tefal tekstiilipesuri 250, tefal clean it tekstiilipesuri 90, tefal clean it tekstiilipesuri kokemuksia 30, tefal tekstiilipesuri kokemuksia 30, tefal clean it tekstiilipesuri iz5020f0 20, tekstiilipesuri tefal 20, tefal tekstiilipesuri arvostelu 10 (noin 450). Ei kohdista: tefal tekstiilipesuri pesuaine 10 (pesuainesivu, osio lyhyt), tefal tekstiilipesuri citymarket (jälleenmyyjähaku) |
 | `/tekstiilipesuri-vai-hoyrypesuri/` | Silta → hoyrypesuri.fi | `/` | Comparison | tekstiilipesuri vs. höyrypesuri | vai-haut noin 180 |
@@ -41,6 +42,7 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 - **Maton pesu** → SE 3, SE 4, Puzzi 8/1, Bissell-hub (kortit), Kärcher-hub, varaosat, pesuaine, vuokraus, sohvan pesu, etusivu. Linkit sisään: etusivun pikavalinta Matto, laitetyyppikortti Matoille ja käyttökohdelista.
 - **Akkukäyttöinen** → SE 3 (SE 3-18), Bissell-hub (kortit), auton penkit, sohvan pesu, vuokraus, etusivu. Linkit sisään: etusivun laitetyyppikortti Akkukäyttöinen ja autosivu.
 - **Ryobi-hub** → akkusivu, auton penkit, pesuaine, SE 3 (SE 3-18), Bissell-hub, etusivu. Linkit sisään: valikko (Muut merkit), etusivu (merkit), akkusivu, pesuainesivun Ryobi-osio.
+- **Shark-hub** → SE 2, Bissell-hub (kortit), akkusivu, maton pesu, pesuaine, etusivu. Linkit sisään: valikko (Muut merkit), etusivu (merkit), akkusivu, Ryobi-sivu.
 - **Ströme-hub** → SE 3, Bissell-hub (kortit), pesuaine, etusivu. Linkit sisään: valikko (Muut merkit), etusivu (merkit), pesuainesivun Ströme-osio.
 - **Tefal-hub** → pesuaine, SE 3, SE 4, Kärcher-hub, Bissell-hub, akkusivu, etusivu. Linkit sisään: valikko, etusivu (merkit), pesuainesivun Tefal-osio.
 - **Kärcher-hub** → mallisivut (taulukot, kortit ja UKK), pesuaine, vuokraus; ylös etusivulle (murupolku).
@@ -53,5 +55,5 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 
 1. **Varaosat ja vianetsintä:** molemmat tehty 2026-10-11.
 2. **Mallisivut:** SE 2, SE 5, SE 6 Signature Line ja Bissell SpotClean Pro tehty 2026-10-11.
-3. **Merkkisivut:** Bissell, Tefal, Ryobi ja Ströme tehty 2026-10-11. Seuraavaksi Shark (Villen päätös 2026-10-11; Sharkilla ei ole hakuja). Feedien ulkopuoliset merkit tehdään korteilla ja tavallisilla kauppalinkeillä. Ryobi (840), Ströme (360), Parkside (620) ja Lumira (250) puuttuvat kumppanifeedeistä, joten niiden sivut tehdään ilman affiliate-linkkejä, jos tehdään.
+3. **Merkkisivut:** Bissell, Tefal, Ryobi, Ströme ja Shark tehty 2026-10-11. Feedien ulkopuoliset merkit tehdään korteilla ja tavallisilla kauppalinkeillä. Ryobi (840), Ströme (360), Parkside (620) ja Lumira (250) puuttuvat kumppanifeedeistä, joten niiden sivut tehdään ilman affiliate-linkkejä, jos tehdään.
 4. **Käyttökohteet:** sohvan pesu, auton penkit, matto ja akkukäyttöinen tehty 2026-10-11. Etusivun pikavalinnat ja laitetyyppikortit linkittävät niihin.

@@ -1,0 +1,114 @@
+---
+// SCN: pilari (merkki), intentti Comparison, emopilari /. Sharkilla ei ole hakuvolyymia (Villen tieto 2026-10-11), joten
+// otsikot perustuvat mallinimiin. Otsikot, meta ja UKK Villen hyväksymät 2026-10-11. Kirjoitettu
+// tekstiilipesuri-writer-skillillä. Tiedot: npm run hae:shark (sharkninja.de; säiliöitä ja PX200EUT:n painoa ei anneta,
+// Villen päätökset 2026-10-11), hinnat kumppanifeedeistä. Testi: Independent 23.4.2026 (PX200). Parkersin ja CAR
+// Magazinen StainStriker Pet -havaintoja ei käytetä, koska versiota ei voi varmistaa.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { tuote, luku, euroa, paiva, mallisivut, type Tuote } from '../lib/tuotteet';
+
+const SIVU = '/shark-tekstiilipesurit/';
+const px200 = await tuote('shark-px200eut');
+const px250 = await tuote('shark-px250eut');
+const hx100 = await tuote('shark-hx100eut');
+const se2 = await tuote('se-2-spot-care');
+const plus = await tuote('bissell-spotclean-plus-3724n');
+const cordless = await tuote('bissell-spotclean-cordless-3681n');
+const v = (t: Tuote, k: string) => t.teknisetValmistajalta[k];
+const rel = 'nofollow noopener';
+const malli = [px200, px250, hx100];
+const erityista: Record<string, string> = { 'shark-px200eut': 'Perusmalli', 'shark-px250eut': 'Lemmikkisuulakkeet, itsepuhdistus', 'shark-hx100eut': 'Valmis pesuainesäiliö' };
+const hinnat = malli.map((t) => t.hinta!);
+
+const ukk = [
+	{
+		kysymys: 'Mitä eroa on Shark PX200EUT:lla ja PX250EUT:lla?',
+		vastaus: `Molemmissa on ${luku(px200.tekniset.tehoW!)} watin teho. PX250EUT on HairPro Pet -versio lemmikkiperheille: sen suulakkeet on tehty niin, etteivät eläinten karvat tuki tai sotkeennu niihin, ja siinä on letkun ja suulakkeiden itsepuhdistus. PX250EUT:n mukana tulee Deep Clean Pet -pesuainetta, PX200EUT:n mukana Deep Clean Pro -pesuainetta. PX200EUT maksaa ${euroa(px200.hinta!)} ja PX250EUT ${euroa(px250.hinta!)}.`,
+	},
+	{
+		kysymys: 'Onko Shark StainForce akkukäyttöinen?',
+		vastaus: `On. Sharkin mukaan StainForce HX100EUT toimii yhdellä latauksella 15 minuuttia, ja akun lataus kestää 5 tuntia. Laite painaa ${luku(hx100.tekniset.painoKg!)} kg. StainStriker-mallit PX200EUT ja PX250EUT ovat johdollisia. Akkukäyttöiset tekstiilipesurit on vertailtu <a href="/akkukayttoinen-tekstiilipesuri/">akkukäyttöisten tekstiilipesurien sivulla</a>.`,
+	},
+	{
+		kysymys: 'Voiko Shark StainStrikerilla pestä villamattoa?',
+		vastaus: 'Ei. Shark kehottaa olemaan käyttämättä StainStriker-malleja villaan. Lue villamaton pesusta lisää <a href="/maton-pesu-tekstiilipesurilla/">maton pesu -sivulta</a>.',
+	},
+	{
+		kysymys: 'Mitä pesuainetta Sharkin tekstiilipesuriin laitetaan?',
+		vastaus: 'Shark käyttää omia aineitaan: StainStrikerin mukana tulevat Deep Clean Pro- tai Deep Clean Pet -pesuaine ja Oxy Multiplier, ja StainForcessa on valmis StainForce-kaksoisaine, jossa Deep Clean Max ja Oxy Multiplier sekoittuvat suihkutettaessa. Muiden merkkien aineet ovat <a href="/tekstiilipesurin-pesuaine/">pesuaineoppaassa</a>.',
+	},
+];
+---
+<Layout
+	title="Shark tekstiilipesuri kokemuksia – StainStriker ja StainForce, hinnat 2026"
+	description="Shark StainStriker PX200EUT, StainStriker HairPro PX250EUT ja akkukäyttöinen StainForce HX100EUT vertailussa: tekniset tiedot, testit ja hinnat."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Shark-tekstiilipesurit', sivu: SIVU }]} />
+		<TuoteSchema tuote={px200} />
+		<TuoteHero tuote={px200} otsikko="Shark tekstiilipesuri – StainStriker ja StainForce" yla="Shark · Kannettavat mallit" merkinta="Suosituksemme">
+			<p>Shark myy Suomessa kolmea kannettavaa tekstiilipesuria tahrojen, sohvien, portaiden ja auton penkkien pesuun: johdolliset StainStriker PX200EUT ja StainStriker HairPro PX250EUT sekä akkukäyttöisen StainForce HX100EUT:n. Hinnat ovat nyt {euroa(Math.min(...hinnat))}–{euroa(Math.max(...hinnat))}.</p>
+			<p>Suosittelemme StainStriker PX200EUT:ta, koska {px200.hinta! <= Math.min(...hinnat) ? 'se on malleista edullisin ja ' : ''}Independent valitsi sen testissään (23.4.2026) parhaaksi nopeisiin tahroihin.</p>
+		</TuoteHero>
+
+		<h2>Shark StainStriker PX200EUT</h2>
+		<p>StainStriker PX200EUT on Sharkin johdollinen perusmalli. Sen teho on {luku(px200.tekniset.tehoW!)} W ja letku {luku(px200.tekniset.letkuM!)} metriä. Mukana tulevat suulake pinttyneille tahroille, leveä suulake isommille tahroille, lemmikkitahrasuulake, rakosuulake sekä aloituspullot Sharkin Deep Clean Pro- ja Oxy Multiplier -pesuainetta. Shark kehottaa olemaan käyttämättä laitetta villaan.</p>
+		<p>Shark ei ilmoita PX200EUT:n säiliöiden tilavuuksia, joten tarkista ne kaupan tuotesivulta, jos vertaat malleja säiliön koon mukaan.</p>
+		<div class="mk-lista"><Korttirivi tuote={px200} otsikko="Shark StainStriker PX200EUT" kuvaus="Johdollinen perusmalli, paras nopeisiin tahroihin Independentin testissä" tagi="Suosituksemme" taso="h3" /></div>
+
+		<h2>Shark StainStriker HairPro PX250EUT lemmikkiperheille</h2>
+		<p>StainStriker HairPro PX250EUT on PX200EUT:n lemmikkiperheille tarkoitettu versio. Teho on sama {luku(px250.tekniset.tehoW!)} W, ja laite painaa Sharkin mukaan {luku(px250.tekniset.painoKg!)} kg. HairPro-suulakkeet on Sharkin mukaan suunniteltu niin, etteivät eläinten karvat tuki niitä eivätkä sotkeennu niihin. Mukana tulevat neljä HairPro-suulaketta sekä Deep Clean Pet- ja Oxy Multiplier -pesuaineen aloituspullot. Laitteessa on letkun ja suulakkeiden itsepuhdistus.</p>
+		<div class="mk-lista"><Korttirivi tuote={px250} otsikko="Shark StainStriker HairPro PX250EUT" kuvaus="Lemmikkiperheille, itsepuhdistus" tagi="Lemmikeille" taso="h3" /></div>
+
+		<h2>Shark StainForce HX100EUT – akkukäyttöinen</h2>
+		<p>StainForce HX100EUT on Sharkin akkukäyttöinen tahranpoistaja. Sharkin mukaan se toimii yhdellä latauksella 15 minuuttia, akun lataus kestää 5 tuntia, ja laite painaa {luku(hx100.tekniset.painoKg!)} kg. StainForcessa pesuaine on valmiissa StainForce-kaksoisainesäiliössä, jossa Deep Clean Max ja Oxy Multiplier sekoittuvat suihkutettaessa. Mukana ovat säilytysteline, tahranpoistosuulake, rakosuulake ja laturi.</p>
+		<p>Lyhyen käyntiajan takia StainForce sopii yksittäisiin tuoreisiin tahroihin, ei koko sohvan tai auton pesuun.</p>
+		<div class="mk-lista"><Korttirivi tuote={hx100} otsikko="Shark StainForce HX100EUT" kuvaus="Akkukäyttöinen tahranpoistaja, 15 minuutin käyntiaika" tagi="Akkukäyttöinen" taso="h3" /></div>
+
+		<h2>Shark-mallit vertailussa</h2>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Hinta</th><th scope="col">Teho</th><th scope="col">Virtalähde</th><th scope="col">Paino</th><th scope="col">Erityistä</th></tr></thead>
+				<tbody>
+					{malli.map((t) => (
+						<tr>
+							<th scope="row"><a href={t.ostopaikka.url} target="_blank" rel={rel}>Shark {t.nimi}</a></th>
+							<td>{euroa(t.hinta!)}</td>
+							<td>{luku(t.tekniset.tehoW!)} W</td>
+							<td>{v(t, 'Akkukäyttöinen') === 'kyllä' ? `Akku, ${t.tekniset.akkuKayttoaika}` : 'Verkkovirta'}</td>
+							<td>{t.tekniset.painoKg != null ? `${luku(t.tekniset.painoKg)} kg` : '–'}</td>
+							<td>{erityista[t.id]}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p class="tp-lahde">Tekniset tiedot: sharkninja.de. Shark ei ilmoita säiliöiden tilavuuksia. Hinnat: suomalaiset verkkokaupat, tarkistettu {paiva(px200.haettu)}.</p>
+
+		<h2>Shark tekstiilipesuri testeissä</h2>
+		<p>Brittiläinen Independent valitsi Shark StainStriker PX200:n testissään (23.4.2026) parhaaksi nopeisiin tahroihin. Laite oli käyttövalmis alle kahdessa minuutissa ja kevyt, ja tuoreet tassunjäljet lähtivät kokonaan. Vanhoihin tahroihin se oli kuitenkin heikompi, ja pinttyneisiin tahroihin Independent valitsi parhaaksi Bissell SpotClean Pron.</p>
+		<p>Sharkin Saksan verkkokaupassa käyttäjät olivat antaneet PX200EUT:lle keskimäärin {v(px200, 'Arvio sharkninja.de')} tähteä ja StainForce HX100EUT:lle {v(hx100, 'Arvio sharkninja.de')} (tarkistettu {paiva(px200.haettu)}).</p>
+
+		<h2>Shark vai Kärcher tai Bissell?</h2>
+		<p>Shark StainStriker on kannettava tahranpoistaja samaan tapaan kuin Kärcher SE 2 ja Bissell SpotClean Plus. Kärcheristä ja Bissellistä tiedetään säiliöiden koot, Sharkista ei. Akkukäyttöisistä malleista Bissell SpotClean Cordless valittiin Parkersin (16.3.2026) ja CAR Magazinen (13.4.2026) testeissä parhaaksi autoon. StainForcen 15 minuutin käyntiaika riittää vain yksittäisiin tahroihin.</p>
+		<div class="mk-lista">
+			<Korttirivi tuote={se2} otsikko="Kärcher SE 2 Spot Care" sivu={mallisivut['SE 2']} kuvaus="Kärcherin pieni kannettava tahroihin" tagi="Kärcher" versio />
+			<Korttirivi tuote={plus} otsikko="Bissell SpotClean Plus" sivu="/bissell-tekstiilipesurit/" ankkuri={plus.id} kuvaus="Kevyt kannettava, 1,1 litran säiliö" tagi="Bissell" versio />
+			<Korttirivi tuote={cordless} otsikko="Bissell SpotClean Cordless" sivu="/bissell-tekstiilipesurit/" ankkuri={cordless.id} kuvaus="Akkukäyttöinen, paras autoon brittiläisissä testeissä" tagi="Akkukäyttöinen" versio />
+		</div>
+
+		<h2>Shark pesuaine</h2>
+		<p>Shark käyttää omia pesuaineitaan: StainStriker-mallien mukana tulevat Deep Clean Pro- tai Deep Clean Pet -pesuaine ja Oxy Multiplier, ja StainForcessa on valmis kaksoisainesäiliö. Muiden merkkien aineet ja annostelu ovat <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineoppaassa</a>.</p>
+
+		<Kokemuslomake malli="Shark" polku={SIVU} mallikentta otsikko="Shark tekstiilipesuri kokemuksia – kerro omasi">
+			<p>Keräämme Sharkin tekstiilipesurien käyttäjien kokemuksia. Kerro, mikä malli sinulla on, mitä peset ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

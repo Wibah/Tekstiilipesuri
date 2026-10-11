@@ -18,6 +18,7 @@
     "lataa:feedit": "python3 scripts/lataa_feedit.py",
     "hae:bissell": "python3 scripts/muunna_bissell.py",
     "hae:ryobi": "python3 scripts/muunna_ryobi.py",
+    "hae:shark": "python3 scripts/muunna_shark.py",
     "hae:strome": "python3 scripts/muunna_strome.py",
     "hae:tefal": "python3 scripts/muunna_tefal.py",
     "hae:kumppanit": "python3 scripts/hae_karcher_kumppanit.py",
