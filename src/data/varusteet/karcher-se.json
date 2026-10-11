@@ -1,0 +1,128 @@
+[
+	{
+		"id": "28633030",
+		"nimi": "Patruunasuodatin WD/SE",
+		"tyyppi": "suodatin",
+		"tuotenumero": "2.863-303.0",
+		"mallit": [
+			"SE 4"
+		],
+		"hinta": 19.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/patruunasuodatin-wd-se-28633030.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "28633140",
+		"nimi": "Fleece-pölypussi 4 kpl WD/SE",
+		"tyyppi": "suodatin",
+		"tuotenumero": "2.863-314.0",
+		"mallit": [
+			"SE 4"
+		],
+		"hinta": 17.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/fleece-poelypussi-4-kpl-wd-se-28633140.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "28630060",
+		"nimi": "Fleece-pölypussi 4 kpl WD/SE",
+		"tyyppi": "suodatin",
+		"tuotenumero": "2.863-006.0",
+		"mallit": [
+			"SE 5",
+			"SE 6"
+		],
+		"hinta": 17.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/fleece-poelypussi-4-kpl-wd-se-28630060.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "28633710",
+		"nimi": "Fleece-pölypussi",
+		"tyyppi": "suodatin",
+		"tuotenumero": "2.863-371.0",
+		"mallit": [
+			"SE 5",
+			"SE 6"
+		],
+		"hinta": 17.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/fleece-poelypussi-28633710.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "28633590",
+		"nimi": "Verhoilusuutin",
+		"tyyppi": "suutin",
+		"tuotenumero": "2.863-359.0",
+		"mallit": [
+			"SE 4",
+			"SE 5",
+			"SE 6"
+		],
+		"hinta": 34.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/verhoilusuutin-28633590.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "28633760",
+		"nimi": "2-in-1 XXL -suutin SE 3 Compact",
+		"tyyppi": "suutin",
+		"tuotenumero": "2.863-376.0",
+		"mallit": [
+			"SE 3 Compact"
+		],
+		"hinta": 49.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/2-in-1-xxl-suutin-se-3-compact-28633760.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "28633700",
+		"nimi": "Shoe!Cleaner SE 3 Compact, SE 4, 5 ja 6",
+		"tyyppi": "suutin",
+		"tuotenumero": "2.863-370.0",
+		"mallit": [
+			"SE 3 Compact",
+			"SE 4",
+			"SE 5",
+			"SE 6"
+		],
+		"hinta": 34.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/shoe-cleaner-se-3-compact-se-4-5-ja-6-28633700.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "28633690",
+		"nimi": "Shoe!Cleaner SE 3-18 Compact",
+		"tyyppi": "suutin",
+		"tuotenumero": "2.863-369.0",
+		"mallit": [
+			"SE 3-18 Compact"
+		],
+		"hinta": 34.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/shoe-cleaner-se-3-18-compact-28633690.html",
+		"haettu": "2026-10-11"
+	},
+	{
+		"id": "28633580",
+		"nimi": "Tukikahva",
+		"tyyppi": "kahva",
+		"tuotenumero": "2.863-358.0",
+		"mallit": [
+			"SE 4",
+			"SE 5",
+			"SE 6"
+		],
+		"hinta": 24.9,
+		"varastossa": true,
+		"url": "https://www.karcher.com/fi/varuste/tukikahva-28633580.html",
+		"haettu": "2026-10-11"
+	}
+]

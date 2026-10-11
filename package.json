@@ -16,7 +16,8 @@
     "hae:pesuaineet": "node scripts/hae-pesuaineet.mjs",
     "hae:kuvat": "python3 scripts/hae_kuvat.py",
     "lataa:feedit": "python3 scripts/lataa_feedit.py",
-    "hae:bissell": "python3 scripts/muunna_bissell.py"
+    "hae:bissell": "python3 scripts/muunna_bissell.py",
+    "hae:varusteet": "python3 scripts/hae_karcher_varusteet.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

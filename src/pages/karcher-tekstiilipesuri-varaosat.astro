@@ -1,0 +1,134 @@
+---
+// SCN: tuki, intentti Outcome, emopilari /karcher-tekstiilipesurit/. Hakusanat: kärcher tekstiilipesuri varaosat 200,
+// kärcher tekstiilipesuri suodatin 90, kärcher tekstiilipesuri tiiviste 90, kärcher tekstiilipesuri suutin 50,
+// kärcher tekstiilipesuri suulake 40, kärcher tekstiilipesuri mattosuulake 30, kärcher tekstiilipesuri letku 20
+// (Ahrefs 2026-10, noin 520). "kärcher tekstiilipesuri ei tule vettä" ja "käyttöohje" kuuluvat vianetsintäsivulle.
+// Otsikot ja UKK Villen hyväksymät 2026-10-11. Kirjoitettu tekstiilipesuri-writer-skillillä.
+// Lähteet: karcher.com/fi:n varaosasivu (tilausohje), Kärcherin varaosahinnasto 2025 (osatyypit), varusteet
+// npm run hae:varusteet (Kärcherin feed ja varustesivujen Sopii-tekstit). Myynnistä poistuneita malleja ei mainita.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import Ukk from '../components/Ukk.astro';
+import varusteet from '../data/varusteet/karcher-se.json';
+import { merkinTuotteet, euroa, paiva, mallisivut } from '../lib/tuotteet';
+
+const VARAOSASIVU = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/varaosat.html';
+const HUOLTOHAKU = 'https://www.karcher.com/fi/palvelut/asiakaspalvelu/jaelleenmyyjaehaku.html';
+const HINNASTO = 'https://s1.kaercher-media.com/media/file/268998/varaosahinnasto-2025.pdf';
+
+const v = (id: string) => varusteet.find((x) => x.id === id)!;
+const suodattimet = varusteet.filter((x) => x.tyyppi === 'suodatin');
+const patruuna = v('28633030');
+const verhoilu = v('28633590');
+const xxl = v('28633760');
+const tukikahva = v('28633580');
+const kengat = v('28633700');
+const kengat18 = v('28633690');
+const haettu = varusteet[0].haettu;
+
+const karcher = (await merkinTuotteet('Kärcher')).filter((t) => !t.ammattilaite);
+const nimella = (nimi: string) => karcher.find((t) => t.nimi === nimi)!;
+const se3 = nimella('SE 3 Compact');
+const se3floor = nimella('SE 3 Compact Floor');
+const se4 = nimella('SE 4 Plus');
+const letku = (t: (typeof karcher)[number]) => t.toimitusSisaltaa.find((r) => r.startsWith('Imuletkun pituus'))?.replace(/^Imuletkun pituus:\s*/, '').replace('.', ',');
+const tuotenumerot = [...karcher].sort((a, b) => a.nimi.localeCompare(b.nimi, 'fi', { numeric: true }));
+const rel = 'nofollow noopener';
+
+const ukk = [
+	{
+		kysymys: 'Mistä saan varaosan Kärcherin tekstiilipesuriin?',
+		vastaus: `Kärcher Oy myy kuluttajalaitteiden varaosia sähköpostitse. Lähetä osoitteeseen info@karcher.fi nimesi, osoitteesi, puhelinnumerosi ja osan tuotenumero. Kärcher veloittaa jokaisesta varaosatilauksesta 12,50 €:n käsittely- ja toimitusmaksun. Listattuja varaosia myyvät myös valtuutetut huoltoliikkeet, jotka löydät <a href="${HUOLTOHAKU}" target="_blank" rel="${rel}">Kärcherin huoltoliikehausta</a>.`,
+	},
+	{
+		kysymys: 'Mistä löydän Kärcher-tekstiilipesurini tuotenumeron?',
+		vastaus: `Tuotenumero on laitteen tyyppikilvessä muodossa 1.xxx-xxx.0. Esimerkiksi SE 3 Compactin tuotenumero on ${se3.tuotenumero} ja SE 4 Plussan ${se4.tuotenumero}. Kaikkien nykyisten SE-mallien tuotenumerot ovat tämän sivun taulukossa.`,
+	},
+	{
+		kysymys: 'Voinko vaihtaa Kärcherin tekstiilipesurin osan itse?',
+		vastaus: 'Kärcher listaa varaosahaussaan osat, joita kuluttaja voi ostaa. Kärcherin mukaan muut osat on tarkoitettu vaihdettavaksi vain valtuutetussa huoltoliikkeessä.',
+	},
+	{
+		kysymys: 'Sopiiko märkä-kuivaimurin suodatin tekstiilipesuriin?',
+		vastaus: `Osittain. Kärcherin patruunasuodatin WD/SE (${euroa(patruuna.hinta)}) sopii WD-märkä-kuivaimurien lisäksi SE 4 -tekstiilipesuriin. Fleece-pölypussit on tehty eri malleille, joten tarkista tuotenumero ennen tilaamista.`,
+	},
+	{
+		kysymys: 'Mitä teen, jos Kärcherin tekstiilipesurista ei tule vettä?',
+		vastaus: 'Katso ensin laitteen käyttöohje. Jos syy on rikkinäinen osa, tilaa varaosa yllä olevan ohjeen mukaan tai vie laite valtuutettuun huoltoliikkeeseen.',
+	},
+];
+---
+<Layout
+	title="Kärcher tekstiilipesuri varaosat – suodatin, suutin, tiiviste ja tilausohje 2026"
+	description="Mistä saat Kärcherin tekstiilipesuriin varaosan? Suodattimet, suuttimet ja suulakkeet malleittain sekä Kärcherin varaosatilauksen ohjeet."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Varaosat', sivu: '/karcher-tekstiilipesuri-varaosat/' }]} />
+		<span class="tp-label">Opas</span>
+		<h1>Kärcher tekstiilipesuri varaosat ja lisävarusteet</h1>
+		<p>Kärcherin tekstiilipesuriin saa kahdenlaisia osia. Lisävarusteita, kuten suodattimia, suuttimia ja tukikahvan, myydään Kärcher.comin verkkokaupassa. Varaosat, kuten letkut, säiliöt ja tiivisteet, tilataan Kärcheriltä sähköpostilla tai ostetaan valtuutetusta huoltoliikkeestä. Kummassakin tapauksessa tarvitset laitteen tuotenumeron, joka on tyyppikilvessä.</p>
+
+		<h2>Näin tilaat Kärcherin varaosan</h2>
+		<p>Kärcher Oy:n mukaan varaosia ei ole 19.5.2025 jälkeen voinut tilata verkkokaupasta. Kuluttajalaitteiden varaosat tilataan näin:</p>
+		<ol>
+			<li>Katso laitteen tuotenumero tyyppikilvestä (muoto 1.xxx-xxx.0).</li>
+			<li>Etsi tarvitsemasi osan tuotenumero <a href={VARAOSASIVU} target="_blank" rel={rel}>Kärcherin varaosahausta</a>. Osan hinnan näet <a href={HINNASTO} target="_blank" rel={rel}>Kärcherin varaosahinnastosta 2025</a> (PDF).</li>
+			<li>Lähetä osoitteeseen info@karcher.fi nimesi, osoitteesi, puhelinnumerosi ja osan tuotenumero.</li>
+			<li>Kärcher vastaa sähköpostiin ja lähettää laskun. Jokaisesta varaosatilauksesta veloitetaan 12,50 €:n käsittely- ja toimitusmaksu.</li>
+		</ol>
+		<p>Jos et tiedä, mikä osa tarvitaan, ota tyyppikilvestä valokuva ja lähetä se vian kuvauksen ja yhteystietojesi kanssa osoitteeseen info@karcher.fi. Valtuutetut huoltoliikkeet myyvät samoja osia, ja niillä on käytössään varaosakuvat.</p>
+
+		<h2>Kärcher tekstiilipesuri suodatin</h2>
+		<p>Kärcherin SE 4-, SE 5- ja SE 6 -malleissa on suodatin ja pölypussi, koska ne toimivat myös märkä-kuivaimurina. SE 4 Plussan mukana tulee vaahtosuodatin ja yksi fleece-pölypussi. Kuivaan imurointiin SE 4:ään sopii patruunasuodatin WD/SE ({euroa(patruuna.hinta)}), jota ei tarvitse vaihtaa märän ja kuivan imuroinnin välillä. Fleece-pölypusseja on eri malleille, joten valitse pussi tuotenumeron mukaan:</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Suodatin tai pussi</th><th scope="col">Tuotenumero</th><th scope="col">Sopii malleihin</th><th scope="col">Hinta</th></tr></thead>
+				<tbody>
+					{suodattimet.map((x) => (
+						<tr><th scope="row"><a href={x.url} target="_blank" rel={rel}>{x.nimi}</a></th><td>{x.tuotenumero}</td><td>{x.mallit.join(', ')}</td><td>{euroa(x.hinta)}</td></tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p>SE 2- ja SE 3 -malleille Kärcher.comissa ei ole erillisiä suodattimia lisävarusteena.</p>
+
+		<h2>Kärcher tekstiilipesuri suutin ja suulake</h2>
+		<p>SE 2:n, SE 3 Compactin ja SE 4 Plussan mukana tulee 88 mm:n verhoilusuulake. Lisävarusteena Kärcher myy SE 4-, SE 5- ja SE 6 -malleihin erillisen verhoilusuuttimen ({euroa(verhoilu.hinta)}), jonka työleveys on myös 88 mm. Suuttimessa on läpinäkyvä kansi, josta näkee pesun edistymisen. Kenkien pesuun on Shoe!Cleaner, jota myydään erikseen SE 3 Compactiin, SE 4:ään, SE 5:een ja SE 6:een ({euroa(kengat.hinta)}) sekä akkukäyttöiseen SE 3-18 Compactiin ({euroa(kengat18.hinta)}). Isojen mattojen pesua helpottaa SE 4-, SE 5- ja SE 6 -malleihin sopiva tukikahva ({euroa(tukikahva.hinta)}), jolla lattiasuulaketta voi ohjata kahdella kädellä.</p>
+		<p>Kärcherin ilmoituksen mukaan verhoilusuutin SE (2.885-018.0) sopii vain myynnistä poistuneisiin malleihin, joten se ei sovi nykyisiin SE-malleihin.</p>
+
+		<h3>Kärcher tekstiilipesuri mattosuulake</h3>
+		<p>SE 3 Compactiin saa lisävarusteena 2-in-1 XXL -suuttimen ({euroa(xxl.hinta)}) keskikokoisten mattojen ja isompien verhoiltujen pintojen pesuun. SE 3 Compact Floorin ({euroa(se3floor.hinta!)}) mukana XXL-suutin ja kaksi 0,5 metrin jatkoputkea tulevat valmiiksi, {se3floor.hinta! < se3.hinta! + xxl.hinta ? `joten Floor-versio tulee halvemmaksi kuin perusversio (${euroa(se3.hinta!)}) ja erikseen ostettu suutin.` : `ja perusversio maksaa ${euroa(se3.hinta!)}.`} SE 4 Plussan mukana tulee {se4.tekniset.tyoleveysMm} mm:n lattiasuulake. Vertailu on <a href={mallisivut['SE 3']}>SE 3 Compactin sivulla</a> ja <a href={mallisivut['SE 4']}>SE 4 Plussan sivulla</a>.</p>
+
+		<h2>Kärcher tekstiilipesuri tiiviste ja letku</h2>
+		<p>Tiivisteitä, letkuja ja säiliöitä ei myydä Kärcher.comissa lisävarusteina, vaan ne ovat varaosia. Kärcherin varaosahinnastossa (2025) on SE-malleille muun muassa imuletku, puhdas- ja likavesisäiliöitä, suodattimia ja uimuri. Hinnaston nimikkeistä ei näe, mihin malliin osa sopii, joten hae oikea osa varaosahausta laitteen tuotenumerolla tai kysy osoitteesta info@karcher.fi.</p>
+		<p>SE 2:ssa, SE 3 Compactissa ja SE 4 Plussassa paine- ja imuletku on yhdistetty samaan letkuun. SE 3 Compactin letku on {letku(se3)} pitkä ja SE 4 Plussan {letku(se4)}.</p>
+
+		<h2>Mikä varaosa sopii mihinkin malliin?</h2>
+		<p>Taulukossa ovat nykyisten SE-mallien tuotenumerot tyyppikilvestä ja niihin sopivat lisävarusteet. Lisävarusteiden hinnat ovat Kärcher.comista, ja ne on tarkistettu {paiva(haettu)}.</p>
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Tuotenumero</th><th scope="col">Sopivat lisävarusteet</th></tr></thead>
+				<tbody>
+					{tuotenumerot.map((t) => {
+						const sarja = /SE 3-18/.test(t.nimi) ? 'SE 3-18 Compact' : /SE 3/.test(t.nimi) ? 'SE 3 Compact' : t.sarja ?? '';
+						const sopivat = varusteet.filter((x) => x.mallit.includes(sarja));
+						return (
+							<tr>
+								<th scope="row">Kärcher {t.nimi}</th>
+								<td>{t.tuotenumero}</td>
+								<td>{sopivat.length ? sopivat.map((x) => `${x.nimi} (${x.tuotenumero})`).join(', ') : 'Ei erillisiä lisävarusteita'}</td>
+							</tr>
+						);
+					})}
+				</tbody>
+			</table>
+		</div>
+
+		<h2>Varaosa vai huolto?</h2>
+		<p>Kärcherin varaosahaussa listatut osat voit ostaa itse. Kärcherin mukaan muut osat on tarkoitettu vaihdettavaksi vain valtuutetussa huoltoliikkeessä, joten jos vikaan tarvittavaa osaa ei ole varaosahaussa, vie laite huoltoon. Lähimmän huoltoliikkeen löydät <a href={HUOLTOHAKU} target="_blank" rel={rel}>Kärcherin jälleenmyyjä- ja huoltoliikehausta</a>. Laitteiden erot ja hinnat ovat <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurien sivulla</a>.</p>
+
+		<p class="tp-lahde">Lähteet: <a href={VARAOSASIVU} target="_blank" rel={rel}>Kärcher Oy, varaosat</a>, Kärcherin kuluttajatuotteiden varaosahinnasto 2025 ja Kärcher.comin varustesivut, tarkistettu {paiva(haettu)}.</p>
+
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>
