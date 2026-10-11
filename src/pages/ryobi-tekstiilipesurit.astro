@@ -1,0 +1,126 @@
+---
+// SCN: pilari (merkki), intentti Comparison, emopilari /. Hakusanat: ryobi tekstiilipesuri 600, tekstiilipesuri ryobi 100,
+// ryobi tekstiilipesuri kokemuksia 70, ryobi tekstiilipesuri pesuaine 30, ryobi one+ tekstiilipesuri 10, ryobi swift
+// clean tekstiilipesuri 10 (Ahrefs 2026-10, noin 820). Pois: prisma- ja motonet-haut (jälleenmyyjät), hinta-haku.
+// Ryobia ei ole kumppanifeedeissä. Villen päätökset 2026-10-11: sivu tehdään, kortit tehdään ja napit vievät kauppaan
+// tavallisella linkillä, mallisivuja ei tehdä. Otsikot, meta ja UKK Villen hyväksymät 2026-10-11. Kirjoitettu
+// tekstiilipesuri-writer-skillillä. Tiedot: npm run hae:ryobi (fi.ryobitools.eu, käyntiajat uk.ryobitools.eu),
+// TM-pikakoe 22.2.2025 (tietopohja).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import Korttirivi from '../components/tuote/Korttirivi.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { merkinTuotteet, tuote, luku, euroa, paiva, mallisivut, type Tuote } from '../lib/tuotteet';
+
+const SIVU = '/ryobi-tekstiilipesurit/';
+const ryobi = await merkinTuotteet('Ryobi');
+const sku = (s: string) => ryobi.find((t) => t.tuotenumero === s)!;
+const bl = sku('RDC18BL-0');
+const runko = sku('RDC18-0');
+const kit = sku('RDC18-1C20G');
+const se318 = await tuote('se-3-18-compact-home-akulla');
+const cordless = await tuote('bissell-spotclean-cordless-3681n');
+const k = (t: Tuote) => t.tekniset;
+const v = (t: Tuote, avain: string) => t.teknisetValmistajalta[avain];
+// Säiliöt: alle litra millilitroina ("120 ml"), litra ja yli litroina ("1 l"). mlN on genetiivi ("120 ml:n", "1 litran").
+const ml = (l: number) => (l >= 1 ? `${luku(l)} l` : `${luku(l * 1000)} ml`);
+const mlN = (l: number) => (l >= 1 ? `${luku(l)} litran` : `${luku(l * 1000)} ml:n`);
+const TM = 'https://www.tekniikanmaailma.fi/lehti/lue/pikakoe-ryobi-one-18v-hiiliharjaton-swift-clean-tekstiilipesuri/';
+const rel = 'nofollow noopener';
+const taulu = [runko, kit, bl];
+
+const ukk = [
+	{
+		kysymys: 'Sisältyykö akku Ryobin tekstiilipesurin hintaan?',
+		vastaus: `Riippuu versiosta. RDC18BL-0 ja RDC18-0 myydään ilman akkua ja laturia. RDC18-1C20G:n mukana tulevat 2,0 Ah:n akku ja laturi, ja Ryobin mukaan akun lataus kestää ${v(kit, 'Latausaika (min)')} minuuttia. Kaikki Ryobin 18 voltin ONE+-akut sopivat näihin laitteisiin, joten jos sinulla on jo ONE+-akku, akuton versio riittää.`,
+	},
+	{
+		kysymys: 'Mikä ero on Ryobi RDC18:lla ja RDC18BL:llä?',
+		vastaus: `RDC18BL on isompi ja tehokkaampi. Siinä on hiiliharjaton moottori, ${mlN(k(bl).puhdasvesiL!)} puhdasvesisäiliö, ${mlN(k(bl).likavesiL!)} likavesisäiliö, ${luku(k(bl).letkuM!)} metrin letku ja imuteho ${v(bl, 'Imuteho (AW)')} AW. RDC18 on pieni käsikäyttöinen malli, jonka puhdasvesisäiliö on ${ml(k(runko).puhdasvesiL!)} ja imuteho ${v(runko, 'Imuteho (AW)')} AW. RDC18 painaa ilman akkua ${luku(k(runko).painoKg!)} kg ja RDC18BL ${luku(k(bl).painoKg!)} kg.`,
+	},
+	{
+		kysymys: 'Sopiiko Ryobi Swift Clean auton penkkien pesuun?',
+		vastaus: 'Sopii, ja akkukäyttöisenä se toimii ilman pistorasiaa. Tekniikan Maailman pikakokeessa (22.2.2025) hiiliharjattomalla Swift Cleanilla pestiin myös auton istuin. Ohje ja muut autoon sopivat mallit ovat <a href="/auton-penkkien-pesu-tekstiilipesurilla/">auton penkkien pesu -sivulla</a>.',
+	},
+	{
+		kysymys: 'Mistä löydän Ryobin tekstiilipesurin käyttöohjeen?',
+		vastaus: `Käyttöohjeet ja varaosat ovat Ryobin suomenkielisellä sivustolla kunkin mallin tuotesivulla kohdassa Ladattavat tiedostot: <a href="${runko.lahde}" target="_blank" rel="${rel}">RDC18</a> ja <a href="${bl.lahde}" target="_blank" rel="${rel}">RDC18BL</a>.`,
+	},
+];
+---
+<Layout
+	title="Ryobi tekstiilipesuri kokemuksia – ONE+ Swift Clean -mallit ja vertailu 2026"
+	description="Ryobin akkukäyttöiset ONE+ Swift Clean -tekstiilipesurit vertailussa: RDC18 ja hiiliharjaton RDC18BL. Tekniset tiedot, akut, testit ja kokemuksia."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Ryobi-tekstiilipesurit', sivu: SIVU }]} />
+		<TuoteSchema tuote={bl} />
+		<TuoteHero tuote={bl} otsikko="Ryobi tekstiilipesuri – ONE+ Swift Clean -mallit vertailussa" yla="Ryobi · Akkukäyttöiset mallit" merkinta="Suosituksemme">
+			<p>Ryobin tekstiilipesurit ovat akkukäyttöisiä ONE+ Swift Clean -malleja, jotka käyttävät samoja 18 voltin akkuja kuin Ryobin muut ONE+-työkalut. Suomessa myydään kahta laitetta: pientä käsikäyttöistä RDC18:aa ja isompaa hiiliharjatonta RDC18BL:ää. Molemmilla tahraa harjataan pesuaineen kanssa ennen imua.</p>
+			<p>Suosittelemme RDC18BL:ää, koska sen {mlN(k(bl).puhdasvesiL!)} puhdasvesisäiliö ja {v(bl, 'Imuteho (AW)')} AW:n imuteho ovat selvästi RDC18:aa suuremmat, joten se sopii myös sohvan ja auton penkkien tahroihin. Jos sinulla ei vielä ole ONE+-akkua, huomaa, että akku ja laturi ostetaan erikseen.</p>
+		</TuoteHero>
+
+		<h2>Ryobi ONE+ Swift Clean -tekstiilipesurit</h2>
+		<p>Ryobin Swift Clean -laitteissa pesu tehdään kolmessa vaiheessa: laite suihkuttaa pesuainetta tahraan, harja hankaa sen kankaaseen, ja lopuksi laite imee lian pois. RDC18:ssa harja on pyörivä. Ryobin mukaan kaikki läpinäkyvät osat voi pestä astianpesukoneen yläkorissa. Kumpikin malli on IPX4-luokiteltu.</p>
+
+		<h3>Ryobi RDC18 Swift Clean (RDC18-0 ja RDC18-1C20G)</h3>
+		<p>RDC18 on pieni käsikäyttöinen tahranpoistaja. Sen puhdasvesisäiliö on {ml(k(runko).puhdasvesiL!)} ja likavesisäiliö {ml(k(runko).likavesiL!)}, imuteho {v(runko, 'Imuteho (AW)')} AW ja puhdistusleveys {luku(k(runko).tyoleveysMm! / 10)} cm. Se painaa ilman akkua {luku(k(runko).painoKg!)} kg. Ryobin mukaan laitteella voi imuroida 5,0 Ah:n akulla enintään 60 minuuttia. Pienen säiliön takia RDC18 sopii lähinnä yksittäisiin tuoreisiin tahroihin, ei koko sohvan pesuun.</p>
+		<p>RDC18-0 on runkomalli ilman akkua ja laturia. RDC18-1C20G:n mukana tulevat 2,0 Ah:n akku ja laturi, ja se maksaa {euroa(kit.hinta!)}. RDC18-0:aa emme löytäneet suomalaisista verkkokaupoista.</p>
+		<div class="mk-lista">
+			<Korttirivi tuote={kit} otsikko="Ryobi ONE+ Swift Clean RDC18-1C20G" kuvaus="Pieni käsikäyttöinen malli, mukana 2,0 Ah:n akku ja laturi" tagi="Akku mukana" taso="h4" />
+			<Korttirivi tuote={runko} otsikko="Ryobi ONE+ Swift Clean RDC18-0" kuvaus="Runkomalli ilman akkua ja laturia" tagi="Runkomalli" taso="h4" />
+		</div>
+
+		<h3>Ryobi RDC18BL hiiliharjaton Swift Clean</h3>
+		<p>RDC18BL on Ryobin isompi tekstiilipesuri. Siinä on hiiliharjaton moottori, {mlN(k(bl).puhdasvesiL!)} puhdasvesisäiliö, {mlN(k(bl).likavesiL!)} likavesisäiliö ja {luku(k(bl).letkuM!)} metrin letku. Imuteho on {v(bl, 'Imuteho (AW)')} AW ja pesusuuttimen leveys {luku(k(bl).tyoleveysMm!)} mm. Laite painaa ilman akkua {luku(k(bl).painoKg!)} kg. Mukana tulevat 2-in-1-pesutyökalu harja- ja kumisuuttimilla, rakotyökalu ja 250 ml pesuainetta.</p>
+		<p>RDC18BL-0 myydään ilman akkua ja laturia, ja se maksaa {euroa(bl.hinta!)}. Ryobin mukaan laitteella voi imuroida 5,0 Ah:n akulla enintään 18 minuuttia.</p>
+		<div class="mk-lista">
+			<Korttirivi tuote={bl} otsikko="Ryobi ONE+ Swift Clean RDC18BL-0" kuvaus="Hiiliharjaton malli, 1 litran puhdasvesisäiliö" tagi="Suosituksemme" taso="h4" />
+		</div>
+
+		<div class="tp-taulu">
+			<table class="tp-versiot">
+				<thead><tr><th scope="col">Malli</th><th scope="col">Hinta</th><th scope="col">Säiliöt (puhdas / lika)</th><th scope="col">Imuteho</th><th scope="col">Paino ilman akkua</th><th scope="col">Akku</th></tr></thead>
+				<tbody>
+					{taulu.map((t) => (
+						<tr>
+							<th scope="row"><a href={t.ostopaikka.url} target="_blank" rel={rel}>Ryobi {t.nimi}</a></th>
+							<td>{t.hinta != null ? euroa(t.hinta) : '–'}</td>
+							<td>{ml(k(t).puhdasvesiL!)} / {ml(k(t).likavesiL!)}</td>
+							<td>{v(t, 'Imuteho (AW)')} AW</td>
+							<td>{luku(k(t).painoKg!)} kg</td>
+							<td>{v(t, 'Mukana akut (kpl)') === '0' ? 'ei mukana' : `${luku(Number(v(t, 'Akun kapasiteetti (Ah)')))} Ah + laturi`}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+		<p class="tp-lahde">Tekniset tiedot: fi.ryobitools.eu. Hinnat: suomalainen verkkokauppa, tarkistettu {paiva(bl.haettu)}.</p>
+
+		<h2>Ryobi akku tekstiilipesuri: akku, laturi ja käyntiaika</h2>
+		<p>Ryobin tekstiilipesurit kuuluvat ONE+-järjestelmään, jossa sama 18 voltin akku sopii kaikkiin ONE+-työkaluihin. Jos sinulla on jo Ryobin akku, akuton RDC18BL-0 tai RDC18-0 riittää. Muuten valitse RDC18-1C20G, jonka mukana tulevat 2,0 Ah:n akku ja laturi.</p>
+		<p>Ryobin brittisivun mukaan RDC18 imuroi 5,0 Ah:n akulla enintään 60 minuuttia ja tehokkaampi RDC18BL enintään 18 minuuttia. Tehokkaamman RDC18BL:n käyntiaika on siis selvästi lyhyempi. Koko sohvan pesuun tarvitaan RDC18BL:llä iso akku tai vara-akku. Akkumallien vertailu on <a href="/akkukayttoinen-tekstiilipesuri/">akkukäyttöisten tekstiilipesurien sivulla</a>.</p>
+
+		<h2>Ryobi tekstiilipesuri arvostelu: testit ja kokemukset</h2>
+		<p>Tekniikan Maailma testasi hiiliharjattoman Ryobi ONE+ Swift Cleanin pikakokeessa (22.2.2025, Ann-Mari Lehtonen). Testissä pestiin oikeita huonekaluja, auton istuin ja matto. Tuoreet tahrat lähtivät tehokkaasti, mutta pinttynyt rasvalika vain vaaleni. Kehuja saivat keveys, imu ja astianpesukoneeseen sopivat säiliöt. Moitteita saivat 120 cm:n letku, vesiroiskeet käyttäjää kohti ja pystysuorien pintojen pesu. <a href={TM} target="_blank" rel={rel}>Lue pikakoe</a>.</p>
+		<p>Ryobin suomenkielisellä sivustolla käyttäjät olivat antaneet RDC18BL-0:lle keskimäärin 5,0/5 tähteä kolmessa arviossa, RDC18-0:lle 4,7/5 ja RDC18-1C20G:lle 4,0/5, kummallekin kolmessa arviossa (tarkistettu 11.10.2026). Arvioita on niin vähän, ettei niistä voi tehdä yleistä johtopäätöstä.</p>
+
+		<h2>Ryobi vai Kärcher SE 3-18 tai Bissell SpotClean Cordless?</h2>
+		<p>Ryobin lisäksi Suomessa myydään kahta muuta akkukäyttöistä tekstiilipesurisarjaa. Kärcher SE 3-18 Compactin puhdasvesisäiliö on {luku(k(se318).puhdasvesiL!)} litraa, ja Home-version mukana tulevat 5 Ah:n akku ja pikalaturi. Bissell SpotClean Cordless valittiin Parkersin (16.3.2026) ja CAR Magazinen (13.4.2026) testeissä parhaaksi autoon. Ryobi on paras valinta, jos sinulla on jo Ryobin ONE+-akkuja. Muuten Kärcherin ja Bissellin akkumallien mukana tulee akku.</p>
+		<div class="mk-lista">
+			<Korttirivi tuote={se318} otsikko="Kärcher SE 3-18 Compact Home akulla" sivu={mallisivut['SE 3']} kuvaus="1,7 litran säiliö, mukana 5 Ah:n akku ja pikalaturi" tagi="Akku mukana" versio />
+			<Korttirivi tuote={cordless} otsikko="Bissell SpotClean Cordless" sivu="/bissell-tekstiilipesurit/" ankkuri={cordless.id} kuvaus="Paras autoon Parkersin ja CAR Magazinen testeissä" tagi="Paras autoon" versio />
+		</div>
+
+		<h2>Ryobi tekstiilipesuri pesuaine</h2>
+		<p>Ryobin laitteiden mukana tulee 250 ml pesuainetta. Lisää ainetta saa Ryobin Swift Clean -pesuainetiivisteenä (RBACLS-01). Aineen käyttö ja muiden merkkien aineet ovat <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineoppaassa</a>.</p>
+
+		<Kokemuslomake malli="Ryobi" polku={SIVU} mallikentta otsikko="Ryobi tekstiilipesuri kokemuksia – kerro omasi">
+			<p>Keräämme Ryobin tekstiilipesurien käyttäjien kokemuksia. Kerro, onko sinulla RDC18 vai RDC18BL, mitä peset ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

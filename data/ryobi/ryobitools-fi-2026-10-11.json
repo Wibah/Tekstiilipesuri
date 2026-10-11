@@ -1,0 +1,105 @@
+[
+ {
+  "u": "https://fi.ryobitools.eu/siivous/imurit/tekstiilipesurit/rdc18/rdc18-0/",
+  "nimi": "18V Tekstiilipesuri Swift Clean",
+  "sku": "RDC18-0",
+  "tuotenumero": "5133005905",
+  "arviot": {
+   "arvo": 4.7,
+   "maara": 3
+  },
+  "props": {
+   "Ilmanvirtaus (l/s)": "17",
+   "Ilmavirta (l/min)": "480",
+   "Imuteho (AW)": "13",
+   "Likaisen säiliön kapasiteetti (ml)": "200",
+   "Puhdistusleveys (cm)": "18",
+   "Puhtaan säiliön kapasiteetti (ml)": "120",
+   "Sinetöity imu (kPa)": "4.3",
+   "Akun kapasiteetti (Ah)": "-",
+   "Laturi mukana: Kyllä/Ei": "Ei",
+   "Mukana akut (kpl)": "0",
+   "Virtalähde": "18V",
+   "Paino (ilman akkua) (kg)": "2.5",
+   "Paino akun kanssa (EPTA) (kg)": "3.0 (RB1820C)",
+   "EAN-koodi": "4892210212221",
+   "IPX-turvallisuusluokka": "IPX4",
+   "Vakiovarustus": "250 ml:n pesuaine"
+  },
+  "kauppa": null,
+  "kayntiaika": "enintään 60 min 5,0 Ah:n akulla (Ryobi UK)"
+ },
+ {
+  "u": "https://fi.ryobitools.eu/siivous/imurit/tekstiilipesurit/rdc18/rdc18-1c20g/",
+  "nimi": "18V Tekstiilipesuri Swift Clean (2,0 Ah)",
+  "sku": "RDC18-1C20G",
+  "tuotenumero": "5133006331",
+  "arviot": {
+   "arvo": 4.0,
+   "maara": 3
+  },
+  "props": {
+   "Ilmanvirtaus (l/s)": "17",
+   "Ilmavirta (l/min)": "480",
+   "Imuteho (AW)": "13",
+   "Likaisen säiliön kapasiteetti (ml)": "200",
+   "Puhtaan säiliön kapasiteetti (ml)": "120",
+   "Sinetöity imu (kPa)": "4.3",
+   "Akkutyyppi": "Li-ion",
+   "Akun kapasiteetti (Ah)": "2.0",
+   "Latausaika (min)": "60",
+   "Laturi mukana: Kyllä/Ei": "RC18120",
+   "Mukana akut (kpl)": "1",
+   "Virtalähde": "18V",
+   "Paino (ilman akkua) (kg)": "2.5",
+   "Paino akun kanssa (EPTA) (kg)": "3.0 (RB1820C)",
+   "EAN-koodi": "4892210236265",
+   "IPX-turvallisuusluokka": "IPX4",
+   "Vakiovarustus": "250 ml pesuainetiiviste"
+  },
+  "kauppa": {
+   "nimi": "Prisma",
+   "url": "https://www.prisma.fi/tuotteet/110794524/ryobi-18v-tekstiilipesuri-swift-clean-20-ah-rdc18-1c20g-110794524",
+   "hinta": 255.0
+  },
+  "kayntiaika": "enintään 60 min 5,0 Ah:n akulla (Ryobi UK, RDC18-0)"
+ },
+ {
+  "u": "https://fi.ryobitools.eu/siivous-sisalla-ja-puutarhassa/imurit/tekstiilipesurit/rdc18bl/rdc18bl-0/",
+  "nimi": "18V Hiiliharjaton Swift Clean -tekstiilipesuri",
+  "sku": "RDC18BL-0",
+  "tuotenumero": "5133006212",
+  "arviot": {
+   "arvo": 5.0,
+   "maara": 3
+  },
+  "props": {
+   "Alipaine imuteho (kPa)": "19",
+   "Ilmanvirtaus (l/s)": "70",
+   "Ilmavirta (l/min)": "760",
+   "Imuteho (AW)": "73",
+   "Letkun pituus (m)": "1.2",
+   "Likaisen säiliön kapasiteetti (ml)": "600",
+   "Puhdistusleveys (cm)": "18",
+   "Puhtaan säiliön kapasiteetti (ml)": "1000",
+   "Akkutyyppi": "Li-ion",
+   "Akun kapasiteetti (Ah)": "-",
+   "Laturi mukana: Kyllä/Ei": "Ei",
+   "Mukana akut (kpl)": "0",
+   "Virtalähde": "18V",
+   "Paino (ilman akkua) (kg)": "4.2",
+   "Paino akun kanssa (EPTA) (kg)": "4.6 (RB1820C)",
+   "Äänen tehotaso (Lwa) (dB(A))": "83.6",
+   "Tärinätaso (m/s²)": "0.08",
+   "EAN-koodi": "4892210221599",
+   "IPX-turvallisuusluokka": "IPX4",
+   "Vakiovarustus": "2-in-1 pesutyökalu harja- ja kumisuuttimilla, rakotyökalu, 250 ml pesuneste"
+  },
+  "kauppa": {
+   "nimi": "Prisma",
+   "url": "https://www.prisma.fi/tuotteet/110999000/ryobi-18v-tekstiilipesuri-swift-clean-hiiliharjattomalla-moottorilla-rdc18bl-0-110999000",
+   "hinta": 249.0
+  },
+  "kayntiaika": "enintään 18 min 5,0 Ah:n akulla (Ryobi UK)"
+ }
+]
