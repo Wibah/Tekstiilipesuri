@@ -9,8 +9,7 @@ Suomenkielinen affiliate-sivusto, joka vertailee Suomessa myytäviä tekstiilipe
 - **Kanoninen domain on `https://tekstiilipesuri.com`.** `site` tiedostossa `astro.config.mjs` on oltava sama kuin domain, jolta sisältö tarjoillaan.
 - **GitHub:** `Wibah/Tekstiilipesuri` (yksityinen), päähaara `main` (luotu 2026-10-05).
 - **Vercel:** projekti `tekstiilipesuri` (Ville Hinkkanen's projects, luotu 2026-10-10). Jokainen push `main`-haaraan julkaisee osoitteeseen https://tekstiilipesuri.com (ja esikatseluun tekstiilipesuri.vercel.app), joten aja `npm run build` ennen pushia.
-- **Julkaistu 2026-10-11:** tekstiilipesuri.com osoittaa Verceliin (Zonerin DNS: A `216.198.79.1`, CNAME www → Vercelin projektikohtainen osoite; www ohjautuu 308:lla osoitteeseen tekstiilipesuri.com). `JULKAISTU = true` tiedostossa `src/layouts/Layout.astro`, `public/robots.txt` viittaa sivukarttaan, ja `vercel.json` antaa esikatseluosoitteelle tekstiilipesuri.vercel.app otsakkeen `X-Robots-Tag: noindex`. Jäljellä: Search Consolen vahvistus (DNS-TXT Zonerissa) ja sivukartan lähetys, Adtraction-kanava ja OBH Nordican ohjelma.
-- Google Search Consolen vahvistustagi lisätään tiedostoon `src/layouts/Layout.astro`, kun domain vahvistetaan.
+- **Julkaistu 2026-10-11:** tekstiilipesuri.com osoittaa Verceliin (Zonerin DNS: A `216.198.79.1`, CNAME www → Vercelin projektikohtainen osoite; www ohjautuu 308:lla osoitteeseen tekstiilipesuri.com). `JULKAISTU = true` tiedostossa `src/layouts/Layout.astro`, `public/robots.txt` viittaa sivukarttaan, ja `vercel.json` antaa esikatseluosoitteelle tekstiilipesuri.vercel.app otsakkeen `X-Robots-Tag: noindex`. Search Console vahvistettiin DNS-TXT-tietueella Zonerissa (verkkotunnusomaisuus, ei tagia koodissa), ja sivukartta `sitemap-index.xml` lähetettiin 2026-10-11. Jäljellä: Adtraction-kanava ja OBH Nordican ohjelma.
 
 ## Rakenne
 
