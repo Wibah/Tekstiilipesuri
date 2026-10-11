@@ -95,9 +95,9 @@ const ukk = [
 		<h2>SE 4, SE 5 ja SE 6: mitä eroa?</h2>
 		<p>Kärcherin SE 4-, SE 5- ja SE 6 -mallit ovat samaa kokoluokkaa. Kaikissa on {luku(t.tehoW!)} watin teho, {luku(t.puhdasvesiL!)} litran säiliöt ja {luku(t.virtajohtoM!)} metrin virtajohto. Erot ovat rungossa ja varusteissa:</p>
 		<ul>
-			<li><strong>SE 5 Car</strong> on pakattu auton pesuun, eikä siinä ole lattiasuulaketta.{se5car.hinta != null ? ` Se maksaa ${kauppa(se5car)} ${euroa(se5car.hinta)}.` : ''}</li>
-			<li><strong>SE 5 Upholstery</strong> on varustettu verhoilun ja mattojen pesuun.{se5u.hinta != null ? ` Se maksaa ${kauppa(se5u)} ${euroa(se5u.hinta)}.` : ''}</li>
-			<li><strong>SE 6 Signature Line</strong> maksaa {euroa(se6.hinta!)}, ja sen mukana tulee litra RM 519 -pesuainetta, vaihdettava kuivaimurointisuulake ja laakasuodatin.</li>
+			<li><strong><a href={mallisivut['SE 5']}>SE 5 Car</a></strong> on pakattu auton pesuun, eikä siinä ole lattiasuulaketta.{se5car.hinta != null ? ` Se maksaa ${kauppa(se5car)} ${euroa(se5car.hinta)}.` : ''}</li>
+			<li><strong><a href={mallisivut['SE 5']}>SE 5 Upholstery</a></strong> on varustettu verhoilun ja mattojen pesuun.{se5u.hinta != null ? ` Se maksaa ${kauppa(se5u)} ${euroa(se5u.hinta)}.` : ''}</li>
+			<li><strong><a href={mallisivut['SE 6']}>SE 6 Signature Line</a></strong> maksaa {euroa(se6.hinta!)}, ja sen mukana tulee litra RM 519 -pesuainetta, vaihdettava kuivaimurointisuulake ja laakasuodatin.</li>
 		</ul>
 		<p>Koska teho ja säiliöt ovat samat, suosittelemme SE 4 Plussaa tai Go!Furtheria. Ne ovat SE-sarjan isoista malleista edullisimpia, ja niissä on lattiasuulake. Kaikki versiot ovat <a href="/karcher-tekstiilipesurit/">Kärcherin mallistotaulukossa</a>.</p>
 		<p class="tp-lahde">SE 5 Carin tiedot: <a href={se5car.lahde} target="_blank" rel="nofollow noopener">Kärcher.com</a>.</p>
@@ -115,7 +115,7 @@ const ukk = [
 		<h2>Vaihtoehdot</h2>
 		<div class="mk-lista">
 			<Tuotekortti tuote={se3} otsikko="Kärcher SE 3 Compact" sivu={mallisivut['SE 3']} kenelle={sarjakuvaukset['SE 3']} tagi="Pienempi ja kevyempi" />
-			<Tuotekortti tuote={se6} otsikko="Kärcher SE 6 Signature Line" sivu="/karcher-tekstiilipesurit/" kenelle={sarjakuvaukset['SE 6']} tagi="Sama teho, eri varusteet" ankkuri={`malli-${se6.id}`} />
+			<Tuotekortti tuote={se6} otsikko="Kärcher SE 6 Signature Line" sivu={mallisivut['SE 6']} kenelle={sarjakuvaukset['SE 6']} tagi="Sama teho, eri varusteet" />
 		</div>
 
 		<Kokemuslomake malli="Kärcher SE 4 Plus" polku={mallisivut['SE 4']} />

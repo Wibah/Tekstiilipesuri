@@ -11,6 +11,9 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 | `/karcher-se-3-compact/` | Tuki (malli) | `/karcher-tekstiilipesurit/` | Decision | Kärcher SE 3 Compact (myös SE 3-18) | SE 3 Compact, Home, Floor, Home Shoe noin 730, SE 3-18 20 |
 | `/karcher-se-4-plus/` | Tuki (malli) | `/karcher-tekstiilipesurit/` | Decision | Kärcher SE 4 Plus | SE 4 Plus noin 130 |
 | `/karcher-puzzi-8-1/` | Tuki (malli) | `/karcher-tekstiilipesurit/` | Decision | Kärcher Puzzi 8/1 | Puzzi 8/1, 8/1 C, 10/1 noin 210 |
+| `/karcher-se-2/` | Tuki (malli) | `/karcher-tekstiilipesurit/` | Decision | Kärcher SE 2 (Spot, Spot Pure, Spot Care) | kärcher se 2 spot pure tekstiilipesuri 70, tekstiilipesuri kärcher se 2 pure 30, tekstiilipesuri se 2 spot care 20, kärcher se 2 spot pure tekstiilipesuri kokemuksia 20 (noin 140) |
+| `/karcher-se-5/` | Tuki (malli) | `/karcher-tekstiilipesurit/` | Decision | Kärcher SE 5 (perus, Car, Upholstery) | kärcher tekstiilipesuri se 5 50, kärcher se 5 car tekstiilipesuri 50, tekstiilipesuri kärcher se 5 car 50, kärcher tekstiilipesuri se 5 car 30, kärcher tekstiilipesuri se5 10, tekstiilipesuri se 5 car 10 (noin 200) |
+| `/karcher-se-6-signature-line/` | Tuki (malli) | `/karcher-tekstiilipesurit/` | Decision | Kärcher SE 6 Signature Line | kärcher se 6 signature line tekstiilipesuri 50, tekstiilipesuri se 6 signature line 20, kärcher tekstiilipesuri se 6 20 (noin 90) |
 | `/tekstiilipesurin-pesuaine/` | Tuki | `/` | Use Case | tekstiilipesuaine | pesuaine 800, kärcher pesuaine 700, aine 60, tabletti 20 |
 | `/tekstiilipesuri-vuokraus-vai-osto/` | Tuki | `/` | Decision | tekstiilipesurin vuokraus | vuokraus 2 600, vuokraa 200, kaupunkihaut, kärcher vuokraus 90 (noin 5 950) |
 | `/bissell-tekstiilipesurit/` | Pilari (merkki) | `/` | Comparison | Bissell | bissell tekstiilipesuri 250, bissell spotclean 150, kokemuksia 50, spotclean plus 50, tekstiilipesuri bissell 40, spot clean 40, hydrosteam-mallit noin 90 (noin 800). Ei kohdista: spotclean pro 150 + professional 40 (/bissell-spotclean-pro/), bissell pesuaine 50 (pesuainesivu, osio pidetään lyhyenä) |
@@ -37,7 +40,7 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 - **Akkukäyttöinen** → SE 3 (SE 3-18), Bissell-hub (kortit), auton penkit, sohvan pesu, vuokraus, etusivu. Linkit sisään: etusivun laitetyyppikortti Akkukäyttöinen ja autosivu.
 - **Tefal-hub** → pesuaine, SE 3, SE 4, Kärcher-hub, Bissell-hub, akkusivu, etusivu. Linkit sisään: valikko, etusivu (merkit), pesuainesivun Tefal-osio.
 - **Kärcher-hub** → mallisivut (taulukot, kortit ja UKK), pesuaine, vuokraus; ylös etusivulle (murupolku).
-- **Mallisivut** → hub (murupolku), toisilleen sivuttain (vaihtoehdot ja UKK), pesuaine (työtapa ja UKK), vuokraus (SE 3 ja Puzzi).
+- **Mallisivut** (SE 2, SE 3, SE 4, SE 5, SE 6, Puzzi 8/1) → hub (murupolku), toisilleen sivuttain (vaihtoehdot ja UKK), pesuaine (työtapa ja UKK), vuokraus (SE 3 ja Puzzi).
 - **Pesuaine** → SE 3, SE 4, Puzzi 8/1 (annostelutaulukko ja UKK), etusivu ja hub.
 - **Vuokraus** → Puzzi 8/1, SE 3, SE 4, SE 2 (laskelma), pesuaine.
 - **Silta** → SE 3, SE 4; hoyrypesuri.fi, kun se on julkaistu.
@@ -45,6 +48,6 @@ Tehty 2026-10-05 `semantic-content-network`-skillin mukaan. Hakuvolyymit: Ahrefs
 ## Aukot (seuraavat sivut)
 
 1. **Varaosat ja vianetsintä:** molemmat tehty 2026-10-11.
-2. **Mallisivut:** SE 5 ja SE 5 Car (noin 200), SE 2 ja SE 2 Spot Pure (noin 160), SE 6 Signature Line (noin 90), Bissell SpotClean Pro (tehty 2026-10-11). Ville päätti 2026-10-11 tehdä nämä ennen julkaisua (aiempi päätös odottaa affiliate-linkkejä kumottu).
+2. **Mallisivut:** SE 2, SE 5, SE 6 Signature Line ja Bissell SpotClean Pro tehty 2026-10-11.
 3. **Merkkisivut:** Bissell ja Tefal tehty 2026-10-11. Seuraavaksi mahdollisesti Shark. Ryobi (840), Ströme (360), Parkside (620) ja Lumira (250) puuttuvat kumppanifeedeistä, joten niiden sivut tehdään ilman affiliate-linkkejä, jos tehdään.
 4. **Käyttökohteet:** sohvan pesu, auton penkit, matto ja akkukäyttöinen tehty 2026-10-11. Etusivun pikavalinnat ja laitetyyppikortit linkittävät niihin.

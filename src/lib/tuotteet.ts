@@ -8,6 +8,9 @@ export const paatuotteet = {
 	'SE 3': 'se-3-compact-floor',
 	'SE 4': 'se-4-plus',
 	'Puzzi 8/1': 'puzzi-8-1-anniversary-edition',
+	'SE 2': 'se-2-spot-care',
+	'SE 5': 'se-5',
+	'SE 6': 'se-6-signature-line',
 } as const;
 export type Mallisarja = keyof typeof paatuotteet;
 
@@ -15,6 +18,9 @@ export const mallisivut: Record<Mallisarja, string> = {
 	'SE 3': '/karcher-se-3-compact/',
 	'SE 4': '/karcher-se-4-plus/',
 	'Puzzi 8/1': '/karcher-puzzi-8-1/',
+	'SE 2': '/karcher-se-2/',
+	'SE 5': '/karcher-se-5/',
+	'SE 6': '/karcher-se-6-signature-line/',
 };
 
 // Sarjan lyhyt kuvaus tuotekortteihin ja taulukoihin.
@@ -105,8 +111,10 @@ export const sailiot = (t: Tuote) =>
 // Rivit, joita ei näytetä "Mukana lisäksi" -sarakkeessa: osat, jotka ovat jokaisessa sarjan versiossa.
 // Lasketaan versioiden leikkauksena, jotta taulukko näyttää vain erot.
 export function erotVersioissa(vv: Tuote[]): Map<string, string[]> {
-	const kaikilla = vv.length
-		? vv.map((v) => new Set(v.toimitusSisaltaa)).reduce((a, b) => new Set([...a].filter((x) => b.has(x))))
+	// Versiot, joiden toimitussisältöä valmistaja ei ilmoita (esim. SE 2 Spot Pure), jätetään leikkauksesta pois.
+	const tiedossa = vv.filter((v) => v.toimitusSisaltaa.length > 0);
+	const kaikilla = tiedossa.length
+		? tiedossa.map((v) => new Set(v.toimitusSisaltaa)).reduce((a, b) => new Set([...a].filter((x) => b.has(x))))
 		: new Set<string>();
 	return new Map(vv.map((v) => [v.id, v.toimitusSisaltaa.filter((r) => !kaikilla.has(r) && !/^Malliversio/.test(r))]));
 }

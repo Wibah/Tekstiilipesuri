@@ -1,0 +1,92 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-tekstiilipesurit/. Hakusanat: kärcher se 6 signature line
+// tekstiilipesuri 50, tekstiilipesuri se 6 signature line 20, kärcher tekstiilipesuri se 6 20 (Ahrefs 2026-10, noin 90).
+// Vanhan SE 6.100:n testejä ei käytetä (Villen päätös 2026-10-05). Otsikot, meta ja UKK Villen hyväksymät 2026-10-11.
+// Kirjoitettu tekstiilipesuri-writer-skillillä. Tiedot ja hinta Kärcher.comista.
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, luku, paiva, euroa, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+
+const suositus = await paatuote('SE 6');
+const se4 = await paatuote('SE 4');
+const se5u = await tuote('se-5-upholstery');
+const t = suositus.tekniset;
+const kauppa = (v: typeof suositus) => (v.kumppanikauppa ? 'verkkokaupassa' : 'Kärcher.comissa');
+const alennus = suositus.hintaEnnenAlennusta != null && suositus.hintaEnnenAlennusta > suositus.hinta!;
+const OHJE = 'https://s1.kaercher-media.com/documents/manuals/html/BTA-5858400-000-04/FI.html';
+
+const ukk = [
+	{
+		kysymys: 'Toimiiko Kärcher SE 6 märkä-kuivaimurina?',
+		vastaus: 'Toimii. Mukana tulevat vaihdettava lattiasuulake kuivaimurointiin, laakasuodatin ja fleece-pölypussi, joten laitteella voi imuroida sekä märkää että kuivaa likaa.',
+	},
+	{
+		kysymys: 'Mitä SE 6 Signature Linen mukana tulee?',
+		vastaus: `Mukana tulevat ${luku(t.letkuM!)} metrin imuletku, kaksi 0,5 metrin jatkoputkea, ${luku(t.tyoleveysMm!)} mm:n lattiasuulake, 88 mm:n verhoilusuulake, kaksi rakosuulaketta, kalustesuulake, vaihdettava lattiasuulake kuivaimurointiin, laakasuodatin, fleece-pölypussi ja litra RM 519 -pesuainetta.`,
+	},
+	{
+		kysymys: 'Kannattaako SE 6 vai SE 4 Plus?',
+		vastaus: `Teho ja säiliöt ovat samat, joten valinta riippuu varusteista ja hinnasta. SE 6 maksaa ${kauppa(suositus)} ${euroa(suositus.hinta!)} ja SE 4 Plus ${kauppa(se4)} ${euroa(se4.hinta!)}. ${suositus.hinta! > se4.hinta! ? 'Jos et tarvitse SE 6:n laakasuodatinta ja vaihdettavaa kuivaimurointisuulaketta, SE 4 Plus on edullisempi.' : 'SE 6 on nyt yhtä edullinen tai edullisempi, joten se on varusteineen parempi valinta.'} Vertailu on <a href="${mallisivut['SE 4']}">SE 4 Plussan sivulla</a>.`,
+	},
+];
+---
+<Layout
+	title="Kärcher SE 6 Signature Line kokemuksia – tekstiilipesuri SE 6, hinta 2026"
+	description="Kärcher SE 6 Signature Line -tekstiilipesurin tekniset tiedot, toimitussisältö ja hinta. Vertailu SE 4 Plussaan ja SE 5:een."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Kärcher SE 6 Signature Line', sivu: mallisivut['SE 6'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SE 6 Signature Line -tekstiilipesuri" yla="Kärcher · Tekstiilipesuri ja märkä-kuivaimuri" merkinta="Signature Line">
+			<p>Kärcher SE 6 Signature Line on Kärcherin kotikäyttöön tarkoitettu tekstiilipesuri, joka toimii myös märkä-kuivaimurina. Sen teho on {luku(t.tehoW!)} W, kummankin säiliön tilavuus on {luku(t.puhdasvesiL!)} litraa, ja se painaa {luku(t.painoKg!)} kg. Laite pesee matot, sohvat ja auton penkit.</p>
+			<p>SE 6 maksaa {kauppa(suositus)} {euroa(suositus.hinta!)}{alennus ? ` (ennen ${euroa(suositus.hintaEnnenAlennusta!)})` : ''}. Mukana tulee litra RM 519 -pesuainetta, kun SE 5:n mukana sitä on 100 ml.</p>
+		</TuoteHero>
+
+		<h2>Kenelle SE 6 Signature Line sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Kotiin, jossa pestään mattoja, sohvia ja autoa: mukana on {luku(t.tyoleveysMm!)} mm:n lattiasuulake, verhoilusuulake, kaksi rakosuulaketta ja kalustesuulake</li>
+					<li>Laitteeksi, jonka pitää myös imuroida: mukana ovat laakasuodatin, fleece-pölypussi ja vaihdettava kuivaimurointisuulake</li>
+					<li>Ostajalle, joka haluaa kaikki varusteet kerralla: mukana on myös litra pesuainetta</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Pieneen säilytystilaan: mitat ovat {t.mitatMm!.replaceAll(' x ', ' × ')} mm</li>
+					<li>Autoon ilman pistorasiaa: SE 6 toimii vain verkkovirralla</li>
+					<li>Edullisinta vaihtoehtoa hakevalle: SE 4 Plus ja SE 5 ovat samaa kokoluokkaa vähemmillä varusteilla</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Tekniset tiedot ja toimitussisältö</h2>
+		<TeknisetTiedot tuote={suositus} />
+		<p class="tp-lahde">Tiedot: Kärcher.com, hinta tarkistettu {paiva(suositus.haettu)}. Käyttö- ja huolto-ohjeet: <a href={OHJE} target="_blank" rel="nofollow noopener">Kärcher SE 5- ja SE 6 -mallien käyttöohje</a>.</p>
+
+		<h2>SE 6 Signature Line vai SE 4 Plus?</h2>
+		<p>SE 6 Signature Linessa ja SE 4 Plussassa on sama {luku(t.tehoW!)} watin teho, {luku(t.puhdasvesiL!)} litran säiliöt ja {luku(t.tyoleveysMm!)} mm:n lattiasuulake. Erot ovat suodattimessa ja kuivaimurointisuulakkeessa:</p>
+		<ul>
+			<li><strong>SE 6 Signature Line:</strong> laakasuodatin ja vaihdettava lattiasuulake kuivaimurointiin. Paino {luku(t.painoKg!)} kg. Hinta {kauppa(suositus)} {euroa(suositus.hinta!)}.</li>
+			<li><strong>SE 4 Plus:</strong> vaahtosuodatin ja clips-suulake lattioiden kuivaimurointiin. Paino {luku(se4.tekniset.painoKg!)} kg. Hinta {kauppa(se4)} {euroa(se4.hinta!)}.</li>
+		</ul>
+		<p>Molempien mukana tulee litra RM 519 -pesuainetta. SE 5 Upholsteryssa on samat suulakkeet kuin SE 6:ssa yhtä rakosuulaketta lukuun ottamatta, mutta pesuainetta on mukana vain 100 ml. SE 5 Upholstery maksaa {kauppa(se5u)} {euroa(se5u.hinta!)}. Lue lisää <a href={mallisivut['SE 5']}>SE 5 -sivulta</a>.</p>
+
+		<h2>Vaihtoehdot</h2>
+		<div class="mk-lista">
+			<Tuotekortti tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kenelle={sarjakuvaukset['SE 4']} tagi="Sama teho" />
+			<Tuotekortti tuote={se5u} otsikko="Kärcher SE 5 Upholstery" sivu={mallisivut['SE 5']} kenelle="Lähes samat suulakkeet, 100 ml pesuainetta" tagi="Lähes samat varusteet" />
+		</div>
+
+		<Kokemuslomake malli="Kärcher SE 6 Signature Line" polku={mallisivut['SE 6']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

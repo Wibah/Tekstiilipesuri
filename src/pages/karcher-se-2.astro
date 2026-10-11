@@ -1,0 +1,110 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-tekstiilipesurit/. Hakusanat: kärcher se 2 spot pure
+// tekstiilipesuri 70, tekstiilipesuri kärcher se 2 pure 30, tekstiilipesuri se 2 spot care 20, kärcher se 2 spot pure
+// tekstiilipesuri kokemuksia 20 (Ahrefs 2026-10, noin 140). "kärcher se 2 car" jätetty pois: mallia ei ole
+// suomalaisissa feedeissä. Otsikot, meta ja UKK Villen hyväksymät 2026-10-11. SE 2 Spot Puresta Kärcher ei julkaise
+// tietoja, joten sille ei anneta teknisiä lukuja (Villen päätös 2026-10-11, vaihtoehto 1). Kirjoitettu
+// tekstiilipesuri-writer-skillillä. Tiedot: Kärcher.com (Spot Care), Kärcherin tietolomake (Spot) ja SE 2 Spot
+// -käyttöohje (BTA-5939401).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+
+const suositus = await paatuote('SE 2');
+const spot = await tuote('se-2-spot');
+const pure = await tuote('se-2-spot-pure');
+const se2versiot = await versiot('SE 2');
+const se3 = await tuote('se-3-compact');
+const t = suositus.tekniset;
+const t3 = se3.tekniset;
+const kauppa = (v: typeof suositus) => (v.kumppanikauppa ? 'verkkokaupassa' : 'Kärcher.comissa');
+const OHJE = 'https://s1.kaercher-media.com/documents/manuals/html/BTA-5939401-000-04/FI.html';
+
+const ukk = [
+	{
+		kysymys: 'Mitä eroa on SE 2 Spot Purella ja Spot Carella?',
+		vastaus: `Molemmat kuuluvat Kärcherin SE 2 Spot -sarjaan. Spot Care on Kärcher.comin versio, ja sen mukana tulee verhoilusuulakkeen lisäksi tahraharja. Spot Puresta Kärcher ei julkaise Suomessa tuotesivua eikä tietolomaketta, joten emme tiedä varmasti, miten sen toimitussisältö eroaa. Tarkista varusteet kaupan tuotesivulta. Spot Pure maksaa ${kauppa(pure)} ${euroa(pure.hinta!)} ja Spot Care ${kauppa(suositus)} ${euroa(suositus.hinta!)}.`,
+	},
+	{
+		kysymys: 'Onko Kärcher SE 2 akkukäyttöinen?',
+		vastaus: `Ei ole. SE 2 toimii verkkovirralla, ja sen virtajohto on ${luku(t.virtajohtoM!)} metriä. Kärcherin akkukäyttöinen malli on SE 3-18 Compact, joka on vertailtu <a href="/akkukayttoinen-tekstiilipesuri/">akkukäyttöisten tekstiilipesurien sivulla</a>.`,
+	},
+	{
+		kysymys: 'Miksi SE 2:n alta vuotaa vaahtoa?',
+		vastaus: `<a href="${OHJE}" target="_blank" rel="nofollow noopener">SE 2 Spotin käyttöohjeen</a> mukaan vaahtoa tai vettä vuotaa laitteen alta silloin, kun tarvitaan vaahdonestoainetta. Lisää likavesisäiliöön 2–4 ml (1–2 korkillista) Kärcherin FoamStop-ainetta. FoamStop ei sisälly toimitukseen. Muut vianetsinnän ohjeet ovat <a href="/karcher-tekstiilipesuri-ei-tule-vetta/">vianetsintäsivulla</a>.`,
+	},
+	{
+		kysymys: 'Sopiiko Kärcher SE 2 auton penkkien pesuun?',
+		vastaus: `Sopii yksittäisiin tahroihin, jos auton lähellä on pistorasia. Puhdasvesisäiliö on vain ${luku(t.puhdasvesiL!)} litraa ja likavesisäiliö ${luku(t.likavesiL!)} litraa, joten koko auton pesussa säiliöitä joutuu tyhjentämään ja täyttämään usein. Ohje ja autoon sopivat mallit ovat <a href="/auton-penkkien-pesu-tekstiilipesurilla/">auton penkkien pesu -sivulla</a>.`,
+	},
+];
+---
+<Layout
+	title="Kärcher SE 2 Spot Pure kokemuksia – SE 2 Spot Care ja Spot, hinnat 2026"
+	description="Kärcher SE 2 Spot, Spot Pure ja Spot Care vertailussa: pieni kannettava tekstiilipesuri tahroihin. Erot, tekniset tiedot, hinnat ja kokemuksia."
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Kärcher SE 2', sivu: mallisivut['SE 2'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SE 2 -tekstiilipesuri – Spot, Spot Pure ja Spot Care" yla="Kärcher · Pieni kannettava tahroihin" merkinta="Suosituksemme">
+			<p>Kärcher SE 2 on Kärcherin pienin tekstiilipesuri. Se on kannettava malli tuoreiden tahrojen pesuun sohvasta, matosta, patjasta ja auton penkeistä. Sen teho on {luku(t.tehoW!)} W, puhdasvesisäiliö {luku(t.puhdasvesiL!)} litraa ja likavesisäiliö {luku(t.likavesiL!)} litraa, ja se painaa {luku(t.painoKg!)} kg.</p>
+			<p>SE 2:ta myydään Suomessa kolmena versiona: Spot, Spot Pure ja Spot Care. Suosittelemme Spot Carea, joka on ainoa Kärcher.comin myymä versio ja jonka mukana tulee tahraharja.</p>
+		</TuoteHero>
+
+		<h2>Kenelle Kärcher SE 2 sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Tuoreisiin tahroihin: laite on nopea ottaa esiin ja painaa {luku(t.painoKg!)} kg</li>
+					<li>Pieneen säilytystilaan: mitat ovat {t.mitatMm!.replaceAll(' x ', ' × ')} mm</li>
+					<li>Edulliseksi ensimmäiseksi tekstiilipesuriksi: Spot Care on Kärcher.comin halvin tekstiilipesuri ({euroa(suositus.hinta!)})</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Koko sohvan tai maton pesuun: {luku(t.likavesiL!)} litran likavesisäiliö täyttyy nopeasti</li>
+					<li>Autoon ilman pistorasiaa: SE 2 toimii vain verkkovirralla</li>
+					<li>Mattojen pesuun seisaaltaan: SE 2:lle ei ole lattiasuulaketta (katso <a href={mallisivut['SE 3']}>SE 3 Compact Floor</a>)</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Kärcher SE 2 Spot Pure tekstiilipesuri</h2>
+		<p>SE 2 Spot Pure (tuotenumero {pure.tuotenumero}) kuuluu samaan SE 2 Spot -sarjaan kuin Spot ja Spot Care. Kärcher ei julkaise Spot Puresta Suomessa tuotesivua eikä tietolomaketta, joten emme anna sille omia teknisiä lukuja. Sarjan käyttöohjeen mukaan SE 2 Spot -laitteiden teho on 450 W, puhdasvesisäiliö 1,5 litraa ja likavesisäiliö 0,8 litraa.</p>
+		<p>Spot Pure maksaa {kauppa(pure)} {euroa(pure.hinta!)}. Ennen ostoa tarkista kaupan tuotesivulta, mitä varusteita sen mukana tulee, ja vertaa niitä Spot Careen.</p>
+
+		<h2>Tekstiilipesuri SE 2 Spot Care</h2>
+		<p>SE 2 Spot Care on Kärcher.comin myymä SE 2 -versio. Sen mukana tulevat {luku(t.letkuM!)} metrin imuletku, 88 mm:n verhoilusuulake, tahraharja ja 100 ml RM 519 -pesuainetta. Paine- ja imuletku on yhdistetty samaan letkuun. Tahraharjalla pinttynyttä tahraa voi hangata pesuaineen kanssa ennen imua.</p>
+		<p>Spot Care maksaa Kärcher.comissa {euroa(suositus.hinta!)}. Perusmalli SE 2 Spot maksaa {kauppa(spot)} {euroa(spot.hinta!)}, ja sen mukana ei tule tahraharjaa.</p>
+
+		<h2>SE 2:n versiot vertailussa</h2>
+		<VersioVertailu versiot={se2versiot} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat: Kärcher.com ja suomalaiset verkkokaupat, tarkistettu {paiva(suositus.haettu)}. Spot Puren toimitussisältöä Kärcher ei ilmoita.</p>
+
+		<h2>Tekniset tiedot: Kärcher SE 2</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>SE 2 vai SE 3 Compact?</h2>
+		<p>SE 3 Compact on SE 2:ta isompi. Sen teho on {luku(t3.tehoW!)} W, puhdasvesisäiliö {luku(t3.puhdasvesiL!)} litraa ja likavesisäiliö {luku(t3.likavesiL!)} litraa, ja se painaa {luku(t3.painoKg!)} kg. SE 3 Compactissa on myös itsepuhdistus. SE 2 Spot Care maksaa Kärcher.comissa {euroa(suositus.hinta!)} ja SE 3 Compact {euroa(se3.hinta!)}.</p>
+		<p>Valitse SE 2, jos peset vain tuoreita tahroja ja haluat mahdollisimman pienen laitteen. Valitse SE 3 Compact, jos peset koko sohvan, auton penkit tai pieniä mattoja, koska sen likavesisäiliö on yli kolme kertaa suurempi. Vertailu on <a href={mallisivut['SE 3']}>SE 3 Compactin sivulla</a>.</p>
+
+		<h2>Vaihtoehdot</h2>
+		<div class="mk-lista">
+			<Tuotekortti tuote={se3} otsikko="Kärcher SE 3 Compact" sivu={mallisivut['SE 3']} kenelle={sarjakuvaukset['SE 3']} tagi="Isommat säiliöt" />
+		</div>
+
+		<Kokemuslomake malli="Kärcher SE 2 Spot Pure" polku={mallisivut['SE 2']} otsikko="Kärcher SE 2 Spot Pure kokemuksia – kerro omasi">
+			<p>Keräämme Kärcher SE 2 -mallien käyttäjien kokemuksia. Kerro, onko sinulla Spot, Spot Pure vai Spot Care, mitä peset ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>
+		</Kokemuslomake>
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

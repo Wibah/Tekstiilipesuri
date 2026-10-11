@@ -1,0 +1,108 @@
+---
+// SCN: tuki (malli), intentti Decision, emopilari /karcher-tekstiilipesurit/. Hakusanat: kärcher tekstiilipesuri se 5 50,
+// kärcher se 5 car tekstiilipesuri 50, tekstiilipesuri kärcher se 5 car 50, kärcher tekstiilipesuri se 5 car 30,
+// kärcher tekstiilipesuri se5 10, tekstiilipesuri se 5 car 10 (Ahrefs 2026-10, noin 200). Vanhan SE 5.100:n testejä
+// ei käytetä (Villen päätös 2026-10-05). Otsikot, meta ja UKK Villen hyväksymät 2026-10-11. Kirjoitettu
+// tekstiilipesuri-writer-skillillä. Tiedot: Kärcher.com (SE 5 Car, SE 5 Upholstery) ja Kärcherin tietolomake (SE 5),
+// hinnat Kärcher.comista tai kumppanikaupasta (npm run hae:kumppanit).
+import Layout from '../layouts/Layout.astro';
+import Murupolku from '../components/Murupolku.astro';
+import TuoteSchema from '../components/tuote/TuoteSchema.astro';
+import TuoteHero from '../components/tuote/TuoteHero.astro';
+import TeknisetTiedot from '../components/tuote/TeknisetTiedot.astro';
+import VersioVertailu from '../components/tuote/VersioVertailu.astro';
+import Tuotekortti from '../components/tuote/Tuotekortti.astro';
+import Ukk from '../components/Ukk.astro';
+import Kokemuslomake from '../components/Kokemuslomake.astro';
+import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset, karcherComissa } from '../lib/tuotteet';
+
+const suositus = await paatuote('SE 5');
+const car = await tuote('se-5-car');
+const upholstery = await tuote('se-5-upholstery');
+const se5versiot = await versiot('SE 5');
+const kc = karcherComissa(se5versiot);
+const se4 = await paatuote('SE 4');
+const se6 = await paatuote('SE 6');
+const t = suositus.tekniset;
+const kauppa = (v: typeof suositus) => (v.kumppanikauppa ? 'verkkokaupassa' : 'Kärcher.comissa');
+const OHJE = 'https://s1.kaercher-media.com/documents/manuals/html/BTA-5858400-000-04/FI.html';
+
+const ukk = [
+	{
+		kysymys: 'Mitä eroa on SE 5 Carilla ja SE 5 Upholsterylla?',
+		vastaus: `Laite on sama: ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran säiliöt ja ${luku(t.painoKg!)} kg. SE 5 Carin mukana tulee verhoilusuulake, kaksi rakosuulaketta ja kalustesuulake, mutta ei lattiasuulaketta. SE 5 Upholsteryn mukana tulevat ${luku(upholstery.tekniset.tyoleveysMm!)} mm:n lattiasuulake, jatkoputket, verhoilusuulake ja vaihdettava lattiasuulake kuivaimurointiin. SE 5 Car maksaa ${kauppa(car)} ${euroa(car.hinta!)} ja SE 5 Upholstery ${kauppa(upholstery)} ${euroa(upholstery.hinta!)}.`,
+	},
+	{
+		kysymys: 'Toimiiko Kärcher SE 5 märkä-kuivaimurina?',
+		vastaus: 'Toimii. Kaikkien SE 5 -versioiden mukana tulee laakasuodatin ja fleece-pölypussi, joten laitteella voi imuroida myös märkää ja kuivaa likaa. Perusmallin ja Upholsteryn mukana tulee lisäksi vaihdettava lattiasuulake kuivaimurointiin.',
+	},
+	{
+		kysymys: 'Mikä ero on Kärcher SE 5:llä ja SE 6 Signature Linella?',
+		vastaus: `Teho, säiliöt ja paino ovat samat. SE 6 Signature Linen mukana tulee lisäksi toinen rakosuulake ja litra RM 519 -pesuainetta, kun SE 5:n mukana pesuainetta on 100 ml. SE 6 maksaa ${kauppa(se6)} ${euroa(se6.hinta!)}. Lue lisää <a href="${mallisivut['SE 6']}">SE 6 Signature Linen sivulta</a>.`,
+	},
+	{
+		kysymys: 'Sopiiko SE 5 Car auton pesuun ilman pistorasiaa?',
+		vastaus: `Ei sovi. SE 5 Car toimii vain verkkovirralla, ja sen virtajohto on ${luku(car.tekniset.virtajohtoM!)} metriä. Pihalla tarvitset siis jatkojohdon. Ilman pistorasiaa toimivat akkukäyttöiset mallit, jotka on vertailtu <a href="/akkukayttoinen-tekstiilipesuri/">akkukäyttöisten tekstiilipesurien sivulla</a>.`,
+	},
+];
+---
+<Layout
+	title="Kärcher SE 5 tekstiilipesuri kokemuksia – SE 5 Car ja Upholstery, hinnat 2026"
+	description={`Kärcher SE 5, SE 5 Car ja SE 5 Upholstery vertailussa: erot, tekniset tiedot ja hinnat. ${luku(t.tehoW!)} W, ${luku(t.puhdasvesiL!)} litran säiliöt, toimii myös märkä-kuivaimurina.`}
+>
+	<main class="article-layout">
+		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Kärcher SE 5', sivu: mallisivut['SE 5'] }]} />
+		<TuoteSchema tuote={suositus} />
+		<TuoteHero tuote={suositus} otsikko="Kärcher SE 5 -tekstiilipesuri – SE 5, SE 5 Car ja SE 5 Upholstery" yla="Kärcher · Tekstiilipesuri ja märkä-kuivaimuri" merkinta="Suosituksemme">
+			<p>Kärcher SE 5 on tekstiilipesuri ja märkä-kuivaimuri samassa laitteessa. Sen teho on {luku(t.tehoW!)} W, kummankin säiliön tilavuus on {luku(t.puhdasvesiL!)} litraa, ja se painaa {luku(t.painoKg!)} kg. SE 5:tä myydään kolmena versiona: perusmallina, autoon tarkoitettuna SE 5 Carina ja verhoilun pesuun varustettuna SE 5 Upholsterynä.</p>
+			<p>Suosittelemme perusmallia, jossa on lattiasuulake matoille ja vaihdettava lattiasuulake kuivaimurointiin. Upholsteryn mukana tulee lisäksi 88 mm:n verhoilusuulake.</p>
+		</TuoteHero>
+
+		<h2>Kenelle Kärcher SE 5 sopii?</h2>
+		<div class="pros-cons-mini">
+			<div class="pros-mini">
+				<strong>+ Sopii:</strong>
+				<ul>
+					<li>Mattoihin ja lattioihin: perusmallin ja Upholsteryn mukana tulevat {luku(t.tyoleveysMm!)} mm:n lattiasuulake ja kaksi 0,5 metrin jatkoputkea</li>
+					<li>Laitteeksi, jonka pitää myös imuroida: mukana ovat laakasuodatin, fleece-pölypussi ja kuivaimurointisuulake</li>
+					<li>Pitkään pesuun: {luku(t.puhdasvesiL!)} litran puhdasvesisäiliö riittää isompaan työhön kuin kompaktien mallien säiliöt</li>
+				</ul>
+			</div>
+			<div class="cons-mini">
+				<strong>- Ei sovi:</strong>
+				<ul>
+					<li>Pieneen säilytystilaan: mitat ovat {t.mitatMm!.replaceAll(' x ', ' × ')} mm</li>
+					<li>Autoon ilman pistorasiaa: SE 5 toimii vain verkkovirralla</li>
+					<li>Pelkkiin tuoreisiin tahroihin: silloin kevyempi <a href={mallisivut['SE 3']}>SE 3 Compact</a> tai <a href={mallisivut['SE 2']}>SE 2</a> riittää</li>
+				</ul>
+			</div>
+		</div>
+
+		<h2>Kärcher SE 5 Car tekstiilipesuri</h2>
+		<p>SE 5 Car on SE 5:n versio auton pesuun. Laite on sama kuin muissa versioissa, mutta mukana ei tule lattiasuulaketta eikä jatkoputkia. Niiden sijaan mukana ovat verhoilusuulake, kaksi rakosuulaketta ja kalustesuulake auton penkkien, saumojen ja jalkatilan pesuun. Virtajohto on {luku(car.tekniset.virtajohtoM!)} metriä ja imuletku {luku(car.tekniset.letkuM!)} metriä.</p>
+		<p>{car.kumppanikauppa ? `SE 5 Car ei ole tällä hetkellä myynnissä Kärcher.comissa, mutta sitä saa suomalaisista verkkokaupoista hintaan ${euroa(car.hinta!)}.` : `SE 5 Car maksaa Kärcher.comissa ${euroa(car.hinta!)}.`} Koska laite toimii vain verkkovirralla, auton lähellä tarvitaan pistorasia. Auton pesuohje ja akkumallit ovat <a href="/auton-penkkien-pesu-tekstiilipesurilla/">auton penkkien pesu -sivulla</a>.</p>
+
+		<h2>SE 5:n versiot vertailussa</h2>
+		<p>Kaikissa SE 5 -versioissa on sama {luku(t.tehoW!)} watin moottori, {luku(t.puhdasvesiL!)} litran säiliöt ja {luku(t.painoKg!)} kg:n paino. Versiot eroavat vain mukana tulevien suulakkeiden osalta. {kc.length ? `Kärcher.com myy nyt ${kc.map((v) => v.nimi).join(' ja ')} -versiota, ja muita versioita saa suomalaisista verkkokaupoista.` : 'Kärcher.com ei myy nyt SE 5:tä, mutta kaikkia versioita saa suomalaisista verkkokaupoista.'}</p>
+		<VersioVertailu versiot={se5versiot} paatuoteId={suositus.id} />
+		<p class="tp-lahde">Hinnat: Kärcher.com ja suomalaiset verkkokaupat, tarkistettu {paiva(suositus.haettu)}. SE 5:n perusmallin tiedot ovat Kärcherin tietolomakkeesta.</p>
+
+		<h2>Tekniset tiedot: Kärcher SE 5</h2>
+		<TeknisetTiedot tuote={suositus} />
+
+		<h2>SE 5 vai SE 4 Plus?</h2>
+		<p>SE 4 Plus ja SE 5 ovat samaa kokoluokkaa: kummassakin on {luku(t.tehoW!)} watin teho, {luku(t.puhdasvesiL!)} litran säiliöt ja {luku(t.tyoleveysMm!)} mm:n lattiasuulake. Erot ovat suodattimessa ja varusteissa. SE 4 Plussan mukana tulee vaahtosuodatin ja litra RM 519 -pesuainetta, SE 5:n mukana laakasuodatin ja 100 ml pesuainetta. SE 4 Plus painaa {luku(se4.tekniset.painoKg!)} kg.</p>
+		<p>SE 4 Plus maksaa {kauppa(se4)} {euroa(se4.hinta!)} ja SE 5 {kauppa(suositus)} {euroa(suositus.hinta!)}. {se4.hinta! < suositus.hinta! ? 'Koska ominaisuudet ovat lähes samat, SE 4 Plus on nyt edullisempi valinta.' : 'Valitse halvempi, koska ominaisuudet ovat lähes samat.'} Vertailu on <a href={mallisivut['SE 4']}>SE 4 Plussan sivulla</a>.</p>
+
+		<h2>Vaihtoehdot</h2>
+		<div class="mk-lista">
+			<Tuotekortti tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kenelle={sarjakuvaukset['SE 4']} tagi="Sama kokoluokka" />
+			<Tuotekortti tuote={se6} otsikko="Kärcher SE 6 Signature Line" sivu={mallisivut['SE 6']} kenelle="Enemmän varusteita ja litra pesuainetta" tagi="Enemmän varusteita" />
+		</div>
+
+		<p class="tp-lahde">Käyttö- ja huolto-ohjeet: <a href={OHJE} target="_blank" rel="nofollow noopener">Kärcher SE 5- ja SE 6 -mallien käyttöohje</a>.</p>
+
+		<Kokemuslomake malli="Kärcher SE 5" polku={mallisivut['SE 5']} />
+		<Ukk kysymykset={ukk} />
+	</main>
+</Layout>

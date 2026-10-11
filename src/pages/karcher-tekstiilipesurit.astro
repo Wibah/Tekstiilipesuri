@@ -26,7 +26,7 @@ const kotiCom = (sarja: string) => karcherComissa(koti.filter((x) => x.sarja ===
 // Mallisivut sarjan mukaan: SE 3-18 kuuluu SE 3 Compactin sivulle.
 const sarjanSivu: Record<string, string> = { ...mallisivut, 'SE 3-18': mallisivut['SE 3'] };
 const sivut = Object.fromEntries(kaikki.filter((t) => t.sarja && sarjanSivu[t.sarja]).map((t) => [t.id, sarjanSivu[t.sarja!]]));
-const nimet = Object.fromEntries(Object.entries(paatuotteet).map(([sarja, id]) => [id, `Kärcher ${sarja === 'SE 3' ? 'SE 3 Compact' : sarja === 'SE 4' ? 'SE 4 Plus' : sarja}`]));
+const nimet = Object.fromEntries(Object.entries(paatuotteet).map(([sarja, id]) => [id, `Kärcher ${({ 'SE 2': 'SE 2 Spot Care', 'SE 3': 'SE 3 Compact', 'SE 4': 'SE 4 Plus', 'SE 6': 'SE 6 Signature Line' } as Record<string, string>)[sarja] ?? sarja}`]));
 
 const t = suositus.tekniset;
 
@@ -68,11 +68,12 @@ const ukk = [
 					<tr><th scope="col">Malli</th><th scope="col">Sopii parhaiten</th><th scope="col">Hinta Kärcher.comissa</th></tr>
 				</thead>
 				<tbody>
-					<tr><th scope="row">Kärcher SE 2 Spot Care</th><td>{sarjakuvaukset['SE 2']}</td><td>{euroa(se2.hinta!)}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 2']}>Kärcher SE 2 Spot Care</a></th><td>{sarjakuvaukset['SE 2']}</td><td>{euroa(se2.hinta!)}</td></tr>
 					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3 Compact</a></th><td>{sarjakuvaukset['SE 3']}</td><td>{hintavali(kotiCom('SE 3'))}</td></tr>
 					<tr><th scope="row"><a href={mallisivut['SE 3']}>Kärcher SE 3-18 Compact</a></th><td>{sarjakuvaukset['SE 3-18']}</td><td>{hintavali(kotiCom('SE 3-18'))}</td></tr>
 					<tr><th scope="row"><a href={mallisivut['SE 4']}>Kärcher SE 4</a></th><td>{sarjakuvaukset['SE 4']}</td><td>{hintavali(kotiCom('SE 4'))}</td></tr>
-					<tr><th scope="row">Kärcher SE 6 Signature Line</th><td>Sama teho ja säiliöt kuin SE 4:ssä, enemmän suulakkeita</td><td>{hintavali(kotiCom('SE 6'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 5']}>Kärcher SE 5</a></th><td>Tekstiilipesuri ja märkä-kuivaimuri, myös auto- ja verhoiluversio</td><td>{hintavali(kotiCom('SE 5'))}</td></tr>
+					<tr><th scope="row"><a href={mallisivut['SE 6']}>Kärcher SE 6 Signature Line</a></th><td>Sama teho ja säiliöt kuin SE 4:ssä, enemmän suulakkeita</td><td>{hintavali(kotiCom('SE 6'))}</td></tr>
 					<tr><th scope="row"><a href={mallisivut['Puzzi 8/1']}>Kärcher Puzzi 8/1</a></th><td>Isot pesut, saatavana myös vuokralle</td><td>{hintavali(karcherComissa(ammatti.filter((x) => x.sarja === 'Puzzi 8/1')))}</td></tr>
 				</tbody>
 			</table>
