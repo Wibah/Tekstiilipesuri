@@ -118,7 +118,7 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/karcher-se-5/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien sivulla | Ylös (pilari) |
 | `/karcher-se-5/` | `/karcher-se-6-signature-line/` | Kärcher SE 6 Signature Line | Sivuttain |
 | `/karcher-se-5/` | `/akkukayttoinen-tekstiilipesuri/` | akkukäyttöisten tekstiilipesurien sivulla | Sivuttain |
-| `/karcher-se-6-signature-line/` | `/karcher-se-5/` | SE 5 -sivulta | Sivuttain |
+| `/karcher-se-6-signature-line/` | `/karcher-se-5/` | SE 5 -sivulla | Sivuttain |
 | `/karcher-se-6-signature-line/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien vertailussa | Ylös (pilari) |
 | `/karcher-se-6-signature-line/` | `/karcher-se-4-plus/` | Kärcher SE 4 Plus | Sivuttain |
 | `/karcher-tekstiilipesuri-ei-tule-vetta/` | `/karcher-tekstiilipesuri-varaosat/` | varaosasivulla | Sivuttain |
@@ -193,7 +193,7 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-tekstiilipesurit/` | Kärcher SE 2 Spot Care | Sivuttain |
 | `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-se-3-compact/` | Kärcher SE 3-18 | Sivuttain |
 | `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-se-4-plus/` | SE 4 Go!Further | Sivuttain |
-| `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-puzzi-8-1/` | Puzzi 8/1:stä | Sivuttain |
+| `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-puzzi-8-1/` | Puzzi 8/1 -sivulla | Sivuttain |
 | `/tekstiilipesuri-vuokraus-vai-osto/` | `/` | tekstiilipesurivertailussa | Ylös (pilari) |
 | `/tekstiilipesurin-pesuaine/` | `/karcher-se-3-compact/` | Kärcher SE 3 Compact ja SE 3-18 | Sivuttain |
 | `/tekstiilipesurin-pesuaine/` | `/karcher-se-4-plus/` | Kärcher SE 4, SE 5 ja SE 6 | Sivuttain |
@@ -202,4 +202,4 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/tekstiilipesurin-pesuaine/` | `/strome-tekstiilipesurit/` | Ströme-tekstiilipesurin sivulla | Sivuttain |
 | `/tekstiilipesurin-pesuaine/` | `/` | etusivun ostajan oppaassa | Ylös (pilari) |
 | `/tekstiilipesurin-pesuaine/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurit-sivulla | Sivuttain |
-| `/tekstiilipesurin-pesuaine/` | `/karcher-puzzi-8-1/` | Puzzi 8/1:n vuokrauksesta | Sivuttain |
+| `/tekstiilipesurin-pesuaine/` | `/karcher-puzzi-8-1/` | Puzzi 8/1:n vuokraus -osiossa | Sivuttain |

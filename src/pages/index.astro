@@ -6,6 +6,7 @@
 // Kirjoitettu tekstiilipesuri-writer-skillillä (2026-10-05). Vain Suomen markkinoilla myytävät mallit
 // (Villen päätös 2026-10-05).
 import Layout from '../layouts/Layout.astro';
+import vuokrahinnat from '../data/vuokrahinnat.json';
 import Korttirivi from '../components/tuote/Korttirivi.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
@@ -17,6 +18,9 @@ const puzzi = await paatuote('Puzzi 8/1');
 const akku = await tuote('se-3-18-compact-home-akulla');
 const se2 = await tuote('se-2-spot-care');
 const se3perus = await tuote('se-3-compact');
+const akkuPieni = await tuote('se-3-18-compact-akulla');
+// Halvin vuorokausivuokra (src/data/vuokrahinnat.json), jotta "noin X vuokrapäivää" päivittyy hintojen mukana.
+const vuokraVrk = Math.min(...vuokrahinnat.flatMap((v) => v.hinnat).filter((h) => /vuorokausi|24 h/.test(h.kesto)).map((h) => h.hinta));
 const karcher = await merkinTuotteet('Kärcher');
 const kotimallit = karcher.filter((t) => !t.ammattilaite);
 // Kärcher.comin omat hinnat tekstejä varten (ei kumppanikauppojen hintoja).
@@ -29,7 +33,7 @@ const alennetut = karcherComissa(karcher).filter((t) => t.hintaEnnenAlennusta !=
 const suositukset = [
 	{ t: se3, otsikko: 'Kärcher SE 3 Compact', otsikkoH3: 'Paras tekstiilipesuri kotiin: Kärcher SE 3 Compact', sivu: mallisivut['SE 3'], tagi: 'Paras kotiin', kuvaus: `Kompakti ja ${luku(se3.tekniset.painoKg!)} kg:n painoinen. Pesee sohvan, nojatuolin ja auton penkit, ja Floor-version lattiasuulakkeella myös pienen maton.` },
 	{ t: se4, otsikko: 'Kärcher SE 4', sivu: mallisivut['SE 4'], tagi: 'Matoille', kuvaus: `${luku(se4.tekniset.puhdasvesiL!)} litran säiliöt ja ${luku(se4.tekniset.tyoleveysMm!)} mm:n lattiasuulake. Toimii myös märkä-kuivaimurina.` },
-	{ t: akku, otsikko: 'Kärcher SE 3-18 Compact Home', sivu: mallisivut['SE 3'], tagi: 'Autoon', kuvaus: `Akkukäyttöinen SE 3. Mukana ovat 5,0 Ah:n akku ja pikalaturi, ja hinta on silti alempi kuin pienemmän akun versiossa.` },
+	{ t: akku, otsikko: 'Kärcher SE 3-18 Compact Home', sivu: mallisivut['SE 3'], tagi: 'Autoon', kuvaus: `Akkukäyttöinen SE 3. Mukana ovat 5,0 Ah:n akku ja pikalaturi${akku.hinta! <= akkuPieni.hinta! ? ', ja hinta on silti alempi kuin pienemmän akun versiossa' : ''}.` },
 	{ t: se2, otsikko: 'Kärcher SE 2 Spot Care', sivu: '/karcher-tekstiilipesurit/', tagi: 'Edullisin', kuvaus: `Kärcher.comin edullisin tekstiilipesuri. Pieni kannettava malli tuoreisiin tahroihin.` },
 	{ t: puzzi, otsikko: 'Kärcher Puzzi 8/1', sivu: mallisivut['Puzzi 8/1'], tagi: 'Vuokralle', kuvaus: `Ammattilaite, jonka puhdasvesisäiliö on ${luku(puzzi.tekniset.puhdasvesiL!)} litraa. Vuokraamoissa noin 39–45 € vuorokaudelta.` },
 ];
@@ -48,7 +52,7 @@ const tyypit = [
 	{ otsikko: 'Tekstiilipesuri ja märkä-kuivaimuri samassa', teksti: 'Isommat säiliöt ja lattiasuulake matoille. Imuroi myös tavallisesti, mutta vie enemmän tilaa.', esim: 'Esim. Kärcher SE 4, SE 5 ja SE 6', sivu: mallisivut['SE 4'] },
 	{ otsikko: 'Akkukäyttöinen tekstiilipesuri', teksti: 'Ei johtoa, joten sopii autoon ja paikkoihin ilman pistorasiaa. Käyntiaika ja säiliö rajaavat työn kokoa.', esim: 'Esim. Kärcher SE 3-18, Bissell SpotClean Cordless', sivu: '/akkukayttoinen-tekstiilipesuri/' },
 	{ otsikko: 'Tekstiilipesuri matoille', teksti: 'Pesee koko maton ja kokolattiamaton, ja harjat irrottavat syvää likaa. Painava, eikä mahdu huonekalujen alle.', esim: 'Esim. Bissell Revolution HydroSteam ja PowerWash', sivu: '/maton-pesu-tekstiilipesurilla/' },
-	{ otsikko: 'Tekstiilipesuri ammattikäyttöön', teksti: 'Isot säiliöt ja paljon tehoa. Kotiin yleensä vuokralle, koska laitteen hinnalla saa lähes 20 vuokrapäivää.', esim: 'Esim. Kärcher Puzzi 8/1', sivu: mallisivut['Puzzi 8/1'] },
+	{ otsikko: 'Tekstiilipesuri ammattikäyttöön', teksti: `Isot säiliöt ja paljon tehoa. Kotiin yleensä vuokralle, koska laitteen hinnalla saa noin ${Math.round(puzzi.hinta! / vuokraVrk)} vuokrapäivää.`, esim: 'Esim. Kärcher Puzzi 8/1', sivu: mallisivut['Puzzi 8/1'] },
 ];
 
 const oppaat = [
@@ -111,7 +115,7 @@ const ukk = [
 		<div class="es-sisalto">
 			<section class="es-osio">
 				<div class="es-otsikko"><div><span class="tp-label">Suositukset</span><h2 id="suositukset">Hyvä tekstiilipesuri kotikäyttöön – suosituksemme 2026</h2></div><a class="es-lisaa" href="/karcher-tekstiilipesurit/">Kaikki Kärcherin mallit →</a></div>
-				<p>Hyvä tekstiilipesuri kotikäyttöön on helppo ottaa esiin, kun tahra syntyy, ja mahtuu kaappiin. Valitsimme kotikäytön suositukset teknisten tietojen, testien ja hinnan perusteella. Paras tekstiilipesuri kotikäyttöön on useimmille Kärcher SE 3 Compact. Se sopii useimpiin koteihin, koska se on pieni säilyttää ja pesee sohvat, tuolit ja auton penkit. Mattoihin suosittelemme isompaa SE 4 Plussaa ja isoihin kertapesuihin vuokrattavaa Puzzia.</p>
+				<p>Hyvä tekstiilipesuri kotikäyttöön on helppo ottaa esiin, kun tahra syntyy, ja mahtuu kaappiin. Valitsimme kotikäytön suositukset teknisten tietojen, testien ja hinnan perusteella. Paras tekstiilipesuri kotikäyttöön on useimmille Kärcher SE 3 Compact, koska se on pieni säilyttää ja pesee sohvat, tuolit ja auton penkit. Mattoihin suosittelemme isompaa SE 4:ää ja isoihin kertapesuihin vuokrattavaa Puzzia.</p>
 				<div class="mk-lista">
 					{suositukset.map((r, i) => (
 						<Korttirivi tuote={r.t} sija={i + 1} tagi={r.tagi} otsikko={r.otsikko} otsikkoH3={r.otsikkoH3} versio sivu={r.sivu} kuvaus={r.kuvaus} />
@@ -121,7 +125,7 @@ const ukk = [
 
 			<section class="es-osio">
 				<div class="es-otsikko"><div><span class="tp-label">Laitetyypit</span><h2>Tekstiilipesuri kotikäyttöön: mikä tyyppi sopii mihinkin?</h2></div></div>
-				<p>Tekstiilipesurit jaetaan kokonsa ja virtalähteensä mukaan kuuteen tyyppiin. Mitä suurempi säiliö, sitä isomman pinnan laite pesee ilman täyttöä. Samalla laite kuitenkin painaa enemmän ja vie enemmän tilaa.</p>
+				<p>Jaamme tekstiilipesurit koon ja virtalähteen mukaan kuuteen tyyppiin. Mitä suurempi säiliö, sitä isomman pinnan laite pesee ilman täyttöä. Samalla laite kuitenkin painaa enemmän ja vie enemmän tilaa.</p>
 				<div class="es-kortit">
 					{tyypit.map((k) => (
 						<a class="es-kortti" href={k.sivu}>
@@ -202,7 +206,7 @@ const ukk = [
 
 			<section class="es-osio">
 				<div class="es-otsikko"><div><span class="tp-label">Testit</span><h2>Tekstiilipesuri testi: testivoittajat 2025–2026</h2></div></div>
-				<p>Suomen verkkokaupoissa myydään Kärcherin lisäksi ainakin Bissellin, <a href="/shark-tekstiilipesurit/">Sharkin</a>, <a href="/tefal-tekstiilipesurit/">Tefalin</a>, <a href="/ryobi-tekstiilipesurit/">Ryobin</a>, <a href="/strome-tekstiilipesurit/">Strömen</a>, Dreamen, Tinecon, Philipsin, Hooverin ja Thomasin tekstiilipesureita. <a href="/bissell-tekstiilipesurit/">Bissellillä</a> on Kärcherin jälkeen laajin valikoima: SpotClean-sarjan kannettavat sekä PowerWash-, ProHeat- ja Revolution HydroSteam -pystymallit. Lisäämme muidenkin merkkien mallit vertailuun valmistajien teknisten tietojen kanssa.</p>
+				<p>Suomen verkkokaupoissa myydään Kärcherin lisäksi ainakin Bissellin, <a href="/shark-tekstiilipesurit/">Sharkin</a>, <a href="/tefal-tekstiilipesurit/">Tefalin</a>, <a href="/ryobi-tekstiilipesurit/">Ryobin</a>, <a href="/strome-tekstiilipesurit/">Strömen</a>, Dreamen, Tinecon, Philipsin, Hooverin ja Thomasin tekstiilipesureita. <a href="/bissell-tekstiilipesurit/">Bissellillä</a> on Kärcherin jälkeen laajin valikoima: SpotClean-sarjan kannettavat sekä PowerWash-, ProHeat- ja Revolution HydroSteam -pystymallit. Bissellillä, Tefalilla, Ryobilla, Strömellä ja Sharkilla on omat sivunsa, joilla mallit on vertailtu valmistajien teknisten tietojen perusteella.</p>
 				<p>Ulkomaiset testit nostavat esiin kolme Suomessakin myytävää mallia. Brittiläinen Independent valitsi testissään (23.4.2026) Bissell SpotClean Pron parhaaksi pinttyneisiin tahroihin ja Shark StainStrikerin parhaaksi nopeisiin tahroihin. Telegraph valitsi (päivitetty 29.9.2026) Bissell Revolution HydroSteamin parhaaksi ostokseksi, koska sen höyry irrotti kuivuneetkin viinitahrat. Höyryä käyttävistä malleista kerrotaan <a href="/tekstiilipesuri-vai-hoyrypesuri/">tekstiilipesuri vai höyrypesuri -sivulla</a>.</p>
 				<p>Suomesta on vähemmän testejä. K-Raudan julkaisemassa kuluttajatestissä (päivitetty 15.5.2025) lapsi- ja koiraperhe pesi Kärcher SE 3 Compactilla sohvan, räsymaton ja lastenrattaat. Sohvasta lähtivät pinttyneetkin tahrat, mutta laitetta moitittiin äänekkääksi. Käyttäjien kokemuksia keräämme <a href="#kokemuksia">sivun lopussa olevalla lomakkeella</a>.</p>
 				<p class="tp-lahde">Lähteet: <a href="https://www.k-rauta.fi/inspiraatio-ja-ohjeet/tuotetestit/tuotetesti-karcher-tekstiilipesuri-se-3-compact" target="_blank" rel="nofollow noopener">K-Rauta</a>, <a href="https://www.independent.co.uk/extras/indybest/house-garden/vacuum-cleaners/best-carpet-cleaners-stairs-upholstery-b2397413.html" target="_blank" rel="nofollow noopener">Independent</a>, <a href="https://www.telegraph.co.uk/recommended/home/best-carpet-cleaners/" target="_blank" rel="nofollow noopener">Telegraph</a>. Testatut laitteet olivat Britannian myyntiversioita.</p>
