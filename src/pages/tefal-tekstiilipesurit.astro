@@ -13,7 +13,7 @@ import TuoteHero from '../components/tuote/TuoteHero.astro';
 import Korttirivi from '../components/tuote/Korttirivi.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
-import { merkinTuotteet, tuote, luku, euroa, paiva, mallisivut, type Tuote } from '../lib/tuotteet';
+import { merkinTuotteet, tuote, paatuote, versionimi, luku, euroa, paiva, mallisivut, type Tuote } from '../lib/tuotteet';
 
 const SIVU = '/tefal-tekstiilipesurit/';
 const tefal = await merkinTuotteet('Tefal');
@@ -22,7 +22,7 @@ const cleanIt = sku('IZ5020F0');
 const compact = sku('IZ3020F0');
 const hot = sku('IZ7021F0');
 const se3 = await tuote('se-3-compact');
-const se4 = await tuote('se-4-plus');
+const se4 = await paatuote('SE 4');
 const k = (t: Tuote) => t.tekniset;
 const ohje = (t: Tuote) => t.teknisetValmistajalta['Käyttöohje'];
 const VERKKOKAUPPA = 'https://www.verkkokauppa.com/fi/product/1002892/Tefal-Clean-It-tekstiilipesuri/reviews';
@@ -106,9 +106,9 @@ const ukk = [
 		<h2>Tekstiilipesuri Tefal vai Kärcher?</h2>
 		<ul>
 			<li><strong>Tefal</strong> myy kannettavia Clean It -malleja tahroihin, sohville ja autoon. Clean Itin {luku(k(cleanIt).puhdasvesiL!)} litran puhdasvesisäiliö on suurempi kuin Kärcher SE 3 Compactin ({luku(k(se3).puhdasvesiL!)} l). Hot & Cold lämmittää veden itse.</li>
-			<li><strong>Kärcher</strong> myy kompaktien <a href={mallisivut['SE 3']}>SE 3 -mallien</a> ({euroa(se3.hinta!)}) lisäksi isompia SE 4–SE 6 -malleja, jotka toimivat myös märkä-kuivaimurina, kuten <a href={mallisivut['SE 4']}>SE 4 Plus</a> ({euroa(se4.hinta!)}). Kärcherillä on myös akkukäyttöinen SE 3-18 ja ammattikäyttöön Puzzi-sarja, jota vuokraamot vuokraavat.</li>
+			<li><strong>Kärcher</strong> myy kompaktien <a href={mallisivut['SE 3']}>SE 3 -mallien</a> ({euroa(se3.hinta!)}) lisäksi isompia SE 4–SE 6 -malleja, jotka toimivat myös märkä-kuivaimurina, kuten <a href={mallisivut['SE 4']}>{versionimi(se4)}</a> ({euroa(se4.hinta!)}). Kärcherillä on myös akkukäyttöinen SE 3-18 ja ammattikäyttöön Puzzi-sarja, jota vuokraamot vuokraavat.</li>
 		</ul>
-		<p>Valitse Tefal, jos haluat kannettavan laitteen isolla säiliöllä tai lämpimällä vedellä. Valitse Kärcher, jos tarvitset akkukäyttöisen mallin, laitteen, joka toimii myös märkä-kuivaimurina, tai ison maton pesuun lattiasuulakkeen. Kaikki Kärcherin mallit ovat <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurien sivulla</a> ja Bissellin <a href="/bissell-tekstiilipesurit/">Bissell-sivulla</a>.</p>
+		<p>Valitse Tefal, jos haluat kannettavan laitteen isolla säiliöllä tai lämpimällä vedellä. Valitse Kärcher, jos tarvitset akkukäyttöisen mallin, laitteen, joka toimii myös märkä-kuivaimurina, tai ison maton pesuun lattiasuulakkeen. Kaikki Kärcherin mallit ovat <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurien sivulla</a> ja Bissellin mallit <a href="/bissell-tekstiilipesurit/">Bissell-sivulla</a>.</p>
 
 		<p>Kaikkien Suomessa myytävien merkkien vertailu on <a href="/">tekstiilipesurivertailussa</a>.</p>
 

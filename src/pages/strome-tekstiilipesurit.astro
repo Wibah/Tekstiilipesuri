@@ -43,6 +43,8 @@ const ukk = [
 		vastaus: `Ei voi. <a href="${OHJE}" target="_blank" rel="${rel}">Käyttöohjeen</a> mukaan suulakkeet pestään käsin lämpimällä vedellä ja hellävaraisella pesuaineella, eikä niitä saa pestä astianpesukoneessa. Säiliöt pestään käsin lämpimällä vedellä, astianpesuaineella ja tiskiharjalla.`,
 	},
 ];
+// "4.3/5 (117 arviota)" → "4,3/5 tähteä 117 arviossa".
+const arviot = v('Arviot').replace(/^([\d.]+)\/5 \((\d+) arviota\)$/, (_, k, n) => `${k.replace('.', ',')}/5 tähteä ${n} arviossa`);
 ---
 <Layout
 	title="Ströme tekstiilipesuri kokemuksia – PowerClean 56A, käyttöohje ja hinta 2026"
@@ -66,7 +68,7 @@ const ukk = [
 		<p class="tp-lahde">Tiedot ja hinta: Verkkokauppa.com, tarkistettu {paiva(s.haettu)}.</p>
 
 		<h2>Ströme tekstiilipesuri kokemuksia ja arviot</h2>
-		<p>Ströme PowerClean 56A:sta ei ole julkaistu toimituksellisia testejä. Verkkokauppa.comissa laitteen käyttäjät olivat antaneet sille keskimäärin {v('Arviot')} (tarkistettu {paiva(s.haettu)}). Arviot ovat kaupan omia, ja ne koskevat Verkkokauppa.comin omaa tuotemerkkiä, mikä kannattaa pitää mielessä niitä lukiessa.</p>
+		<p>Ströme PowerClean 56A:sta ei ole julkaistu toimituksellisia testejä. Verkkokauppa.comissa laitteen käyttäjät olivat antaneet sille keskimäärin {arviot} (tarkistettu {paiva(s.haettu)}). Arviot ovat kaupan omia, ja ne koskevat Verkkokauppa.comin omaa tuotemerkkiä, mikä kannattaa pitää mielessä niitä lukiessa.</p>
 		<p>Jos sinulla on Ströme-tekstiilipesuri, kerro kokemuksesi sivun lopussa olevalla lomakkeella.</p>
 
 		<h2>Ströme tekstiilipesuri käyttöohje</h2>

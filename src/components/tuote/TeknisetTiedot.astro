@@ -29,7 +29,7 @@ const rivit = [
 					<tr><th scope="row">{nimi}</th><td>{luku(arvo!)} {yksikko}</td></tr>
 				))}
 				{t.akkuKayttoaika && <tr><th scope="row">Käyttöaika yhdellä latauksella (min)</th><td>{t.akkuKayttoaika.replace(/Normaali tila: \/ /g, '')}</td></tr>}
-				{t.tyosuoritusM2h && <tr><th scope="row">Työsuoritus</th><td>{t.tyosuoritusM2h} m²/h</td></tr>}
+				{t.tyosuoritusM2h && <tr><th scope="row">Työsuoritus</th><td>{t.tyosuoritusM2h.replace(' - ', '–')} m²/h</td></tr>}
 				{t.mitatMm && <tr><th scope="row">Mitat (p × l × k)</th><td>{t.mitatMm.replaceAll(' x ', ' × ')} mm</td></tr>}
 			</tbody>
 		</table>

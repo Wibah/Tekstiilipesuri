@@ -8,10 +8,10 @@ import Layout from '../layouts/Layout.astro';
 import Murupolku from '../components/Murupolku.astro';
 import Korttirivi from '../components/tuote/Korttirivi.astro';
 import Ukk from '../components/Ukk.astro';
-import { tuote, luku, euroa, mallisivut } from '../lib/tuotteet';
+import { tuote, paatuote, versionimi, luku, euroa, mallisivut } from '../lib/tuotteet';
 
 const SIVU = '/maton-pesu-tekstiilipesurilla/';
-const se4 = await tuote('se-4-plus');
+const se4 = await paatuote('SE 4');
 const floor = await tuote('se-3-compact-floor');
 const revolution = await tuote('bissell-revolution-hydrosteam-3670n');
 const proheat = await tuote('bissell-proheat-2x-revolution-1858n');
@@ -74,7 +74,7 @@ const ukk = [
 		<p>Kärcherin kotikäyttöön tarkoitetuissa malleissa ei ole harjatelaa, joten mattoa pestään lattiasuulakkeella:</p>
 		<ul>
 			<li><strong>SE 3 Compact Floor</strong> ({euroa(floor.hinta!)}): mukana tulevat 2-in-1 XXL -tekstiilisuutin ja kaksi 0,5 metrin jatkoputkea. Sopii pienille ja keskikokoisille matoille.</li>
-			<li><strong>SE 4 Plus</strong> ({euroa(se4.hinta!)}): {luku(se4.tekniset.tyoleveysMm!)} mm:n lattiasuulake ja {luku(se4.tekniset.puhdasvesiL!)} litran säiliöt. Isompi säiliö riittää pidempään pesuun.</li>
+			<li><strong>{versionimi(se4)}</strong> ({euroa(se4.hinta!)}): {luku(se4.tekniset.tyoleveysMm!)} mm:n lattiasuulake ja {luku(se4.tekniset.puhdasvesiL!)} litran säiliöt. Isompi säiliö riittää pidempään pesuun.</li>
 			<li><strong>Puzzi 8/1:</strong> ammattilaite isoille matoille, saatavana myös vuokralle.</li>
 		</ul>
 		<p>Mattosuulakkeet ja lisävarusteet ovat <a href="/karcher-tekstiilipesuri-varaosat/">varaosasivulla</a>, ja mallien erot <a href="/karcher-tekstiilipesurit/">Kärcher-tekstiilipesurien sivulla</a>.</p>
@@ -85,7 +85,7 @@ const ukk = [
 
 		<h2>Sopivat mallit</h2>
 		<div class="mk-lista">
-			<Korttirivi tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kuvaus={`Lattiasuulake ${luku(se4.tekniset.tyoleveysMm!)} mm, toimii myös märkä-kuivaimurina`} tagi="Matoille ja lattioille" versio />
+			<Korttirivi tuote={se4} otsikko="Kärcher SE 4" sivu={mallisivut['SE 4']} kuvaus={`Lattiasuulake ${luku(se4.tekniset.tyoleveysMm!)} mm, toimii myös märkä-kuivaimurina`} tagi="Matoille ja lattioille" versio />
 			<Korttirivi tuote={floor} otsikko="Kärcher SE 3 Compact Floor" sivu={mallisivut['SE 3']} kuvaus="Kompakti malli, mukana XXL-suutin matoille" tagi="Pienille matoille" versio />
 			<Korttirivi tuote={revolution} otsikko="Bissell Revolution HydroSteam" sivu="/bissell-tekstiilipesurit/" ankkuri={revolution.id} kuvaus="Pystymalli, harjatela ja höyry koko maton pesuun" tagi="Kokolattiamatoille" versio />
 			<Korttirivi tuote={proheat} otsikko="Bissell ProHeat 2x Revolution" sivu="/bissell-tekstiilipesurit/" ankkuri={proheat.id} kuvaus="Pystymalli harjatelalla" tagi="Pystymalli" versio />

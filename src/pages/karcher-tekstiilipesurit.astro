@@ -41,7 +41,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Mistä löydän Kärcherin tekstiilipesurin tarjouksen?',
-		vastaus: `Tällä sivulla olevat hinnat ovat Kärcher.comin hintoja, ja ne on tarkistettu ${paiva(suositus.haettu)}. Kärcher.com merkitsee alennetun hinnan näkyviin, ja näytämme silloin myös hinnan ennen alennusta.`,
+		vastaus: `Mallien hinnat ovat Kärcher.comista, ja malleille, joita Kärcher.com ei myy, suomalaisista verkkokaupoista. Hinnat on tarkistettu ${paiva(suositus.haettu)}. Kun hinta on alennettu, näytämme myös hinnan ennen alennusta.`,
 	},
 	{
 		kysymys: 'Mikä on Kärcherin halvin tekstiilipesuri?',
@@ -91,7 +91,7 @@ const ukk = [
 		<Merkkikortit tuotteet={koti} otsikko="Kärcher tekstiilipesuri tarjous ja hinta: kotikäyttöön sopivat mallit hintajärjestyksessä" ohita={suositus.id} sivut={sivut} nimet={nimet} />
 
 		<h2>Kärcherin SE-mallisto taulukkona</h2>
-		<p>Taulukossa ovat kaikki Kärcher.comin SE-mallit, myös ne, joita Kärcher.com ei tällä hetkellä myy. Niitä voi silti löytyä muista kaupoista.</p>
+		<p>Taulukossa ovat kaikki Suomessa myytävät SE-mallit. Mallien hinnat ovat Kärcher.comista, ja malleille, joita Kärcher.com ei myy, suomalaisista verkkokaupoista.</p>
 		<MallistoTaulu tuotteet={koti} suositusId={suositus.id} sivut={sarjanSivu} />
 
 		<h2>Kärcher Professional tekstiilipesuri – Puzzi-mallit</h2>
@@ -99,9 +99,9 @@ const ukk = [
 		<MallistoTaulu tuotteet={ammatti} sivut={sarjanSivu} />
 
 		<h2>Pesuaineet Kärcherin tekstiilipesureihin</h2>
-		<p>Kärcherin kotikäyttöön tarkoitettujen mallien mukana tulee RM 519 -pesuainetta, ja Puzzeihin Kärcher Center suosittelee RM 760 -tabletteja. Aineiden erot, hinnat ja annostelu ovat <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineoppaassa</a>. Suodattimet, suuttimet ja varaosien tilausohje ovat <a href="/karcher-tekstiilipesuri-varaosat/">Kärcher tekstiilipesuri varaosat -sivulla</a>. Jos laitteesta ei tule vettä tai se ei ime, katso <a href="/karcher-tekstiilipesuri-ei-tule-vetta/">vianetsintäohje Kärcherin käyttöohjeiden pohjalta</a>.</p>
+		<p>Kärcherin kotikäyttöön tarkoitettujen mallien mukana tulee RM 519 -pesuainetta, ja Puzzeihin Kärcher Center suosittelee RM 760 -tabletteja. Aineiden erot, hinnat ja annostelu ovat <a href="/tekstiilipesurin-pesuaine/">tekstiilipesurin pesuaineoppaassa</a>. Suodattimet, suuttimet ja varaosien tilausohje ovat <a href="/karcher-tekstiilipesuri-varaosat/">Kärcher tekstiilipesuri varaosat -sivulla</a>. Jos laitteesta ei tule vettä tai se ei ime, syyt ja korjaukset ovat <a href="/karcher-tekstiilipesuri-ei-tule-vetta/">Kärcherin vianetsintäohjeessa</a>.</p>
 
-		<p class="tp-lahde">Hinnat ja tekniset tiedot: Kärcher.com, tarkistettu {paiva(suositus.haettu)}.</p>
+		<p class="tp-lahde">Tekniset tiedot: Kärcher.com ja Kärcherin tietolomakkeet. Hinnat: Kärcher.com ja suomalaiset verkkokaupat, tarkistettu {paiva(suositus.haettu)}.</p>
 
 		<Kokemuslomake malli="Kärcher" polku="/karcher-tekstiilipesurit/" mallikentta otsikko="Onko sinulla Kärcher tekstiilipesuri kokemuksia? Kerro ne meille!">
 			<p>Keräämme Kärcherin tekstiilipesureiden käyttäjien kokemuksia. Kerro, mikä malli sinulla on, mitä peset ja mikä toimii tai ei toimi. Luemme jokaisen kokemuksen ennen julkaisua.</p>

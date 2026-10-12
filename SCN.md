@@ -57,7 +57,7 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/` | `/tekstiilipesurin-pesuaine/` | Pesuaine | Alas (tuki) |
 | `/` | `/karcher-tekstiilipesurit/` | Kärcher-opas → | Alas (tuki) |
 | `/` | `/karcher-se-3-compact/` | Kärcher SE 3 Compact | Sivuttain |
-| `/` | `/karcher-se-4-plus/` | SE 4 Plus | Sivuttain |
+| `/` | `/karcher-se-4-plus/` | SE 4:ssä | Sivuttain |
 | `/` | `/karcher-puzzi-8-1/` | Puzzi 8/1 | Sivuttain |
 | `/` | `/akkukayttoinen-tekstiilipesuri/` | Akkukäyttöinen tekstiilipesuri Ei johtoa, joten sopii autoon ja paikkoihin ilman | Alas (tuki) |
 | `/` | `/tekstiilipesuri-vai-hoyrypesuri/` | tekstiilipesuri vai höyrypesuri | Alas (tuki) |
@@ -84,7 +84,7 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/bissell-spotclean-pro/` | `/tekstiilipesurin-pesuaine/` | tekstiilipesurin pesuaineoppaassa | Sivuttain |
 | `/bissell-tekstiilipesurit/` | `/bissell-spotclean-pro/` | Bissell SpotClean Pro 1558N | Alas (tuki) |
 | `/bissell-tekstiilipesurit/` | `/karcher-se-3-compact/` | SE 3 Compactin | Sivuttain |
-| `/bissell-tekstiilipesurit/` | `/karcher-se-4-plus/` | SE 4 Plussan | Sivuttain |
+| `/bissell-tekstiilipesurit/` | `/karcher-se-4-plus/` | SE 4:n | Sivuttain |
 | `/bissell-tekstiilipesurit/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien sivulla | Sivuttain |
 | `/bissell-tekstiilipesurit/` | `/` | tekstiilipesurivertailussa | Ylös (pilari) |
 | `/bissell-tekstiilipesurit/` | `/tekstiilipesurin-pesuaine/` | Bissell pesuaine | Sivuttain |
@@ -92,14 +92,14 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/karcher-puzzi-8-1/` | `/tekstiilipesuri-vuokraus-vai-osto/` | vuokraus vai osto -sivulla | Sivuttain |
 | `/karcher-puzzi-8-1/` | `/karcher-se-3-compact/` | SE 3 Compact | Sivuttain |
 | `/karcher-puzzi-8-1/` | `/karcher-tekstiilipesurit/` | Kärcher Puzzi 10/1 | Ylös (pilari) |
-| `/karcher-puzzi-8-1/` | `/karcher-se-4-plus/` | SE 4 Plus | Sivuttain |
+| `/karcher-puzzi-8-1/` | `/karcher-se-4-plus/` | Kärcher SE 4 | Sivuttain |
 | `/karcher-puzzi-8-1/` | `/tekstiilipesurin-pesuaine/` | pesuaineoppaassa | Sivuttain |
 | `/karcher-se-2/` | `/karcher-se-3-compact/` | SE 3 Compact Floor | Sivuttain |
 | `/karcher-se-2/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien vertailussa | Ylös (pilari) |
 | `/karcher-se-2/` | `/akkukayttoinen-tekstiilipesuri/` | akkukäyttöisten tekstiilipesurien sivulla | Sivuttain |
 | `/karcher-se-2/` | `/karcher-tekstiilipesuri-ei-tule-vetta/` | vianetsintäsivulla | Sivuttain |
 | `/karcher-se-2/` | `/auton-penkkien-pesu-tekstiilipesurilla/` | auton penkkien pesu -sivulla | Sivuttain |
-| `/karcher-se-3-compact/` | `/karcher-se-4-plus/` | SE 4 Plus | Sivuttain |
+| `/karcher-se-3-compact/` | `/karcher-se-4-plus/` | SE 4 | Sivuttain |
 | `/karcher-se-3-compact/` | `/tekstiilipesurin-pesuaine/` | pesuaineoppaaseen | Sivuttain |
 | `/karcher-se-3-compact/` | `/karcher-tekstiilipesurit/` | Kärcherin mallistotaulukossa | Ylös (pilari) |
 | `/karcher-se-3-compact/` | `/karcher-puzzi-8-1/` | Puzzi 8/1 | Sivuttain |
@@ -114,13 +114,13 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/karcher-se-5/` | `/karcher-se-3-compact/` | SE 3 Compact | Sivuttain |
 | `/karcher-se-5/` | `/karcher-se-2/` | SE 2 | Sivuttain |
 | `/karcher-se-5/` | `/auton-penkkien-pesu-tekstiilipesurilla/` | auton penkkien pesu -sivulla | Sivuttain |
-| `/karcher-se-5/` | `/karcher-se-4-plus/` | Kärcher SE 4 Plus | Sivuttain |
+| `/karcher-se-5/` | `/karcher-se-4-plus/` | Kärcher SE 4 | Sivuttain |
 | `/karcher-se-5/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien sivulla | Ylös (pilari) |
 | `/karcher-se-5/` | `/karcher-se-6-signature-line/` | Kärcher SE 6 Signature Line | Sivuttain |
 | `/karcher-se-5/` | `/akkukayttoinen-tekstiilipesuri/` | akkukäyttöisten tekstiilipesurien sivulla | Sivuttain |
 | `/karcher-se-6-signature-line/` | `/karcher-se-5/` | SE 5 -sivulla | Sivuttain |
 | `/karcher-se-6-signature-line/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien vertailussa | Ylös (pilari) |
-| `/karcher-se-6-signature-line/` | `/karcher-se-4-plus/` | Kärcher SE 4 Plus | Sivuttain |
+| `/karcher-se-6-signature-line/` | `/karcher-se-4-plus/` | Kärcher SE 4 | Sivuttain |
 | `/karcher-tekstiilipesuri-ei-tule-vetta/` | `/karcher-tekstiilipesuri-varaosat/` | varaosasivulla | Sivuttain |
 | `/karcher-tekstiilipesuri-ei-tule-vetta/` | `/tekstiilipesurin-pesuaine/` | pesuaineoppaassa | Sivuttain |
 | `/karcher-tekstiilipesuri-ei-tule-vetta/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien sivulla | Ylös (pilari) |
@@ -143,12 +143,12 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/karcher-tekstiilipesurit/` | `/tekstiilipesuri-vuokraus-vai-osto/` | vuokraus vai osto -sivulla | Sivuttain |
 | `/karcher-tekstiilipesurit/` | `/tekstiilipesurin-pesuaine/` | tekstiilipesurin pesuaineoppaassa | Sivuttain |
 | `/karcher-tekstiilipesurit/` | `/karcher-tekstiilipesuri-varaosat/` | Kärcher tekstiilipesuri varaosat -sivulla | Alas (tuki) |
-| `/karcher-tekstiilipesurit/` | `/karcher-tekstiilipesuri-ei-tule-vetta/` | vianetsintäohje Kärcherin käyttöohjeiden pohjalta | Alas (tuki) |
+| `/karcher-tekstiilipesurit/` | `/karcher-tekstiilipesuri-ei-tule-vetta/` | Kärcherin vianetsintäohjeessa | Alas (tuki) |
 | `/maton-pesu-tekstiilipesurilla/` | `/karcher-puzzi-8-1/` | Kärcher Puzzi 8/1 | Sivuttain |
 | `/maton-pesu-tekstiilipesurilla/` | `/tekstiilipesurin-pesuaine/` | pesuaineoppaassa | Sivuttain |
 | `/maton-pesu-tekstiilipesurilla/` | `/karcher-tekstiilipesuri-varaosat/` | varaosasivulla | Sivuttain |
 | `/maton-pesu-tekstiilipesurilla/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien sivulla | Sivuttain |
-| `/maton-pesu-tekstiilipesurilla/` | `/karcher-se-4-plus/` | Kärcher SE 4 Plus | Sivuttain |
+| `/maton-pesu-tekstiilipesurilla/` | `/karcher-se-4-plus/` | Kärcher SE 4 | Sivuttain |
 | `/maton-pesu-tekstiilipesurilla/` | `/karcher-se-3-compact/` | Kärcher SE 3 Compact Floor | Sivuttain |
 | `/maton-pesu-tekstiilipesurilla/` | `/bissell-tekstiilipesurit/` | Bissell Revolution HydroSteam | Sivuttain |
 | `/maton-pesu-tekstiilipesurilla/` | `/sohvan-pesu-tekstiilipesurilla/` | sohvan pesu -sivulla | Sivuttain |
@@ -166,7 +166,7 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/shark-tekstiilipesurit/` | `/` | tekstiilipesurivertailussa | Ylös (pilari) |
 | `/shark-tekstiilipesurit/` | `/tekstiilipesurin-pesuaine/` | pesuaineoppaassa | Sivuttain |
 | `/shark-tekstiilipesurit/` | `/akkukayttoinen-tekstiilipesuri/` | akkukäyttöisten tekstiilipesurien sivulla | Sivuttain |
-| `/shark-tekstiilipesurit/` | `/maton-pesu-tekstiilipesurilla/` | maton pesu -sivulta | Sivuttain |
+| `/shark-tekstiilipesurit/` | `/maton-pesu-tekstiilipesurilla/` | maton pesu -sivulla | Sivuttain |
 | `/sohvan-pesu-tekstiilipesurilla/` | `/karcher-se-3-compact/` | Kärcher SE 3 Compact | Sivuttain |
 | `/sohvan-pesu-tekstiilipesurilla/` | `/bissell-spotclean-pro/` | Bissell SpotClean Pro | Sivuttain |
 | `/sohvan-pesu-tekstiilipesurilla/` | `/bissell-tekstiilipesurit/` | Bissell SpotClean Plus | Sivuttain |
@@ -180,7 +180,7 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/strome-tekstiilipesurit/` | `/` | tekstiilipesurivertailussa | Ylös (pilari) |
 | `/strome-tekstiilipesurit/` | `/tekstiilipesurin-pesuaine/` | tekstiilipesurin pesuaineoppaassa | Sivuttain |
 | `/tefal-tekstiilipesurit/` | `/karcher-se-3-compact/` | SE 3 -mallien | Sivuttain |
-| `/tefal-tekstiilipesurit/` | `/karcher-se-4-plus/` | SE 4 Plus | Sivuttain |
+| `/tefal-tekstiilipesurit/` | `/karcher-se-4-plus/` | SE 4 Go!Further | Sivuttain |
 | `/tefal-tekstiilipesurit/` | `/karcher-tekstiilipesurit/` | Kärcher-tekstiilipesurien sivulla | Sivuttain |
 | `/tefal-tekstiilipesurit/` | `/bissell-tekstiilipesurit/` | Bissell-sivulla | Sivuttain |
 | `/tefal-tekstiilipesurit/` | `/` | tekstiilipesurivertailussa | Ylös (pilari) |
@@ -189,10 +189,10 @@ Koottu valmiista sivustosta skriptillä `scripts/linkkikartta.py`. Leipätekstin
 | `/tekstiilipesuri-vai-hoyrypesuri/` | `/` | tekstiilipesurivertailussa | Ylös (pilari) |
 | `/tekstiilipesuri-vai-hoyrypesuri/` | `/bissell-tekstiilipesurit/` | Bissell Revolution HydroSteam | Sivuttain |
 | `/tekstiilipesuri-vai-hoyrypesuri/` | `/karcher-se-3-compact/` | Kärcher SE 3 Compact | Sivuttain |
-| `/tekstiilipesuri-vai-hoyrypesuri/` | `/karcher-se-4-plus/` | SE 4 Plus | Sivuttain |
-| `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-tekstiilipesurit/` | Kärcher SE 2 Spot Care | Sivuttain |
+| `/tekstiilipesuri-vai-hoyrypesuri/` | `/karcher-se-4-plus/` | SE 4 | Sivuttain |
+| `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-se-2/` | Kärcher SE 2 Spot Care | Sivuttain |
 | `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-se-3-compact/` | Kärcher SE 3-18 | Sivuttain |
-| `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-se-4-plus/` | SE 4 Go!Further | Sivuttain |
+| `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-se-4-plus/` | Kärcher SE 4 | Sivuttain |
 | `/tekstiilipesuri-vuokraus-vai-osto/` | `/karcher-puzzi-8-1/` | Puzzi 8/1 -sivulla | Sivuttain |
 | `/tekstiilipesuri-vuokraus-vai-osto/` | `/` | tekstiilipesurivertailussa | Ylös (pilari) |
 | `/tekstiilipesurin-pesuaine/` | `/karcher-se-3-compact/` | Kärcher SE 3 Compact ja SE 3-18 | Sivuttain |

@@ -47,7 +47,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Kuinka kauan Kärcher SE 3-18:n akku kestää?',
-		vastaus: `Kärcherin mukaan 2,5 Ah:n akulla noin ${minuutit(ta.akkuKayttoaika)} minuuttia ja 5,0 Ah:n akulla noin ${minuutit(tah.akkuKayttoaika)} minuuttia. Parkersin testissä (2026) Mazda MX-5:n kaksi mattoa vei akusta 39 prosenttia, eli yksi pikkuauto onnistuu yhdellä latauksella.`,
+		vastaus: `Kärcherin mukaan 2,5 Ah:n akulla noin ${minuutit(ta.akkuKayttoaika)} minuuttia ja 5,0 Ah:n akulla noin ${minuutit(tah.akkuKayttoaika)} minuuttia. Parkersin testissä (2026) Mazda MX-5:n kaksi mattoa vei akusta 39 prosenttia, eli kahden automaton pesuun riittää reilusti alle yksi lataus.`,
 	},
 	{
 		kysymys: 'Paljonko pesuainetta Kärcher SE 3:een laitetaan?',
@@ -55,7 +55,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Pystyykö Kärcher SE 3 Compactilla pesemään koko maton?',
-		vastaus: `Pienen maton pystyy, kun käytössä on Floor-version lattiasuulake. Säiliö on kuitenkin ${luku(t.puhdasvesiL!)} litraa, joten isossa matossa vettä joutuu lisäämään useita kertoja. Isoille matoille sopii paremmin <a href="${mallisivut['SE 4']}">SE 4 Plus</a> (${luku(t4.puhdasvesiL!)} l) tai vuokrattava <a href="${mallisivut['Puzzi 8/1']}">Puzzi 8/1</a>.`,
+		vastaus: `Pienen maton pystyy, kun käytössä on Floor-version lattiasuulake. Säiliö on kuitenkin ${luku(t.puhdasvesiL!)} litraa, joten isossa matossa vettä joutuu lisäämään useita kertoja. Isoille matoille sopii paremmin <a href="${mallisivut['SE 4']}">SE 4</a> (${luku(t4.puhdasvesiL!)} l) tai vuokrattava <a href="${mallisivut['Puzzi 8/1']}">Puzzi 8/1</a>.`,
 	},
 ];
 ---
@@ -99,7 +99,7 @@ const ukk = [
 		<p>SE 3 Compact Floor ({suositus.tuotenumero}) on suosittelemamme versio. Kaupat myyvät sitä myös nimellä SE 3 Compact Home Floor. Floorin mukana tulevat perusversion suulakkeiden lisäksi 2-in-1 XXL -tekstiilisuutin ja kaksi 0,5 metrin jatkoputkea, joten mattoa voi pestä seisaaltaan. Floor maksaa {kauppa(suositus)} {euroa(suositus.hinta!)}, eli {euroa(floorLisa)} enemmän kuin perusversio.</p>
 
 		<h3>Kärcher SE 3-18 Compact – akkuversio</h3>
-		<p>Akkuversio SE 3-18 painaa {luku(ta.painoKg!)} kg ja sen teho on {luku(ta.tehoW!)} W. Kärcher.comin kumpaankin akkuversioon kuuluvat akku ja laturi. SE 3-18 Compact Home akulla maksaa {euroa(akkuHome.hinta!)} ja SE 3-18 Compact akulla {euroa(akku.hinta!)}. {akkuHome.hinta! <= akku.hinta! ? 'Home-versiossa on suurempi 5,0 Ah:n akku ja pikalaturi, ja se on nyt yhtä edullinen tai edullisempi, joten valitse Home.' : `Home-versiossa on suurempi 5,0 Ah:n akku ja pikalaturi ${euroa(akkuHome.hinta! - akku.hinta!)} kalliimmalla.`} Jos sinulla on jo Kärcherin 18 voltin akku, SE 3-18 Compact ilman akkua maksaa {kauppa(ilmanAkkua)} {euroa(ilmanAkkua.hinta!)}.</p>
+		<p>Akkuversio SE 3-18 painaa {luku(ta.painoKg!)} kg ja sen teho on {luku(ta.tehoW!)} W. Kärcher.comin kumpaankin akkuversioon kuuluvat akku ja laturi. SE 3-18 Compact Home akulla maksaa {euroa(akkuHome.hinta!)} ja SE 3-18 Compact akulla {euroa(akku.hinta!)}. {akkuHome.hinta! <= akku.hinta! ? (akkuHome.hinta! < akku.hinta! ? 'Home-versiossa on suurempi 5,0 Ah:n akku ja pikalaturi, ja se on nyt halvempi, joten valitse Home.' : 'Home-versiossa on suurempi 5,0 Ah:n akku ja pikalaturi samaan hintaan, joten valitse Home.') : `Home-versiossa on suurempi 5,0 Ah:n akku ja pikalaturi ${euroa(akkuHome.hinta! - akku.hinta!)} kalliimmalla.`} Jos sinulla on jo Kärcherin 18 voltin akku, SE 3-18 Compact ilman akkua maksaa {kauppa(ilmanAkkua)} {euroa(ilmanAkkua.hinta!)}.</p>
 		<VersioVertailu versiot={kaikki} paatuoteId={suositus.id} />
 		<p class="tp-lahde">Hinnat: Kärcher.com ja suomalaiset verkkokaupat (malleille, joita Kärcher.com ei myy), tarkistettu {paiva(suositus.haettu)}.</p>
 
@@ -130,10 +130,10 @@ const ukk = [
 		<p>Kaikki Kärcherin kotikäyttöön tarkoitetut mallit ovat <a href="/karcher-tekstiilipesurit/">Kärcherin mallistotaulukossa</a>.</p>
 
 		<h2>SE 3 Compact vs. SE 4 Plus ja Puzzi 8/1</h2>
-		<p><a href={mallisivut['SE 4']}>SE 4 Plus</a> on SE 3:a suurempi laite. Sen teho on {luku(t4.tehoW!)} W, kummankin säiliön tilavuus on {luku(t4.puhdasvesiL!)} litraa, ja se toimii myös märkä-kuivaimurina. {versionimi(se4)} painaa {luku(t4.painoKg!)} kg ja maksaa {euroa(se4.hinta!)}. Ero SE 3 Compact Flooriin on {euroa(se4.hinta! - suositus.hinta!)}.</p>
+		<p><a href={mallisivut['SE 4']}>SE 4</a> on SE 3:a suurempi laite. Sen teho on {luku(t4.tehoW!)} W, kummankin säiliön tilavuus on {luku(t4.puhdasvesiL!)} litraa, ja se toimii myös märkä-kuivaimurina. {versionimi(se4)} painaa {luku(t4.painoKg!)} kg ja maksaa {euroa(se4.hinta!)}. Ero SE 3 Compact Flooriin on {euroa(se4.hinta! - suositus.hinta!)}.</p>
 		<p>Jos peset kerran vuodessa ison maton tai koko sohvakaluston, ammattilaitteen vuokraaminen voi tulla edullisemmaksi kuin oman laitteen ostaminen. Kaikki kolme tarkistamaamme vuokraamoa vuokraavat <a href={mallisivut['Puzzi 8/1']}>Kärcher Puzzi 8/1</a> -laitetta, jonka puhdasvesisäiliö on {luku(puzzi.tekniset.puhdasvesiL!)} litraa. Laskelma on <a href="/tekstiilipesuri-vuokraus-vai-osto/">vuokraus vai osto -sivulla</a>.</p>
 		<div class="mk-lista">
-			<Tuotekortti tuote={se4} otsikko="Kärcher SE 4 Plus" sivu={mallisivut['SE 4']} kenelle={sarjakuvaukset['SE 4']} tagi="Isommat säiliöt" />
+			<Tuotekortti tuote={se4} otsikko="Kärcher SE 4" sivu={mallisivut['SE 4']} kenelle={sarjakuvaukset['SE 4']} tagi="Isommat säiliöt" />
 			<Tuotekortti tuote={puzzi} otsikko="Kärcher Puzzi 8/1" sivu={mallisivut['Puzzi 8/1']} kenelle={sarjakuvaukset['Puzzi 8/1']} tagi="Ammattilaite" />
 		</div>
 

@@ -12,7 +12,8 @@ import VuokraTaulu from '../components/tuote/VuokraTaulu.astro';
 import Tuotekortti from '../components/tuote/Tuotekortti.astro';
 import Ukk from '../components/Ukk.astro';
 import Kokemuslomake from '../components/Kokemuslomake.astro';
-import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset } from '../lib/tuotteet';
+import vuokrahinnat from '../data/vuokrahinnat.json';
+import { paatuote, tuote, versiot, luku, paiva, euroa, mallisivut, sarjakuvaukset, versionimi } from '../lib/tuotteet';
 
 const suositus = await paatuote('Puzzi 8/1');
 const perus = await tuote('puzzi-8-1');
@@ -21,11 +22,12 @@ const p8versiot = await versiot('Puzzi 8/1');
 const p10 = await tuote('puzzi-10-1');
 const p21 = await tuote('puzzi-2-1-bp');
 const se4 = await paatuote('SE 4');
+const halvemmat = (await Promise.all(['puzzi-8-1-anniversary-edition', 'puzzi-8-1-go-further'].map((id) => tuote(id)))).every((v) => v.hinta! < perus.hinta!);
 
 const t = suositus.tekniset;
 const t4 = se4.tekniset;
 // Halvimman vuorokausivuokran (Pesurivuokraus.fi 39 €) ja ostohinnan suhde.
-const vuorokausi = 39;
+const vuorokausi = Math.min(...vuokrahinnat.flatMap((v) => v.hinnat).filter((h) => /vuorokausi|24 h/.test(h.kesto)).map((h) => h.hinta));
 const kertaa = Math.round(suositus.hinta! / vuorokausi);
 
 const ukk = [
@@ -47,7 +49,7 @@ const ukk = [
 	},
 	{
 		kysymys: 'Kannattaako Puzzi 8/1 ostaa kotiin?',
-		vastaus: `Harvoin. Puzzi 8/1 maksaa Kärcher.comissa vähintään ${euroa(suositus.hinta!)}, mikä vastaa noin ${kertaa} vuorokauden vuokraa halvimmassa tarkistamassamme vuokraamossa. Kotiin, jossa tekstiilejä pestään usein, sopii paremmin <a href="${mallisivut['SE 4']}">SE 4 Plus</a> (${euroa(se4.hinta!)}).`,
+		vastaus: `Harvoin. Puzzi 8/1 maksaa Kärcher.comissa vähintään ${euroa(suositus.hinta!)}, mikä vastaa noin ${kertaa} vuorokauden vuokraa halvimmassa tarkistamassamme vuokraamossa. Kotiin, jossa tekstiilejä pestään usein, sopii paremmin <a href="${mallisivut['SE 4']}">${versionimi(se4)}</a> (${euroa(se4.hinta!)}).`,
 	},
 ];
 ---
@@ -59,7 +61,7 @@ const ukk = [
 		<Murupolku polku={[{ nimi: 'Etusivu', sivu: '/' }, { nimi: 'Kärcher', sivu: '/karcher-tekstiilipesurit/' }, { nimi: 'Kärcher Puzzi 8/1', sivu: mallisivut['Puzzi 8/1'] }]} />
 		<TuoteSchema tuote={suositus} />
 		<TuoteHero tuote={suositus} otsikko="Kärcher Puzzi 8/1 -tekstiilipesuri" yla="Kärcher Professional · Ammattilaite" merkinta="Edullisin versio">
-			<p>Kärcher Puzzi 8/1 on Kärcherin ammattikäyttöön tarkoitettu tekstiilipesuri. Kärcher kutsuu sitä painehuuhtelukoneeksi. Puhdasvesisäiliö on {luku(t.puhdasvesiL!)} litraa, likavesisäiliö {luku(t.likavesiL!)} litraa ja imuturbiinin teho {luku(t.imuturbiiniW!)} W. Kärcherin mukaan työsuoritus on {t.tyosuoritusM2h} m² tunnissa.</p>
+			<p>Kärcher Puzzi 8/1 on Kärcherin ammattikäyttöön tarkoitettu tekstiilipesuri. Kärcher kutsuu sitä painehuuhtelukoneeksi. Puhdasvesisäiliö on {luku(t.puhdasvesiL!)} litraa, likavesisäiliö {luku(t.likavesiL!)} litraa ja imuturbiinin teho {luku(t.imuturbiiniW!)} W. Kärcherin mukaan työsuoritus on {t.tyosuoritusM2h!.replace(' - ', '–')} m² tunnissa.</p>
 			<p>Useimmille kodeille Puzzi kannattaa vuokrata. Vuorokauden vuokra on noin 39–45 €, ja laitteen hinnalla saisi noin {kertaa} vuokrapäivää.</p>
 		</TuoteHero>
 
@@ -74,7 +76,7 @@ const ukk = [
 				<strong>+ Sopii:</strong>
 				<ul>
 					<li>Kerran tai kaksi vuodessa tehtävään isoon pesuun: koko sohvakalusto, matot ja auto samalla vuokrauksella</li>
-					<li>Isoille pinnoille: {luku(t.puhdasvesiL!)} litran puhdasvesisäiliö on kaksinkertainen SE 4 Plussan {luku(t4.puhdasvesiL!)} litraan verrattuna</li>
+					<li>Isoille pinnoille: {luku(t.puhdasvesiL!)} litran puhdasvesisäiliö on kaksinkertainen SE 4:n {luku(t4.puhdasvesiL!)} litraan verrattuna</li>
 					<li>Ammattikäyttöön, esimerkiksi siivousyrityksille ja autonhoitajille</li>
 				</ul>
 			</div>
@@ -89,7 +91,7 @@ const ukk = [
 		</div>
 
 		<h2>Puzzi 8/1:n versiot vertailussa</h2>
-		<p>Kärcher myy Puzzi 8/1:tä neljänä versiona. Laite on kaikissa sama, ja versiot eroavat varusteiden ja pesuaineen osalta. Juhlavuoden Anniversary Edition ja musta Go!Further maksavat vähemmän kuin perusversio, ja niiden mukana tulee pesuainetta: Anniversary Editionissa 16 RM 760 -tablettia ja Go!Furtherissa litra RM 764N -pesuainetta. Mattojen pesuun tarvittava lattiasuulake kuuluu vain Adv-versioon.</p>
+		<p>Kärcher myy Puzzi 8/1:tä neljänä versiona. Laite on kaikissa sama, ja versiot eroavat varusteiden ja pesuaineen osalta. Juhlavuoden Anniversary Editionin ja mustan Go!Furtherin mukana tulee pesuainetta: Anniversary Editionissa 16 RM 760 -tablettia ja Go!Furtherissa litra RM 764N -pesuainetta.{halvemmat ? ' Silti ne maksavat vähemmän kuin perusversio.' : ''} Mattojen pesuun tarvittava lattiasuulake kuuluu vain Adv-versioon.</p>
 		<VersioVertailu versiot={p8versiot} paatuoteId={suositus.id} />
 		<p class="tp-lahde">Hinnat tarkistettu {paiva(suositus.haettu)} Kärcher.comista.</p>
 
