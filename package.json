@@ -22,6 +22,7 @@
     "hae:strome": "python3 scripts/muunna_strome.py",
     "hae:tefal": "python3 scripts/muunna_tefal.py",
     "hae:kumppanit": "python3 scripts/hae_karcher_kumppanit.py",
+    "scn:linkit": "python3 scripts/linkkikartta.py",
     "hae:varusteet": "python3 scripts/hae_karcher_varusteet.py"
   },
   "dependencies": {
